@@ -1,61 +1,267 @@
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION RESERVASI / CTA  (gelap, penutup)
-     Ganti nomor WhatsApp, telepon, alamat, jam buka, link tombol.
+     KURNIA SEAFOOD · SECTION RESERVASI (3 langkah, branch-aware WA)
+     Pilih cabang → tombol akhir membuka WhatsApp cabang yang benar
+     (window.KS_BRANCHES). PRASYARAT: pasang data/branches.js sebelum ini.
      ============================================================ -->
-<section class="ks-book" id="reservasi">
-  <div class="ks-book__inner">
-    <span class="ks-kicker">
-      <svg viewBox="0 0 24 24"><path d="M3 13c4-5 14-5 18 0M6 11c2 3 10 3 12 0M16 11l3-2-1 3"/><circle cx="9" cy="9.5" r=".9"/></svg>
-      Reservasi
-    </span>
-    <h2 class="ks-book__title">Pesan meja Anda<br>hari ini</h2>
-    <p class="ks-book__sub">Hubungi kami untuk reservasi atau langsung mampir. Kami tunggu kedatangan Anda!</p>
+<section class="ks-resv" id="reservasi">
+  <div class="ks-resv__inner">
+    <header class="ks-resv__head">
+      <span class="ks-kicker">
+        <svg viewBox="0 0 24 24"><path d="M3 13c4-5 14-5 18 0M6 11c2 3 10 3 12 0M16 11l3-2-1 3"/><circle cx="9" cy="9.5" r=".9"/></svg>
+        Reservasi
+      </span>
+      <h2 class="ks-resv__title">Pesan meja Anda</h2>
+      <p class="ks-resv__sub">Tiga langkah singkat — konfirmasi via WhatsApp cabang pilihan Anda.</p>
+    </header>
 
-    <div class="ks-book__btns">
-      <a href="https://wa.me/62000000000" class="ks-btn ks-btn--red">Reservasi via WhatsApp</a>
-      <a href="tel:+62000000000" class="ks-btn ks-btn--ghost">Telepon Kami</a>
-    </div>
+    <ol class="ks-resv__steps">
+      <li class="is-active" data-dot="1"><span>1</span> Cabang</li>
+      <li data-dot="2"><span>2</span> Detail</li>
+      <li data-dot="3"><span>3</span> Konfirmasi</li>
+    </ol>
 
-    <div class="ks-book__info" id="kontak">
-      <div><span class="ks-il">Lokasi</span><p>Jl. Contoh Alamat No. 8, Kota Anda</p></div>
-      <div><span class="ks-il">Jam Buka</span><p>Setiap hari · 10.00 – 22.00 WIB</p></div>
-      <div><span class="ks-il">Kontak</span><p>+62 000-0000-0000</p></div>
+    <div class="ks-resv__card">
+      <!-- STEP 1 — Cabang -->
+      <div class="ks-resv__step" data-step="1">
+        <p class="ks-resv__label">Pilih cabang</p>
+        <div class="ks-resv__branches" role="radiogroup" aria-label="Pilih cabang"></div>
+      </div>
+
+      <!-- STEP 2 — Detail -->
+      <div class="ks-resv__step" data-step="2" hidden>
+        <div class="ks-resv__fields">
+          <div class="ks-f ks-f--full">
+            <label for="ksNama">Nama</label>
+            <input id="ksNama" type="text" placeholder="Nama lengkap" autocomplete="name">
+          </div>
+          <div class="ks-f">
+            <label for="ksTgl">Tanggal <span class="req">*</span></label>
+            <input id="ksTgl" type="date">
+          </div>
+          <div class="ks-f">
+            <label for="ksJam">Jam <span class="req">*</span></label>
+            <input id="ksJam" type="time" value="19:00" step="900">
+          </div>
+          <div class="ks-f ks-f--full">
+            <label for="ksJumlah">Jumlah tamu <span class="req">*</span></label>
+            <select id="ksJumlah">
+              <option value="">Pilih jumlah…</option>
+              <option>2 orang</option><option>3–4 orang</option><option>5–6 orang</option>
+              <option>7–10 orang</option><option>11–20 orang</option><option>20+ (acara/gathering)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 — Konfirmasi -->
+      <div class="ks-resv__step" data-step="3" hidden>
+        <div class="ks-f ks-f--full">
+          <label for="ksMenu">Pre-order <span class="opt">(opsional)</span></label>
+          <textarea id="ksMenu" rows="2" placeholder="Mis. Kepiting saus padang 2, Udang bakar madu 1…"></textarea>
+        </div>
+        <div class="ks-resv__summary" aria-live="polite"></div>
+        <a id="ksWaBtn" class="ks-resv__wa is-disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">
+          <svg viewBox="0 0 24 24"><path d="M4 20l1.5-4.5A8 8 0 1 1 9 19L4 20Z"/><path d="M9 10c0 4 2 6 6 6" stroke-linecap="round"/></svg>
+          Kirim Reservasi via WhatsApp
+        </a>
+        <p class="ks-resv__note">Pratinjau: data dirangkum lalu dibuka di WhatsApp cabang. Belum tersimpan ke sistem.</p>
+      </div>
+
+      <!-- NAV -->
+      <div class="ks-resv__nav">
+        <button type="button" class="ks-btn ks-btn--ghost" data-act="back" hidden>Kembali</button>
+        <button type="button" class="ks-btn ks-btn--red" data-act="next" disabled>Lanjut</button>
+      </div>
     </div>
   </div>
 
   <style>
-  .ks-book{
-    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
-    --muted:rgba(246,241,231,.66);
+  .ks-resv{
+    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000; --wa:#25D366;
+    --muted:rgba(246,241,231,.66); --line:rgba(246,241,231,.16);
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
-    background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 60%);
-    color:var(--cream); font-family:var(--fh); padding:clamp(56px,8vw,104px) 22px; text-align:center;
+    background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 62%);
+    color:var(--cream); font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
   }
-  .ks-book__inner{ max-width:760px; margin:0 auto; }
-  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
-    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; }
-  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:#FF6B6B; stroke-width:1.6;
-    stroke-linecap:round; stroke-linejoin:round; }
-  .ks-book__title{ font-family:var(--fh); font-weight:500; color:var(--cream);
-    font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.07; margin:16px 0 0; letter-spacing:-.01em; }
-  .ks-book__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); font-size:1.05rem;
-    margin:18px auto 0; max-width:46ch; }
-  .ks-book__btns{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:32px; }
-  .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
-    text-decoration:none; padding:15px 30px; border-radius:10px; border:2px solid transparent;
-    transition:transform .18s, box-shadow .25s, background .2s, color .2s; }
-  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 16px 30px -14px rgba(216,0,0,.6); }
-  .ks-btn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
-  .ks-btn--ghost{ background:transparent; color:var(--cream); border-color:rgba(246,241,231,.35); }
-  .ks-btn--ghost:hover{ background:rgba(246,241,231,.1); transform:translateY(-2px); }
+  .ks-resv__inner{ max-width:760px; margin:0 auto; }
+  .ks-resv__head{ text-align:center; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; justify-content:center; }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:#FF6B6B; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .ks-resv__title{ font-family:var(--fh); font-weight:500; color:var(--cream); font-size:clamp(2rem,4.6vw,3.2rem); margin:14px 0 0; }
+  .ks-resv__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); margin:12px 0 0; }
 
-  .ks-book__info{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:50px;
-    padding-top:34px; border-top:1px solid rgba(246,241,231,.15); }
-  .ks-il{ font-family:var(--fl); font-weight:600; font-size:11px; letter-spacing:.16em;
-    text-transform:uppercase; color:#FF6B6B; }
-  .ks-book__info p{ font-family:var(--fl); font-weight:300; color:var(--cream); margin:8px 0 0; font-size:.98rem; line-height:1.5; }
+  .ks-resv__steps{ list-style:none; display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:30px 0 26px; padding:0; }
+  .ks-resv__steps li{ display:flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:500; font-size:13px; color:var(--muted); }
+  .ks-resv__steps li span{ width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-weight:700; font-size:12px; background:rgba(246,241,231,.12); color:var(--cream); }
+  .ks-resv__steps li.is-active span{ background:var(--red); color:#fff; }
+  .ks-resv__steps li.is-done span{ background:var(--wa); color:#063; }
+  .ks-resv__steps li:not(:last-child)::after{ content:""; width:22px; height:1px; background:var(--line); margin-left:2px; }
 
-  @media (max-width:640px){ .ks-book__info{ grid-template-columns:1fr; gap:18px; } }
-  @media (prefers-reduced-motion: reduce){ .ks-btn:hover{ transform:none; } }
+  .ks-resv__card{ background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:24px; padding:clamp(22px,4vw,34px); backdrop-filter:blur(6px); }
+  .ks-resv__label{ font-family:var(--fl); font-weight:600; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 14px; }
+
+  /* branch cards */
+  .ks-resv__branches{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .ks-bcard{ text-align:left; cursor:pointer; background:rgba(255,255,255,.04); border:1.5px solid var(--line); border-radius:16px; padding:16px 18px; transition:border-color .2s, background .2s, transform .15s; color:var(--cream); }
+  .ks-bcard:hover{ border-color:#FF6B6B; transform:translateY(-2px); }
+  .ks-bcard.is-sel{ border-color:var(--red); background:rgba(216,0,0,.12); }
+  .ks-bcard__city{ font-family:var(--fh); font-weight:600; font-size:1.25rem; }
+  .ks-bcard__tag{ font-family:var(--fl); font-weight:300; font-size:12.5px; color:var(--muted); margin-top:4px; line-height:1.4; }
+
+  /* fields */
+  .ks-resv__fields{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .ks-f{ display:flex; flex-direction:column; }
+  .ks-f--full{ grid-column:1 / -1; }
+  .ks-f label{ font-family:var(--fl); font-weight:600; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .ks-f .req{ color:#FF6B6B; } .ks-f .opt{ color:var(--muted); text-transform:none; letter-spacing:0; font-weight:300; }
+  .ks-f input, .ks-f select, .ks-f textarea{ font-family:var(--fl); font-size:15px; color:var(--cream); background:rgba(3,24,47,.6); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; outline:none; transition:border-color .2s, box-shadow .2s; }
+  .ks-f input::placeholder, .ks-f textarea::placeholder{ color:rgba(246,241,231,.4); }
+  .ks-f input:focus, .ks-f select:focus, .ks-f textarea:focus{ border-color:#FF6B6B; box-shadow:0 0 0 3px rgba(216,0,0,.18); }
+  .ks-f input[type=date], .ks-f input[type=time]{ color-scheme:dark; }
+
+  .ks-resv__summary{ font-family:var(--fl); font-size:14px; line-height:1.7; color:var(--cream); background:rgba(3,24,47,.5); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:6px 0 16px; }
+  .ks-resv__summary b{ color:#FF6B6B; font-weight:600; }
+  .ks-resv__summary .muted{ color:var(--muted); }
+
+  .ks-resv__wa{ display:flex; align-items:center; justify-content:center; gap:10px; width:100%; font-family:var(--fl); font-weight:700; font-size:15px; text-decoration:none; background:var(--wa); color:#053b1e; padding:16px; border-radius:12px; box-shadow:0 16px 30px -14px rgba(37,211,102,.7); transition:filter .2s, transform .18s; }
+  .ks-resv__wa svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; }
+  .ks-resv__wa:hover{ filter:brightness(1.05); transform:translateY(-2px); }
+  .ks-resv__wa.is-disabled{ pointer-events:none; opacity:.45; filter:grayscale(.5); box-shadow:none; }
+  .ks-resv__note{ font-family:var(--fl); font-weight:300; font-size:12px; color:var(--muted); text-align:center; margin:12px 0 0; }
+
+  .ks-resv__nav{ display:flex; justify-content:space-between; gap:12px; margin-top:24px; }
+  .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; padding:14px 28px; border-radius:12px; border:2px solid transparent; transition:background .2s, color .2s, transform .18s, opacity .2s; }
+  .ks-btn--red{ background:var(--red); color:#fff; margin-left:auto; }
+  .ks-btn--red:hover:not(:disabled){ background:var(--red-2); transform:translateY(-2px); }
+  .ks-btn--red:disabled{ opacity:.4; cursor:not-allowed; }
+  .ks-btn--ghost{ background:transparent; color:var(--cream); border-color:var(--line); }
+  .ks-btn--ghost:hover{ background:rgba(246,241,231,.08); }
+
+  @media (max-width:560px){ .ks-resv__branches{ grid-template-columns:1fr; } .ks-resv__fields{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ .ks-bcard:hover, .ks-resv__wa:hover, .ks-btn--red:hover{ transform:none; } }
   </style>
+
+  <script>
+  (function () {
+    var root = document.getElementById('reservasi');
+    var data = window.KS_BRANCHES || [];
+
+    var state = { idx: -1, slug: '', city: '', whatsapp: '', nama: '', tanggal: '', jam: '19:00', jumlah: '', menu: '' };
+    var step = 1;
+
+    var steps   = root.querySelectorAll('.ks-resv__step');
+    var dots    = root.querySelectorAll('.ks-resv__steps li');
+    var btnNext = root.querySelector('[data-act="next"]');
+    var btnBack = root.querySelector('[data-act="back"]');
+    var wrap    = root.querySelector('.ks-resv__branches');
+
+    // --- Step 1: render branch cards ---
+    if (!data.length) {
+      wrap.innerHTML = '<p style="color:rgba(246,241,231,.7);font-family:Alexandria,sans-serif">Data cabang belum dimuat. Pasang <code>data/branches.js</code>.</p>';
+    } else {
+      data.forEach(function (b, i) {
+        var c = document.createElement('button');
+        c.type = 'button'; c.className = 'ks-bcard'; c.setAttribute('role', 'radio'); c.setAttribute('aria-checked', 'false');
+        c.innerHTML = '<div class="ks-bcard__city">' + b.city + '</div><div class="ks-bcard__tag">' + b.tagline + '</div>';
+        c.addEventListener('click', function () { selectBranch(i); });
+        wrap.appendChild(c);
+      });
+    }
+
+    function selectBranch(i) {
+      state.idx = i;
+      var b = data[i];
+      state.slug = b.slug; state.city = b.city; state.whatsapp = b.whatsapp;
+      Array.prototype.forEach.call(wrap.children, function (el, idx) {
+        var on = idx === i; el.classList.toggle('is-sel', on); el.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+      refreshNav();
+    }
+
+    // dipanggil dari section Cabang (CTA "Reservasi di <kota>")
+    window.ksReservasiSelect = function (slug) {
+      var i = data.findIndex ? data.findIndex(function (b) { return b.slug === slug; })
+                             : (function(){ for (var k=0;k<data.length;k++) if (data[k].slug===slug) return k; return -1; })();
+      if (i < 0) return;
+      selectBranch(i);
+      goto(2);
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // --- bind step 2 fields ---
+    var fNama = root.querySelector('#ksNama'), fTgl = root.querySelector('#ksTgl'),
+        fJam = root.querySelector('#ksJam'), fJml = root.querySelector('#ksJumlah'),
+        fMenu = root.querySelector('#ksMenu');
+    // tanggal minimal = hari ini
+    (function(){ var t=new Date(); var iso=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0'); fTgl.min=iso; })();
+    fNama.addEventListener('input', function(){ state.nama = fNama.value.trim(); });
+    fTgl .addEventListener('input', function(){ state.tanggal = fTgl.value; refreshNav(); });
+    fJam .addEventListener('input', function(){ state.jam = fJam.value; refreshNav(); });
+    fJml .addEventListener('change', function(){ state.jumlah = fJml.value; refreshNav(); });
+    fMenu.addEventListener('input', function(){ state.menu = fMenu.value.trim(); if (step === 3) updateConfirm(); });
+
+    // --- validation per step ---
+    function step1Valid(){ return state.idx >= 0; }
+    function step2Valid(){ return !!(state.tanggal && state.jam && state.jumlah); }
+    function allValid(){ return step1Valid() && step2Valid(); }
+
+    function refreshNav() {
+      if (step === 1) { btnNext.disabled = !step1Valid(); }
+      else if (step === 2) { btnNext.disabled = !step2Valid(); }
+    }
+
+    // --- WA link ---
+    function fmtDate(iso){ if(!iso) return '-'; var p=iso.split('-'); return p.length===3 ? (p[2]+'-'+p[1]+'-'+p[0]) : iso; }
+    function buildMessage(){
+      return 'Halo Kurnia Seafood ' + state.city + ', saya ingin reservasi:\n' +
+             'Nama: ' + (state.nama || '-') + '\n' +
+             'Tanggal: ' + fmtDate(state.tanggal) + '\n' +
+             'Jam: ' + (state.jam || '-') + '\n' +
+             'Jumlah tamu: ' + (state.jumlah || '-') + '\n' +
+             'Pre-order: ' + (state.menu || '-') + '\n' +
+             'Terima kasih.';
+    }
+    function updateConfirm() {
+      var sum = root.querySelector('.ks-resv__summary');
+      sum.innerHTML =
+        '<div><span class="muted">Cabang:</span> <b>' + (state.city || '-') + '</b></div>' +
+        '<div><span class="muted">Nama:</span> ' + (state.nama || '-') + '</div>' +
+        '<div><span class="muted">Tanggal:</span> ' + fmtDate(state.tanggal) + ' · <span class="muted">Jam:</span> ' + (state.jam || '-') + '</div>' +
+        '<div><span class="muted">Jumlah:</span> ' + (state.jumlah || '-') + '</div>' +
+        '<div><span class="muted">Pre-order:</span> ' + (state.menu || '-') + '</div>';
+
+      var wa = root.querySelector('#ksWaBtn');
+      if (allValid()) {
+        // TODO: persist reservation data before WA redirect (production) —
+        // simpan ke form endpoint / Google Sheets / CRM sebelum membuka WA.
+        wa.href = 'https://wa.me/' + state.whatsapp + '?text=' + encodeURIComponent(buildMessage());
+        wa.classList.remove('is-disabled'); wa.setAttribute('aria-disabled', 'false');
+      } else {
+        wa.href = '#'; wa.classList.add('is-disabled'); wa.setAttribute('aria-disabled', 'true');
+      }
+    }
+
+    // --- step navigation ---
+    function goto(n) {
+      step = n;
+      Array.prototype.forEach.call(steps, function (el) { el.hidden = (parseInt(el.getAttribute('data-step'), 10) !== n); });
+      Array.prototype.forEach.call(dots, function (el, i) {
+        el.classList.toggle('is-active', i === n - 1);
+        el.classList.toggle('is-done', i < n - 1);
+      });
+      btnBack.hidden = (n === 1);
+      if (n === 3) { btnNext.hidden = true; updateConfirm(); }
+      else { btnNext.hidden = false; btnNext.textContent = (n === 2 ? 'Lanjut' : 'Lanjut'); }
+      refreshNav();
+    }
+
+    btnNext.addEventListener('click', function () {
+      if (step === 1 && step1Valid()) goto(2);
+      else if (step === 2 && step2Valid()) goto(3);
+    });
+    btnBack.addEventListener('click', function () { if (step > 1) goto(step - 1); });
+
+    goto(1);
+  })();
+  </script>
 </section>
