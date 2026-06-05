@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurnia Seafood — Kemewahan dari Kedalaman Laut</title>
+  <meta name="description" content="Restoran seafood premium. Tangkapan harian dari pesisir Nusantara, diolah dengan presisi. Reservasi private dining di Kurnia Seafood." />
+
+  <!-- Fonts: Fraunces (display serif) + Hanken Grotesk (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Play CDN (demo). The Next.js version uses a compiled Tailwind build. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { DEFAULT: '#04223F', 900: '#021526', 800: '#03192E' },
+            brand:  { DEFAULT: '#0056AC', 400: '#2E7BD1', 200: '#9CC3EA' },
+            red:    { DEFAULT: '#D80000', 600: '#B40000' },
+            steel:  '#929497',
+            mist:   '#F4F4F4',
+            paper:  '#F8F7F2',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'serif'],
+            sans: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: { kicker: '0.32em' },
+          maxWidth: { shell: '78rem' },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root { --ink:#04223F; --brand:#0056AC; --red:#D80000; }
+    html, body { -webkit-font-smoothing: antialiased; }
+    body { background:#F8F7F2; color:#04223F; font-family:'Hanken Grotesk',system-ui,sans-serif; }
+
+    /* Subtle film-grain texture for atmosphere on dark sections */
+    .grain::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Decorative hairline that draws itself on reveal */
+    .rule { height:1px; background:linear-gradient(90deg,transparent,currentColor,transparent); }
+
+    /* Animated link underline */
+    .ul-anim{ background-image:linear-gradient(currentColor,currentColor); background-size:0% 1px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .35s cubic-bezier(.2,.7,.2,1); }
+    .ul-anim:hover{ background-size:100% 1px; }
+
+    /* Scroll reveal */
+    [data-reveal]{ opacity:0; transform:translateY(22px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+    [data-reveal].in{ opacity:1; transform:none; }
+    [data-reveal][data-delay="1"]{ transition-delay:.08s; }
+    [data-reveal][data-delay="2"]{ transition-delay:.16s; }
+    [data-reveal][data-delay="3"]{ transition-delay:.24s; }
+    [data-reveal][data-delay="4"]{ transition-delay:.32s; }
+    [data-reveal][data-delay="5"]{ transition-delay:.40s; }
+
+    /* Hero entrance */
+    @keyframes rise { from{opacity:0; transform:translateY(28px)} to{opacity:1; transform:none} }
+    .rise{ opacity:0; animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards; }
+
+    /* Floating blueprint motifs */
+    @keyframes drift { 0%,100%{ transform:translateY(0) rotate(0)} 50%{ transform:translateY(-14px) rotate(-1.5deg)} }
+    .drift{ animation:drift 9s ease-in-out infinite; }
+    .drift-slow{ animation:drift 14s ease-in-out infinite; }
+
+    /* Marquee */
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .marquee-track{ animation:marquee 32s linear infinite; }
+
+    @media (prefers-reduced-motion: reduce){
+      .scroll-smooth{ scroll-behavior:auto; }
+      [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
+      .rise{ animation:none; opacity:1; }
+      .drift,.drift-slow,.marquee-track{ animation:none; }
+    }
+
+    .text-balance{ text-wrap:balance; }
+    ::selection{ background:#D80000; color:#fff; }
+  </style>
+</head>
+
+<body class="bg-paper text-ink antialiased selection:bg-red selection:text-white">
+
+  <!-- Skip link -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-ink focus:text-paper focus:px-4 focus:py-2 focus:rounded">Lewati ke konten</a>
+
+  <!-- ======================= HEADER ======================= -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-500">
+    <!-- announcement bar -->
+    <div class="hidden md:block bg-ink-900 text-paper/70">
+      <div class="mx-auto max-w-shell px-6 lg:px-8 flex items-center justify-between py-2 text-[12.5px] tracking-wide">
+        <p class="flex items-center gap-2">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-red animate-pulse"></span>
+          Tersedia private dining &amp; chef's table
+        </p>
+        <p class="flex items-center gap-6">
+          <span>Selasa–Minggu · 11.00–23.00</span>
+          <a href="tel:+62215550198" class="ul-anim text-paper hover:text-brand-200">Reservasi: +62 21 555 0198</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- main nav -->
+    <div id="nav-shell" class="transition-colors duration-500">
+      <nav class="mx-auto max-w-shell px-6 lg:px-8 flex items-center justify-between py-4" aria-label="Utama">
+        <a href="#" class="flex items-center gap-3 group">
+          <span class="text-brand-200 group-hover:text-red transition-colors duration-300" aria-hidden="true">
+            <!-- roundel monogram -->
+            <svg width="38" height="38" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+              <circle cx="24" cy="24" r="22" stroke-opacity=".45"/>
+              <path d="M9 27c4-5 9-5 13 0 4 5 9 5 13 0" stroke-linecap="round"/>
+              <path d="M13 19c4 4 12 4 18 0M31 19l5-3-1 5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="20" cy="16.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="leading-none">
+            <span id="brandword" class="block font-display text-[20px] font-semibold tracking-tight text-paper transition-colors duration-500">Kurnia<span class="text-red"> Seafood</span></span>
+            <span id="brandtag" class="block text-[10px] tracking-kicker uppercase text-paper/55 transition-colors duration-500">Pesisir · Nusantara · Est. 1998</span>
+          </span>
+        </a>
+
+        <div id="navlinks" class="hidden lg:flex items-center gap-9 text-[14.5px] text-paper/80 transition-colors duration-500">
+          <a href="#filosofi" class="ul-anim hover:text-paper">Filosofi</a>
+          <a href="#menu" class="ul-anim hover:text-paper">Hidangan</a>
+          <a href="#pengalaman" class="ul-anim hover:text-paper">Pengalaman</a>
+          <a href="#galeri" class="ul-anim hover:text-paper">Galeri</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="#reservasi" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-red px-5 py-2.5 text-[14px] font-semibold text-white shadow-lg shadow-red/20 transition hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
+            Reservasi
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <button id="menu-btn" class="lg:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-paper/25 text-paper" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="sr-only">Buka menu</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-ink-900 text-paper border-t border-white/10">
+      <div class="px-6 py-6 flex flex-col gap-1 text-lg">
+        <a href="#filosofi" class="py-3 border-b border-white/10">Filosofi</a>
+        <a href="#menu" class="py-3 border-b border-white/10">Hidangan</a>
+        <a href="#pengalaman" class="py-3 border-b border-white/10">Pengalaman</a>
+        <a href="#galeri" class="py-3 border-b border-white/10">Galeri</a>
+        <a href="#reservasi" class="mt-4 inline-flex justify-center rounded-full bg-red px-5 py-3 font-semibold text-white">Reservasi Meja</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- ======================= HERO ======================= -->
+  <section class="relative isolate overflow-hidden bg-ink text-paper grain">
+    <!-- atmospheric glows -->
+    <div class="pointer-events-none absolute -top-40 right-[-10%] h-[60vh] w-[60vh] rounded-full bg-brand/30 blur-[120px]"></div>
+    <div class="pointer-events-none absolute bottom-[-20%] left-[-10%] h-[50vh] w-[50vh] rounded-full bg-brand-400/15 blur-[120px]"></div>
+
+    <!-- floating blueprint line-art -->
+    <div class="pointer-events-none absolute right-[4%] top-[26%] w-[clamp(200px,32vw,460px)] text-brand-200/25 drift" aria-hidden="true">
+      <!-- FISH -->
+      <svg viewBox="0 0 240 130" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 65 C55 25 130 25 168 58 L206 32 C198 50 198 80 206 98 L168 72 C130 105 55 105 22 65 Z"/>
+        <path d="M74 40 C66 58 66 72 74 90"/>
+        <path d="M100 30 C108 17 130 16 136 30"/>
+        <path d="M92 76 C102 94 120 92 126 80"/>
+        <path d="M120 50c8 6 8 24 0 30M138 52c7 5 7 21 0 26"/>
+        <circle cx="50" cy="56" r="3.2"/>
+      </svg>
+    </div>
+    <div class="pointer-events-none absolute left-[2%] bottom-[14%] w-[clamp(120px,16vw,210px)] text-brand-200/20 drift-slow" aria-hidden="true">
+      <!-- SCALLOP -->
+      <svg viewBox="0 0 160 130" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M80 116 C20 116 12 60 26 34 C34 20 44 28 50 30 C58 18 66 18 72 30 C78 20 82 20 88 30 C94 18 102 18 110 30 C116 28 126 20 134 34 C148 60 140 116 80 116 Z"/>
+        <path d="M80 112V40M62 110 70 44M98 110 90 44M46 102 62 50M114 102 98 50M34 86 56 56M126 86 104 56"/>
+        <path d="M68 118h24l-5 8h-14z"/>
+      </svg>
+    </div>
+
+    <div class="relative mx-auto max-w-shell px-6 lg:px-8 pt-40 pb-24 md:pt-48 md:pb-32">
+      <p class="rise text-[12px] tracking-kicker uppercase text-brand-200" style="animation-delay:.05s">
+        Restoran Seafood Premium · Jakarta
+      </p>
+
+      <h1 class="rise mt-6 max-w-4xl font-display font-light text-balance text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.98] tracking-[-0.02em]" style="animation-delay:.18s">
+        Kemewahan dari<br>
+        <span class="italic font-normal text-brand-200">kedalaman</span> laut.
+      </h1>
+
+      <p class="rise mt-7 max-w-xl text-[17px] leading-relaxed text-paper/70" style="animation-delay:.32s">
+        Tangkapan harian dari nelayan pesisir Nusantara, diolah dengan presisi
+        dan disajikan dalam ruang yang tenang. Sebuah penghormatan untuk laut.
+      </p>
+
+      <div class="rise mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4" style="animation-delay:.46s">
+        <a href="#reservasi" class="group inline-flex items-center gap-3 rounded-full bg-red px-7 py-4 text-[15px] font-semibold text-white shadow-xl shadow-red/25 transition hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
+          Reservasi Sekarang
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#menu" class="inline-flex items-center gap-3 rounded-full border border-paper/25 px-7 py-4 text-[15px] font-semibold text-paper transition hover:border-paper/60 hover:bg-white/5">
+          Lihat Hidangan
+        </a>
+      </div>
+
+      <!-- stat row -->
+      <dl class="rise mt-20 grid grid-cols-2 sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm" style="animation-delay:.6s">
+        <div class="p-6 sm:p-8">
+          <dt class="text-[12px] uppercase tracking-kicker text-paper/45">Tahun</dt>
+          <dd class="mt-2 font-display text-3xl sm:text-4xl">27<span class="text-red">+</span></dd>
+          <p class="mt-1 text-[13px] text-paper/55">melayani pencinta laut</p>
+        </div>
+        <div class="p-6 sm:p-8 sm:border-l border-white/10">
+          <dt class="text-[12px] uppercase tracking-kicker text-paper/45">Tangkapan</dt>
+          <dd class="mt-2 font-display text-3xl sm:text-4xl">Harian</dd>
+          <p class="mt-1 text-[13px] text-paper/55">langsung dari pesisir</p>
+        </div>
+        <div class="p-6 sm:p-8 border-t sm:border-t-0 sm:border-l border-white/10 col-span-2 sm:col-span-1">
+          <dt class="text-[12px] uppercase tracking-kicker text-paper/45">Signature</dt>
+          <dd class="mt-2 font-display text-3xl sm:text-4xl">32 Hidangan</dd>
+          <p class="mt-1 text-[13px] text-paper/55">racikan para master</p>
+        </div>
+      </dl>
+    </div>
+
+    <!-- scroll cue -->
+    <div class="relative mx-auto max-w-shell px-6 lg:px-8 pb-10 hidden md:flex items-center gap-3 text-[12px] tracking-kicker uppercase text-paper/40">
+      <span class="h-10 w-px bg-gradient-to-b from-paper/40 to-transparent"></span>
+      Gulir untuk menelusuri
+    </div>
+  </section>
+
+  <!-- ======================= MARQUEE STRIP ======================= -->
+  <div class="bg-ink-900 text-paper/35 border-y border-white/10 overflow-hidden py-4">
+    <div class="marquee-track flex w-max items-center gap-10 whitespace-nowrap text-[13px] tracking-kicker uppercase">
+      <!-- duplicated for seamless loop -->
+      <span class="flex items-center gap-10">
+        <span>Lobster</span><span class="text-red">✦</span><span>Kerapu Merah</span><span class="text-red">✦</span><span>Kepiting Bakau</span><span class="text-red">✦</span><span>Udang Galah</span><span class="text-red">✦</span><span>Tiram Segar</span><span class="text-red">✦</span><span>Gindara Miso</span><span class="text-red">✦</span>
+      </span>
+      <span class="flex items-center gap-10" aria-hidden="true">
+        <span>Lobster</span><span class="text-red">✦</span><span>Kerapu Merah</span><span class="text-red">✦</span><span>Kepiting Bakau</span><span class="text-red">✦</span><span>Udang Galah</span><span class="text-red">✦</span><span>Tiram Segar</span><span class="text-red">✦</span><span>Gindara Miso</span><span class="text-red">✦</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- ======================= FILOSOFI / STORY ======================= -->
+  <section id="filosofi" class="relative bg-paper py-24 md:py-36">
+    <div class="mx-auto max-w-shell px-6 lg:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+      <div class="lg:col-span-6" data-reveal>
+        <p class="text-[12px] tracking-kicker uppercase text-red">Filosofi Kami</p>
+        <h2 class="mt-5 font-display font-light text-balance text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.05] tracking-[-0.02em]">
+          Laut diperlakukan dengan <span class="italic text-brand">hormat</span>, bukan sekadar bahan.
+        </h2>
+        <p class="mt-7 max-w-lg text-[16.5px] leading-relaxed text-ink/70">
+          Setiap pagi, tangkapan terbaik tiba dari nelayan langganan di sepanjang
+          pesisir. Kami memilih dengan teliti — hanya yang paling segar yang layak
+          menyentuh dapur kami. Tidak ada jalan pintas, tidak ada kompromi.
+        </p>
+        <p class="mt-4 max-w-lg text-[16.5px] leading-relaxed text-ink/70">
+          Dari laut ke meja Anda dalam hitungan jam. Itulah janji yang kami jaga
+          selama lebih dari dua dekade.
+        </p>
+
+        <div class="mt-9 flex items-center gap-5">
+          <span class="font-display italic text-2xl text-brand">Kurnia</span>
+          <span class="h-px w-16 bg-steel/40"></span>
+          <span class="text-[13px] tracking-wide text-steel">Pendiri &amp; Kepala Dapur</span>
+        </div>
+      </div>
+
+      <!-- BLUEPRINT CARD -->
+      <div class="lg:col-span-6" data-reveal data-delay="2">
+        <figure class="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] overflow-hidden rounded-3xl bg-ink text-brand-200 grain shadow-2xl shadow-ink/30">
+          <!-- blueprint grid -->
+          <div class="absolute inset-0 opacity-[0.18]" style="background-image:linear-gradient(#9CC3EA22 1px,transparent 1px),linear-gradient(90deg,#9CC3EA22 1px,transparent 1px);background-size:28px 28px"></div>
+          <figcaption class="absolute left-6 top-6 z-10 text-[11px] tracking-kicker uppercase text-paper/60">
+            Pl. 01 — Anatomi Kesegaran
+          </figcaption>
+          <span class="absolute right-6 top-6 z-10 text-[11px] tracking-kicker uppercase text-red">Kurnia&nbsp;Seafood</span>
+
+          <!-- big line-art prawn -->
+          <div class="absolute inset-0 grid place-items-center p-10">
+            <svg viewBox="0 0 220 220" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-3/4 text-paper/80 drift-slow">
+              <!-- body -->
+              <path d="M150 36 C188 70 184 132 138 162 C112 179 78 178 58 162"/>
+              <path d="M150 52 C176 80 172 124 134 150 C112 165 86 165 70 154"/>
+              <!-- segments -->
+              <path d="M168 78 154 86M170 96 154 102M168 116 152 118M160 134 146 132M146 150 136 144"/>
+              <!-- tail fan -->
+              <path d="M58 162 38 150M58 162 46 178M58 162 64 182M58 162 76 180"/>
+              <!-- head + rostrum -->
+              <path d="M150 36 C156 24 168 18 182 18M150 36 168 30M150 36 162 44"/>
+              <!-- antennae -->
+              <path d="M182 18 C150 6 96 8 60 26M182 18 C160 14 120 22 92 40"/>
+              <!-- legs -->
+              <path d="M138 162l-4 16M120 170l-2 16M102 172l0 16M84 170l2 16"/>
+              <circle cx="160" cy="40" r="2.6" fill="currentColor" stroke="none"/>
+              <!-- measure ticks -->
+              <path d="M30 196h160M30 192v8M190 192v8" stroke-opacity=".5"/>
+            </svg>
+          </div>
+          <div class="absolute bottom-6 left-6 right-6 z-10 flex items-end justify-between">
+            <p class="text-[12px] leading-snug text-paper/55 max-w-[60%]">Udang galah · dipilih utuh,<br>diukur, ditimbang setiap pagi.</p>
+            <p class="font-display text-3xl text-paper">No.&nbsp;01</p>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MENU / SIGNATURE DISHES ======================= -->
+  <section id="menu" class="relative bg-mist py-24 md:py-32">
+    <div class="mx-auto max-w-shell px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6" data-reveal>
+        <div>
+          <p class="text-[12px] tracking-kicker uppercase text-red">Hidangan Signature</p>
+          <h2 class="mt-4 font-display font-light text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">
+            Dipilih dari laut,<br class="hidden sm:block"> disempurnakan di dapur.
+          </h2>
+        </div>
+        <a href="#" class="ul-anim self-start md:self-auto inline-flex items-center gap-2 text-[15px] font-semibold text-brand">
+          Lihat menu lengkap
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        <!-- dish -->
+        <article class="group relative" data-reveal data-delay="1">
+          <div class="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
+            <span class="font-display text-sm text-steel">01</span>
+            <span class="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors"></span>
+            <span class="font-display text-lg text-brand">Rp 385K</span>
+          </div>
+          <h3 class="mt-4 font-display text-2xl tracking-tight">Lobster Bakar Madu-Asam</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Lobster utuh dipanggang, glasir madu &amp; asam jawa, sambal matah segar.</p>
+        </article>
+
+        <article class="group relative" data-reveal data-delay="2">
+          <div class="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
+            <span class="font-display text-sm text-steel">02</span>
+            <span class="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors"></span>
+            <span class="font-display text-lg text-brand">Rp 268K</span>
+          </div>
+          <h3 class="mt-4 font-display text-2xl tracking-tight">Kerapu Kukus Hong Kong</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Kerapu merah utuh, kecap asin premium, jahe muda, taburan daun bawang.</p>
+        </article>
+
+        <article class="group relative" data-reveal data-delay="3">
+          <div class="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
+            <span class="font-display text-sm text-steel">03</span>
+            <span class="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors"></span>
+            <span class="font-display text-lg text-brand">Rp 312K</span>
+          </div>
+          <h3 class="mt-4 font-display text-2xl tracking-tight">Kepiting Saus Padang</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Kepiting bakau jumbo, saus padang pedas berempah, mantou panggang.</p>
+        </article>
+
+        <article class="group relative" data-reveal data-delay="1">
+          <div class="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
+            <span class="font-display text-sm text-steel">04</span>
+            <span class="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors"></span>
+            <span class="font-display text-lg text-brand">Rp 295K</span>
+          </div>
+          <h3 class="mt-4 font-display text-2xl tracking-tight">Udang Galah Mentega</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Udang galah, saus mentega truffle, bawang putih panggang, peterseli.</p>
+        </article>
+
+        <article class="group relative" data-reveal data-delay="2">
+          <div class="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
+            <span class="font-display text-sm text-steel">05</span>
+            <span class="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors"></span>
+            <span class="font-display text-lg text-brand">Rp 178K</span>
+          </div>
+          <h3 class="mt-4 font-display text-2xl tracking-tight">Tiram Segar Pesisir</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Setengah lusin tiram dingin, mignonette jeruk nipis, roti panggang mentega.</p>
+        </article>
+
+        <article class="group relative" data-reveal data-delay="3">
+          <div class="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
+            <span class="font-display text-sm text-steel">06</span>
+            <span class="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors"></span>
+            <span class="font-display text-lg text-brand">Rp 248K</span>
+          </div>
+          <h3 class="mt-4 font-display text-2xl tracking-tight">Gindara Miso Panggang</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Black cod marinasi miso tiga hari, asinan rumput laut, wijen sangrai.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PENGALAMAN / EXPERIENCE ======================= -->
+  <section id="pengalaman" class="relative bg-ink text-paper py-24 md:py-32 grain overflow-hidden">
+    <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[70vh] w-[70vh] rounded-full bg-brand/20 blur-[140px]"></div>
+    <div class="relative mx-auto max-w-shell px-6 lg:px-8">
+      <div class="max-w-2xl" data-reveal>
+        <p class="text-[12px] tracking-kicker uppercase text-brand-200">Pengalaman</p>
+        <h2 class="mt-4 font-display font-light text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.05] tracking-[-0.02em]">
+          Tiga babak dalam satu <span class="italic text-brand-200">jamuan</span>.
+        </h2>
+        <p class="mt-6 text-[16.5px] leading-relaxed text-paper/65">
+          Ruang yang dirancang untuk memperlambat waktu — dari sambutan pertama
+          hingga teguk terakhir.
+        </p>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-3 gap-5">
+        <!-- card 1 (tall) -->
+        <figure class="group relative overflow-hidden rounded-3xl bg-ink-800 aspect-[4/5] md:row-span-2 md:aspect-auto border border-white/10" data-reveal data-delay="1">
+          <div class="absolute inset-0 bg-gradient-to-br from-brand/40 via-ink to-ink-900"></div>
+          <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=900&q=70" alt="Interior ruang utama restoran dengan pencahayaan hangat" loading="lazy" class="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" onerror="this.style.display='none'">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-ink-900/10 to-transparent"></div>
+          <figcaption class="absolute bottom-0 p-7">
+            <p class="text-[11px] tracking-kicker uppercase text-brand-200">Ruang Utama</p>
+            <h3 class="mt-2 font-display text-2xl">Cahaya rendah, langit-langit tinggi</h3>
+          </figcaption>
+        </figure>
+        <!-- card 2 -->
+        <figure class="group relative overflow-hidden rounded-3xl bg-ink-800 aspect-[16/10] border border-white/10" data-reveal data-delay="2">
+          <div class="absolute inset-0 bg-gradient-to-br from-ink-800 via-ink to-brand/30"></div>
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=70" alt="Meja private dining yang ditata elegan" loading="lazy" class="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" onerror="this.style.display='none'">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-ink-900/10 to-transparent"></div>
+          <figcaption class="absolute bottom-0 p-7">
+            <p class="text-[11px] tracking-kicker uppercase text-brand-200">Private Dining</p>
+            <h3 class="mt-2 font-display text-2xl">Ruang tertutup untuk 12 tamu</h3>
+          </figcaption>
+        </figure>
+        <!-- card 3 -->
+        <figure class="group relative overflow-hidden rounded-3xl bg-ink-800 aspect-[16/10] border border-white/10" data-reveal data-delay="3">
+          <div class="absolute inset-0 bg-gradient-to-br from-red/30 via-ink to-ink-900"></div>
+          <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=900&q=70" alt="Raw bar dengan tiram dan es" loading="lazy" class="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-105" onerror="this.style.display='none'">
+          <div class="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-ink-900/10 to-transparent"></div>
+          <figcaption class="absolute bottom-0 p-7">
+            <p class="text-[11px] tracking-kicker uppercase text-brand-200">Raw Bar &amp; Cellar</p>
+            <h3 class="mt-2 font-display text-2xl">Tiram dingin &amp; anggur pilihan</h3>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= MENGAPA / FEATURES ======================= -->
+  <section class="bg-paper py-24 md:py-32">
+    <div class="mx-auto max-w-shell px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto" data-reveal>
+        <p class="text-[12px] tracking-kicker uppercase text-red">Mengapa Kurnia</p>
+        <h2 class="mt-4 font-display font-light text-[clamp(2rem,4.2vw,3.2rem)] leading-[1.05] tracking-[-0.02em]">Empat janji yang tak kami tawar.</h2>
+      </div>
+
+      <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-px rounded-3xl overflow-hidden border border-ink/10 bg-ink/10">
+        <!-- f1 -->
+        <div class="bg-paper p-8 group hover:bg-mist transition-colors duration-300" data-reveal data-delay="1">
+          <span class="text-brand group-hover:text-red transition-colors">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30c5-7 12-7 18 0 6 7 13 7 18 0M10 22c4 4 12 4 16 0M26 22l4-2-1 4"/><circle cx="17" cy="18" r="1"/></svg>
+          </span>
+          <h3 class="mt-5 font-display text-xl">Tangkapan Harian</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Dipasok langsung dari nelayan pesisir setiap pagi, tanpa perantara.</p>
+        </div>
+        <!-- f2 -->
+        <div class="bg-paper p-8 group hover:bg-mist transition-colors duration-300" data-reveal data-delay="2">
+          <span class="text-brand group-hover:text-red transition-colors">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c6 0 10 4 10 10 0 5-4 8-4 12H18c0-4-4-7-4-12C14 10 18 6 24 6Z"/><path d="M18 28h12M19 34h10M21 40h6"/></svg>
+          </span>
+          <h3 class="mt-5 font-display text-xl">Tangan Para Master</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Chef dengan puluhan tahun pengalaman menjaga setiap teknik &amp; rasa.</p>
+        </div>
+        <!-- f3 -->
+        <div class="bg-paper p-8 group hover:bg-mist transition-colors duration-300" data-reveal data-delay="3">
+          <span class="text-brand group-hover:text-red transition-colors">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 34c4-5 8-5 12 0M6 26c4-5 8-5 12 0"/><path d="M24 12v24M24 12c6 2 12 2 18 0v10c-6 2-12 2-18 0"/></svg>
+          </span>
+          <h3 class="mt-5 font-display text-xl">Laut ke Meja</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Rantai pasok terpendek menjaga kesegaran dan menghormati sumbernya.</p>
+        </div>
+        <!-- f4 -->
+        <div class="bg-paper p-8 group hover:bg-mist transition-colors duration-300" data-reveal data-delay="4">
+          <span class="text-brand group-hover:text-red transition-colors">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40V20l16-12 16 12v20"/><path d="M18 40V28h12v12"/><path d="M24 8v6"/></svg>
+          </span>
+          <h3 class="mt-5 font-display text-xl">Ruang Privat</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink/65">Private dining &amp; chef's table untuk perayaan dan jamuan istimewa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= TESTIMONIAL ======================= -->
+  <section id="galeri" class="bg-mist py-24 md:py-32">
+    <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center" data-reveal>
+      <svg class="mx-auto text-red" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 6C6.5 7.3 5 9.7 5 13.2V18h5v-5H7.6c.1-2 .9-3.3 2.6-4.1L9.5 6Zm9 0C15.5 7.3 14 9.7 14 13.2V18h5v-5h-2.4c.1-2 .9-3.3 2.6-4.1L18.5 6Z"/></svg>
+      <blockquote class="mt-8 font-display font-light text-[clamp(1.6rem,3.6vw,2.6rem)] leading-[1.2] tracking-[-0.01em] text-balance text-ink">
+        “Sebuah ode untuk laut Nusantara. Kesegaran yang jujur, ruang yang tenang,
+        dan pelayanan yang membuat Anda ingin berlama-lama.”
+      </blockquote>
+      <div class="mt-9 flex items-center justify-center gap-4">
+        <span class="grid h-12 w-12 place-items-center rounded-full bg-ink text-paper font-display text-lg">SW</span>
+        <div class="text-left">
+          <p class="font-semibold text-ink">Sastra Wijaya</p>
+          <p class="text-[13px] text-steel">Kolumnis Kuliner · Majalah Rasa</p>
+        </div>
+      </div>
+
+      <!-- review badges -->
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-steel" data-reveal data-delay="2">
+        <span class="flex items-center gap-2 text-[14px]">
+          <span class="text-red">★★★★★</span> 4.9 · 1.200+ ulasan
+        </span>
+        <span class="hidden sm:block h-4 w-px bg-steel/30"></span>
+        <span class="text-[14px]">Diliput Tatler Dining</span>
+        <span class="hidden sm:block h-4 w-px bg-steel/30"></span>
+        <span class="text-[14px]">Pilihan Editor · Foodism ID</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= RESERVASI ======================= -->
+  <section id="reservasi" class="relative bg-ink text-paper py-24 md:py-32 grain overflow-hidden">
+    <div class="pointer-events-none absolute -top-20 left-[-5%] h-[50vh] w-[50vh] rounded-full bg-red/15 blur-[120px]"></div>
+    <div class="relative mx-auto max-w-shell px-6 lg:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+
+      <div data-reveal>
+        <p class="text-[12px] tracking-kicker uppercase text-brand-200">Reservasi</p>
+        <h2 class="mt-4 font-display font-light text-[clamp(2.2rem,4.6vw,3.6rem)] leading-[1.04] tracking-[-0.02em]">
+          Amankan meja Anda<br>di tepi laut.
+        </h2>
+        <p class="mt-6 max-w-md text-[16.5px] leading-relaxed text-paper/65">
+          Kami menyarankan reservasi untuk akhir pekan dan private dining.
+          Tim kami akan mengonfirmasi dalam 1×24 jam.
+        </p>
+
+        <dl class="mt-10 space-y-5 text-[15px]">
+          <div class="flex gap-4">
+            <dt class="text-brand-200 mt-0.5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></dt>
+            <dd class="text-paper/80">Jl. Pantai Indah Selatan No. 8<br>Jakarta Utara 14470</dd>
+          </div>
+          <div class="flex gap-4">
+            <dt class="text-brand-200 mt-0.5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></dt>
+            <dd class="text-paper/80"><a href="tel:+62215550198" class="ul-anim hover:text-paper">+62 21 555 0198</a></dd>
+          </div>
+          <div class="flex gap-4">
+            <dt class="text-brand-200 mt-0.5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></dt>
+            <dd class="text-paper/80">Selasa – Minggu · 11.00 – 23.00<br><span class="text-paper/45">Senin tutup</span></dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- form -->
+      <form class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-7 sm:p-9" data-reveal data-delay="2" onsubmit="event.preventDefault(); this.reset(); document.getElementById('form-ok').classList.remove('hidden');">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div class="sm:col-span-2">
+            <label for="nama" class="block text-[12px] tracking-kicker uppercase text-paper/55 mb-2">Nama</label>
+            <input id="nama" name="nama" type="text" required placeholder="Nama lengkap" class="w-full rounded-xl bg-ink-900/60 border border-white/15 px-4 py-3 text-paper placeholder:text-paper/35 outline-none focus-visible:border-brand-200 focus-visible:ring-2 focus-visible:ring-brand/40 transition" />
+          </div>
+          <div>
+            <label for="tgl" class="block text-[12px] tracking-kicker uppercase text-paper/55 mb-2">Tanggal</label>
+            <input id="tgl" name="tgl" type="date" required class="w-full rounded-xl bg-ink-900/60 border border-white/15 px-4 py-3 text-paper outline-none focus-visible:border-brand-200 focus-visible:ring-2 focus-visible:ring-brand/40 transition [color-scheme:dark]" />
+          </div>
+          <div>
+            <label for="tamu" class="block text-[12px] tracking-kicker uppercase text-paper/55 mb-2">Jumlah Tamu</label>
+            <select id="tamu" name="tamu" class="w-full rounded-xl bg-ink-900/60 border border-white/15 px-4 py-3 text-paper outline-none focus-visible:border-brand-200 focus-visible:ring-2 focus-visible:ring-brand/40 transition">
+              <option>2 orang</option><option>3–4 orang</option><option>5–6 orang</option><option>7–12 orang</option><option>Private dining (12+)</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="telp" class="block text-[12px] tracking-kicker uppercase text-paper/55 mb-2">No. Telepon / WhatsApp</label>
+            <input id="telp" name="telp" type="tel" required placeholder="+62 8.." class="w-full rounded-xl bg-ink-900/60 border border-white/15 px-4 py-3 text-paper placeholder:text-paper/35 outline-none focus-visible:border-brand-200 focus-visible:ring-2 focus-visible:ring-brand/40 transition" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="catatan" class="block text-[12px] tracking-kicker uppercase text-paper/55 mb-2">Catatan <span class="text-paper/35 normal-case tracking-normal">(opsional)</span></label>
+            <textarea id="catatan" name="catatan" rows="3" placeholder="Alergi, perayaan, permintaan khusus…" class="w-full rounded-xl bg-ink-900/60 border border-white/15 px-4 py-3 text-paper placeholder:text-paper/35 outline-none focus-visible:border-brand-200 focus-visible:ring-2 focus-visible:ring-brand/40 transition resize-none"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="mt-7 w-full inline-flex items-center justify-center gap-2 rounded-full bg-red px-6 py-4 text-[15px] font-semibold text-white shadow-xl shadow-red/25 transition hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
+          Kirim Permintaan Reservasi
+        </button>
+        <p id="form-ok" class="hidden mt-4 text-center text-[14px] text-brand-200">Terima kasih — permintaan terkirim. Kami akan menghubungi Anda segera.</p>
+        <p class="mt-3 text-center text-[12.5px] text-paper/40">Demo form · belum terhubung ke sistem pemesanan.</p>
+      </form>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="bg-ink-900 text-paper/70">
+    <div class="mx-auto max-w-shell px-6 lg:px-8 py-16">
+      <div class="grid gap-12 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="text-brand-200" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="24" cy="24" r="22" stroke-opacity=".45"/><path d="M9 27c4-5 9-5 13 0 4 5 9 5 13 0" stroke-linecap="round"/><path d="M13 19c4 4 12 4 18 0M31 19l5-3-1 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="font-display text-xl text-paper">Kurnia<span class="text-red"> Seafood</span></span>
+          </div>
+          <p class="mt-5 max-w-sm text-[15px] leading-relaxed text-paper/55">
+            Restoran seafood premium yang menghormati laut Nusantara — dari
+            tangkapan harian hingga meja Anda, sejak 1998.
+          </p>
+          <div class="mt-6 flex items-center gap-3">
+            <a href="#" aria-label="Instagram" class="grid h-10 w-10 place-items-center rounded-full border border-white/15 hover:border-red hover:text-red transition"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="#" aria-label="WhatsApp" class="grid h-10 w-10 place-items-center rounded-full border border-white/15 hover:border-red hover:text-red transition"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20l1.5-4.5A8 8 0 1 1 9 19L4 20Z"/><path d="M9 10c0 4 2 6 6 6" stroke-linecap="round"/></svg></a>
+            <a href="#" aria-label="Facebook" class="grid h-10 w-10 place-items-center rounded-full border border-white/15 hover:border-red hover:text-red transition"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8h2V5h-2c-2 0-3 1-3 3v2H9v3h2v6h3v-6h2l1-3h-3V8c0-.5.5-1 1-1Z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <h3 class="text-[12px] tracking-kicker uppercase text-paper/40">Jelajahi</h3>
+          <ul class="mt-4 space-y-3 text-[15px]">
+            <li><a href="#filosofi" class="ul-anim hover:text-paper">Filosofi</a></li>
+            <li><a href="#menu" class="ul-anim hover:text-paper">Hidangan</a></li>
+            <li><a href="#pengalaman" class="ul-anim hover:text-paper">Pengalaman</a></li>
+            <li><a href="#reservasi" class="ul-anim hover:text-paper">Reservasi</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2">
+          <h3 class="text-[12px] tracking-kicker uppercase text-paper/40">Jam Buka</h3>
+          <ul class="mt-4 space-y-3 text-[15px] text-paper/55">
+            <li>Sel–Jum · 11–23</li>
+            <li>Sab–Min · 11–24</li>
+            <li class="text-paper/35">Senin tutup</li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3">
+          <h3 class="text-[12px] tracking-kicker uppercase text-paper/40">Kunjungi</h3>
+          <address class="mt-4 not-italic text-[15px] leading-relaxed text-paper/55">
+            Jl. Pantai Indah Selatan No. 8<br>Jakarta Utara 14470<br>
+            <a href="tel:+62215550198" class="ul-anim hover:text-paper">+62 21 555 0198</a><br>
+            <a href="mailto:halo@kurniaseafood.co.id" class="ul-anim hover:text-paper">halo@kurniaseafood.co.id</a>
+          </address>
+        </div>
+      </div>
+
+      <div class="mt-14 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[13px] text-paper/40">
+        <p>© <span id="year"></span> Kurnia Seafood. Hak cipta dilindungi.</p>
+        <p class="flex items-center gap-5">
+          <a href="#" class="ul-anim hover:text-paper">Privasi</a>
+          <a href="#" class="ul-anim hover:text-paper">Syarat</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Header: transparent over hero, solid after scroll
+    const header = document.getElementById('site-header');
+    const navShell = document.getElementById('nav-shell');
+    const brandword = document.getElementById('brandword');
+    const brandtag = document.getElementById('brandtag');
+    const navlinks = document.getElementById('navlinks');
+    function onScroll(){
+      const solid = window.scrollY > 40;
+      navShell.classList.toggle('bg-paper/95', solid);
+      navShell.classList.toggle('backdrop-blur', solid);
+      navShell.classList.toggle('shadow-sm', solid);
+      navShell.classList.toggle('border-b', solid);
+      navShell.classList.toggle('border-ink/10', solid);
+      // swap text colors light/dark
+      brandword.classList.toggle('text-paper', !solid);
+      brandword.classList.toggle('text-ink', solid);
+      brandtag.classList.toggle('text-paper/55', !solid);
+      brandtag.classList.toggle('text-steel', solid);
+      navlinks.classList.toggle('text-paper/80', !solid);
+      navlinks.classList.toggle('text-ink/70', solid);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false;
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Scroll reveal
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('[data-reveal]');
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(el => io.observe(el));
+    }
+  </script>
+</body>
+</html>
