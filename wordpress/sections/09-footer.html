@@ -9,10 +9,10 @@
     <div class="ks-foot__top">
       <div class="ks-foot__cols">
         <div class="ks-foot__col ks-foot__brand">
-          <!-- LOGO full-color dibungkus plate putih agar kontras di footer navy.
-               WebP + retina @2x, dengan PNG fallback. -->
+          <!-- LOGO versi putih (mono) agar bersih di footer navy, tanpa kotak.
+               WebP + retina @2x, PNG fallback. -->
           <a href="#" aria-label="Kurnia Seafood" class="ks-foot__logo-link">
-            <span class="ks-logo-plate">
+            <span class="ks-logo-wrap">
               <picture>
                 <source type="image/webp"
                         srcset="assets/kurnia-seafood-logo.webp 1x, assets/kurnia-seafood-logo@2x.webp 2x">
@@ -84,9 +84,8 @@
   .ks-foot__cols{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; }
   .ks-foot__brand p{ font-family:var(--fl); font-weight:300; font-size:.95rem; line-height:1.6; color:var(--muted); margin:14px 0 18px; max-width:34ch; }
   .ks-foot__logo-link{ display:inline-block; }
-  .ks-logo-plate{ display:inline-flex; align-items:center; background:#fff; border-radius:14px;
-    padding:8px 14px; box-shadow:0 10px 24px -12px rgba(0,0,0,.5); }
-  .ks-logo{ display:block; height:42px; width:auto; }
+  .ks-logo-wrap{ display:inline-flex; align-items:center; }
+  .ks-logo{ display:block; height:44px; width:auto; filter:brightness(0) invert(1); }
   .ks-foot__social{ display:flex; gap:10px; }
   .ks-foot__social a{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
     display:grid; place-items:center; color:var(--cream); transition:background .2s, border-color .2s, color .2s; }
