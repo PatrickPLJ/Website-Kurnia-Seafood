@@ -113,7 +113,11 @@ Yang **wajib** kamu sesuaikan (sekarang masih contoh):
 - **Kabar/Promo** — judul, tanggal, gambar di `05-kabar.html`.
 - **Kontak** — nomor WhatsApp (`https://wa.me/62...`), telepon, alamat, jam
   buka di `06-reservasi.html`.
-- **Logo & nav** — ganti teks "Kurnia Seafood" di `01-hero.html` dengan logomu.
+- **Logo** — upload logo ke Media Library, lalu ganti `src="assets/kurnia-logo.png"`
+  di `01-hero.html` & `09-footer.html` dengan URL-nya. Di latar gelap, logo
+  otomatis dibuat **putih** (class `ks-logo--white`) — atau pakai file logo versi
+  putih & hapus class itu. Detail lengkap: `assets/README.md`. Kalau file belum
+  ada, otomatis tampil teks "Kurnia Seafood".
 - **Link tombol** — arahkan ke halaman menu / WhatsApp / form reservasi.
 
 ---

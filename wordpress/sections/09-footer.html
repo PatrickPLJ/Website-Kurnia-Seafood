@@ -9,8 +9,13 @@
     <div class="ks-foot__top">
       <div class="ks-foot__cols">
         <div class="ks-foot__col ks-foot__brand">
-          <!-- Ganti teks ini dengan logo (versi putih) lewat Elementor -->
-          <span class="ks-foot__word">Kurnia&nbsp;Seafood</span>
+          <!-- LOGO: ganti src dengan URL logo dari Media Library. Dibuat putih
+               (filter) untuk latar gelap. Fallback ke teks bila file belum ada. -->
+          <a href="#" aria-label="Kurnia Seafood" class="ks-foot__logo-link">
+            <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+            <span class="ks-foot__word" style="display:none">Kurnia&nbsp;Seafood</span>
+          </a>
           <p>Kesegaran laut Nusantara untuk keluarga Anda, sejak 1998. The happiest seafood time!</p>
           <div class="ks-foot__social">
             <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -74,6 +79,9 @@
   .ks-foot__top{ display:grid; grid-template-columns:1.5fr 1fr; gap:clamp(28px,4vw,56px); align-items:start; }
   .ks-foot__cols{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; }
   .ks-foot__brand p{ font-family:var(--fl); font-weight:300; font-size:.95rem; line-height:1.6; color:var(--muted); margin:14px 0 18px; max-width:34ch; }
+  .ks-foot__logo-link{ display:inline-block; }
+  .ks-logo{ display:block; height:48px; width:auto; }
+  .ks-logo--white{ filter:brightness(0) invert(1); }
   .ks-foot__word{ font-family:var(--fh); font-weight:600; font-size:1.55rem; color:#fff; }
   .ks-foot__social{ display:flex; gap:10px; }
   .ks-foot__social a{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line);

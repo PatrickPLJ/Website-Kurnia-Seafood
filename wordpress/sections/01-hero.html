@@ -11,7 +11,15 @@
 
   <!-- NAV (opsional) -->
   <nav class="ks-nav">
-    <a class="ks-nav__brand" href="#">Kurnia&nbsp;Seafood</a>
+    <!-- LOGO: ganti src dengan URL logo dari Media Library WordPress.
+         Di latar gelap ini logo dibuat versi PUTIH (filter). Jika kamu punya
+         file logo versi putih resmi, pakai itu & hapus class "ks-logo--white".
+         Jika file belum ada, otomatis tampil teks "Kurnia Seafood". -->
+    <a class="ks-nav__brand" href="#" aria-label="Kurnia Seafood">
+      <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+      <span class="ks-nav__word" style="display:none">Kurnia&nbsp;Seafood</span>
+    </a>
     <ul class="ks-nav__menu">
       <li><a href="#">Beranda</a></li>
       <li><a href="#menu">Menu</a></li>
@@ -38,16 +46,20 @@
 
   <style>
   .ks-hero{
-    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
-    --blue:#2E7BD1; --muted:rgba(246,241,231,.62);
+    /* Variasi warna #2 — navy lebih dalam & lebih biru agar menyatu dgn logo */
+    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
+    --blue:#0056AC; --muted:rgba(246,241,231,.62);
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
     position:relative; overflow:hidden; isolation:isolate;
-    background:radial-gradient(120% 90% at 50% 0%, var(--navy-2), var(--navy) 60%);
+    background:radial-gradient(130% 95% at 50% -8%, var(--navy-2), var(--navy) 62%);
     color:var(--cream); font-family:var(--fh); padding:18px 18px 0;
   }
   /* glow + daun dekoratif */
-  .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
-    background:radial-gradient(500px 320px at 50% 8%, rgba(46,123,209,.22), transparent 70%); }
+  .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.6;
+    background:radial-gradient(560px 340px at 50% 6%, rgba(0,86,172,.30), transparent 70%); }
+  /* logo */
+  .ks-logo{ display:block; height:46px; width:auto; }
+  .ks-logo--white{ filter:brightness(0) invert(1); }   /* render putih di latar gelap */
   .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
     background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
   .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }

@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-<div class="ks-preview-note">PREVIEW · homepage lengkap 10 section + animasi reveal. Scroll untuk lihat efeknya. Di WordPress: tiap section = widget <b>HTML</b>, snippet reveal ditempel <b>sekali</b> di bawah halaman.</div>
+<div class="ks-preview-note">PREVIEW · logo memakai fallback teks (file logo belum disertakan). Hero pakai variasi warna #2 (navy lebih dalam &amp; biru). Scroll untuk animasi reveal.</div>
 
 <!-- ===== sections/01-hero.html ===== -->
 <!-- ============================================================
@@ -31,7 +31,15 @@
 
   <!-- NAV (opsional) -->
   <nav class="ks-nav">
-    <a class="ks-nav__brand" href="#">Kurnia&nbsp;Seafood</a>
+    <!-- LOGO: ganti src dengan URL logo dari Media Library WordPress.
+         Di latar gelap ini logo dibuat versi PUTIH (filter). Jika kamu punya
+         file logo versi putih resmi, pakai itu & hapus class "ks-logo--white".
+         Jika file belum ada, otomatis tampil teks "Kurnia Seafood". -->
+    <a class="ks-nav__brand" href="#" aria-label="Kurnia Seafood">
+      <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+      <span class="ks-nav__word" style="display:none">Kurnia&nbsp;Seafood</span>
+    </a>
     <ul class="ks-nav__menu">
       <li><a href="#">Beranda</a></li>
       <li><a href="#menu">Menu</a></li>
@@ -58,16 +66,20 @@
 
   <style>
   .ks-hero{
-    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
-    --blue:#2E7BD1; --muted:rgba(246,241,231,.62);
+    /* Variasi warna #2 — navy lebih dalam & lebih biru agar menyatu dgn logo */
+    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
+    --blue:#0056AC; --muted:rgba(246,241,231,.62);
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
     position:relative; overflow:hidden; isolation:isolate;
-    background:radial-gradient(120% 90% at 50% 0%, var(--navy-2), var(--navy) 60%);
+    background:radial-gradient(130% 95% at 50% -8%, var(--navy-2), var(--navy) 62%);
     color:var(--cream); font-family:var(--fh); padding:18px 18px 0;
   }
   /* glow + daun dekoratif */
-  .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
-    background:radial-gradient(500px 320px at 50% 8%, rgba(46,123,209,.22), transparent 70%); }
+  .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.6;
+    background:radial-gradient(560px 340px at 50% 6%, rgba(0,86,172,.30), transparent 70%); }
+  /* logo */
+  .ks-logo{ display:block; height:46px; width:auto; }
+  .ks-logo--white{ filter:brightness(0) invert(1); }   /* render putih di latar gelap */
   .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
     background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
   .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
@@ -474,7 +486,7 @@
 
   <style>
   .ks-rev{
-    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --blue:#2E7BD1;
+    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --blue:#2E7BD1;
     --muted:rgba(246,241,231,.66);
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
     background:#fff; font-family:var(--fh); padding:clamp(30px,5vw,64px) 22px;
@@ -710,7 +722,7 @@
 
   <style>
   .ks-book{
-    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
+    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
     --muted:rgba(246,241,231,.66);
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
     background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 60%);
@@ -757,8 +769,13 @@
     <div class="ks-foot__top">
       <div class="ks-foot__cols">
         <div class="ks-foot__col ks-foot__brand">
-          <!-- Ganti teks ini dengan logo (versi putih) lewat Elementor -->
-          <span class="ks-foot__word">Kurnia&nbsp;Seafood</span>
+          <!-- LOGO: ganti src dengan URL logo dari Media Library. Dibuat putih
+               (filter) untuk latar gelap. Fallback ke teks bila file belum ada. -->
+          <a href="#" aria-label="Kurnia Seafood" class="ks-foot__logo-link">
+            <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+            <span class="ks-foot__word" style="display:none">Kurnia&nbsp;Seafood</span>
+          </a>
           <p>Kesegaran laut Nusantara untuk keluarga Anda, sejak 1998. The happiest seafood time!</p>
           <div class="ks-foot__social">
             <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -822,6 +839,9 @@
   .ks-foot__top{ display:grid; grid-template-columns:1.5fr 1fr; gap:clamp(28px,4vw,56px); align-items:start; }
   .ks-foot__cols{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; }
   .ks-foot__brand p{ font-family:var(--fl); font-weight:300; font-size:.95rem; line-height:1.6; color:var(--muted); margin:14px 0 18px; max-width:34ch; }
+  .ks-foot__logo-link{ display:inline-block; }
+  .ks-logo{ display:block; height:48px; width:auto; }
+  .ks-logo--white{ filter:brightness(0) invert(1); }
   .ks-foot__word{ font-family:var(--fh); font-weight:600; font-size:1.55rem; color:#fff; }
   .ks-foot__social{ display:flex; gap:10px; }
   .ks-foot__social a{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
@@ -858,7 +878,7 @@
   </script>
 </footer>
 
-<!-- ===== ks-reveal.html (sekali di bawah halaman) ===== -->
+<!-- ===== ks-reveal.html ===== -->
 <!-- ============================================================
      KURNIA SEAFOOD · ANIMASI REVEAL (dramatis)
      Tempel SEKALI saja, di paling BAWAH halaman:
