@@ -7,15 +7,18 @@ foto, kartu ulasan gelap). Hijau→**navy biru brand**, oranye→**merah brand**
 
 Isi folder `wordpress/`:
 - `kurnia-brand.css` — gaya global (warna + font + tombol + form).
-- `sections/` — 8 blok section siap tempel:
+- `sections/` — 10 blok section siap tempel:
   1. `01-hero.html` — hero gelap + headline serif + foto besar
   2. `02-menu-hidangan.html` — daftar menu (kiri) + foto (kanan)
   3. `03-menu-bakar.html` — foto (kiri) + daftar menu (kanan)
   4. `04-review.html` — **Customer Review** (kartu gelap, pengganti "Our Mission")
   5. `05-kabar.html` — Kabar & Promo (3 kartu)
-  6. `06-reservasi.html` — CTA reservasi (gelap, penutup)
+  6. `06-reservasi.html` — CTA reservasi (gelap)
   7. `07-tentang.html` — Tentang Kami (foto + cerita + statistik)
   8. `08-galeri.html` — Galeri foto (grid premium)
+  9. `09-footer.html` — Footer navy (peta, jam, sosial, kontak)
+  10. `10-faq.html` — FAQ (accordion)
+- `ks-reveal.html` — **animasi reveal** (tempel SEKALI di bawah halaman).
 - `PREVIEW.html` — buka di browser untuk melihat hasilnya sebelum dipasang.
 
 > **Logo:** sengaja TIDAK dimasukkan ke kode. Pasang logo kamu (file terpisah)
@@ -78,8 +81,20 @@ Untuk tiap file di `sections/`:
 
 Urutan yang disarankan untuk homepage:
 `01-hero` → `07-tentang` → `02-menu-hidangan` → `03-menu-bakar` → `08-galeri`
-→ `04-review` → `05-kabar` → `06-reservasi`.
-(Nomor file ≠ urutan tampil — ikuti urutan di atas.)
+→ `04-review` → `05-kabar` → `10-faq` → `06-reservasi` → `09-footer`.
+(Nomor file ≠ urutan tampil — ikuti urutan di atas. Footer paling bawah.)
+
+## Langkah 4b — Aktifkan Animasi Reveal (dramatis)
+
+Buka `ks-reveal.html`, copy **semua isinya**, lalu tempel **SEKALI** di paling
+bawah halaman:
+- **Elementor Pro:** Site Settings → **Custom Code** → tambah kode baru,
+  Location = **Footer** → paste → Publish. (berlaku untuk semua halaman)
+- **Tanpa Pro:** taruh widget **"HTML"** paling akhir di halaman → paste.
+
+Efeknya: setiap section akan **muncul perlahan (fade + naik + blur) bertahap**
+saat di-scroll. Otomatis mati jika pengunjung mengaktifkan "reduce motion".
+Tidak perlu mengubah blok section — script mendeteksi semuanya sendiri.
 
 > **Navbar di hero:** blok `01-hero.html` memuat navbar opsional. Kalau tema
 > WordPress kamu sudah menampilkan header sendiri, **hapus bagian

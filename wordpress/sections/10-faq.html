@@ -1,0 +1,86 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · SECTION FAQ
+     Accordion native (<details>) — aksesibel, tanpa library.
+     Tempel di widget "HTML". Ganti pertanyaan & jawaban.
+     ============================================================ -->
+<section class="ks-faq" id="faq">
+  <div class="ks-faq__inner">
+    <aside class="ks-faq__intro">
+      <span class="ks-kicker">
+        <svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4 2.8c-.9.4-1 .9-1 1.7M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+        FAQ
+      </span>
+      <h2 class="ks-faq__title">Pertanyaan yang sering ditanya</h2>
+      <p class="ks-faq__text">Belum menemukan jawabannya? Tim kami siap membantu.</p>
+      <a href="https://wa.me/62000000000" class="ks-btn ks-btn--red">Tanya via WhatsApp</a>
+    </aside>
+
+    <div class="ks-faq__list">
+      <details class="ks-faq__item" open>
+        <summary>Apakah perlu reservasi sebelum datang?<span class="ks-faq__ic"></span></summary>
+        <div class="ks-faq__ans"><p>Tidak wajib, namun sangat disarankan untuk akhir pekan, rombongan, atau acara khusus agar meja Anda terjamin.</p></div>
+      </details>
+      <details class="ks-faq__item">
+        <summary>Apakah tempatnya ramah untuk keluarga &amp; anak?<span class="ks-faq__ic"></span></summary>
+        <div class="ks-faq__ans"><p>Tentu! Kami menyediakan area yang nyaman untuk keluarga, kursi anak, dan suasana yang hangat untuk berkumpul.</p></div>
+      </details>
+      <details class="ks-faq__item">
+        <summary>Apakah menyediakan layanan pesan antar?<span class="ks-faq__ic"></span></summary>
+        <div class="ks-faq__ans"><p>Ya, Anda bisa memesan melalui GoFood, GrabFood, atau langsung via WhatsApp untuk area sekitar.</p></div>
+      </details>
+      <details class="ks-faq__item">
+        <summary>Bisakah memesan tempat untuk acara atau gathering?<span class="ks-faq__ic"></span></summary>
+        <div class="ks-faq__ans"><p>Bisa. Kami melayani ulang tahun, arisan, hingga jamuan kantor. Hubungi kami untuk paket dan ketersediaan ruang.</p></div>
+      </details>
+      <details class="ks-faq__item">
+        <summary>Metode pembayaran apa saja yang diterima?<span class="ks-faq__ic"></span></summary>
+        <div class="ks-faq__ans"><p>Tunai, kartu debit/kredit, dan QRIS (semua e-wallet) tersedia untuk kenyamanan Anda.</p></div>
+      </details>
+    </div>
+  </div>
+
+  <style>
+  .ks-faq{
+    --navy:#14263D; --red:#D80000; --red-2:#B40000; --muted:#5d6b7a; --line:#e6e2d8;
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#F8F7F2; font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
+  }
+  .ks-faq__inner{ max-width:1140px; margin:0 auto; display:grid; gap:clamp(28px,4vw,60px);
+    grid-template-columns:.82fr 1.18fr; align-items:start; }
+  .ks-faq__intro{ position:sticky; top:30px; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:var(--red); stroke-width:1.6;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .ks-faq__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
+    font-size:clamp(1.9rem,4vw,2.8rem); line-height:1.1; margin:14px 0 14px; letter-spacing:-.01em; }
+  .ks-faq__text{ font-family:var(--fh); font-size:1.08rem; color:#3a4757; margin:0 0 22px; }
+  .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; display:inline-flex; padding:14px 28px; border-radius:10px; border:2px solid transparent;
+    transition:transform .18s, box-shadow .25s, background .2s; }
+  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 16px 30px -14px rgba(216,0,0,.5); }
+  .ks-btn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
+
+  .ks-faq__list{ display:flex; flex-direction:column; gap:14px; }
+  .ks-faq__item{ background:#fff; border:1px solid #ececec; border-radius:16px; padding:4px 22px;
+    box-shadow:0 10px 26px -20px rgba(20,38,61,.35); transition:box-shadow .25s, border-color .25s; }
+  .ks-faq__item[open]{ border-color:rgba(216,0,0,.25); box-shadow:0 18px 36px -22px rgba(0,86,172,.35); }
+  .ks-faq__item summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:18px 0; font-family:var(--fh); font-weight:600; font-size:1.18rem; color:var(--navy); }
+  .ks-faq__item summary::-webkit-details-marker{ display:none; }
+  .ks-faq__ic{ position:relative; flex:none; width:22px; height:22px; }
+  .ks-faq__ic::before, .ks-faq__ic::after{ content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    background:var(--red); border-radius:2px; transition:transform .25s ease; }
+  .ks-faq__ic::before{ width:14px; height:2px; }
+  .ks-faq__ic::after{ width:2px; height:14px; }
+  .ks-faq__item[open] .ks-faq__ic::after{ transform:translate(-50%,-50%) rotate(90deg); opacity:0; }
+  .ks-faq__ans{ padding:0 0 20px; }
+  .ks-faq__ans p{ font-family:var(--fh); font-size:1.05rem; line-height:1.65; color:#46555f; margin:0; max-width:60ch; }
+
+  @media (max-width:820px){
+    .ks-faq__inner{ grid-template-columns:1fr; }
+    .ks-faq__intro{ position:static; }
+  }
+  @media (prefers-reduced-motion: reduce){ .ks-btn--red:hover{ transform:none; } }
+  </style>
+</section>

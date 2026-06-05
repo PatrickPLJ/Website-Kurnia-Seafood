@@ -1,0 +1,82 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · ANIMASI REVEAL (dramatis)
+     Tempel SEKALI saja, di paling BAWAH halaman:
+       • Elementor Pro : Site Settings → Custom Code (Footer), atau
+       • widget "HTML" terakhir di halaman.
+     Otomatis menganimasikan SEMUA section kit (.ks-*) saat di-scroll:
+     fade + naik + blur, dengan efek bertahap (stagger).
+     Menghormati prefers-reduced-motion (mati otomatis bila perlu).
+     ============================================================ -->
+<style>
+  .ks-reveal{
+    opacity:0;
+    transform:translateY(38px) scale(.98);
+    filter:blur(7px);
+    transition:opacity .9s cubic-bezier(.2,.7,.2,1),
+               transform .95s cubic-bezier(.2,.7,.2,1),
+               filter .9s ease;
+    will-change:opacity, transform, filter;
+  }
+  .ks-reveal--in{ opacity:1; transform:none; filter:none; }
+  @media (prefers-reduced-motion: reduce){
+    .ks-reveal{ opacity:1 !important; transform:none !important; filter:none !important; }
+  }
+</style>
+
+<script>
+(function(){
+  if (window.__ksRevealInit) return;          // cegah dobel
+  window.__ksRevealInit = true;
+
+  function init(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Elemen yang dianimasikan di tiap section kit
+    var SEL = [
+      '.ks-kicker', '[class*="__title"]',
+      '.ks-hero__sub', '.ks-hero__cta', '.ks-hero__photo',
+      '.ks-item', '.ks-menu__media', '.ks-menu2__media',
+      '.ks-about__media', '.ks-about__text', '.ks-about__stats',
+      '.ks-gtile', '.ks-post', '.ks-rev__card', '.ks-rev__media',
+      '.ks-book__sub', '.ks-book__btns', '.ks-book__info',
+      '.ks-faq__item', '.ks-faq__text', '.ks-faq__intro .ks-btn',
+      '.ks-foot__col'
+    ].join(',');
+
+    var nodes = Array.prototype.slice.call(document.querySelectorAll(SEL));
+    if (!nodes.length) return;
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      nodes.forEach(function(n){ n.classList.add('ks-reveal--in'); });
+      return;
+    }
+
+    // Stagger: urutkan per-section supaya efeknya beruntun
+    nodes.forEach(function(n){ n.classList.add('ks-reveal'); });
+    var sections = document.querySelectorAll('section, footer');
+    sections.forEach(function(sec){
+      var items = sec.querySelectorAll('.ks-reveal');
+      Array.prototype.forEach.call(items, function(it, i){
+        it.style.transitionDelay = Math.min(i * 70, 450) + 'ms';
+      });
+    });
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('ks-reveal--in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -50px 0px' });
+
+    nodes.forEach(function(n){ io.observe(n); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
