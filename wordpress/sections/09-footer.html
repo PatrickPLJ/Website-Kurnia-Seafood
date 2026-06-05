@@ -9,14 +9,15 @@
     <div class="ks-foot__top">
       <div class="ks-foot__cols">
         <div class="ks-foot__col ks-foot__brand">
-          <!-- LOGO: ganti src dengan URL logo dari Media Library. Dibuat putih
-               (filter) untuk latar gelap. Fallback ke teks bila file belum ada. -->
+          <!-- LOGO full-color dibungkus plate putih agar kontras di footer navy.
+               WebP + retina @2x, dengan PNG fallback. -->
           <a href="#" aria-label="Kurnia Seafood" class="ks-foot__logo-link">
-            <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
-            <span class="ks-lockup" style="display:none">
-              <span class="ks-lockup__name">Kurnia <em>Seafood</em></span>
-              <span class="ks-lockup__ribbon">The Happiest Seafood Time!</span>
+            <span class="ks-logo-plate">
+              <picture>
+                <source type="image/webp"
+                        srcset="assets/kurnia-seafood-logo.webp 1x, assets/kurnia-seafood-logo@2x.webp 2x">
+                <img class="ks-logo" src="assets/kurnia-seafood-logo.png" alt="Kurnia Seafood" width="170" height="92">
+              </picture>
             </span>
           </a>
           <p>Kesegaran laut Nusantara untuk keluarga Anda, sejak 1998. The happiest seafood time!</p>
@@ -83,13 +84,9 @@
   .ks-foot__cols{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:30px; }
   .ks-foot__brand p{ font-family:var(--fl); font-weight:300; font-size:.95rem; line-height:1.6; color:var(--muted); margin:14px 0 18px; max-width:34ch; }
   .ks-foot__logo-link{ display:inline-block; }
-  .ks-logo{ display:block; height:48px; width:auto; }
-  .ks-logo--white{ filter:brightness(0) invert(1); }
-  .ks-lockup{ flex-direction:column; gap:5px; line-height:1; }
-  .ks-lockup__name{ font-family:var(--fh); font-weight:700; font-size:1.55rem; color:#fff; }
-  .ks-lockup__name em{ font-style:italic; color:#FF6B6B; }
-  .ks-lockup__ribbon{ align-self:flex-start; font-family:var(--fl); font-weight:600; font-size:9px;
-    letter-spacing:.14em; text-transform:uppercase; color:#fff; background:#0056AC; padding:3px 9px; border-radius:5px; }
+  .ks-logo-plate{ display:inline-flex; align-items:center; background:#fff; border-radius:14px;
+    padding:8px 14px; box-shadow:0 10px 24px -12px rgba(0,0,0,.5); }
+  .ks-logo{ display:block; height:42px; width:auto; }
   .ks-foot__social{ display:flex; gap:10px; }
   .ks-foot__social a{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
     display:grid; place-items:center; color:var(--cream); transition:background .2s, border-color .2s, color .2s; }

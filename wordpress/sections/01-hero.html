@@ -11,16 +11,16 @@
 
   <!-- NAV (opsional) -->
   <nav class="ks-nav">
-    <!-- LOGO: ganti src dengan URL logo dari Media Library WordPress.
-         Di latar gelap ini logo dibuat versi PUTIH (filter). Jika kamu punya
-         file logo versi putih resmi, pakai itu & hapus class "ks-logo--white".
-         Jika file belum ada, otomatis tampil teks "Kurnia Seafood". -->
+    <!-- LOGO full-color dibungkus "plate" putih agar tetap kontras di atas
+         navy (teks "Seafood" yang berwarna navy jadi tetap terbaca).
+         WebP + retina @2x, dengan PNG sebagai fallback. -->
     <a class="ks-nav__brand" href="#" aria-label="Kurnia Seafood">
-      <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
-      <span class="ks-lockup" style="display:none">
-        <span class="ks-lockup__name">Kurnia <em>Seafood</em></span>
-        <span class="ks-lockup__ribbon">The Happiest Seafood Time!</span>
+      <span class="ks-logo-plate">
+        <picture>
+          <source type="image/webp"
+                  srcset="assets/kurnia-seafood-logo.webp 1x, assets/kurnia-seafood-logo@2x.webp 2x">
+          <img class="ks-logo" src="assets/kurnia-seafood-logo.png" alt="Kurnia Seafood" width="170" height="92">
+        </picture>
       </span>
     </a>
     <ul class="ks-nav__menu">
@@ -61,14 +61,10 @@
   .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.6;
     background:radial-gradient(560px 340px at 50% 6%, rgba(0,86,172,.30), transparent 70%); }
   /* logo */
+  /* "plate" putih pembungkus logo full-color di atas navy */
+  .ks-logo-plate{ display:inline-flex; align-items:center; background:#fff; border-radius:14px;
+    padding:7px 14px; box-shadow:0 10px 24px -12px rgba(0,0,0,.45); }
   .ks-logo{ display:block; height:46px; width:auto; }
-  .ks-logo--white{ filter:brightness(0) invert(1); }   /* render putih di latar gelap */
-  /* fallback lockup (tampil jika file logo belum ada) */
-  .ks-lockup{ flex-direction:column; gap:5px; line-height:1; }
-  .ks-lockup__name{ font-family:var(--fh); font-weight:700; font-size:1.6rem; color:#fff; letter-spacing:.01em; }
-  .ks-lockup__name em{ font-style:italic; color:#FF6B6B; }
-  .ks-lockup__ribbon{ align-self:flex-start; font-family:var(--fl); font-weight:600; font-size:9px;
-    letter-spacing:.14em; text-transform:uppercase; color:#fff; background:var(--blue); padding:3px 9px; border-radius:5px; }
   .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
     background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
   .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
