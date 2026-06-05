@@ -11,9 +11,7 @@
 
   <!-- NAV (opsional) -->
   <nav class="ks-nav">
-    <!-- LOGO ditampilkan versi PUTIH (mono) agar bersih & kontras di atas navy
-         TANPA kotak. Punya file logo putih / merah-putih resmi? Pakai itu &
-         hapus 'filter' pada .ks-logo. WebP + retina @2x, PNG fallback. -->
+    <!-- LOGO full-color (apa adanya) tanpa kotak. WebP + retina @2x, PNG fallback. -->
     <a class="ks-nav__brand" href="#" aria-label="Kurnia Seafood">
       <span class="ks-logo-wrap">
         <picture>
@@ -61,9 +59,9 @@
   .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.6;
     background:radial-gradient(560px 340px at 50% 6%, rgba(0,86,172,.30), transparent 70%); }
   /* logo */
-  /* logo versi putih (mono) — bersih di atas navy, tanpa kotak */
+  /* logo full-color, tanpa kotak */
   .ks-logo-wrap{ display:inline-flex; align-items:center; }
-  .ks-logo{ display:block; height:48px; width:auto; filter:brightness(0) invert(1); }
+  .ks-logo{ display:block; height:48px; width:auto; }
   .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
     background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
   .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
