@@ -39,15 +39,17 @@
 }
 
 /* ---- Tipografi dasar ------------------------------------------- */
+/* Judul = Crimson Pro (serif elegan, gaya premium ala template).
+   Kicker/label/tombol = Alexandria. Keduanya font brand resmi.    */
 h1, h2, h3, h4, h5, h6,
 .elementor-heading-title {
-  font-family: var(--ks-font-head) !important;
-  font-weight: 800;
+  font-family: var(--ks-font-body) !important; /* Crimson Pro */
+  font-weight: 600;
   color: var(--ks-ink);
   letter-spacing: -0.01em;
   line-height: 1.12;
 }
-h3, h4, h5, h6, .elementor-heading-title.is-sub { font-weight: 700; }
+.ks-kicker, .elementor-heading-title.is-kicker { font-family: var(--ks-font-head) !important; }
 
 body, p, li,
 .elementor-widget-text-editor,
@@ -68,11 +70,13 @@ a:hover { color: var(--ks-red); }
 .wp-element-button,
 .wp-block-button__link,
 button.btn, .btn {
-  font-family: var(--ks-font-head) !important;
-  font-weight: 700 !important;
-  letter-spacing: .01em;
-  border-radius: 999px !important;
-  padding: .85em 1.9em !important;
+  font-family: var(--ks-font-head) !important; /* Alexandria */
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase;
+  border-radius: 10px !important;
+  padding: 1em 2em !important;
   border: 2px solid transparent !important;
   transition: transform .18s var(--ks-ease), box-shadow .25s var(--ks-ease),
               background-color .2s var(--ks-ease), color .2s var(--ks-ease) !important;

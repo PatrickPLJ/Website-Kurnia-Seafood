@@ -3,532 +3,493 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurnia Seafood — Preview Section (Elementor Kit)</title>
+<title>Kurnia Seafood — Preview (gaya Bamzi · brand Kurnia)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box} html,body{margin:0;padding:0}
-  .ks-preview-note{font-family:'Alexandria',sans-serif;background:#14263D;color:#fff;
+  *{box-sizing:border-box} html,body{margin:0;padding:0;background:#fff}
+  .ks-preview-note{font-family:'Alexandria',sans-serif;background:#04223F;color:#F6F1E7;
     text-align:center;padding:10px;font-size:13px;letter-spacing:.04em}
-  .ks-preview-note b{color:#FFD7D7}
+  .ks-preview-note b{color:#FF6B6B}
 </style>
 </head>
 <body>
-<div class="ks-preview-note">PREVIEW · ini gabungan semua section untuk pratinjau. Di WordPress, tiap section ditempel terpisah sebagai widget <b>HTML</b> di Elementor.</div>
+<div class="ks-preview-note">PREVIEW · gabungan semua section (gaya Bamzi diadaptasi ke brand Kurnia). Di WordPress tiap section ditempel terpisah sebagai widget <b>HTML</b> di Elementor.</div>
 
 <!-- ===== sections/01-hero.html ===== -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION HERO
-     Tempel di Elementor: widget "HTML" (kosongkan padding section).
-     Ganti teks, tombol (href), dan area foto sesuai kebutuhan.
+     KURNIA SEAFOOD · SECTION HERO  (gaya Bamzi · premium gelap)
+     Tempel di Elementor: widget "HTML". Set padding section = 0.
+     • Navbar di dalam blok ini OPSIONAL — kalau tema WordPress kamu
+       sudah punya header, hapus bagian <nav class="ks-nav">…</nav>.
+     • Logo: ganti teks "Kurnia Seafood" dengan widget/gambar logomu.
      ============================================================ -->
 <section class="ks-hero">
-  <div class="ks-hero__bg" aria-hidden="true"></div>
+  <span class="ks-hero__leaf ks-hero__leaf--l" aria-hidden="true"></span>
+  <span class="ks-hero__leaf ks-hero__leaf--r" aria-hidden="true"></span>
+
+  <!-- NAV (opsional) -->
+  <nav class="ks-nav">
+    <a class="ks-nav__brand" href="#">Kurnia&nbsp;Seafood</a>
+    <ul class="ks-nav__menu">
+      <li><a href="#">Beranda</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#review">Ulasan</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <a href="#reservasi" class="ks-btn ks-btn--red ks-nav__cta">Pesan Meja</a>
+  </nav>
 
   <div class="ks-hero__inner">
-    <div class="ks-hero__copy">
-      <span class="ks-badge">★ 4.9 · Favorit keluarga sejak 1998</span>
+    <h1 class="ks-hero__title">
+      Santapan laut <span class="amp">&amp;</span><br>
+      pengalaman makan tak terlupakan
+    </h1>
+    <p class="ks-hero__sub">Menyajikan kesegaran laut, kehangatan, &amp; kebahagiaan sejak 1998</p>
+    <a href="#reservasi" class="ks-btn ks-btn--red ks-hero__cta">Pesan Meja</a>
 
-      <h1 class="ks-hero__title">
-        Waktu Seafood Paling
-        <span class="ks-hl">Bahagia</span><br>
-        Bareng Keluarga.
-      </h1>
-
-      <p class="ks-hero__sub">
-        Tangkapan segar setiap hari, diolah dengan bumbu istimewa khas Nusantara.
-        Suasana hangat, porsi puas, rasa juara — <em>the happiest seafood time!</em>
-      </p>
-
-      <div class="ks-hero__cta">
-        <a href="#reservasi" class="ks-btn ks-btn--red">Pesan Tempat</a>
-        <a href="#menu" class="ks-btn ks-btn--ghost">Lihat Menu</a>
-      </div>
-
-      <ul class="ks-hero__trust">
-        <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg> Segar tiap hari</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg> Ramah keluarga</li>
-        <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg> Harga bersahabat</li>
-      </ul>
-    </div>
-
-    <div class="ks-hero__visual">
-      <!-- GANTI dengan foto hidangan terbaikmu (Elementor: ganti src) -->
-      <div class="ks-hero__photo">
-        <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=900&q=70"
-             alt="Sajian seafood Kurnia Seafood" loading="lazy"
-             onerror="this.style.display='none'">
-        <span class="ks-hero__photo-note">Letakkan foto hidangan terbaik di sini</span>
-      </div>
-      <div class="ks-float ks-float--a">🔥 Best Seller<small>Kepiting Saus Padang</small></div>
-      <div class="ks-float ks-float--b">Mulai<strong>Rp 35K</strong></div>
+    <div class="ks-hero__photo">
+      <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1200&q=72"
+           alt="Sajian seafood Kurnia Seafood di atas piring gelap" loading="lazy"
+           onerror="this.style.display='none'">
     </div>
   </div>
 
-  <!-- pembatas ombak -->
-  <svg class="ks-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 50 C 240 90 480 10 720 40 C 960 70 1200 20 1440 50 L1440 90 L0 90 Z"></path>
-  </svg>
-
   <style>
   .ks-hero{
-    --blue:#0056AC; --blue-dark:#023E7D; --red:#D80000; --red-dark:#B40000;
-    --ink:#14263D; --grey:#929497; --soft:#E7F0FB;
-    --fh:'Alexandria',system-ui,sans-serif; --fb:'Crimson Pro',Georgia,serif;
-    position:relative; overflow:hidden; background:#fff; isolation:isolate;
-    font-family:var(--fb); padding:clamp(28px,6vw,72px) 20px 90px;
+    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
+    --blue:#2E7BD1; --muted:rgba(246,241,231,.62);
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    position:relative; overflow:hidden; isolation:isolate;
+    background:radial-gradient(120% 90% at 50% 0%, var(--navy-2), var(--navy) 60%);
+    color:var(--cream); font-family:var(--fh); padding:18px 18px 0;
   }
-  .ks-hero__bg{
-    position:absolute; inset:0; z-index:-1;
-    background:
-      radial-gradient(520px 420px at 88% -8%, var(--soft), transparent 70%),
-      radial-gradient(420px 360px at -6% 18%, #FDEAEA, transparent 70%);
-  }
-  .ks-hero__bg::after{ /* bubble dots */
-    content:""; position:absolute; inset:0; opacity:.5;
-    background-image:radial-gradient(rgba(0,86,172,.10) 2px, transparent 2.5px);
-    background-size:30px 30px; -webkit-mask-image:linear-gradient(transparent,#000 40%,transparent);
-            mask-image:linear-gradient(transparent,#000 40%,transparent);
-  }
-  .ks-hero__inner{
-    max-width:1140px; margin:0 auto; display:grid; gap:clamp(28px,4vw,56px);
-    grid-template-columns:1.05fr .95fr; align-items:center;
-  }
-  .ks-badge{
-    display:inline-flex; align-items:center; gap:8px; font-family:var(--fh);
-    font-weight:600; font-size:13.5px; color:var(--blue);
-    background:#fff; border:1.5px solid var(--soft); box-shadow:0 6px 18px -10px rgba(0,86,172,.4);
-    padding:8px 16px; border-radius:999px;
-  }
-  .ks-hero__title{
-    font-family:var(--fh); font-weight:800; color:var(--ink);
-    font-size:clamp(2.1rem,5.2vw,3.7rem); line-height:1.05; letter-spacing:-.02em;
-    margin:18px 0 0;
-  }
-  .ks-hl{ position:relative; color:var(--red); white-space:nowrap; }
-  .ks-hl::after{ content:""; position:absolute; left:-2%; right:-2%; bottom:.08em; height:.34em;
-    background:rgba(216,0,0,.16); border-radius:6px; z-index:-1; }
-  .ks-hero__sub{
-    max-width:33ch; margin:18px 0 0; font-size:clamp(1.05rem,1.6vw,1.22rem);
-    line-height:1.65; color:#3c4a5c;
-  }
-  .ks-hero__sub em{ color:var(--blue); font-style:italic; }
-  .ks-hero__cta{ display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
-  .ks-btn{
-    font-family:var(--fh); font-weight:700; font-size:15.5px; text-decoration:none;
-    padding:14px 30px; border-radius:999px; border:2px solid transparent;
-    display:inline-flex; align-items:center; transition:transform .18s, box-shadow .25s, background .2s, color .2s;
-  }
-  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 14px 26px -12px rgba(216,0,0,.6); }
-  .ks-btn--red:hover{ background:var(--red-dark); transform:translateY(-2px); }
-  .ks-btn--ghost{ background:#fff; color:var(--blue); border-color:var(--blue); }
-  .ks-btn--ghost:hover{ background:var(--blue); color:#fff; transform:translateY(-2px); }
-  .ks-hero__trust{
-    list-style:none; padding:0; margin:26px 0 0; display:flex; flex-wrap:wrap; gap:18px;
-    font-family:var(--fh); font-weight:500; font-size:14px; color:#46556a;
-  }
-  .ks-hero__trust li{ display:inline-flex; align-items:center; gap:7px; }
-  .ks-hero__trust svg{ width:18px; height:18px; fill:none; stroke:var(--blue); stroke-width:3;
-    stroke-linecap:round; stroke-linejoin:round;
-    background:var(--soft); border-radius:50%; padding:3px; }
+  /* glow + daun dekoratif */
+  .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.5;
+    background:radial-gradient(500px 320px at 50% 8%, rgba(46,123,209,.22), transparent 70%); }
+  .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
+    background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
+  .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
 
-  /* visual */
-  .ks-hero__visual{ position:relative; }
-  .ks-hero__photo{
-    position:relative; aspect-ratio:4/3.4; border-radius:26px; overflow:hidden;
-    background:linear-gradient(135deg,#0056AC,#3D86D6); display:grid; place-items:center;
-    box-shadow:0 30px 60px -24px rgba(0,86,172,.55); border:6px solid #fff;
-  }
+  /* NAV */
+  .ks-nav{ position:relative; z-index:3; max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:18px; padding:14px 8px 6px; }
+  .ks-nav__brand{ font-family:var(--fh); font-weight:600; font-size:1.5rem; color:var(--cream);
+    text-decoration:none; letter-spacing:.01em; }
+  .ks-nav__menu{ display:flex; gap:6px; list-style:none; margin:0; padding:6px;
+    background:rgba(246,241,231,.08); border:1px solid rgba(246,241,231,.14); border-radius:999px; }
+  .ks-nav__menu a{ font-family:var(--fl); font-weight:500; font-size:13.5px; letter-spacing:.04em;
+    color:var(--cream); text-decoration:none; padding:9px 18px; border-radius:999px; transition:background .2s,color .2s; }
+  .ks-nav__menu a:hover{ background:var(--cream); color:var(--navy); }
+
+  /* HERO INNER */
+  .ks-hero__inner{ position:relative; z-index:2; max-width:1000px; margin:0 auto; text-align:center;
+    padding:clamp(36px,7vw,84px) 8px 0; }
+  .ks-hero__title{ font-family:var(--fh); font-weight:500; color:var(--cream);
+    font-size:clamp(2.3rem,6vw,4.7rem); line-height:1.04; letter-spacing:-.01em; margin:0; }
+  .ks-hero__title .amp{ font-style:italic; font-weight:400; }
+  .ks-hero__sub{ font-family:var(--fl); font-weight:300; color:var(--muted);
+    font-size:clamp(.95rem,1.6vw,1.15rem); letter-spacing:.02em; margin:22px 0 0; }
+  .ks-hero__cta{ margin-top:30px; }
+
+  /* tombol */
+  .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:10px;
+    border:2px solid transparent; transition:transform .18s, box-shadow .25s, background .2s, color .2s; }
+  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 16px 30px -14px rgba(216,0,0,.6); }
+  .ks-btn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
+
+  /* FOTO HERO */
+  .ks-hero__photo{ position:relative; max-width:760px; margin:clamp(34px,6vw,68px) auto -1px;
+    aspect-ratio:16/10; border-radius:26px 26px 0 0; overflow:hidden;
+    background:linear-gradient(135deg,#06304F,#0a3c63);
+    box-shadow:0 -10px 60px -20px rgba(0,0,0,.6); }
   .ks-hero__photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .ks-hero__photo-note{ position:relative; color:#fff; font-family:var(--fh); font-weight:600;
-    font-size:14px; opacity:.85; padding:0 20px; text-align:center; }
-  .ks-float{
-    position:absolute; background:#fff; border-radius:16px; padding:12px 16px;
-    font-family:var(--fh); font-weight:700; font-size:14px; color:var(--ink);
-    box-shadow:0 18px 36px -16px rgba(20,38,61,.45); display:flex; flex-direction:column; line-height:1.25;
-    animation:ksFloat 5s ease-in-out infinite;
-  }
-  .ks-float small{ font-weight:500; color:var(--grey); font-size:12px; }
-  .ks-float strong{ color:var(--red); font-size:20px; }
-  .ks-float--a{ left:-14px; top:18%; }
-  .ks-float--b{ right:-10px; bottom:14%; animation-delay:1.2s; }
-  @keyframes ksFloat{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-9px) } }
 
-  .ks-wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:80px; }
-  .ks-wave path{ fill:#fff; }
-  .ks-hero + *{ position:relative; }
-
-  @media (max-width:860px){
-    .ks-hero__inner{ grid-template-columns:1fr; text-align:center; }
-    .ks-hero__sub{ margin-left:auto; margin-right:auto; }
-    .ks-hero__cta,.ks-hero__trust{ justify-content:center; }
-    .ks-hero__visual{ max-width:420px; margin:8px auto 0; }
+  @media (max-width:760px){
+    .ks-nav__menu{ display:none; } .ks-nav__cta{ padding:11px 18px; }
   }
-  @media (prefers-reduced-motion: reduce){ .ks-float{ animation:none; } }
+  @media (prefers-reduced-motion: reduce){ .ks-btn:hover{ transform:none; } }
   </style>
 </section>
 
-<!-- ===== sections/02-menu-favorit.html ===== -->
+<!-- ===== sections/02-menu-hidangan.html ===== -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION MENU FAVORIT
-     Tempel di Elementor: widget "HTML".
-     Ganti foto (src), nama, deskripsi, harga, dan link "Pesan".
+     KURNIA SEAFOOD · SECTION MENU A  (daftar kiri · foto kanan)
+     Gaya Bamzi "Famous sushi's". Tempel di widget "HTML".
+     Ganti nama, harga, deskripsi, dan foto (src).
      ============================================================ -->
 <section class="ks-menu" id="menu">
   <div class="ks-menu__inner">
-    <header class="ks-menu__head">
-      <span class="ks-kicker">Menu Favorit</span>
-      <h2 class="ks-menu__title">Yang paling sering <span class="ks-hl">dipesan</span> 🦀</h2>
-      <p class="ks-menu__sub">Pilihan hidangan terlaris yang bikin pelanggan balik lagi.</p>
-    </header>
+    <div class="ks-menu__list">
+      <span class="ks-kicker">
+        <svg viewBox="0 0 24 24"><path d="M3 13c4-5 14-5 18 0M6 11c2 3 10 3 12 0M16 11l3-2-1 3"/><circle cx="9" cy="9.5" r=".9"/></svg>
+        Menu Pilihan
+      </span>
+      <h2 class="ks-menu__title">Hidangan laut favorit</h2>
 
-    <div class="ks-menu__grid">
-      <!-- KARTU (duplikat & ubah sesuai menu) -->
-      <article class="ks-dish">
-        <div class="ks-dish__media">
-          <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=700&q=70" alt="Kepiting Saus Padang" loading="lazy" onerror="this.style.display='none'">
-          <span class="ks-dish__tag">Best Seller</span>
-        </div>
-        <div class="ks-dish__body">
-          <h3>Kepiting Saus Padang</h3>
-          <p>Kepiting bakau jumbo, saus padang pedas berempah, gurih nampol.</p>
-          <div class="ks-dish__foot">
-            <span class="ks-price">Rp 95K</span>
-            <a href="#reservasi" class="ks-pill">Pesan</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="ks-dish">
-        <div class="ks-dish__media">
-          <img src="https://images.unsplash.com/photo-1625943555435-d9d3a3f9d3f4?auto=format&fit=crop&w=700&q=70" alt="Udang Bakar Madu" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="ks-dish__body">
-          <h3>Udang Bakar Madu</h3>
-          <p>Udang segar dibakar, glasir madu manis-gurih, harum menggoda.</p>
-          <div class="ks-dish__foot">
-            <span class="ks-price">Rp 65K</span>
-            <a href="#reservasi" class="ks-pill">Pesan</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="ks-dish">
-        <div class="ks-dish__media">
-          <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=700&q=70" alt="Cumi Goreng Tepung" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="ks-dish__body">
-          <h3>Cumi Goreng Tepung</h3>
-          <p>Cumi renyah di luar, lembut di dalam, dengan saus sambal spesial.</p>
-          <div class="ks-dish__foot">
-            <span class="ks-price">Rp 48K</span>
-            <a href="#reservasi" class="ks-pill">Pesan</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="ks-dish">
-        <div class="ks-dish__media">
-          <img src="https://images.unsplash.com/photo-1535140728325-a4d3707eee61?auto=format&fit=crop&w=700&q=70" alt="Kerapu Asam Manis" loading="lazy" onerror="this.style.display='none'">
-          <span class="ks-dish__tag ks-dish__tag--blue">Favorit</span>
-        </div>
-        <div class="ks-dish__body">
-          <h3>Kerapu Asam Manis</h3>
+      <div class="ks-items">
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Kepiting Saus Padang</h3><span class="ks-price">Rp 95K</span></div>
+          <p>Kepiting bakau jumbo, saus padang pedas berempah.</p>
+        </article>
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Udang Bakar Madu</h3><span class="ks-price">Rp 65K</span></div>
+          <p>Udang segar dibakar, glasir madu, perasan jeruk nipis.</p>
+        </article>
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Cumi Goreng Tepung</h3><span class="ks-price">Rp 48K</span></div>
+          <p>Renyah di luar, lembut di dalam, saus sambal spesial.</p>
+        </article>
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Kerapu Asam Manis</h3><span class="ks-price">Rp 88K</span></div>
           <p>Kerapu utuh goreng garing, siram saus asam manis segar.</p>
-          <div class="ks-dish__foot">
-            <span class="ks-price">Rp 88K</span>
-            <a href="#reservasi" class="ks-pill">Pesan</a>
-          </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </div>
 
-    <div class="ks-menu__more">
-      <a href="#" class="ks-btn ks-btn--ghost">Lihat Menu Lengkap →</a>
-    </div>
+    <figure class="ks-menu__media">
+      <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=900&q=72"
+           alt="Kepiting saus padang Kurnia Seafood" loading="lazy" onerror="this.style.display='none'">
+    </figure>
   </div>
 
   <style>
   .ks-menu{
-    --blue:#0056AC; --red:#D80000; --red-dark:#B40000; --ink:#14263D; --grey:#929497; --mist:#F4F4F4; --soft:#E7F0FB;
-    --fh:'Alexandria',system-ui,sans-serif; --fb:'Crimson Pro',Georgia,serif;
-    background:var(--mist); font-family:var(--fb); padding:clamp(48px,7vw,86px) 20px;
+    --navy:#14263D; --red:#D80000; --blue:#0056AC; --muted:#7c8896; --line:#e8eaee;
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#fff; font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
   }
-  .ks-menu__inner{ max-width:1140px; margin:0 auto; }
-  .ks-menu__head{ text-align:center; max-width:620px; margin:0 auto 44px; }
-  .ks-kicker{ font-family:var(--fh); font-weight:700; font-size:13px; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--red); }
-  .ks-menu__title{ font-family:var(--fh); font-weight:800; color:var(--ink);
-    font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.1; margin:12px 0 0; letter-spacing:-.02em; }
-  .ks-hl{ position:relative; color:var(--blue); }
-  .ks-hl::after{ content:""; position:absolute; left:-2%; right:-2%; bottom:.06em; height:.32em;
-    background:rgba(0,86,172,.15); border-radius:6px; z-index:0; }
-  .ks-menu__sub{ margin:14px 0 0; font-size:1.1rem; color:#4a586b; }
+  .ks-menu__inner{ max-width:1140px; margin:0 auto; display:grid; gap:clamp(32px,5vw,72px);
+    grid-template-columns:1fr 1fr; align-items:center; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:var(--red); stroke-width:1.6;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .ks-menu__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
+    font-size:clamp(2rem,4.4vw,3.1rem); line-height:1.06; margin:14px 0 30px; letter-spacing:-.01em; }
 
-  .ks-menu__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
-  .ks-dish{ background:#fff; border-radius:22px; overflow:hidden; box-shadow:0 14px 30px -18px rgba(20,38,61,.35);
-    border:1px solid #eef1f5; transition:transform .22s, box-shadow .25s; display:flex; flex-direction:column; }
-  .ks-dish:hover{ transform:translateY(-6px); box-shadow:0 26px 46px -22px rgba(0,86,172,.45); }
-  .ks-dish__media{ position:relative; aspect-ratio:4/3; background:linear-gradient(135deg,#0056AC,#5a9be0); }
-  .ks-dish__media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .ks-dish__tag{ position:absolute; top:12px; left:12px; z-index:1; background:var(--red); color:#fff;
-    font-family:var(--fh); font-weight:700; font-size:11.5px; padding:5px 12px; border-radius:999px;
-    box-shadow:0 6px 14px -6px rgba(216,0,0,.7); }
-  .ks-dish__tag--blue{ background:var(--blue); box-shadow:0 6px 14px -6px rgba(0,86,172,.7); }
-  .ks-dish__body{ padding:18px 18px 20px; display:flex; flex-direction:column; flex:1; }
-  .ks-dish__body h3{ font-family:var(--fh); font-weight:700; font-size:1.15rem; color:var(--ink); margin:0; }
-  .ks-dish__body p{ margin:8px 0 0; font-size:.98rem; line-height:1.55; color:#5a6878; flex:1; }
-  .ks-dish__foot{ display:flex; align-items:center; justify-content:space-between; margin-top:16px; }
-  .ks-price{ font-family:var(--fh); font-weight:800; font-size:1.2rem; color:var(--blue); }
-  .ks-pill{ font-family:var(--fh); font-weight:700; font-size:14px; text-decoration:none;
-    background:var(--red); color:#fff; padding:9px 20px; border-radius:999px;
-    transition:background .2s, transform .18s; box-shadow:0 8px 16px -8px rgba(216,0,0,.6); }
-  .ks-pill:hover{ background:var(--red-dark); transform:translateY(-2px); }
+  .ks-items{ display:flex; flex-direction:column; }
+  .ks-item{ padding:18px 0; border-bottom:1px solid var(--line); }
+  .ks-item:first-child{ padding-top:0; }
+  .ks-item__row{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; }
+  .ks-item__row h3{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--navy); margin:0; }
+  .ks-price{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--blue); white-space:nowrap; }
+  .ks-item p{ font-family:var(--fl); font-weight:300; font-size:.92rem; color:var(--muted); margin:7px 0 0; line-height:1.5; }
 
-  .ks-menu__more{ text-align:center; margin-top:40px; }
-  .ks-btn{ font-family:var(--fh); font-weight:700; font-size:15.5px; text-decoration:none;
-    padding:13px 30px; border-radius:999px; display:inline-flex; border:2px solid var(--blue);
-    color:var(--blue); background:#fff; transition:background .2s,color .2s,transform .18s; }
-  .ks-btn--ghost:hover{ background:var(--blue); color:#fff; transform:translateY(-2px); }
+  .ks-menu__media{ margin:0; aspect-ratio:1/1; border-radius:18px; overflow:hidden;
+    background:linear-gradient(135deg,#0056AC,#5a9be0); box-shadow:0 30px 60px -28px rgba(0,86,172,.5); }
+  .ks-menu__media img{ width:100%; height:100%; object-fit:cover; }
 
-  @media (max-width:980px){ .ks-menu__grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:520px){ .ks-menu__grid{ grid-template-columns:1fr; } }
-  @media (prefers-reduced-motion: reduce){ .ks-dish:hover,.ks-pill:hover,.ks-btn--ghost:hover{ transform:none; } }
+  @media (max-width:820px){
+    .ks-menu__inner{ grid-template-columns:1fr; }
+    .ks-menu__media{ order:-1; aspect-ratio:16/11; }
+  }
   </style>
 </section>
 
-<!-- ===== sections/03-keunggulan.html ===== -->
+<!-- ===== sections/03-menu-bakar.html ===== -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION KEUNGGULAN (Kenapa Kami)
-     Tempel di Elementor: widget "HTML".
+     KURNIA SEAFOOD · SECTION MENU B  (foto kiri · daftar kanan)
+     Gaya Bamzi "Sea fish & dishes" (cermin dari section A).
      ============================================================ -->
-<section class="ks-why">
-  <div class="ks-why__inner">
-    <header class="ks-why__head">
-      <span class="ks-kicker">Kenapa Kurnia Seafood?</span>
-      <h2 class="ks-why__title">Alasan keluarga selalu <span class="ks-hl">balik lagi</span></h2>
+<section class="ks-menu2">
+  <div class="ks-menu2__inner">
+    <figure class="ks-menu2__media">
+      <img src="https://images.unsplash.com/photo-1535140728325-a4d3707eee61?auto=format&fit=crop&w=900&q=72"
+           alt="Ikan bakar Kurnia Seafood" loading="lazy" onerror="this.style.display='none'">
+    </figure>
+
+    <div class="ks-menu2__list">
+      <span class="ks-kicker">
+        <svg viewBox="0 0 24 24"><path d="M4 12c3-4 6-4 8 0M3 18c2-2 5-2 7 0M13 7c4 1 7 4 8 9-5 1-9-1-11-5l3-4Z"/></svg>
+        Dari Bara
+      </span>
+      <h2 class="ks-menu2__title">Ikan &amp; olahan bakar</h2>
+
+      <div class="ks-items">
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Gurame Bakar Kecap</h3><span class="ks-price">Rp 78K</span></div>
+          <p>Gurame utuh dibakar, olesan kecap manis, sambal terasi.</p>
+        </article>
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Kakap Asam Pedas</h3><span class="ks-price">Rp 82K</span></div>
+          <p>Kakap merah, kuah asam pedas segar, daun kemangi.</p>
+        </article>
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Cumi Bakar Pedas</h3><span class="ks-price">Rp 55K</span></div>
+          <p>Cumi bakar bumbu rica, harum dan menggugah selera.</p>
+        </article>
+        <article class="ks-item">
+          <div class="ks-item__row"><h3>Kerang Saus Tiram</h3><span class="ks-price">Rp 45K</span></div>
+          <p>Kerang hijau, saus tiram gurih, bawang putih.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <style>
+  .ks-menu2{
+    --navy:#14263D; --red:#D80000; --blue:#0056AC; --muted:#7c8896; --line:#e8eaee;
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#fff; font-family:var(--fh); padding:clamp(20px,3vw,40px) 22px clamp(54px,8vw,96px);
+  }
+  .ks-menu2__inner{ max-width:1140px; margin:0 auto; display:grid; gap:clamp(32px,5vw,72px);
+    grid-template-columns:1fr 1fr; align-items:center; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:var(--red); stroke-width:1.6;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .ks-menu2__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
+    font-size:clamp(2rem,4.4vw,3.1rem); line-height:1.06; margin:14px 0 30px; letter-spacing:-.01em; }
+
+  .ks-items{ display:flex; flex-direction:column; }
+  .ks-item{ padding:18px 0; border-bottom:1px solid var(--line); }
+  .ks-item:first-child{ padding-top:0; }
+  .ks-item__row{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; }
+  .ks-item__row h3{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--navy); margin:0; }
+  .ks-price{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--blue); white-space:nowrap; }
+  .ks-item p{ font-family:var(--fl); font-weight:300; font-size:.92rem; color:var(--muted); margin:7px 0 0; line-height:1.5; }
+
+  .ks-menu2__media{ margin:0; aspect-ratio:1/1; border-radius:18px; overflow:hidden;
+    background:linear-gradient(135deg,#0056AC,#5a9be0); box-shadow:0 30px 60px -28px rgba(0,86,172,.5); }
+  .ks-menu2__media img{ width:100%; height:100%; object-fit:cover; }
+
+  @media (max-width:820px){
+    .ks-menu2__inner{ grid-template-columns:1fr; }
+    .ks-menu2__media{ aspect-ratio:16/11; }
+  }
+  </style>
+</section>
+
+<!-- ===== sections/04-review.html ===== -->
+<!-- ============================================================
+     KURNIA SEAFOOD · SECTION CUSTOMER REVIEW  (kartu gelap)
+     Pengganti "Our Mission" pada template Bamzi.
+     Ganti kutipan, nama pelanggan, dan foto.
+     ============================================================ -->
+<section class="ks-rev" id="review">
+  <div class="ks-rev__card">
+    <svg class="ks-rev__watermark" viewBox="0 0 240 130" aria-hidden="true">
+      <path d="M22 65 C55 25 130 25 168 58 L206 32 C198 50 198 80 206 98 L168 72 C130 105 55 105 22 65 Z"/>
+      <circle cx="50" cy="56" r="3.5"/>
+    </svg>
+
+    <div class="ks-rev__body">
+      <span class="ks-kicker">
+        <svg viewBox="0 0 24 24"><path d="M12 17.3 6.2 21l1.6-6.6L3 9.8l6.7-.5L12 3l2.3 6.3 6.7.5-4.8 4.6L17.8 21z"/></svg>
+        Kata Pelanggan
+      </span>
+
+      <div class="ks-rev__stars" aria-label="Rating 5 dari 5">★★★★★</div>
+
+      <blockquote class="ks-rev__quote">
+        “Seafoodnya benar-benar segar dan bumbunya juara. Tempatnya nyaman buat
+        keluarga, pelayanannya ramah. Sudah jadi langganan tiap akhir pekan!”
+      </blockquote>
+
+      <div class="ks-rev__by">
+        <span class="ks-rev__label">Pelanggan Setia</span>
+        <p class="ks-rev__name">Rina Anggraini</p>
+      </div>
+
+      <div class="ks-rev__meta">
+        <span><strong>4.9</strong>/5 rata-rata</span>
+        <span class="ks-dot"></span>
+        <span><strong>1.200+</strong> ulasan</span>
+        <span class="ks-dot"></span>
+        <span>Google &amp; GoFood</span>
+      </div>
+    </div>
+
+    <figure class="ks-rev__media">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=72"
+           alt="Pelanggan menikmati hidangan di Kurnia Seafood" loading="lazy" onerror="this.style.display='none'">
+    </figure>
+  </div>
+
+  <style>
+  .ks-rev{
+    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --blue:#2E7BD1;
+    --muted:rgba(246,241,231,.66);
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#fff; font-family:var(--fh); padding:clamp(30px,5vw,64px) 22px;
+  }
+  .ks-rev__card{ position:relative; overflow:hidden; max-width:1140px; margin:0 auto;
+    background:radial-gradient(120% 130% at 85% 0%, var(--navy-2), var(--navy) 62%);
+    color:var(--cream); border-radius:28px; padding:clamp(34px,5vw,64px);
+    display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(28px,4vw,56px); align-items:center;
+    box-shadow:0 40px 80px -40px rgba(4,34,63,.7); }
+  .ks-rev__watermark{ position:absolute; right:-30px; top:-20px; width:360px; opacity:.06; z-index:0;
+    fill:none; stroke:var(--cream); stroke-width:1.4; }
+  .ks-rev__body{ position:relative; z-index:1; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; }
+  .ks-kicker svg{ width:18px; height:18px; fill:#FF6B6B; }
+  .ks-rev__stars{ color:#F5B301; font-size:1.25rem; letter-spacing:3px; margin:18px 0 14px; }
+  .ks-rev__quote{ font-family:var(--fh); font-weight:400; color:var(--cream); margin:0;
+    font-size:clamp(1.5rem,3.2vw,2.5rem); line-height:1.28; letter-spacing:-.01em; }
+  .ks-rev__by{ margin-top:26px; }
+  .ks-rev__label{ font-family:var(--fl); font-weight:500; font-size:11.5px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--muted); }
+  .ks-rev__name{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--cream); margin:4px 0 0; }
+  .ks-rev__meta{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:24px;
+    font-family:var(--fl); font-weight:300; font-size:13.5px; color:var(--muted); }
+  .ks-rev__meta strong{ color:var(--cream); font-weight:600; }
+  .ks-dot{ width:4px; height:4px; border-radius:50%; background:var(--muted); }
+
+  .ks-rev__media{ position:relative; z-index:1; margin:0; aspect-ratio:4/5; border-radius:20px; overflow:hidden;
+    background:linear-gradient(135deg,#06304F,#0a3c63); box-shadow:0 24px 50px -24px rgba(0,0,0,.55); }
+  .ks-rev__media img{ width:100%; height:100%; object-fit:cover; }
+
+  @media (max-width:820px){
+    .ks-rev__card{ grid-template-columns:1fr; }
+    .ks-rev__media{ order:-1; aspect-ratio:16/10; max-height:320px; }
+  }
+  </style>
+</section>
+
+<!-- ===== sections/05-kabar.html ===== -->
+<!-- ============================================================
+     KURNIA SEAFOOD · SECTION KABAR & PROMO  (3 kartu putih)
+     Gaya Bamzi "Restaurant blog & update".
+     ============================================================ -->
+<section class="ks-news">
+  <div class="ks-news__inner">
+    <header class="ks-news__head">
+      <span class="ks-kicker ks-kicker--center">
+        <svg viewBox="0 0 24 24"><path d="M3 13c4-5 14-5 18 0M6 11c2 3 10 3 12 0M16 11l3-2-1 3"/><circle cx="9" cy="9.5" r=".9"/></svg>
+        Kabar &amp; Promo
+      </span>
+      <h2 class="ks-news__title">Kabar &amp; promo terbaru</h2>
     </header>
 
-    <div class="ks-why__grid">
-      <div class="ks-feat">
-        <span class="ks-feat__ic ks-feat__ic--blue">
-          <svg viewBox="0 0 48 48"><path d="M6 30c5-7 12-7 18 0 6 7 13 7 18 0M10 22c4 4 12 4 16 0M26 22l4-2-1 4"/><circle cx="17" cy="18" r="1.2"/></svg>
-        </span>
-        <h3>Selalu Segar</h3>
-        <p>Tangkapan datang setiap pagi langsung dari nelayan. Dijamin segar.</p>
-      </div>
+    <div class="ks-news__grid">
+      <article class="ks-post">
+        <div class="ks-post__media">
+          <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=700&q=72" alt="Promo paket keluarga" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <span class="ks-post__date">5 Juni 2026</span>
+        <h3>Paket Keluarga Hemat untuk 4 orang</h3>
+        <a href="#" class="ks-post__more">Selengkapnya</a>
+      </article>
 
-      <div class="ks-feat">
-        <span class="ks-feat__ic ks-feat__ic--red">
-          <svg viewBox="0 0 48 48"><path d="M24 42S8 31 8 19a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 12-16 23-16 23Z"/></svg>
-        </span>
-        <h3>Harga Bersahabat</h3>
-        <p>Rasa restoran, harga merakyat. Puas tanpa bikin kantong bolong.</p>
-      </div>
+      <article class="ks-post">
+        <div class="ks-post__media">
+          <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=700&q=72" alt="Menu spesial kepiting" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <span class="ks-post__date">1 Juni 2026</span>
+        <h3>Spesial bulan ini: Kepiting Cabai Garam</h3>
+        <a href="#" class="ks-post__more">Selengkapnya</a>
+      </article>
 
-      <div class="ks-feat">
-        <span class="ks-feat__ic ks-feat__ic--blue">
-          <svg viewBox="0 0 48 48"><path d="M24 6l4.8 9.7 10.7 1.6-7.7 7.5 1.8 10.6L24 36l-9.4 5 1.8-10.6-7.7-7.5 10.7-1.6z"/></svg>
-        </span>
-        <h3>Porsi Puas</h3>
-        <p>Porsi melimpah, cocok dinikmati ramai-ramai bareng keluarga.</p>
-      </div>
-
-      <div class="ks-feat">
-        <span class="ks-feat__ic ks-feat__ic--red">
-          <svg viewBox="0 0 48 48"><path d="M8 40V20l16-12 16 12v20"/><path d="M18 40V28h12v12"/></svg>
-        </span>
-        <h3>Tempat Nyaman</h3>
-        <p>Suasana hangat & ramah anak. Pas untuk kumpul dan rayakan momen.</p>
-      </div>
+      <article class="ks-post">
+        <div class="ks-post__media">
+          <img src="https://images.unsplash.com/photo-1535140728325-a4d3707eee61?auto=format&fit=crop&w=700&q=72" alt="Tips memilih ikan segar" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <span class="ks-post__date">24 Mei 2026</span>
+        <h3>Cara kami menjaga kesegaran tangkapan</h3>
+        <a href="#" class="ks-post__more">Selengkapnya</a>
+      </article>
     </div>
   </div>
 
   <style>
-  .ks-why{
-    --blue:#0056AC; --red:#D80000; --ink:#14263D; --grey:#929497; --soft:#E7F0FB; --softred:#FDE7E7;
-    --fh:'Alexandria',system-ui,sans-serif; --fb:'Crimson Pro',Georgia,serif;
-    background:#fff; font-family:var(--fb); padding:clamp(48px,7vw,86px) 20px;
+  .ks-news{
+    --navy:#14263D; --red:#D80000; --blue:#0056AC; --muted:#7c8896; --line:#e8eaee;
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#fff; font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
   }
-  .ks-why__inner{ max-width:1140px; margin:0 auto; }
-  .ks-why__head{ text-align:center; margin-bottom:46px; }
-  .ks-kicker{ font-family:var(--fh); font-weight:700; font-size:13px; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--red); }
-  .ks-why__title{ font-family:var(--fh); font-weight:800; color:var(--ink);
-    font-size:clamp(1.8rem,4vw,2.8rem); margin:12px 0 0; letter-spacing:-.02em; }
-  .ks-hl{ position:relative; color:var(--blue); }
-  .ks-hl::after{ content:""; position:absolute; left:-2%; right:-2%; bottom:.06em; height:.32em;
-    background:rgba(0,86,172,.15); border-radius:6px; z-index:0; }
+  .ks-news__inner{ max-width:1140px; margin:0 auto; }
+  .ks-news__head{ text-align:center; margin-bottom:48px; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
+  .ks-kicker--center{ justify-content:center; }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:var(--red); stroke-width:1.6;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .ks-news__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
+    font-size:clamp(2rem,4.4vw,3.1rem); margin:12px 0 0; letter-spacing:-.01em; }
 
-  .ks-why__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
-  .ks-feat{ background:#fff; border:1px solid #eef1f5; border-radius:22px; padding:28px 24px;
-    text-align:center; transition:transform .22s, box-shadow .25s; box-shadow:0 10px 26px -18px rgba(20,38,61,.3); }
-  .ks-feat:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -22px rgba(0,86,172,.42); }
-  .ks-feat__ic{ width:64px; height:64px; border-radius:20px; display:grid; place-items:center; margin:0 auto 16px; }
-  .ks-feat__ic svg{ width:34px; height:34px; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-  .ks-feat__ic--blue{ background:var(--soft); } .ks-feat__ic--blue svg{ stroke:var(--blue); }
-  .ks-feat__ic--red{ background:var(--softred); } .ks-feat__ic--red svg{ stroke:var(--red); }
-  .ks-feat h3{ font-family:var(--fh); font-weight:700; font-size:1.18rem; color:var(--ink); margin:0; }
-  .ks-feat p{ margin:10px 0 0; font-size:1rem; line-height:1.55; color:#5a6878; }
+  .ks-news__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+  .ks-post__media{ aspect-ratio:16/11; border-radius:16px; overflow:hidden; margin-bottom:18px;
+    background:linear-gradient(135deg,#0056AC,#5a9be0); }
+  .ks-post__media img{ width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+  .ks-post:hover .ks-post__media img{ transform:scale(1.05); }
+  .ks-post__date{ font-family:var(--fl); font-weight:600; font-size:11.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--red); display:block;
+    border-top:1px solid var(--line); padding-top:16px; }
+  .ks-post h3{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--navy);
+    line-height:1.25; margin:10px 0 16px; }
+  .ks-post__more{ font-family:var(--fl); font-weight:600; font-size:11.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--navy); text-decoration:none; border-bottom:2px solid var(--red);
+    padding-bottom:3px; transition:color .2s; }
+  .ks-post__more:hover{ color:var(--red); }
 
-  @media (max-width:980px){ .ks-why__grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:520px){ .ks-why__grid{ grid-template-columns:1fr; } }
-  @media (prefers-reduced-motion: reduce){ .ks-feat:hover{ transform:none; } }
+  @media (max-width:820px){ .ks-news__grid{ grid-template-columns:1fr; max-width:440px; margin:0 auto; } }
+  @media (prefers-reduced-motion: reduce){ .ks-post:hover .ks-post__media img{ transform:none; } }
   </style>
 </section>
 
-<!-- ===== sections/04-testimoni.html ===== -->
+<!-- ===== sections/06-reservasi.html ===== -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION TESTIMONI
-     Tempel di Elementor: widget "HTML". Ganti kutipan & nama.
+     KURNIA SEAFOOD · SECTION RESERVASI / CTA  (gelap, penutup)
+     Ganti nomor WhatsApp, telepon, alamat, jam buka, link tombol.
      ============================================================ -->
-<section class="ks-tm">
-  <div class="ks-tm__inner">
-    <header class="ks-tm__head">
-      <span class="ks-kicker">Kata Pelanggan</span>
-      <h2 class="ks-tm__title">Ribuan keluarga sudah <span class="ks-hl">bahagia</span> di sini</h2>
-      <div class="ks-tm__rating">
-        <span class="ks-stars">★★★★★</span>
-        <strong>4.9 / 5</strong> · 1.200+ ulasan
-      </div>
-    </header>
+<section class="ks-book" id="reservasi">
+  <div class="ks-book__inner">
+    <span class="ks-kicker">
+      <svg viewBox="0 0 24 24"><path d="M3 13c4-5 14-5 18 0M6 11c2 3 10 3 12 0M16 11l3-2-1 3"/><circle cx="9" cy="9.5" r=".9"/></svg>
+      Reservasi
+    </span>
+    <h2 class="ks-book__title">Pesan meja Anda<br>hari ini</h2>
+    <p class="ks-book__sub">Hubungi kami untuk reservasi atau langsung mampir. Kami tunggu kedatangan Anda!</p>
 
-    <div class="ks-tm__grid">
-      <figure class="ks-quote">
-        <span class="ks-stars">★★★★★</span>
-        <blockquote>“Kepitingnya juara! Bumbunya meresap, porsinya banyak. Tempatnya juga nyaman buat bawa anak-anak.”</blockquote>
-        <figcaption><span class="ks-av">RA</span><div><strong>Rina A.</strong><small>Jakarta</small></div></figcaption>
-      </figure>
+    <div class="ks-book__btns">
+      <a href="https://wa.me/62000000000" class="ks-btn ks-btn--red">Reservasi via WhatsApp</a>
+      <a href="tel:+62000000000" class="ks-btn ks-btn--ghost">Telepon Kami</a>
+    </div>
 
-      <figure class="ks-quote">
-        <span class="ks-stars">★★★★★</span>
-        <blockquote>“Langganan tiap akhir pekan. Seafoodnya selalu segar dan harganya masuk akal. Recommended banget!”</blockquote>
-        <figcaption><span class="ks-av ks-av--red">BS</span><div><strong>Budi S.</strong><small>Tangerang</small></div></figcaption>
-      </figure>
-
-      <figure class="ks-quote">
-        <span class="ks-stars">★★★★★</span>
-        <blockquote>“Pelayanannya ramah, makanannya cepat datang. Udang bakar madunya bikin nagih. The happiest seafood time!”</blockquote>
-        <figcaption><span class="ks-av">DK</span><div><strong>Dewi K.</strong><small>Bekasi</small></div></figcaption>
-      </figure>
+    <div class="ks-book__info" id="kontak">
+      <div><span class="ks-il">Lokasi</span><p>Jl. Contoh Alamat No. 8, Kota Anda</p></div>
+      <div><span class="ks-il">Jam Buka</span><p>Setiap hari · 10.00 – 22.00 WIB</p></div>
+      <div><span class="ks-il">Kontak</span><p>+62 000-0000-0000</p></div>
     </div>
   </div>
 
   <style>
-  .ks-tm{
-    --blue:#0056AC; --red:#D80000; --ink:#14263D; --grey:#929497; --soft:#E7F0FB;
-    --fh:'Alexandria',system-ui,sans-serif; --fb:'Crimson Pro',Georgia,serif;
-    background:var(--soft); font-family:var(--fb); padding:clamp(48px,7vw,86px) 20px;
+  .ks-book{
+    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
+    --muted:rgba(246,241,231,.66);
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 60%);
+    color:var(--cream); font-family:var(--fh); padding:clamp(56px,8vw,104px) 22px; text-align:center;
   }
-  .ks-tm__inner{ max-width:1140px; margin:0 auto; }
-  .ks-tm__head{ text-align:center; margin-bottom:44px; }
-  .ks-kicker{ font-family:var(--fh); font-weight:700; font-size:13px; letter-spacing:.18em;
-    text-transform:uppercase; color:var(--red); }
-  .ks-tm__title{ font-family:var(--fh); font-weight:800; color:var(--ink);
-    font-size:clamp(1.8rem,4vw,2.7rem); margin:12px 0 0; letter-spacing:-.02em; }
-  .ks-hl{ position:relative; color:var(--blue); }
-  .ks-hl::after{ content:""; position:absolute; left:-2%; right:-2%; bottom:.06em; height:.32em;
-    background:rgba(0,86,172,.16); border-radius:6px; z-index:0; }
-  .ks-tm__rating{ margin-top:16px; font-size:1.05rem; color:#3c4a5c; }
-  .ks-tm__rating strong{ font-family:var(--fh); color:var(--ink); }
-  .ks-stars{ color:#F5A623; letter-spacing:2px; }
+  .ks-book__inner{ max-width:760px; margin:0 auto; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:#FF6B6B; stroke-width:1.6;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .ks-book__title{ font-family:var(--fh); font-weight:500; color:var(--cream);
+    font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.07; margin:16px 0 0; letter-spacing:-.01em; }
+  .ks-book__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); font-size:1.05rem;
+    margin:18px auto 0; max-width:46ch; }
+  .ks-book__btns{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:32px; }
+  .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; padding:15px 30px; border-radius:10px; border:2px solid transparent;
+    transition:transform .18s, box-shadow .25s, background .2s, color .2s; }
+  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 16px 30px -14px rgba(216,0,0,.6); }
+  .ks-btn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
+  .ks-btn--ghost{ background:transparent; color:var(--cream); border-color:rgba(246,241,231,.35); }
+  .ks-btn--ghost:hover{ background:rgba(246,241,231,.1); transform:translateY(-2px); }
 
-  .ks-tm__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .ks-quote{ background:#fff; border-radius:22px; padding:28px 26px; margin:0;
-    box-shadow:0 16px 34px -22px rgba(0,86,172,.4); border:1px solid #fff; }
-  .ks-quote blockquote{ margin:14px 0 0; font-size:1.12rem; line-height:1.62; color:#2c3a4d; font-style:italic; }
-  .ks-quote figcaption{ display:flex; align-items:center; gap:12px; margin-top:20px; }
-  .ks-av{ width:44px; height:44px; border-radius:50%; background:var(--blue); color:#fff;
-    display:grid; place-items:center; font-family:var(--fh); font-weight:700; font-size:15px; }
-  .ks-av--red{ background:var(--red); }
-  .ks-quote figcaption strong{ display:block; font-family:var(--fh); color:var(--ink); font-size:1rem; }
-  .ks-quote figcaption small{ color:var(--grey); }
+  .ks-book__info{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:50px;
+    padding-top:34px; border-top:1px solid rgba(246,241,231,.15); }
+  .ks-il{ font-family:var(--fl); font-weight:600; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:#FF6B6B; }
+  .ks-book__info p{ font-family:var(--fl); font-weight:300; color:var(--cream); margin:8px 0 0; font-size:.98rem; line-height:1.5; }
 
-  @media (max-width:900px){ .ks-tm__grid{ grid-template-columns:1fr; max-width:560px; margin:0 auto; } }
-  </style>
-</section>
-
-<!-- ===== sections/05-cta-reservasi.html ===== -->
-<!-- ============================================================
-     KURNIA SEAFOOD · SECTION CTA / RESERVASI
-     Tempel di Elementor: widget "HTML".
-     Ganti nomor WhatsApp, alamat, jam buka, dan link tombol.
-     ============================================================ -->
-<section class="ks-cta" id="reservasi">
-  <svg class="ks-cta__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 40 C 240 0 480 80 720 50 C 960 20 1200 70 1440 40 L1440 0 L0 0 Z"></path>
-  </svg>
-
-  <div class="ks-cta__inner">
-    <div class="ks-cta__copy">
-      <span class="ks-kicker">Lagi lapar? 🦞</span>
-      <h2 class="ks-cta__title">Yuk, makan seafood<br>paling bahagia hari ini!</h2>
-      <p class="ks-cta__sub">Reservasi sekarang atau langsung mampir. Kami tunggu kedatanganmu!</p>
-
-      <div class="ks-cta__btns">
-        <a href="https://wa.me/62000000000" class="ks-btn ks-btn--wa">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.5-4.5A8 8 0 1 1 9 19L4 20Z"/><path d="M9 10c0 4 2 6 6 6"/></svg>
-          Reservasi via WhatsApp
-        </a>
-        <a href="tel:+62000000000" class="ks-btn ks-btn--white">Telepon Kami</a>
-      </div>
-    </div>
-
-    <div class="ks-cta__info">
-      <div class="ks-info">
-        <span class="ks-info__ic">📍</span>
-        <div><strong>Lokasi</strong><p>Jl. Contoh Alamat No. 8, Kota Anda</p></div>
-      </div>
-      <div class="ks-info">
-        <span class="ks-info__ic">🕒</span>
-        <div><strong>Jam Buka</strong><p>Setiap hari · 10.00 – 22.00 WIB</p></div>
-      </div>
-      <div class="ks-info">
-        <span class="ks-info__ic">📞</span>
-        <div><strong>Kontak</strong><p>+62 000-0000-0000</p></div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-  .ks-cta{
-    --blue:#0056AC; --blue-dark:#023E7D; --red:#D80000; --wa:#25D366; --ink:#14263D;
-    --fh:'Alexandria',system-ui,sans-serif; --fb:'Crimson Pro',Georgia,serif;
-    position:relative; background:linear-gradient(135deg,#0056AC,#023E7D); color:#fff;
-    font-family:var(--fb); padding:clamp(70px,9vw,110px) 20px clamp(48px,7vw,80px); overflow:hidden;
-  }
-  .ks-cta__wave{ position:absolute; top:-1px; left:0; width:100%; height:80px; }
-  .ks-cta__wave path{ fill:#fff; }       /* sesuaikan dgn warna section di atasnya */
-  .ks-cta::after{ content:""; position:absolute; inset:0; opacity:.18; pointer-events:none;
-    background-image:radial-gradient(rgba(255,255,255,.5) 2px, transparent 2.5px); background-size:32px 32px; }
-  .ks-cta__inner{ position:relative; max-width:1140px; margin:0 auto; display:grid;
-    grid-template-columns:1.1fr .9fr; gap:clamp(28px,5vw,64px); align-items:center; }
-  .ks-kicker{ font-family:var(--fh); font-weight:700; font-size:14px; letter-spacing:.14em;
-    text-transform:uppercase; color:#FFD7D7; }
-  .ks-cta__title{ font-family:var(--fh); font-weight:800; font-size:clamp(1.9rem,4.4vw,3.1rem);
-    line-height:1.08; margin:12px 0 0; color:#fff; letter-spacing:-.02em; }
-  .ks-cta__sub{ margin:16px 0 0; font-size:1.15rem; color:rgba(255,255,255,.85); max-width:42ch; }
-  .ks-cta__btns{ display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
-  .ks-btn{ font-family:var(--fh); font-weight:700; font-size:15.5px; text-decoration:none;
-    display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:999px;
-    border:2px solid transparent; transition:transform .18s, box-shadow .25s, background .2s, color .2s; }
-  .ks-btn svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-  .ks-btn--wa{ background:var(--wa); color:#063; box-shadow:0 16px 30px -14px rgba(37,211,102,.7); }
-  .ks-btn--wa:hover{ transform:translateY(-2px); filter:brightness(1.05); }
-  .ks-btn--white{ background:#fff; color:var(--blue); }
-  .ks-btn--white:hover{ transform:translateY(-2px); background:#FFE5E5; color:var(--red); }
-
-  .ks-cta__info{ display:grid; gap:14px; background:rgba(255,255,255,.10);
-    border:1px solid rgba(255,255,255,.18); border-radius:24px; padding:24px; backdrop-filter:blur(6px); }
-  .ks-info{ display:flex; gap:14px; align-items:flex-start; }
-  .ks-info__ic{ font-size:22px; line-height:1; flex:none; width:44px; height:44px; border-radius:14px;
-    background:rgba(255,255,255,.15); display:grid; place-items:center; }
-  .ks-info strong{ font-family:var(--fh); font-weight:700; color:#fff; display:block; }
-  .ks-info p{ margin:3px 0 0; color:rgba(255,255,255,.8); font-size:1rem; }
-
-  @media (max-width:860px){ .ks-cta__inner{ grid-template-columns:1fr; } .ks-cta__btns{ }
-    .ks-cta__title{ } }
+  @media (max-width:640px){ .ks-book__info{ grid-template-columns:1fr; gap:18px; } }
   @media (prefers-reduced-motion: reduce){ .ks-btn:hover{ transform:none; } }
   </style>
 </section>

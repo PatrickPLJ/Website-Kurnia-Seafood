@@ -1,0 +1,61 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · SECTION RESERVASI / CTA  (gelap, penutup)
+     Ganti nomor WhatsApp, telepon, alamat, jam buka, link tombol.
+     ============================================================ -->
+<section class="ks-book" id="reservasi">
+  <div class="ks-book__inner">
+    <span class="ks-kicker">
+      <svg viewBox="0 0 24 24"><path d="M3 13c4-5 14-5 18 0M6 11c2 3 10 3 12 0M16 11l3-2-1 3"/><circle cx="9" cy="9.5" r=".9"/></svg>
+      Reservasi
+    </span>
+    <h2 class="ks-book__title">Pesan meja Anda<br>hari ini</h2>
+    <p class="ks-book__sub">Hubungi kami untuk reservasi atau langsung mampir. Kami tunggu kedatangan Anda!</p>
+
+    <div class="ks-book__btns">
+      <a href="https://wa.me/62000000000" class="ks-btn ks-btn--red">Reservasi via WhatsApp</a>
+      <a href="tel:+62000000000" class="ks-btn ks-btn--ghost">Telepon Kami</a>
+    </div>
+
+    <div class="ks-book__info" id="kontak">
+      <div><span class="ks-il">Lokasi</span><p>Jl. Contoh Alamat No. 8, Kota Anda</p></div>
+      <div><span class="ks-il">Jam Buka</span><p>Setiap hari · 10.00 – 22.00 WIB</p></div>
+      <div><span class="ks-il">Kontak</span><p>+62 000-0000-0000</p></div>
+    </div>
+  </div>
+
+  <style>
+  .ks-book{
+    --navy:#04223F; --navy-2:#06304F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
+    --muted:rgba(246,241,231,.66);
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 60%);
+    color:var(--cream); font-family:var(--fh); padding:clamp(56px,8vw,104px) 22px; text-align:center;
+  }
+  .ks-book__inner{ max-width:760px; margin:0 auto; }
+  .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
+    font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; }
+  .ks-kicker svg{ width:20px; height:20px; fill:none; stroke:#FF6B6B; stroke-width:1.6;
+    stroke-linecap:round; stroke-linejoin:round; }
+  .ks-book__title{ font-family:var(--fh); font-weight:500; color:var(--cream);
+    font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.07; margin:16px 0 0; letter-spacing:-.01em; }
+  .ks-book__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); font-size:1.05rem;
+    margin:18px auto 0; max-width:46ch; }
+  .ks-book__btns{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:32px; }
+  .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    text-decoration:none; padding:15px 30px; border-radius:10px; border:2px solid transparent;
+    transition:transform .18s, box-shadow .25s, background .2s, color .2s; }
+  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 16px 30px -14px rgba(216,0,0,.6); }
+  .ks-btn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
+  .ks-btn--ghost{ background:transparent; color:var(--cream); border-color:rgba(246,241,231,.35); }
+  .ks-btn--ghost:hover{ background:rgba(246,241,231,.1); transform:translateY(-2px); }
+
+  .ks-book__info{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:50px;
+    padding-top:34px; border-top:1px solid rgba(246,241,231,.15); }
+  .ks-il{ font-family:var(--fl); font-weight:600; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:#FF6B6B; }
+  .ks-book__info p{ font-family:var(--fl); font-weight:300; color:var(--cream); margin:8px 0 0; font-size:.98rem; line-height:1.5; }
+
+  @media (max-width:640px){ .ks-book__info{ grid-template-columns:1fr; gap:18px; } }
+  @media (prefers-reduced-motion: reduce){ .ks-btn:hover{ transform:none; } }
+  </style>
+</section>

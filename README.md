@@ -1,11 +1,14 @@
 # Kurnia Seafood — Web Visual Kit
 
 Mempercantik tampilan website **Kurnia Seafood** agar lebih menarik bagi calon
-pelanggan, mengikuti **brand guideline resmi** (tagline *"The Happiest Seafood
-Time!"*) dengan nuansa **ceria, ramah, dan premium**.
+pelanggan. Mengikuti **brand guideline resmi** (warna + font Kurnia) dengan
+**layout premium terinspirasi template *Bamzi*** (hero gelap elegan, daftar menu
++ foto, kartu ulasan gelap) — diadaptasi ke warna brand: hijau→**navy biru**,
+oranye→**merah**.
 
-Brand: biru `#0056AC` dominan · merah `#D80000` aksen · latar putih ·
-font **Alexandria** + **Crimson Pro**. Detail di [`brand/BRAND.md`](brand/BRAND.md).
+Brand: biru `#0056AC` / navy gelap dominan · merah `#D80000` aksen ·
+font **Crimson Pro** (judul serif) + **Alexandria** (kicker/tombol).
+Detail di [`brand/BRAND.md`](brand/BRAND.md).
 
 ---
 
@@ -19,12 +22,13 @@ wordpress/
 ├─ PANDUAN-ELEMENTOR.md   # langkah pasang (BACA INI DULU)
 ├─ kurnia-brand.css       # gaya global: warna, font, tombol, form
 ├─ PREVIEW.html           # buka di browser untuk lihat hasil semua section
-└─ sections/              # 5 blok siap tempel ke widget "HTML" Elementor
-   ├─ 01-hero.html
-   ├─ 02-menu-favorit.html
-   ├─ 03-keunggulan.html
-   ├─ 04-testimoni.html
-   └─ 05-cta-reservasi.html
+└─ sections/              # 6 blok siap tempel ke widget "HTML" Elementor
+   ├─ 01-hero.html          # hero gelap + headline serif + foto besar
+   ├─ 02-menu-hidangan.html # daftar menu (kiri) + foto (kanan)
+   ├─ 03-menu-bakar.html    # foto (kiri) + daftar menu (kanan)
+   ├─ 04-review.html        # Customer Review (kartu gelap)
+   ├─ 05-kabar.html         # Kabar & Promo (3 kartu)
+   └─ 06-reservasi.html     # CTA reservasi (gelap)
 ```
 
 **Mulai cepat:** buka `wordpress/PREVIEW.html` di browser untuk melihat hasilnya,
