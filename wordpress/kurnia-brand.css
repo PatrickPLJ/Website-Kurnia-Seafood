@@ -1,0 +1,147 @@
+/* =================================================================
+   KURNIA SEAFOOD — Brand Polish CSS  (untuk WordPress + Elementor)
+   "The Happiest Seafood Time" · ceria · ramah · premium
+   -----------------------------------------------------------------
+   Cara pakai (pilih salah satu):
+   • Elementor  : Site Settings → Custom CSS  (paling rapi)
+   • Tema klasik: Appearance → Customize → Additional CSS
+   • Child theme: enqueue file ini
+
+   CATATAN: ini hanya MEMPERCANTIK elemen yang sudah ada (judul,
+   tombol, link, form). Warna & font mengikuti brand guideline resmi.
+   Logo TIDAK diatur di sini — pasang lewat Elementor.
+   ================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  /* Palet brand resmi */
+  --ks-red:        #D80000;  /* 30% — aksen / CTA            */
+  --ks-red-dark:   #B40000;
+  --ks-blue:       #0056AC;  /* 50% — warna dominan          */
+  --ks-blue-dark:  #023E7D;
+  --ks-blue-soft:  #E7F0FB;  /* tint biru untuk background lembut */
+  --ks-grey:       #929497;  /* 10% — teks redup / garis     */
+  --ks-mist:       #F4F4F4;  /* 10% — background section terang */
+  --ks-white:      #FFFFFF;  /* utamakan putih (guideline)   */
+  --ks-ink:        #14263D;  /* teks utama (navy gelap, kontras di putih) */
+
+  /* Tipografi resmi */
+  --ks-font-head:  'Alexandria', system-ui, sans-serif;  /* headline & sub */
+  --ks-font-body:  'Crimson Pro', Georgia, serif;        /* body, sub, kutipan */
+
+  /* Detail premium */
+  --ks-radius:     18px;
+  --ks-radius-lg:  26px;
+  --ks-shadow:     0 12px 30px -12px rgba(0,86,172,.28);
+  --ks-shadow-sm:  0 6px 18px -8px rgba(20,38,61,.20);
+  --ks-ease:       cubic-bezier(.2,.7,.2,1);
+}
+
+/* ---- Tipografi dasar ------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.elementor-heading-title {
+  font-family: var(--ks-font-head) !important;
+  font-weight: 800;
+  color: var(--ks-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+}
+h3, h4, h5, h6, .elementor-heading-title.is-sub { font-weight: 700; }
+
+body, p, li,
+.elementor-widget-text-editor,
+.elementor-widget-text-editor p {
+  font-family: var(--ks-font-body);
+  font-size: 1.075rem;
+  line-height: 1.7;
+  color: var(--ks-ink);
+}
+
+::selection { background: var(--ks-red); color: #fff; }
+
+a { color: var(--ks-blue); transition: color .2s var(--ks-ease); }
+a:hover { color: var(--ks-red); }
+
+/* ---- Tombol (Elementor + tombol tema umum) --------------------- */
+.elementor-button,
+.wp-element-button,
+.wp-block-button__link,
+button.btn, .btn {
+  font-family: var(--ks-font-head) !important;
+  font-weight: 700 !important;
+  letter-spacing: .01em;
+  border-radius: 999px !important;
+  padding: .85em 1.9em !important;
+  border: 2px solid transparent !important;
+  transition: transform .18s var(--ks-ease), box-shadow .25s var(--ks-ease),
+              background-color .2s var(--ks-ease), color .2s var(--ks-ease) !important;
+  box-shadow: var(--ks-shadow-sm);
+}
+.elementor-button:hover,
+.wp-element-button:hover,
+.wp-block-button__link:hover,
+button.btn:hover, .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ks-shadow);
+}
+
+/* Tombol utama = merah (CTA). Tambahkan class "is-primary" bila perlu */
+.elementor-button.is-primary,
+.elementor-button-danger,
+.wp-block-button.is-primary .wp-block-button__link {
+  background-color: var(--ks-red) !important;
+  color: #fff !important;
+}
+.elementor-button.is-primary:hover { background-color: var(--ks-red-dark) !important; }
+
+/* Tombol sekunder = biru garis */
+.elementor-button.is-outline,
+.wp-block-button.is-style-outline .wp-block-button__link {
+  background: transparent !important;
+  color: var(--ks-blue) !important;
+  border-color: var(--ks-blue) !important;
+}
+.elementor-button.is-outline:hover {
+  background: var(--ks-blue) !important; color: #fff !important;
+}
+
+/* ---- Helper background section --------------------------------- */
+.ks-bg-white { background: var(--ks-white) !important; }
+.ks-bg-mist  { background: var(--ks-mist)  !important; }
+.ks-bg-soft  { background: var(--ks-blue-soft) !important; }
+.ks-bg-blue  { background: var(--ks-blue)  !important; color:#fff !important; }
+.ks-bg-blue h1,.ks-bg-blue h2,.ks-bg-blue h3,.ks-bg-blue p { color:#fff !important; }
+
+/* ---- Aksen kecil ----------------------------------------------- */
+.ks-text-red  { color: var(--ks-red)  !important; }
+.ks-text-blue { color: var(--ks-blue) !important; }
+.ks-underline { box-shadow: inset 0 -.35em 0 rgba(216,0,0,.18); }
+
+/* Sudut & bayangan premium untuk gambar/kartu */
+.elementor-widget-image img,
+.ks-rounded { border-radius: var(--ks-radius); }
+.ks-card, .ks-shadow { border-radius: var(--ks-radius-lg); box-shadow: var(--ks-shadow); }
+
+/* ---- Form (kontak / reservasi) -------------------------------- */
+input:not([type=submit]):not([type=button]),
+select, textarea,
+.elementor-field-group .elementor-field {
+  border-radius: 12px !important;
+  border: 1.5px solid #e4e7ec !important;
+  padding: .8em 1em !important;
+  font-family: var(--ks-font-body) !important;
+  transition: border-color .2s var(--ks-ease), box-shadow .2s var(--ks-ease);
+}
+input:focus, select:focus, textarea:focus,
+.elementor-field:focus {
+  outline: none !important;
+  border-color: var(--ks-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0,86,172,.15) !important;
+}
+
+/* ---- Aksesibilitas & gerak ------------------------------------ */
+:focus-visible { outline: 3px solid rgba(0,86,172,.45); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

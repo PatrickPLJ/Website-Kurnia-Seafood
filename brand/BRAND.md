@@ -1,53 +1,51 @@
 # Kurnia Seafood — Panduan Brand (Ringkas)
 
-Arah desain redesign: **restoran seafood premium** yang berkelas, mewah, dan
-memorable. Konsep visual: *"Refined nautical editorial"* — atmosfer biru laut
-dalam, kertas gading hangat, dan **ilustrasi line-art gaya blueprint** sebagai
-elemen khas (tanda tangan visual yang membuat brand mudah diingat).
+Berdasarkan **Brand Guidelines of Kurnia Seafood (2023©)** resmi.
+Tagline: **"The Happiest Seafood Time!"** — brand restoran seafood keluarga
+yang **ceria, ramah, dan hangat**. Untuk website, nuansa ini dinaikkan kelasnya
+menjadi **ceria + premium**: cerah, bersih, banyak ruang, tetap fun.
 
-## Palet Warna
+## Palet Warna Resmi
 
-Mengikuti guideline brand (proporsi penggunaan):
+Latar utama **selalu putih** bila memungkinkan (sesuai guideline).
 
-| Peran | Hex | Proporsi | Penggunaan |
-|-------|-----|----------|------------|
-| Biru utama | `#0056AC` | 50% | Warna dominan, aksen elegan, link, ilustrasi |
-| Merah | `#D80000` | 30% | Aksen "permata" — CTA, highlight, garis bawah |
-| Abu-abu | `#929497` | 10% | Teks sekunder, garis halus, metadata |
-| Latar terang | `#F4F4F4` | 10% | Background section terang |
+| Peran | Hex | Proporsi |
+|-------|-----|----------|
+| Biru | `#0056AC` | 50% — warna dominan |
+| Merah | `#D80000` | 30% — aksen / CTA |
+| Abu-abu | `#929497` | 10% — teks redup / garis |
+| Latar terang | `#F4F4F4` | 10% — background section |
+| Putih | `#FFFFFF` | latar utama (diutamakan) |
 
-Warna turunan yang dipakai untuk kedalaman/mewah (tetap dalam semangat palet):
+Turunan untuk web: `#14263D` (teks utama, kontras di putih), `#E7F0FB` (tint
+biru untuk background lembut).
 
-| Token | Hex | Catatan |
-|-------|-----|---------|
-| `ink` (navy dalam) | `#04223F` | Background section gelap (shade dari biru utama) |
-| `ink-900` | `#021526` | Navy paling gelap (footer, announcement bar) |
-| `brand-200` | `#9CC3EA` | Biru muda untuk garis blueprint & aksen di atas navy |
-| `paper` | `#F8F7F2` | Putih gading hangat (kemewahan halus, ≈ `#F4F4F4`) |
+## Tipografi Resmi
 
-## Tipografi
+| Font | Penggunaan |
+|------|------------|
+| **Alexandria** (sans) | Headline & Sub-headline saja |
+| **Crimson Pro** (serif) | Headline, Sub-headline, **dan** Body copy |
 
-| Peran | Font | Catatan |
-|-------|------|---------|
-| Display / Heading | **Fraunces** | Serif editorial high-contrast, ada italic — terasa mewah & berkarakter |
-| Body / UI | **Hanken Grotesk** | Sans bersih, hangat, mudah dibaca |
-| Label / kicker | Hanken Grotesk | UPPERCASE, letter-spacing lebar (`0.32em`) |
+Pada web kit: **Alexandria** untuk judul/tombol (tegas, ramah), **Crimson Pro**
+untuk body & kutipan (hangat, sedikit premium). Keduanya ada di Google Fonts.
 
-## Motif Khas: Blueprint Line-Art
+## Logo
 
-Ilustrasi seafood satu-warna bergaya gambar teknik (ikan, udang/lobster, kerang
-scallop, ombak) dengan stroke tipis biru muda di atas navy + grid blueprint.
-Dipakai di hero, kartu filosofi ("Pl. 01 — Anatomi Kesegaran"), dan ikon fitur.
-Seluruhnya **SVG buatan tangan** (bukan gambar eksternal) sehingga tajam,
-ringan, dan tidak pernah "rusak".
+Logo resmi = wordmark "Kurnia Seafood" + maskot **kepiting kartun** + pita
+"THE HAPPIEST SEAFOOD TIME!". Colorway hanya seperti aslinya; di atas background
+berwarna gunakan versi full putih / merah-putih (pastikan kontras dengan merah).
 
-## Prinsip
+> **Logo TIDAK direplikasi di kode.** Dipasang langsung lewat Elementor dari file
+> logo terpisah yang disediakan.
 
-- Biru dominan, merah hanya sebagai aksen tunggal yang berani.
-- Banyak ruang napas (negative space), tipografi besar & tenang.
-- Animasi halus & bermakna (reveal saat scroll, drift pada ilustrasi),
-  menghormati `prefers-reduced-motion`.
-- Aksesibilitas: kontras cukup, label form, focus ring, alt text.
+## Tone Visual Web (ceria + premium)
 
-> Sumber awal palet & motif: `brand/screenshot_design_notes.md` (dari screenshot
-> brand guideline yang dilampirkan).
+- Biru dominan + putih bersih; **merah hanya untuk aksen penting** (tombol pesan,
+  highlight kata).
+- Sudut membulat, bayangan lembut, ruang napas cukup → kesan premium.
+- Sentuhan ceria: badge, pembatas ombak, titik gelembung, hover yang "memantul".
+- Aksesibel: kontras cukup, focus ring, hormati `prefers-reduced-motion`.
+
+> Sumber: `brand/screenshot_design_notes.md` (catatan awal) dan guidelines resmi
+> yang dikirim pengguna (Crimson Pro + Alexandria, palet 30/50/10/10).

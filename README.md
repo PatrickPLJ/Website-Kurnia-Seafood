@@ -1,85 +1,43 @@
-# Kurnia Seafood — Website Redesign
+# Kurnia Seafood — Web Visual Kit
 
-Redesign konsep website **Kurnia Seafood** sebagai restoran seafood **premium,
-mewah, dan memorable**. Dibangun dengan arah desain *"Refined nautical
-editorial"*: biru laut dalam, kertas gading hangat, ilustrasi **blueprint
-line-art** seafood, font **Fraunces** + **Hanken Grotesk**, dengan merah brand
-sebagai aksen tunggal yang berani.
+Mempercantik tampilan website **Kurnia Seafood** agar lebih menarik bagi calon
+pelanggan, mengikuti **brand guideline resmi** (tagline *"The Happiest Seafood
+Time!"*) dengan nuansa **ceria, ramah, dan premium**.
 
-Lihat panduan brand di [`brand/BRAND.md`](brand/BRAND.md).
+Brand: biru `#0056AC` dominan · merah `#D80000` aksen · latar putih ·
+font **Alexandria** + **Crimson Pro**. Detail di [`brand/BRAND.md`](brand/BRAND.md).
 
-## Dua versi (sesuai permintaan)
+---
 
-Landing page yang sama diimplementasikan dalam **dua stack** agar bisa
-dibandingkan:
+## 👉 Deliverable aktif: `wordpress/` (WordPress + Elementor)
 
-### 1. `html-tailwind/` — Static HTML + Tailwind
-Satu file `index.html` yang langsung bisa dibuka di browser (Tailwind via Play
-CDN + Google Fonts). Paling cepat untuk preview & deploy ke hosting statis
-apa pun.
+Website tetap di **WordPress**; kit ini hanya mempercantik visualnya — **tanpa
+ganti platform**.
 
-```bash
-# Buka langsung
-open html-tailwind/index.html        # macOS
-xdg-open html-tailwind/index.html    # Linux
-
-# atau jalankan server statis
-npx serve html-tailwind
+```
+wordpress/
+├─ PANDUAN-ELEMENTOR.md   # langkah pasang (BACA INI DULU)
+├─ kurnia-brand.css       # gaya global: warna, font, tombol, form
+├─ PREVIEW.html           # buka di browser untuk lihat hasil semua section
+└─ sections/              # 5 blok siap tempel ke widget "HTML" Elementor
+   ├─ 01-hero.html
+   ├─ 02-menu-favorit.html
+   ├─ 03-keunggulan.html
+   ├─ 04-testimoni.html
+   └─ 05-cta-reservasi.html
 ```
 
-> Catatan: Tailwind Play CDN ditujukan untuk prototipe. Untuk produksi, gunakan
-> versi Next.js (Tailwind sudah dikompilasi) atau build Tailwind secara lokal.
+**Mulai cepat:** buka `wordpress/PREVIEW.html` di browser untuk melihat hasilnya,
+lalu ikuti `wordpress/PANDUAN-ELEMENTOR.md` untuk memasangnya.
 
-### 2. `nextjs/` — Next.js 14 + React + Tailwind (production-grade)
-Versi terstruktur dengan komponen, `next/font` (font self-hosted), dan Tailwind
-yang dikompilasi. Cocok untuk dikembangkan lebih lanjut (CMS, form reservasi
-nyata, halaman tambahan).
+> Logo **tidak** dimasukkan ke kode — dipasang langsung lewat Elementor dari file
+> logo terpisah.
 
-```bash
-cd nextjs
-npm install
-npm run dev      # http://localhost:3000
-# produksi:
-npm run build && npm run start
-```
+---
 
-Struktur:
-```
-nextjs/
-├─ app/
-│  ├─ layout.tsx      # font (Fraunces + Hanken Grotesk), metadata
-│  ├─ page.tsx        # menyusun seluruh section
-│  └─ globals.css     # Tailwind + util kustom (grain, reveal, underline)
-├─ components/
-│  ├─ Header.tsx      # nav (transparan→solid saat scroll, menu mobile)
-│  ├─ Hero.tsx        # hero + ilustrasi blueprint melayang
-│  ├─ Marquee.tsx     # strip berjalan nama hidangan
-│  ├─ Philosophy.tsx  # cerita + kartu blueprint "Anatomi Kesegaran"
-│  ├─ Menu.tsx        # 6 hidangan signature
-│  ├─ Experience.tsx  # galeri suasana (foto + fallback gradient)
-│  ├─ Features.tsx    # 4 keunggulan + ikon line-art
-│  ├─ Testimonial.tsx # kutipan + badge ulasan
-│  ├─ Reservation.tsx # form reservasi (demo) + kontak
-│  ├─ Footer.tsx
-│  ├─ Reveal.tsx      # animasi reveal saat scroll (hormati reduced-motion)
-│  └─ Logo.tsx        # monogram + wordmark
-└─ tailwind.config.ts # token warna & font brand
-```
+## Arsip: prototipe awal (tidak dipakai)
 
-## Section landing page
-Hero → Marquee → Filosofi → Hidangan Signature → Pengalaman → Mengapa Kurnia →
-Testimoni → Reservasi → Footer.
-
-## Catatan
-- **Foto suasana** memakai Unsplash dengan *fallback* gradient — jika gambar
-  gagal dimuat, blok tetap terlihat sengaja didesain. Ganti dengan foto asli
-  Kurnia Seafood saat tersedia.
-- **Form reservasi** masih demo (belum terhubung backend).
-- Teks (alamat, telp, harga, jam) adalah **placeholder** — mohon sesuaikan
-  dengan data asli.
-- Aksesibilitas: skip-link, label form, focus ring, alt text, dukungan
-  `prefers-reduced-motion`.
-
-## Status
-Tahap pertama: **landing page** (bisnis: restoran). Berikutnya bisa dilanjut ke
-halaman Menu lengkap, Tentang Kami, Galeri, dan integrasi reservasi.
+Folder `html-tailwind/` dan `nextjs/` adalah eksplorasi **arah pertama** (konsep
+"luxury navy", standalone). Setelah arah final ditetapkan (**tetap WordPress** +
+brand resmi yang ceria), keduanya **tidak lagi dipakai** dan hanya disimpan
+sebagai referensi. Boleh dihapus kapan saja.

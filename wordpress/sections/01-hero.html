@@ -1,0 +1,150 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · SECTION HERO
+     Tempel di Elementor: widget "HTML" (kosongkan padding section).
+     Ganti teks, tombol (href), dan area foto sesuai kebutuhan.
+     ============================================================ -->
+<section class="ks-hero">
+  <div class="ks-hero__bg" aria-hidden="true"></div>
+
+  <div class="ks-hero__inner">
+    <div class="ks-hero__copy">
+      <span class="ks-badge">★ 4.9 · Favorit keluarga sejak 1998</span>
+
+      <h1 class="ks-hero__title">
+        Waktu Seafood Paling
+        <span class="ks-hl">Bahagia</span><br>
+        Bareng Keluarga.
+      </h1>
+
+      <p class="ks-hero__sub">
+        Tangkapan segar setiap hari, diolah dengan bumbu istimewa khas Nusantara.
+        Suasana hangat, porsi puas, rasa juara — <em>the happiest seafood time!</em>
+      </p>
+
+      <div class="ks-hero__cta">
+        <a href="#reservasi" class="ks-btn ks-btn--red">Pesan Tempat</a>
+        <a href="#menu" class="ks-btn ks-btn--ghost">Lihat Menu</a>
+      </div>
+
+      <ul class="ks-hero__trust">
+        <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg> Segar tiap hari</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg> Ramah keluarga</li>
+        <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4 10-10"/></svg> Harga bersahabat</li>
+      </ul>
+    </div>
+
+    <div class="ks-hero__visual">
+      <!-- GANTI dengan foto hidangan terbaikmu (Elementor: ganti src) -->
+      <div class="ks-hero__photo">
+        <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=900&q=70"
+             alt="Sajian seafood Kurnia Seafood" loading="lazy"
+             onerror="this.style.display='none'">
+        <span class="ks-hero__photo-note">Letakkan foto hidangan terbaik di sini</span>
+      </div>
+      <div class="ks-float ks-float--a">🔥 Best Seller<small>Kepiting Saus Padang</small></div>
+      <div class="ks-float ks-float--b">Mulai<strong>Rp 35K</strong></div>
+    </div>
+  </div>
+
+  <!-- pembatas ombak -->
+  <svg class="ks-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 50 C 240 90 480 10 720 40 C 960 70 1200 20 1440 50 L1440 90 L0 90 Z"></path>
+  </svg>
+
+  <style>
+  .ks-hero{
+    --blue:#0056AC; --blue-dark:#023E7D; --red:#D80000; --red-dark:#B40000;
+    --ink:#14263D; --grey:#929497; --soft:#E7F0FB;
+    --fh:'Alexandria',system-ui,sans-serif; --fb:'Crimson Pro',Georgia,serif;
+    position:relative; overflow:hidden; background:#fff; isolation:isolate;
+    font-family:var(--fb); padding:clamp(28px,6vw,72px) 20px 90px;
+  }
+  .ks-hero__bg{
+    position:absolute; inset:0; z-index:-1;
+    background:
+      radial-gradient(520px 420px at 88% -8%, var(--soft), transparent 70%),
+      radial-gradient(420px 360px at -6% 18%, #FDEAEA, transparent 70%);
+  }
+  .ks-hero__bg::after{ /* bubble dots */
+    content:""; position:absolute; inset:0; opacity:.5;
+    background-image:radial-gradient(rgba(0,86,172,.10) 2px, transparent 2.5px);
+    background-size:30px 30px; -webkit-mask-image:linear-gradient(transparent,#000 40%,transparent);
+            mask-image:linear-gradient(transparent,#000 40%,transparent);
+  }
+  .ks-hero__inner{
+    max-width:1140px; margin:0 auto; display:grid; gap:clamp(28px,4vw,56px);
+    grid-template-columns:1.05fr .95fr; align-items:center;
+  }
+  .ks-badge{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--fh);
+    font-weight:600; font-size:13.5px; color:var(--blue);
+    background:#fff; border:1.5px solid var(--soft); box-shadow:0 6px 18px -10px rgba(0,86,172,.4);
+    padding:8px 16px; border-radius:999px;
+  }
+  .ks-hero__title{
+    font-family:var(--fh); font-weight:800; color:var(--ink);
+    font-size:clamp(2.1rem,5.2vw,3.7rem); line-height:1.05; letter-spacing:-.02em;
+    margin:18px 0 0;
+  }
+  .ks-hl{ position:relative; color:var(--red); white-space:nowrap; }
+  .ks-hl::after{ content:""; position:absolute; left:-2%; right:-2%; bottom:.08em; height:.34em;
+    background:rgba(216,0,0,.16); border-radius:6px; z-index:-1; }
+  .ks-hero__sub{
+    max-width:33ch; margin:18px 0 0; font-size:clamp(1.05rem,1.6vw,1.22rem);
+    line-height:1.65; color:#3c4a5c;
+  }
+  .ks-hero__sub em{ color:var(--blue); font-style:italic; }
+  .ks-hero__cta{ display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+  .ks-btn{
+    font-family:var(--fh); font-weight:700; font-size:15.5px; text-decoration:none;
+    padding:14px 30px; border-radius:999px; border:2px solid transparent;
+    display:inline-flex; align-items:center; transition:transform .18s, box-shadow .25s, background .2s, color .2s;
+  }
+  .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 14px 26px -12px rgba(216,0,0,.6); }
+  .ks-btn--red:hover{ background:var(--red-dark); transform:translateY(-2px); }
+  .ks-btn--ghost{ background:#fff; color:var(--blue); border-color:var(--blue); }
+  .ks-btn--ghost:hover{ background:var(--blue); color:#fff; transform:translateY(-2px); }
+  .ks-hero__trust{
+    list-style:none; padding:0; margin:26px 0 0; display:flex; flex-wrap:wrap; gap:18px;
+    font-family:var(--fh); font-weight:500; font-size:14px; color:#46556a;
+  }
+  .ks-hero__trust li{ display:inline-flex; align-items:center; gap:7px; }
+  .ks-hero__trust svg{ width:18px; height:18px; fill:none; stroke:var(--blue); stroke-width:3;
+    stroke-linecap:round; stroke-linejoin:round;
+    background:var(--soft); border-radius:50%; padding:3px; }
+
+  /* visual */
+  .ks-hero__visual{ position:relative; }
+  .ks-hero__photo{
+    position:relative; aspect-ratio:4/3.4; border-radius:26px; overflow:hidden;
+    background:linear-gradient(135deg,#0056AC,#3D86D6); display:grid; place-items:center;
+    box-shadow:0 30px 60px -24px rgba(0,86,172,.55); border:6px solid #fff;
+  }
+  .ks-hero__photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .ks-hero__photo-note{ position:relative; color:#fff; font-family:var(--fh); font-weight:600;
+    font-size:14px; opacity:.85; padding:0 20px; text-align:center; }
+  .ks-float{
+    position:absolute; background:#fff; border-radius:16px; padding:12px 16px;
+    font-family:var(--fh); font-weight:700; font-size:14px; color:var(--ink);
+    box-shadow:0 18px 36px -16px rgba(20,38,61,.45); display:flex; flex-direction:column; line-height:1.25;
+    animation:ksFloat 5s ease-in-out infinite;
+  }
+  .ks-float small{ font-weight:500; color:var(--grey); font-size:12px; }
+  .ks-float strong{ color:var(--red); font-size:20px; }
+  .ks-float--a{ left:-14px; top:18%; }
+  .ks-float--b{ right:-10px; bottom:14%; animation-delay:1.2s; }
+  @keyframes ksFloat{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-9px) } }
+
+  .ks-wave{ position:absolute; left:0; right:0; bottom:-1px; width:100%; height:80px; }
+  .ks-wave path{ fill:#fff; }
+  .ks-hero + *{ position:relative; }
+
+  @media (max-width:860px){
+    .ks-hero__inner{ grid-template-columns:1fr; text-align:center; }
+    .ks-hero__sub{ margin-left:auto; margin-right:auto; }
+    .ks-hero__cta,.ks-hero__trust{ justify-content:center; }
+    .ks-hero__visual{ max-width:420px; margin:8px auto 0; }
+  }
+  @media (prefers-reduced-motion: reduce){ .ks-float{ animation:none; } }
+  </style>
+</section>
