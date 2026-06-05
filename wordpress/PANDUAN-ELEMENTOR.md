@@ -7,13 +7,15 @@ foto, kartu ulasan gelap). Hijau→**navy biru brand**, oranye→**merah brand**
 
 Isi folder `wordpress/`:
 - `kurnia-brand.css` — gaya global (warna + font + tombol + form).
-- `sections/` — 6 blok section siap tempel:
+- `sections/` — 8 blok section siap tempel:
   1. `01-hero.html` — hero gelap + headline serif + foto besar
   2. `02-menu-hidangan.html` — daftar menu (kiri) + foto (kanan)
   3. `03-menu-bakar.html` — foto (kiri) + daftar menu (kanan)
   4. `04-review.html` — **Customer Review** (kartu gelap, pengganti "Our Mission")
   5. `05-kabar.html` — Kabar & Promo (3 kartu)
   6. `06-reservasi.html` — CTA reservasi (gelap, penutup)
+  7. `07-tentang.html` — Tentang Kami (foto + cerita + statistik)
+  8. `08-galeri.html` — Galeri foto (grid premium)
 - `PREVIEW.html` — buka di browser untuk melihat hasilnya sebelum dipasang.
 
 > **Logo:** sengaja TIDAK dimasukkan ke kode. Pasang logo kamu (file terpisah)
@@ -75,7 +77,9 @@ Untuk tiap file di `sections/`:
    dalam blok, jadi aman walau tema berbeda).
 
 Urutan yang disarankan untuk homepage:
-`01-hero` → `02-menu-hidangan` → `03-menu-bakar` → `04-review` → `05-kabar` → `06-reservasi`.
+`01-hero` → `07-tentang` → `02-menu-hidangan` → `03-menu-bakar` → `08-galeri`
+→ `04-review` → `05-kabar` → `06-reservasi`.
+(Nomor file ≠ urutan tampil — ikuti urutan di atas.)
 
 > **Navbar di hero:** blok `01-hero.html` memuat navbar opsional. Kalau tema
 > WordPress kamu sudah menampilkan header sendiri, **hapus bagian
