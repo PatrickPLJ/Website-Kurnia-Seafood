@@ -7,21 +7,24 @@ foto, kartu ulasan gelap). Hijau→**navy biru brand**, oranye→**merah brand**
 
 Isi folder `wordpress/`:
 - `kurnia-brand.css` — gaya global (warna + font + tombol + form).
-- `data/branches.js` — **sumber data tunggal cabang** (WA, alamat, jam, fasilitas).
-  Tempel SEKALI sebelum section Reservasi & Cabang (lihat Langkah 4c).
-- `sections/` — 11 blok section siap tempel:
-  1. `01-hero.html` — hero gelap + headline serif + foto besar
-  2. `02-menu-hidangan.html` — daftar menu (kiri) + foto (kanan)
-  3. `03-menu-bakar.html` — foto (kiri) + daftar menu (kanan)
-  4. `04-review.html` — **Customer Review** (kartu gelap, pengganti "Our Mission")
-  5. `05-kabar.html` — Kabar & Promo (3 kartu)
-  6. `06-reservasi.html` — **Reservasi 3-langkah** + branch selector → WA cabang yang benar
-  7. `07-tentang.html` — Tentang Kami + **3 Core Value** (blok permanen)
-  8. `08-galeri.html` — Galeri foto (grid premium)
-  9. `09-footer.html` — Footer navy (peta, jam, sosial, kontak)
-  10. `10-faq.html` — FAQ (accordion)
-  11. `11-cabang.html` — **Cabang** (tab switcher 5 kota, info & fasilitas unik per kota)
+- `data/` — **sumber data tunggal** (tempel SEKALI sebelum section terkait, Langkah 4c):
+  `branches.js` (cabang aktif + upcoming), `menu.js` (New Menu + Signature), `promos.js` (Spotlight).
+- `sections/` — 13 blok section siap tempel:
+  1. `01-hero.html` — hero + **carousel foto background** (auto-rotate) + CTA
+  2. `12-spotlight.html` — **Spotlight terbaru** (promo/menu/campaign; auto-hide bila kosong)
+  3. `13-new-menu.html` — **New Menu** (image-forward, tanpa harga)
+  4. `14-signature.html` — **Signature/Hero Menus** (image-forward, gelap)
+  5. `15-locations.html` — **Locations** (5 cabang aktif + "Segera Hadir")
+  6. `07-tentang.html` — Tentang Kami + 3 Core Value
+  7. `11-cabang.html` — Cabang (tab switcher detail per kota)
+  8. `08-galeri.html` — Galeri foto
+  9. `04-review.html` — Customer Review (kartu gelap)
+  10. `05-kabar.html` — Kabar & Promo (3 kartu)
+  11. `10-faq.html` — FAQ (accordion)
+  12. `06-reservasi.html` — Reservasi 3-langkah + branch selector → WA cabang yang benar
+  13. `09-footer.html` — Footer navy (peta, jam, sosial, kontak)
 - `ks-reveal.html` — **animasi reveal** (tempel SEKALI di bawah halaman).
+- `PLACEHOLDERS.md` — daftar foto placeholder yang harus diganti foto resmi.
 - `PREVIEW.html` — buka di browser untuk melihat hasilnya sebelum dipasang.
 
 > **Logo:** sengaja TIDAK dimasukkan ke kode. Pasang logo kamu (file terpisah)
@@ -83,25 +86,28 @@ Untuk tiap file di `sections/`:
    dalam blok, jadi aman walau tema berbeda).
 
 Urutan yang disarankan untuk homepage:
-`01-hero` → `07-tentang` → `02-menu-hidangan` → `03-menu-bakar` → `08-galeri`
-→ `11-cabang` → `04-review` → `05-kabar` → `10-faq` → `06-reservasi` → `09-footer`.
+`01-hero` → `12-spotlight` → `13-new-menu` → `14-signature` → `15-locations`
+→ `07-tentang` → `11-cabang` → `08-galeri` → `04-review` → `05-kabar`
+→ `10-faq` → `06-reservasi` → `09-footer`.
 (Nomor file ≠ urutan tampil — ikuti urutan di atas. Footer paling bawah.)
-> Halaman Cabang & Reservasi bisa juga dipisah ke halaman tersendiri — yang
-> penting `data/branches.js` dimuat di halaman itu (Langkah 4c).
 
-## Langkah 4c — Pasang data cabang (untuk Reservasi & Cabang)
+## Langkah 4c — Pasang data (untuk Spotlight, New Menu, Signature, Locations, Cabang, Reservasi)
 
-Section **Reservasi** (`06`) & **Cabang** (`11`) membaca data dari
-`data/branches.js` (nomor WA, alamat, jam, fasilitas tiap cabang).
-- Buka `data/branches.js`, bungkus isinya dalam `<script> … </script>`, lalu
-  tempel **SEKALI** sebelum kedua section itu — mis. widget **HTML** di atas
-  halaman, atau via **Custom Code (Header)** Elementor Pro / enqueue di
-  child theme.
-- Ubah data cukup di **satu file ini** (jangan tulis ulang nomor di banyak
-  tempat). **Nomor WA Bandung sudah fix** `6281372405758`.
-- Item `verify:true` = data dari sumber pihak ketiga → muncul peringatan di
-  **console browser** sebagai pengingat tim untuk dikonfirmasi (tidak tampil
-  ke pengunjung).
+Section di atas membaca dari file data (sumber tunggal). Bungkus isi tiap file
+dalam `<script> … </script>` dan tempel **SEKALI** sebelum section terkait
+(mis. Custom Code Header Elementor Pro, atau widget HTML paling atas):
+- `data/branches.js` — Locations, Cabang, Reservasi (cabang aktif + upcoming).
+- `data/menu.js` — New Menu & Signature.
+- `data/promos.js` — Spotlight terbaru.
+
+Catatan:
+- Ubah data cukup di file-file ini (jangan tulis ulang di markup).
+  **Nomor WA Bandung sudah fix** `6281372405758`.
+- Cabang **upcoming** (`status:"upcoming"`) hanya tampil di "Segera Hadir" —
+  tanpa reservasi/peta/schema sampai benar-benar buka.
+- Item `verify:true` & foto `placeholder` → muncul peringatan di **console
+  browser** sebagai pengingat tim (tidak tampil ke pengunjung). Lihat
+  `PLACEHOLDERS.md` untuk daftar foto yang perlu diganti.
 
 ## Langkah 4b — Aktifkan Animasi Reveal (dramatis)
 

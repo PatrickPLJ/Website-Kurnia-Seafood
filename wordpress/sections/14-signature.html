@@ -1,0 +1,56 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · SIGNATURE / HERO MENUS (image-forward, TANPA harga)
+     Render dari window.KS_MENU (item signature:true). Section gelap premium.
+     Foto = placeholder bertanda. PRASYARAT: data/menu.js dimuat sebelum ini.
+     ============================================================ -->
+<section class="ks-sig" id="signature">
+  <div class="ks-sig__inner">
+    <header class="ks-sig__head">
+      <span class="ks-kicker">Menu Andalan</span>
+      <h2 class="ks-sig__title">Signature Kurnia</h2>
+      <p class="ks-sig__sub">Hidangan yang membuat tamu kembali lagi &amp; lagi.</p>
+    </header>
+    <!-- TODO: ganti dengan foto resmi Kurnia (hak cipta) -->
+    <div class="ks-sig__grid"></div>
+  </div>
+
+  <style>
+  .ks-sig{
+    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --muted:rgba(246,241,231,.66);
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 62%);
+    color:var(--cream); font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
+  }
+  .ks-sig__inner{ max-width:1140px; margin:0 auto; }
+  .ks-sig__head{ text-align:center; margin-bottom:42px; }
+  .ks-kicker{ font-family:var(--fl); font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; }
+  .ks-sig__title{ font-family:var(--fh); font-weight:500; color:var(--cream); font-size:clamp(2rem,4.4vw,3.2rem); margin:10px 0 0; letter-spacing:-.01em; }
+  .ks-sig__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); margin:12px 0 0; }
+  .ks-sig__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .ks-sig__card{ position:relative; aspect-ratio:3/4; border-radius:20px; overflow:hidden;
+    background:linear-gradient(135deg,#06304F,#0a3c63); border:1px solid rgba(246,241,231,.12); }
+  .ks-sig__card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .ks-sig__card:hover img{ transform:scale(1.06); }
+  .ks-sig__card::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(3,24,47,.92) 8%, rgba(3,24,47,.15) 55%, transparent); }
+  .ks-sig__name{ position:absolute; z-index:1; left:18px; right:18px; bottom:18px; font-family:var(--fh); font-weight:600; font-size:1.3rem; line-height:1.2; color:#fff; }
+  @media (max-width:900px){ .ks-sig__grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .ks-sig__grid{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ .ks-sig__card:hover img{ transform:none; } }
+  </style>
+
+  <script>
+  (function () {
+    var root = document.getElementById('signature');
+    var grid = root.querySelector('.ks-sig__grid');
+    var items = (window.KS_MENU || []).filter(function (m) { return m.signature; });
+    if (!items.length) { root.remove(); return; }
+    function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
+    grid.innerHTML = items.map(function (m) {
+      var ph = m.placeholder ? ' data-placeholder="true"' : '';
+      return '<article class="ks-sig__card">' +
+        '<img src="' + esc(m.image) + '" alt="' + esc(m.name) + '" loading="lazy"' + ph + ' onerror="this.style.display=\'none\'">' +
+        '<h3 class="ks-sig__name">' + esc(m.name) + '</h3></article>';
+    }).join('');
+  })();
+  </script>
+</section>

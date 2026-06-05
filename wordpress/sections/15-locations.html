@@ -1,0 +1,105 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · LOCATIONS (cabang aktif ringkas + Segera Hadir)
+     Render dari window.KS_BRANCHES (status active vs upcoming).
+     - Aktif: kartu ringkas + CTA "Lihat detail" (→ section Cabang) & "Reservasi".
+     - Upcoming: Kota · Area · "Segera Hadir — {estimasi}" (tanpa CTA/peta).
+       Bagian Upcoming auto-hide bila tidak ada data.
+     PRASYARAT: data/branches.js dimuat sebelum section ini.
+     ============================================================ -->
+<section class="ks-locs" id="locations">
+  <div class="ks-locs__inner">
+    <header class="ks-locs__head">
+      <span class="ks-kicker ks-kicker--center">Lokasi</span>
+      <h2 class="ks-locs__title">Temukan Kurnia Seafood</h2>
+      <p class="ks-locs__sub">Lima cabang aktif &amp; yang akan segera hadir.</p>
+    </header>
+
+    <div class="ks-locs__grid" id="locsActive"></div>
+
+    <div class="ks-locs__up" id="locsUpcoming" hidden>
+      <h3 class="ks-locs__uptitle"><span>Segera Hadir</span></h3>
+      <div class="ks-locs__upgrid"></div>
+    </div>
+  </div>
+
+  <style>
+  .ks-locs{
+    --navy:#14263D; --red:#D80000; --red-2:#B40000; --blue:#0056AC; --muted:#5d6b7a; --soft:#E7F0FB; --line:#e6e2d8;
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#F8F7F2; font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
+  }
+  .ks-locs__inner{ max-width:1140px; margin:0 auto; }
+  .ks-locs__head{ text-align:center; margin-bottom:38px; }
+  .ks-kicker{ font-family:var(--fl); font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
+  .ks-kicker--center{ display:block; text-align:center; }
+  .ks-locs__title{ font-family:var(--fh); font-weight:600; color:var(--navy); font-size:clamp(2rem,4.2vw,3rem); margin:10px 0 0; letter-spacing:-.01em; }
+  .ks-locs__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); margin:10px 0 0; }
+
+  .ks-locs__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .ks-loc-card{ background:#fff; border:1px solid #eee7da; border-radius:20px; overflow:hidden; box-shadow:0 14px 30px -22px rgba(20,38,61,.35); display:flex; flex-direction:column; }
+  .ks-loc-card__map{ aspect-ratio:16/10; background:linear-gradient(135deg,#0056AC,#5a9be0); }
+  .ks-loc-card__map iframe{ width:100%; height:100%; border:0; display:block; filter:grayscale(.15) contrast(1.03); }
+  .ks-loc-card__body{ padding:18px 20px 20px; display:flex; flex-direction:column; flex:1; }
+  .ks-loc-card__city{ font-family:var(--fl); font-weight:700; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--red); }
+  .ks-loc-card__name{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--navy); margin:4px 0 0; line-height:1.2; }
+  .ks-loc-card__act{ display:flex; gap:10px; margin-top:16px; }
+  .ks-lbtn{ font-family:var(--fl); font-weight:600; font-size:12px; letter-spacing:.06em; cursor:pointer; text-decoration:none; text-align:center; padding:11px 14px; border-radius:10px; border:2px solid transparent; transition:background .2s,color .2s,transform .18s; flex:1; }
+  .ks-lbtn--red{ background:var(--red); color:#fff; } .ks-lbtn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
+  .ks-lbtn--ghost{ background:#fff; color:var(--blue); border-color:var(--blue); } .ks-lbtn--ghost:hover{ background:var(--blue); color:#fff; transform:translateY(-2px); }
+
+  .ks-locs__up{ margin-top:44px; padding-top:34px; border-top:1px dashed #d9d3c4; }
+  .ks-locs__uptitle{ text-align:center; font-family:var(--fl); font-weight:600; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--blue); margin:0 0 22px; }
+  .ks-locs__upgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; max-width:760px; margin:0 auto; }
+  .ks-up-card{ background:#fff; border:1.5px dashed #c9d6e6; border-radius:18px; padding:22px 24px; text-align:center; }
+  .ks-up-card__city{ font-family:var(--fh); font-weight:600; font-size:1.5rem; color:var(--navy); }
+  .ks-up-card__area{ font-family:var(--fl); font-weight:400; font-size:.95rem; color:var(--muted); margin-top:2px; }
+  .ks-up-card__eta{ display:inline-block; margin-top:12px; font-family:var(--fl); font-weight:600; font-size:12px; letter-spacing:.06em; color:#fff; background:var(--blue); padding:7px 16px; border-radius:999px; }
+
+  @media (max-width:900px){ .ks-locs__grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .ks-locs__grid, .ks-locs__upgrid{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ .ks-lbtn:hover{ transform:none; } }
+  </style>
+
+  <script>
+  (function () {
+    var all = window.KS_BRANCHES || [];
+    var esc = function (s){ return String(s||'').replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); };
+
+    // ---- aktif ----
+    var active = all.filter(function (b) { return b.status !== 'upcoming'; });
+    var grid = document.getElementById('locsActive');
+    grid.innerHTML = active.map(function (b) {
+      var map = 'https://www.google.com/maps?q=' + b.geo.lat + ',' + b.geo.lng + '&z=15&output=embed';
+      return '<article class="ks-loc-card">' +
+        '<div class="ks-loc-card__map"><iframe title="Peta ' + esc(b.city) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="' + map + '"></iframe></div>' +
+        '<div class="ks-loc-card__body">' +
+          '<span class="ks-loc-card__city">' + esc(b.city) + '</span>' +
+          '<span class="ks-loc-card__name">' + esc(b.name) + '</span>' +
+          '<div class="ks-loc-card__act">' +
+            '<a class="ks-lbtn ks-lbtn--ghost" href="#cabang" data-slug="' + esc(b.slug) + '" data-act="detail">Lihat detail</a>' +
+            '<a class="ks-lbtn ks-lbtn--red" href="#reservasi" data-slug="' + esc(b.slug) + '" data-act="resv">Reservasi</a>' +
+          '</div>' +
+        '</div></article>';
+    }).join('');
+
+    grid.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-act]'); if (!a) return;
+      var slug = a.getAttribute('data-slug');
+      if (a.getAttribute('data-act') === 'detail' && typeof window.ksCabangSelect === 'function') { window.ksCabangSelect(slug); }
+      if (a.getAttribute('data-act') === 'resv' && typeof window.ksReservasiSelect === 'function') { window.ksReservasiSelect(slug); }
+    });
+
+    // ---- upcoming ----
+    var up = all.filter(function (b) { return b.status === 'upcoming'; });
+    var upWrap = document.getElementById('locsUpcoming');
+    if (up.length) {
+      upWrap.querySelector('.ks-locs__upgrid').innerHTML = up.map(function (b) {
+        var area = b.area ? '<div class="ks-up-card__area">' + esc(b.area) + '</div>' : '';
+        var eta = b.openingEstimate ? '<span class="ks-up-card__eta">Segera Hadir — ' + esc(b.openingEstimate) + '</span>' : '<span class="ks-up-card__eta">Segera Hadir</span>';
+        return '<div class="ks-up-card"><div class="ks-up-card__city">' + esc(b.city) + '</div>' + area + eta + '</div>';
+      }).join('');
+      upWrap.hidden = false;   // tampilkan hanya bila ada upcoming
+    }
+  })();
+  </script>
+</section>

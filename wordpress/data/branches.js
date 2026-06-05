@@ -15,6 +15,7 @@ window.KS_BRANCHES = [
     slug: "yogyakarta",
     city: "Yogyakarta",
     name: "Kurnia Seafood Yogyakarta",
+    status: "active",
     whatsapp: "6285229235758",
     phoneDisplay: "+62 852-2923-5758",
     address: "Jl. Laksda Adisucipto No.48B, Ngentak, Caturtunggal, Kec. Depok, Kab. Sleman, DI Yogyakarta 55281",
@@ -38,6 +39,7 @@ window.KS_BRANCHES = [
     slug: "semarang",
     city: "Semarang",
     name: "Kurnia Seafood Semarang",
+    status: "active",
     whatsapp: "6281339505758",
     phoneDisplay: "+62 813-3950-5758",
     address: "Jl. Kompol Maksum No.300, Peterongan, Kec. Semarang Selatan, Kota Semarang, Jawa Tengah 50242",
@@ -62,6 +64,7 @@ window.KS_BRANCHES = [
     slug: "bandung",
     city: "Bandung",
     name: "Kurnia Seafood Bandung",
+    status: "active",
     whatsapp: "6281372405758",
     phoneDisplay: "+62 813-7240-5758",
     address: "Jl. Prof. Dr. Sutami No.100, Sukarasa, Kec. Sukasari, Kota Bandung, Jawa Barat 40152",
@@ -88,6 +91,7 @@ window.KS_BRANCHES = [
     slug: "bali",
     city: "Bali (Tabanan)",
     name: "Kurnia Seafood Bali",
+    status: "active",
     whatsapp: "6281338555758",
     phoneDisplay: "+62 813-3855-5758",
     address: "Jl. By Pass Tanah Lot, Beraban, Kec. Kediri, Kab. Tabanan, Bali 82121",
@@ -110,6 +114,7 @@ window.KS_BRANCHES = [
     slug: "surabaya",
     city: "Surabaya",
     name: "Kurnia Seafood Surabaya",
+    status: "active",
     whatsapp: "6281385375758",
     phoneDisplay: "+62 813-8537-5758",
     address: "Jl. Kombes Pol. Moh. Duryat No.4, Embong Kaliasin, Kec. Tegalsari, Surabaya, Jawa Timur 60271",
@@ -128,6 +133,27 @@ window.KS_BRANCHES = [
       "Halal"
     ],
     verify: false // sumber: artikel resmi kurniaseafood.co.id
+  },
+
+  // --- UPCOMING (Segera Hadir) — JANGAN dibuatkan schema/halaman cabang penuh sampai benar-benar buka ---
+  // Catatan internal (JANGAN tampil di UI): lokasi bekas resto, referensi tim saja.
+  {
+    slug: "jakarta-pondok-indah",
+    city: "Jakarta",
+    area: "Pondok Indah",
+    name: "Kurnia Seafood Jakarta",
+    status: "upcoming",
+    openingEstimate: "Akhir 2026" // perkiraan — TODO: konfirmasi final/estimasi dgn tim
+    // internal: menempati bekas lokasi resto (TODO: konfirmasi ejaan nama). Jangan ditampilkan di UI.
+  },
+  {
+    slug: "bandung-2",
+    city: "Bandung",
+    area: "", // TODO: isi area/kawasan spesifik cabang ke-2 bila sudah pasti
+    name: "Kurnia Seafood Bandung (Cabang ke-2)",
+    status: "upcoming",
+    openingEstimate: "September 2026" // perkiraan — TODO: konfirmasi final/estimasi dgn tim
+    // internal: menempati bekas lokasi resto Hello Summer. Jangan ditampilkan di UI.
   }
 ];
 

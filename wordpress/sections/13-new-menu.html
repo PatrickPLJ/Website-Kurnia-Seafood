@@ -1,0 +1,60 @@
+<!-- ============================================================
+     KURNIA SEAFOOD · NEW MENU (image-forward, TANPA harga)
+     Render dari window.KS_MENU (item isNew:true). Foto = placeholder bertanda.
+     PRASYARAT: data/menu.js dimuat sebelum section ini.
+     ============================================================ -->
+<section class="ks-nm" id="new-menu">
+  <div class="ks-nm__inner">
+    <header class="ks-nm__head">
+      <span class="ks-kicker ks-kicker--center">Menu Baru</span>
+      <h2 class="ks-nm__title">Baru di Kurnia</h2>
+      <p class="ks-nm__sub">Coba kreasi terbaru kami.</p>
+    </header>
+    <!-- TODO: ganti dengan foto resmi Kurnia (hak cipta) -->
+    <div class="ks-nm__grid"></div>
+  </div>
+
+  <style>
+  .ks-nm{
+    --navy:#14263D; --red:#D80000; --muted:#7c8896;
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    background:#fff; font-family:var(--fh); padding:clamp(48px,7vw,86px) 22px;
+  }
+  .ks-nm__inner{ max-width:1140px; margin:0 auto; }
+  .ks-nm__head{ text-align:center; margin-bottom:38px; }
+  .ks-kicker{ font-family:var(--fl); font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
+  .ks-kicker--center{ display:block; text-align:center; }
+  .ks-nm__title{ font-family:var(--fh); font-weight:600; color:var(--navy); font-size:clamp(2rem,4.2vw,3rem); margin:10px 0 0; letter-spacing:-.01em; }
+  .ks-nm__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); margin:10px 0 0; }
+  .ks-nm__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .ks-card{ background:#fff; border:1px solid #eef1f5; border-radius:20px; overflow:hidden; box-shadow:0 14px 30px -20px rgba(20,38,61,.35); transition:transform .22s, box-shadow .25s; }
+  .ks-card:hover{ transform:translateY(-6px); box-shadow:0 26px 46px -24px rgba(0,86,172,.4); }
+  .ks-card__media{ aspect-ratio:4/3; background:linear-gradient(135deg,#0056AC,#5a9be0); position:relative; }
+  .ks-card__media img{ width:100%; height:100%; object-fit:cover; }
+  .ks-card__tag{ position:absolute; top:12px; left:12px; font-family:var(--fl); font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:var(--red); padding:5px 12px; border-radius:999px; }
+  .ks-card__body{ padding:18px 20px 22px; }
+  .ks-card__body h3{ font-family:var(--fh); font-weight:600; font-size:1.3rem; color:var(--navy); margin:0; }
+  .ks-card__body p{ font-family:var(--fl); font-weight:300; font-size:.95rem; color:#5a6878; margin:6px 0 0; line-height:1.5; }
+  @media (max-width:900px){ .ks-nm__grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .ks-nm__grid{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ .ks-card:hover{ transform:none; } }
+  </style>
+
+  <script>
+  (function () {
+    var root = document.getElementById('new-menu');
+    var grid = root.querySelector('.ks-nm__grid');
+    var items = (window.KS_MENU || []).filter(function (m) { return m.isNew; });
+    if (!items.length) { root.remove(); return; }  // auto-hide bila tak ada menu baru
+    function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
+    grid.innerHTML = items.map(function (m) {
+      var ph = m.placeholder ? ' data-placeholder="true"' : '';
+      var desc = m.desc ? '<p>' + esc(m.desc) + '</p>' : '';
+      return '<article class="ks-card">' +
+        '<div class="ks-card__media"><span class="ks-card__tag">Baru</span>' +
+          '<img src="' + esc(m.image) + '" alt="' + esc(m.name) + '" loading="lazy"' + ph + ' onerror="this.style.display=\'none\'"></div>' +
+        '<div class="ks-card__body"><h3>' + esc(m.name) + '</h3>' + desc + '</div></article>';
+    }).join('');
+  })();
+  </script>
+</section>

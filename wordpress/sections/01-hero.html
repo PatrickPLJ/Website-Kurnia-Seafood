@@ -1,110 +1,145 @@
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION HERO  (gaya Bamzi · premium gelap)
-     Tempel di Elementor: widget "HTML". Set padding section = 0.
-     • Navbar di dalam blok ini OPSIONAL — kalau tema WordPress kamu
-       sudah punya header, hapus bagian <nav class="ks-nav">…</nav>.
-     • Logo: ganti teks "Kurnia Seafood" dengan widget/gambar logomu.
+     KURNIA SEAFOOD · HERO (carousel foto background)
+     Auto-rotate ~5s, fade, pause-on-hover, hormati prefers-reduced-motion.
+     FOTO background = PLACEHOLDER pihak ketiga (data-placeholder) →
+     ganti dgn foto resmi Kurnia. Lihat PLACEHOLDERS.md.
+     Navbar opsional (hapus jika tema sudah punya header).
      ============================================================ -->
-<section class="ks-hero">
-  <span class="ks-hero__leaf ks-hero__leaf--l" aria-hidden="true"></span>
-  <span class="ks-hero__leaf ks-hero__leaf--r" aria-hidden="true"></span>
+<section class="ks-hero" id="hero">
+  <!-- TODO: ganti semua foto background di bawah dengan foto resmi Kurnia (hak cipta) -->
+  <div class="ks-hero__bg" aria-hidden="true">
+    <div class="ks-hero__slide is-active" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="ks-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="ks-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="ks-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1535140728325-a4d3707eee61?auto=format&fit=crop&w=1600&q=70')"></div>
+    <div class="ks-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=70')"></div>
+  </div>
+  <div class="ks-hero__scrim" aria-hidden="true"></div>
 
   <!-- NAV (opsional) -->
   <nav class="ks-nav">
-    <!-- LOGO full-color (apa adanya) tanpa kotak. WebP + retina @2x, PNG fallback. -->
-    <a class="ks-nav__brand" href="#" aria-label="Kurnia Seafood">
+    <a class="ks-nav__brand" href="#hero" aria-label="Kurnia Seafood">
       <span class="ks-logo-wrap">
         <picture>
-          <source type="image/webp"
-                  srcset="assets/kurnia-seafood-logo.webp 1x, assets/kurnia-seafood-logo@2x.webp 2x">
+          <source type="image/webp" srcset="assets/kurnia-seafood-logo.webp 1x, assets/kurnia-seafood-logo@2x.webp 2x">
           <img class="ks-logo" src="assets/kurnia-seafood-logo.png" alt="Kurnia Seafood" width="170" height="92">
         </picture>
       </span>
     </a>
     <ul class="ks-nav__menu">
-      <li><a href="#">Beranda</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#review">Ulasan</a></li>
-      <li><a href="#kontak">Kontak</a></li>
+      <li><a href="#new-menu">Menu</a></li>
+      <li><a href="#locations">Cabang</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#reservasi">Reservasi</a></li>
     </ul>
-    <a href="#reservasi" class="ks-btn ks-btn--red ks-nav__cta">Pesan Meja</a>
+    <a href="#reservasi" class="ks-btn ks-btn--red ks-nav__cta">Reservasi</a>
   </nav>
 
-  <div class="ks-hero__inner">
-    <h1 class="ks-hero__title">
-      Santapan laut <span class="amp">&amp;</span><br>
-      pengalaman makan tak terlupakan
-    </h1>
-    <p class="ks-hero__sub">Menyajikan kesegaran laut, kehangatan, &amp; kebahagiaan sejak 2020</p>
-    <a href="#reservasi" class="ks-btn ks-btn--red ks-hero__cta">Pesan Meja</a>
-
-    <div class="ks-hero__photo">
-      <img src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1200&q=72"
-           alt="Sajian seafood Kurnia Seafood di atas piring gelap" loading="lazy"
-           onerror="this.style.display='none'">
+  <div class="ks-hero__content">
+    <span class="ks-hero__kicker">The Happiest Seafood Time</span>
+    <h1 class="ks-hero__title">Tangkapan laut terbaik,<br>untuk keluarga Anda</h1>
+    <p class="ks-hero__sub">Pilih sendiri seafood tersegar di Fresh Seafood Market kami, olah dengan resep bumbu spesial khas Kurnia.</p>
+    <div class="ks-hero__cta">
+      <a href="#reservasi" class="ks-btn ks-btn--red ks-btn--lg">Reservasi Sekarang</a>
+      <a href="#new-menu" class="ks-btn ks-btn--glass ks-btn--lg">Lihat Menu</a>
     </div>
   </div>
 
+  <!-- indikator slide -->
+  <div class="ks-hero__dots" role="tablist" aria-label="Slide foto"></div>
+
   <style>
   .ks-hero{
-    /* Variasi warna #2 — navy lebih dalam & lebih biru agar menyatu dgn logo */
-    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000;
-    --blue:#0056AC; --muted:rgba(246,241,231,.62);
+    --navy:#03182F; --cream:#F6F1E7; --red:#D80000; --red-2:#B40000; --blue:#0056AC;
+    --muted:rgba(246,241,231,.78);
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
-    position:relative; overflow:hidden; isolation:isolate;
-    background:radial-gradient(130% 95% at 50% -8%, var(--navy-2), var(--navy) 62%);
-    color:var(--cream); font-family:var(--fh); padding:18px 18px 0;
+    position:relative; isolation:isolate; overflow:hidden; min-height:clamp(560px,92vh,880px);
+    display:flex; flex-direction:column; font-family:var(--fh); color:var(--cream);
+    background:var(--navy);
   }
-  /* glow + daun dekoratif */
-  .ks-hero::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.6;
-    background:radial-gradient(560px 340px at 50% 6%, rgba(0,86,172,.30), transparent 70%); }
-  /* logo */
-  /* logo full-color, tanpa kotak */
-  .ks-logo-wrap{ display:inline-flex; align-items:center; }
-  .ks-logo{ display:block; height:125px; width:auto; }
-  .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
-    background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
-  .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
+  .ks-hero__bg{ position:absolute; inset:0; z-index:-2; }
+  .ks-hero__slide{ position:absolute; inset:0; background-size:cover; background-position:center;
+    opacity:0; transition:opacity 1.2s ease; }
+  .ks-hero__slide.is-active{ opacity:1; }
+  /* scrim agar teks terbaca di atas foto apa pun */
+  .ks-hero__scrim{ position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, rgba(3,24,47,.82) 0%, rgba(3,24,47,.45) 40%, rgba(3,24,47,.72) 100%); }
 
   /* NAV */
-  .ks-nav{ position:relative; z-index:3; max-width:1180px; margin:0 auto;
-    display:flex; align-items:center; justify-content:space-between; gap:18px; padding:14px 8px 6px; }
-  .ks-nav__brand{ font-family:var(--fh); font-weight:600; font-size:1.5rem; color:var(--cream);
-    text-decoration:none; letter-spacing:.01em; }
+  .ks-nav{ position:relative; z-index:2; max-width:1180px; width:100%; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px 22px 6px; }
+  .ks-nav__brand{ display:inline-flex; }
+  .ks-logo-wrap{ display:inline-flex; align-items:center; }
+  .ks-logo{ display:block; height:62px; width:auto; }
   .ks-nav__menu{ display:flex; gap:6px; list-style:none; margin:0; padding:6px;
-    background:rgba(246,241,231,.08); border:1px solid rgba(246,241,231,.14); border-radius:999px; }
+    background:rgba(246,241,231,.10); border:1px solid rgba(246,241,231,.18); border-radius:999px; backdrop-filter:blur(6px); }
   .ks-nav__menu a{ font-family:var(--fl); font-weight:500; font-size:13.5px; letter-spacing:.04em;
     color:var(--cream); text-decoration:none; padding:9px 18px; border-radius:999px; transition:background .2s,color .2s; }
   .ks-nav__menu a:hover{ background:var(--cream); color:var(--navy); }
 
-  /* HERO INNER */
-  .ks-hero__inner{ position:relative; z-index:2; max-width:1000px; margin:0 auto; text-align:center;
-    padding:clamp(36px,7vw,84px) 8px 0; }
-  .ks-hero__title{ font-family:var(--fh); font-weight:500; color:var(--cream);
-    font-size:clamp(2.3rem,6vw,4.7rem); line-height:1.04; letter-spacing:-.01em; margin:0; }
-  .ks-hero__title .amp{ font-style:italic; font-weight:400; }
-  .ks-hero__sub{ font-family:var(--fl); font-weight:300; color:var(--muted);
-    font-size:clamp(.95rem,1.6vw,1.15rem); letter-spacing:.02em; margin:22px 0 0; }
-  .ks-hero__cta{ margin-top:30px; }
+  /* CONTENT */
+  .ks-hero__content{ position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:center;
+    align-items:center; text-align:center; max-width:880px; margin:0 auto; padding:40px 22px 80px; }
+  .ks-hero__kicker{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.26em; text-transform:uppercase; color:#FFD7D7; }
+  .ks-hero__title{ font-family:var(--fh); font-weight:500; font-size:clamp(2.4rem,6.5vw,5rem); line-height:1.04; letter-spacing:-.02em; margin:18px 0 0; text-shadow:0 2px 30px rgba(0,0,0,.35); }
+  .ks-hero__sub{ font-family:var(--fl); font-weight:300; font-size:clamp(1rem,1.8vw,1.2rem); line-height:1.6; color:var(--muted); margin:20px 0 0; max-width:46ch; }
+  .ks-hero__cta{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:32px; }
 
-  /* tombol */
   .ks-btn{ font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase;
-    text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:15px 30px; border-radius:10px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:10px;
     border:2px solid transparent; transition:transform .18s, box-shadow .25s, background .2s, color .2s; }
+  .ks-btn--lg{ padding:16px 32px; font-size:14px; }
   .ks-btn--red{ background:var(--red); color:#fff; box-shadow:0 16px 30px -14px rgba(216,0,0,.6); }
   .ks-btn--red:hover{ background:var(--red-2); transform:translateY(-2px); }
+  .ks-btn--glass{ background:rgba(246,241,231,.12); color:#fff; border-color:rgba(246,241,231,.4); backdrop-filter:blur(6px); }
+  .ks-btn--glass:hover{ background:#fff; color:var(--navy); transform:translateY(-2px); }
+  .ks-nav__cta{ padding:11px 22px; }
 
-  /* FOTO HERO */
-  .ks-hero__photo{ position:relative; max-width:760px; margin:clamp(34px,6vw,68px) auto -1px;
-    aspect-ratio:16/10; border-radius:26px 26px 0 0; overflow:hidden;
-    background:linear-gradient(135deg,#06304F,#0a3c63);
-    box-shadow:0 -10px 60px -20px rgba(0,0,0,.6); }
-  .ks-hero__photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  /* dots */
+  .ks-hero__dots{ position:absolute; z-index:2; left:0; right:0; bottom:24px; display:flex; gap:9px; justify-content:center; }
+  .ks-hero__dots button{ width:9px; height:9px; border-radius:50%; border:0; cursor:pointer; padding:0;
+    background:rgba(246,241,231,.4); transition:background .2s, transform .2s; }
+  .ks-hero__dots button.is-active{ background:var(--red); transform:scale(1.25); }
 
-  @media (max-width:760px){
-    .ks-nav__menu{ display:none; } .ks-nav__cta{ padding:11px 18px; }
-    .ks-logo{ height:74px; }
-  }
-  @media (prefers-reduced-motion: reduce){ .ks-btn:hover{ transform:none; } }
+  @media (max-width:760px){ .ks-nav__menu{ display:none; } .ks-logo{ height:50px; } }
+  @media (prefers-reduced-motion: reduce){ .ks-hero__slide{ transition:none; } .ks-btn:hover{ transform:none; } }
   </style>
+
+  <script>
+  (function () {
+    var root   = document.getElementById('hero');
+    var slides = root.querySelectorAll('.ks-hero__slide');
+    var dotsWrap = root.querySelector('.ks-hero__dots');
+    if (slides.length < 2) return;
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var i = 0, timer = null, DELAY = 5000;
+
+    // dots
+    slides.forEach(function (_, idx) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Foto ' + (idx + 1));
+      if (idx === 0) b.classList.add('is-active');
+      b.addEventListener('click', function () { go(idx); restart(); });
+      dotsWrap.appendChild(b);
+    });
+    var dots = dotsWrap.children;
+
+    function go(n) {
+      slides[i].classList.remove('is-active'); dots[i].classList.remove('is-active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('is-active'); dots[i].classList.add('is-active');
+    }
+    function next() { go(i + 1); }
+    function start() { if (!reduce) timer = setInterval(next, DELAY); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function restart() { stop(); start(); }
+
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+    start();
+  })();
+  </script>
 </section>

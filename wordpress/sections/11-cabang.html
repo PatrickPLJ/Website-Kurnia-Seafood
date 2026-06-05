@@ -75,7 +75,7 @@
     var root  = document.getElementById('cabang');
     var tabs  = root.querySelector('.ks-loc__tabs');
     var panel = root.querySelector('.ks-loc__panel');
-    var data  = window.KS_BRANCHES || [];
+    var data  = (window.KS_BRANCHES || []).filter(function (b) { return b.status !== 'upcoming'; });
 
     if (!data.length) {
       panel.innerHTML = '<p style="text-align:center;color:#888;font-family:Alexandria,sans-serif">' +
@@ -128,6 +128,15 @@
       btn.addEventListener('click', function () { render(i); });
       tabs.appendChild(btn);
     });
+
+    // dipanggil dari section Locations (CTA "Lihat detail") untuk membuka tab kota
+    window.ksCabangSelect = function (slug) {
+      var i = -1;
+      for (var k = 0; k < data.length; k++) { if (data[k].slug === slug) { i = k; break; } }
+      if (i < 0) return;
+      render(i);
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
 
     render(0);
   })();

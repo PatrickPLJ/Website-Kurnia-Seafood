@@ -144,7 +144,7 @@
   <script>
   (function () {
     var root = document.getElementById('reservasi');
-    var data = window.KS_BRANCHES || [];
+    var data = (window.KS_BRANCHES || []).filter(function (b) { return b.status !== 'upcoming'; });
 
     var state = { idx: -1, slug: '', city: '', whatsapp: '', nama: '', tanggal: '', jam: '19:00', jumlah: '', menu: '' };
     var step = 1;
