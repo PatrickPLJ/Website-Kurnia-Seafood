@@ -95,7 +95,9 @@ Urutan yang disarankan untuk homepage:
 
 Section di atas membaca dari file data (sumber tunggal). Bungkus isi tiap file
 dalam `<script> … </script>` dan tempel **SEKALI** sebelum section terkait
-(mis. Custom Code Header Elementor Pro, atau widget HTML paling atas):
+(mis. Custom Code Header Elementor Pro, atau widget HTML paling atas) —
+**urutkan `config.js` paling awal**:
+- `data/config.js` — konfigurasi terpusat (URL endpoint reservasi + `HOME_URL`).
 - `data/branches.js` — Locations, Cabang, Reservasi (cabang aktif + upcoming).
 - `data/menu.js` — New Menu & Signature.
 - `data/promos.js` — Spotlight terbaru.
@@ -103,6 +105,20 @@ dalam `<script> … </script>` dan tempel **SEKALI** sebelum section terkait
 Catatan:
 - Ubah data cukup di file-file ini (jangan tulis ulang di markup).
   **Nomor WA Bandung sudah fix** `6281372405758`.
+- **Tombol "Kembali ke Beranda"** (Reservasi): jika section ada di halaman yang
+  sama dengan hero → smooth-scroll; jika di halaman terpisah → navigasi ke
+  `KS_CONFIG.HOME_URL` (default `/`). Set `HOME_URL` ke URL beranda situsmu.
+
+## Langkah 4d — (Opsional) Simpan reservasi ke Google Sheet — PROTOTIPE
+
+Agar data reservasi tersimpan sebelum ke WhatsApp (best-effort, tidak memblokir):
+1. Pemilik deploy `integrations/reservation-apps-script.gs` (lihat langkah di
+   header file: buat Sheet UJI → Apps Script → Deploy Web App "Anyone" → salin URL).
+2. Tempel URL `…/exec` ke `data/config.js` → `RESERVATION_ENDPOINT`.
+- Jika kosong/gagal, pelanggan **tetap** diteruskan ke WhatsApp (capture opsional).
+- **Tanpa kredensial di repo** — hanya URL Web App publik. Data dikirim via POST
+  body (bukan query string). Gunakan **Sheet khusus uji** di preview; capture
+  produksi sebenarnya nanti dibangun di WordPress.
 - Cabang **upcoming** (`status:"upcoming"`) hanya tampil di "Segera Hadir" —
   tanpa reservasi/peta/schema sampai benar-benar buka.
 - Item `verify:true` & foto `placeholder` → muncul peringatan di **console

@@ -64,8 +64,10 @@
           <svg viewBox="0 0 24 24"><path d="M4 20l1.5-4.5A8 8 0 1 1 9 19L4 20Z"/><path d="M9 10c0 4 2 6 6 6" stroke-linecap="round"/></svg>
           Kirim Reservasi via WhatsApp
         </a>
-        <p class="ks-resv__note">Pratinjau: data dirangkum lalu dibuka di WhatsApp cabang. Belum tersimpan ke sistem.</p>
-        <button type="button" class="ks-resv__home" data-act="home">← Kembali ke Beranda</button>
+        <p class="ks-resv__privacy">Dengan mengirim, data Anda dipakai untuk memproses reservasi (lihat Kebijakan Privasi).</p>
+        <!-- href = URL beranda (dipakai bila section ini di halaman terpisah tanpa #hero).
+             Bila #hero ada di halaman yg sama (mis. homepage), klik di-intercept untuk smooth-scroll. -->
+        <a class="ks-resv__home" data-act="home" href="/">← Kembali ke Beranda</a>
       </div>
 
       <!-- NAV -->
@@ -129,9 +131,10 @@
   .ks-resv__wa:hover{ filter:brightness(1.05); transform:translateY(-2px); }
   .ks-resv__wa.is-disabled{ pointer-events:none; opacity:.45; filter:grayscale(.5); box-shadow:none; }
   .ks-resv__note{ font-family:var(--fl); font-weight:300; font-size:12px; color:var(--muted); text-align:center; margin:12px 0 0; }
-  .ks-resv__home{ display:block; margin:16px auto 0; background:none; border:0; cursor:pointer;
+  .ks-resv__privacy{ font-family:var(--fl); font-weight:300; font-size:12px; color:var(--muted); text-align:center; margin:12px 0 0; }
+  .ks-resv__home{ display:block; width:max-content; margin:14px auto 0; background:none; border:0; cursor:pointer; text-decoration:none;
     font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.04em; color:#FFD7D7;
-    padding:8px 10px; border-radius:8px; transition:color .2s, background .2s; }
+    padding:8px 12px; border-radius:8px; transition:color .2s, background .2s; }
   .ks-resv__home:hover{ color:#fff; background:rgba(246,241,231,.08); }
 
   .ks-resv__nav{ display:flex; justify-content:space-between; gap:12px; margin-top:24px; }
@@ -286,11 +289,47 @@
     // Sengaja TIDAK pakai history.back() agar tidak keluar dari halaman.
     var btnHome = root.querySelector('[data-act="home"]');
     if (btnHome) {
-      btnHome.addEventListener('click', function () {
-        resetFlow();
+      var cfgHome = window.KS_CONFIG || {};
+      if (cfgHome.HOME_URL) { btnHome.setAttribute('href', cfgHome.HOME_URL); }
+      btnHome.addEventListener('click', function (e) {
         var hero = document.getElementById('hero');
-        if (hero && hero.scrollIntoView) { hero.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-        else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        if (hero && hero.scrollIntoView) {
+          // #hero ADA di dokumen yang sama (mis. homepage) -> scroll, jangan navigasi.
+          e.preventDefault();
+          resetFlow();
+          hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          // #hero TIDAK ada (halaman reservasi terpisah) -> biarkan <a href> ke beranda.
+          resetFlow();
+        }
+      });
+    }
+
+    // --- Capture best-effort ke endpoint (Apps Script) SEBELUM membuka WhatsApp ---
+    // Tidak memblokir: bila endpoint kosong/gagal, pengguna tetap lanjut ke WhatsApp.
+    var waBtn = root.querySelector('#ksWaBtn');
+    if (waBtn) {
+      waBtn.addEventListener('click', function () {
+        if (!allValid()) { return; }
+        var endpoint = (window.KS_CONFIG || {}).RESERVATION_ENDPOINT;
+        if (!endpoint) { return; }  // belum dikonfigurasi -> lewati diam-diam, tetap ke WA
+        try {
+          fetch(endpoint, {
+            method: 'POST',
+            mode: 'no-cors',           // Apps Script Web App
+            keepalive: true,           // tetap terkirim walau tab WA terbuka
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari preflight CORS
+            body: JSON.stringify({
+              timestamp: new Date().toISOString(),
+              cabang: state.city, nama: state.nama, tanggal: state.tanggal,
+              jam: state.jam, jumlah: state.jumlah, preorder: state.menu,
+              sumber: 'preview-github-pages'
+            })
+          }).catch(function (err) { if (window.console) console.warn('[Kurnia] capture gagal (lanjut ke WA):', err); });
+        } catch (err) {
+          if (window.console) console.warn('[Kurnia] capture error (lanjut ke WA):', err);
+        }
+        // sengaja TIDAK preventDefault — biarkan <a> membuka WhatsApp.
       });
     }
 
