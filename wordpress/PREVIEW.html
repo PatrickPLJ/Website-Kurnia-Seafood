@@ -1,23 +1,14 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurnia Seafood — Preview (gaya Bamzi · brand Kurnia)</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurnia Seafood — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-<style>
-  *{box-sizing:border-box} html,body{margin:0;padding:0;background:#fff}
-  .ks-preview-note{font-family:'Alexandria',sans-serif;background:#021526;color:#F6F1E7;
-    text-align:center;padding:10px;font-size:13px;letter-spacing:.04em}
-  .ks-preview-note b{color:#FF6B6B}
-</style>
-</head>
-<body>
-<div class="ks-preview-note">PREVIEW · logo memakai fallback teks (file logo belum disertakan). Hero pakai variasi warna #2 (navy lebih dalam &amp; biru). Scroll untuk animasi reveal.</div>
+<style>*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff}
+.ks-preview-note{font-family:'Alexandria',sans-serif;background:#021526;color:#F6F1E7;text-align:center;padding:10px;font-size:13px;letter-spacing:.04em}.ks-preview-note b{color:#FF6B6B}</style>
+</head><body>
+<div class="ks-preview-note">PREVIEW · logo memakai lockup teks ber-brand (file logo asli belum ada). Scroll untuk animasi reveal.</div>
 
-<!-- ===== sections/01-hero.html ===== -->
+<!-- sections/01-hero.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION HERO  (gaya Bamzi · premium gelap)
      Tempel di Elementor: widget "HTML". Set padding section = 0.
@@ -37,8 +28,11 @@
          Jika file belum ada, otomatis tampil teks "Kurnia Seafood". -->
     <a class="ks-nav__brand" href="#" aria-label="Kurnia Seafood">
       <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
-      <span class="ks-nav__word" style="display:none">Kurnia&nbsp;Seafood</span>
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+      <span class="ks-lockup" style="display:none">
+        <span class="ks-lockup__name">Kurnia <em>Seafood</em></span>
+        <span class="ks-lockup__ribbon">The Happiest Seafood Time!</span>
+      </span>
     </a>
     <ul class="ks-nav__menu">
       <li><a href="#">Beranda</a></li>
@@ -80,6 +74,12 @@
   /* logo */
   .ks-logo{ display:block; height:46px; width:auto; }
   .ks-logo--white{ filter:brightness(0) invert(1); }   /* render putih di latar gelap */
+  /* fallback lockup (tampil jika file logo belum ada) */
+  .ks-lockup{ flex-direction:column; gap:5px; line-height:1; }
+  .ks-lockup__name{ font-family:var(--fh); font-weight:700; font-size:1.6rem; color:#fff; letter-spacing:.01em; }
+  .ks-lockup__name em{ font-style:italic; color:#FF6B6B; }
+  .ks-lockup__ribbon{ align-self:flex-start; font-family:var(--fl); font-weight:600; font-size:9px;
+    letter-spacing:.14em; text-transform:uppercase; color:#fff; background:var(--blue); padding:3px 9px; border-radius:5px; }
   .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
     background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
   .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
@@ -126,7 +126,7 @@
   </style>
 </section>
 
-<!-- ===== sections/07-tentang.html ===== -->
+<!-- sections/07-tentang.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION TENTANG KAMI
      Gaya Bamzi (foto + cerita + statistik). Tempel di widget "HTML".
@@ -208,7 +208,7 @@
   </style>
 </section>
 
-<!-- ===== sections/02-menu-hidangan.html ===== -->
+<!-- sections/02-menu-hidangan.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION MENU A  (daftar kiri · foto kanan)
      Gaya Bamzi "Famous sushi's". Tempel di widget "HTML".
@@ -283,7 +283,7 @@
   </style>
 </section>
 
-<!-- ===== sections/03-menu-bakar.html ===== -->
+<!-- sections/03-menu-bakar.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION MENU B  (foto kiri · daftar kanan)
      Gaya Bamzi "Sea fish & dishes" (cermin dari section A).
@@ -357,7 +357,7 @@
   </style>
 </section>
 
-<!-- ===== sections/08-galeri.html ===== -->
+<!-- sections/08-galeri.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION GALERI  (grid foto premium)
      Gaya Bamzi. Tempel di widget "HTML". Ganti foto (src) & caption.
@@ -438,7 +438,7 @@
   </style>
 </section>
 
-<!-- ===== sections/04-review.html ===== -->
+<!-- sections/04-review.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION CUSTOMER REVIEW  (kartu gelap)
      Pengganti "Our Mission" pada template Bamzi.
@@ -525,7 +525,7 @@
   </style>
 </section>
 
-<!-- ===== sections/05-kabar.html ===== -->
+<!-- sections/05-kabar.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION KABAR & PROMO  (3 kartu putih)
      Gaya Bamzi "Restaurant blog & update".
@@ -606,7 +606,7 @@
   </style>
 </section>
 
-<!-- ===== sections/10-faq.html ===== -->
+<!-- sections/10-faq.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION FAQ
      Accordion native (<details>) — aksesibel, tanpa library.
@@ -694,7 +694,7 @@
   </style>
 </section>
 
-<!-- ===== sections/06-reservasi.html ===== -->
+<!-- sections/06-reservasi.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION RESERVASI / CTA  (gelap, penutup)
      Ganti nomor WhatsApp, telepon, alamat, jam buka, link tombol.
@@ -757,7 +757,7 @@
   </style>
 </section>
 
-<!-- ===== sections/09-footer.html ===== -->
+<!-- sections/09-footer.html -->
 <!-- ============================================================
      KURNIA SEAFOOD · SECTION FOOTER  (navy)
      Ganti: logo/teks brand, link nav, jam, kontak, sosial, & PETA.
@@ -773,8 +773,11 @@
                (filter) untuk latar gelap. Fallback ke teks bila file belum ada. -->
           <a href="#" aria-label="Kurnia Seafood" class="ks-foot__logo-link">
             <img class="ks-logo ks-logo--white" src="assets/kurnia-logo.png" alt="Kurnia Seafood"
-                 onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
-            <span class="ks-foot__word" style="display:none">Kurnia&nbsp;Seafood</span>
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'">
+            <span class="ks-lockup" style="display:none">
+              <span class="ks-lockup__name">Kurnia <em>Seafood</em></span>
+              <span class="ks-lockup__ribbon">The Happiest Seafood Time!</span>
+            </span>
           </a>
           <p>Kesegaran laut Nusantara untuk keluarga Anda, sejak 1998. The happiest seafood time!</p>
           <div class="ks-foot__social">
@@ -842,7 +845,11 @@
   .ks-foot__logo-link{ display:inline-block; }
   .ks-logo{ display:block; height:48px; width:auto; }
   .ks-logo--white{ filter:brightness(0) invert(1); }
-  .ks-foot__word{ font-family:var(--fh); font-weight:600; font-size:1.55rem; color:#fff; }
+  .ks-lockup{ flex-direction:column; gap:5px; line-height:1; }
+  .ks-lockup__name{ font-family:var(--fh); font-weight:700; font-size:1.55rem; color:#fff; }
+  .ks-lockup__name em{ font-style:italic; color:#FF6B6B; }
+  .ks-lockup__ribbon{ align-self:flex-start; font-family:var(--fl); font-weight:600; font-size:9px;
+    letter-spacing:.14em; text-transform:uppercase; color:#fff; background:#0056AC; padding:3px 9px; border-radius:5px; }
   .ks-foot__social{ display:flex; gap:10px; }
   .ks-foot__social a{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
     display:grid; place-items:center; color:var(--cream); transition:background .2s, border-color .2s, color .2s; }
@@ -878,7 +885,6 @@
   </script>
 </footer>
 
-<!-- ===== ks-reveal.html ===== -->
 <!-- ============================================================
      KURNIA SEAFOOD · ANIMASI REVEAL (dramatis)
      Tempel SEKALI saja, di paling BAWAH halaman:
