@@ -6,7 +6,7 @@
 <style>*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff}
 .ks-preview-note{font-family:'Alexandria',sans-serif;background:#021526;color:#F6F1E7;text-align:center;padding:10px;font-size:13px}.ks-preview-note b{color:#FF6B6B}</style>
 </head><body>
-<div class="ks-preview-note">PREVIEW · logo full-color (lebih besar). Scroll untuk animasi reveal.</div>
+<div class="ks-preview-note">PREVIEW · hero logo 125px. Scroll untuk animasi reveal.</div>
 
 <!-- sections/01-hero.html -->
 <!-- ============================================================
@@ -72,7 +72,7 @@
   /* logo */
   /* logo full-color, tanpa kotak */
   .ks-logo-wrap{ display:inline-flex; align-items:center; }
-  .ks-logo{ display:block; height:66px; width:auto; }
+  .ks-logo{ display:block; height:125px; width:auto; }
   .ks-hero__leaf{ position:absolute; top:64px; width:230px; height:300px; z-index:0; opacity:.16; pointer-events:none;
     background:radial-gradient(closest-side, var(--blue), transparent 70%); filter:blur(2px); }
   .ks-hero__leaf--l{ left:-60px; } .ks-hero__leaf--r{ right:-60px; transform:scaleX(-1); }
@@ -114,6 +114,7 @@
 
   @media (max-width:760px){
     .ks-nav__menu{ display:none; } .ks-nav__cta{ padding:11px 18px; }
+    .ks-logo{ height:74px; }
   }
   @media (prefers-reduced-motion: reduce){ .ks-btn:hover{ transform:none; } }
   </style>
