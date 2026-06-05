@@ -1,12 +1,12 @@
 import Reveal from "./Reveal";
 
 const dishes = [
-  { no: "01", name: "Lobster Bakar Madu-Asam", price: "Rp 385K", desc: "Lobster utuh dipanggang, glasir madu & asam jawa, sambal matah segar." },
-  { no: "02", name: "Kerapu Kukus Hong Kong", price: "Rp 268K", desc: "Kerapu merah utuh, kecap asin premium, jahe muda, taburan daun bawang." },
-  { no: "03", name: "Kepiting Saus Padang", price: "Rp 312K", desc: "Kepiting bakau jumbo, saus padang pedas berempah, mantou panggang." },
-  { no: "04", name: "Udang Galah Mentega", price: "Rp 295K", desc: "Udang galah, saus mentega truffle, bawang putih panggang, peterseli." },
-  { no: "05", name: "Tiram Segar Pesisir", price: "Rp 178K", desc: "Setengah lusin tiram dingin, mignonette jeruk nipis, roti panggang mentega." },
-  { no: "06", name: "Gindara Miso Panggang", price: "Rp 248K", desc: "Black cod marinasi miso tiga hari, asinan rumput laut, wijen sangrai." },
+  { no: "01", name: "Lobster Bakar Madu-Asam", desc: "Lobster utuh dipanggang, glasir madu & asam jawa, sambal matah segar." },
+  { no: "02", name: "Kerapu Kukus Hong Kong", desc: "Kerapu merah utuh, kecap asin premium, jahe muda, taburan daun bawang." },
+  { no: "03", name: "Kepiting Saus Padang", desc: "Kepiting bakau jumbo, saus padang pedas berempah, mantou panggang." },
+  { no: "04", name: "Udang Galah Mentega", desc: "Udang galah, saus mentega truffle, bawang putih panggang, peterseli." },
+  { no: "05", name: "Tiram Segar Pesisir", desc: "Setengah lusin tiram dingin, mignonette jeruk nipis, roti panggang mentega." },
+  { no: "06", name: "Gindara Miso Panggang", desc: "Black cod marinasi miso tiga hari, asinan rumput laut, wijen sangrai." },
 ];
 
 export default function Menu() {
@@ -35,7 +35,6 @@ export default function Menu() {
               <div className="flex items-baseline justify-between gap-3 border-b border-ink/10 pb-3 group-hover:border-red transition-colors duration-300">
                 <span className="font-display text-sm text-steel">{d.no}</span>
                 <span className="h-px flex-1 bg-ink/10 group-hover:bg-red/40 transition-colors" />
-                <span className="font-display text-lg text-brand">{d.price}</span>
               </div>
               <h3 className="mt-4 font-display text-2xl tracking-tight">{d.name}</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-ink/65">{d.desc}</p>

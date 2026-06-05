@@ -126,8 +126,8 @@ Yang **wajib** kamu sesuaikan (sekarang masih contoh):
 - **Foto** — ganti `src="https://..."` dengan foto asli (atau upload ke Media
   Library lalu pakai URL-nya). Kalau foto gagal muncul, blok tetap rapi
   (ada latar gradient cadangan).
-- **Menu & harga** — nama hidangan, deskripsi, harga di `02-menu-hidangan.html`
-  dan `03-menu-bakar.html`.
+- **Menu** — nama hidangan & deskripsi di `02-menu-hidangan.html` dan
+  `03-menu-bakar.html`. (Harga sengaja tidak ditampilkan — atas permintaan klien.)
 - **Ulasan** — kutipan & nama pelanggan asli di `04-review.html`.
 - **Kabar/Promo** — judul, tanggal, gambar di `05-kabar.html`.
 - **Kontak** — nomor WhatsApp (`https://wa.me/62...`), telepon, alamat, jam

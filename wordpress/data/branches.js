@@ -48,7 +48,7 @@ window.KS_BRANCHES = [
       "Indoor ber-AC, outdoor, dan gazebo",
       "3 ruang VIP (Anyer, Benoa, Bunaken) @24 pax dengan connecting doors — gabung hingga 84 pax",
       "Perlengkapan meeting: LCD proyektor, Smart TV, wireless microphone",
-      "Pilihan dining set: set menu, set on table, buffet, à la carte (paket meeting mulai Rp125.000/orang)",
+      "Pilihan dining set: set menu, set on table, buffet, à la carte",
       "Playground anak",
       "Musala",
       "Parkiran luas",

@@ -163,7 +163,7 @@ function ks_schema_hours( $rows ) {
 	return $out;
 }
 
-function ks_schema_restaurant( $b ) {
+function ks_schema_restaurant( $b, $slug = '' ) {
 	$url = get_permalink( get_queried_object_id() );
 	if ( ! $url ) {
 		$url = home_url( '/' );
@@ -212,7 +212,60 @@ function ks_schema_restaurant( $b ) {
 		$data['image'] = $img;
 	}
 
+	// amenityFeature (dari fasilitas cabang, nama ringkas — lihat ks_schema_amenity_features).
+	$amenities = ks_schema_amenity_features( $slug );
+	if ( ! empty( $amenities ) ) {
+		$data['amenityFeature'] = $amenities;
+	}
+
 	return $data;
+}
+
+/**
+ * Fasilitas cabang sebagai amenityFeature (LocationFeatureSpecification, value:true).
+ * Nama sengaja RINGKAS untuk SEO (bukan kalimat). TANPA harga.
+ * Sinkron dengan daftar `facilities` di data/branches.js — jika fasilitas
+ * cabang diperbarui di sana, perbarui juga ringkasannya di sini.
+ */
+function ks_schema_amenity_features( $slug ) {
+	$map = array(
+		'lokasi-yogya' => array(
+			'Indoor & outdoor', 'Ruang VIP', 'Ruang meeting', 'Live music',
+			'Seafood market', 'Area bermain anak', 'Musala', 'Area parkir luas',
+			'Smoking area', 'Halal',
+		),
+		'lokasi-semarang' => array(
+			'Indoor ber-AC', 'Area outdoor', 'Gazebo', 'Ruang VIP', 'Ruang meeting',
+			'Area bermain anak', 'Musala', 'Area parkir luas', 'Welcome drink',
+			'Seafood market', 'Halal',
+		),
+		'lokasi-bandung' => array(
+			'Area bermain anak', 'Ruang VIP', 'Live music', 'Seafood market',
+			'Area outdoor', 'Smoking area', 'WiFi', 'Area parkir luas',
+			'Pembayaran kartu & QRIS', 'Layanan pesan antar', 'Halal',
+		),
+		'kurnia-seafood-bali' => array(
+			'Area parkir luas', 'Ruang meeting', 'Ruang acara & pernikahan',
+			'Live music', 'Toilet & kamar mandi', 'Seafood market', 'Courtyard',
+			'Menu vegetarian & India', 'Halal',
+		),
+		'lokasi-surabaya' => array(
+			'Aula utama', 'Ruang VIP', 'Karaoke', 'Ruang meeting', 'Seafood market', 'Halal',
+		),
+	);
+
+	$names = isset( $map[ $slug ] ) ? $map[ $slug ] : array();
+	$names = apply_filters( 'ks_schema_amenities', $names, $slug );
+
+	$out = array();
+	foreach ( $names as $name ) {
+		$out[] = array(
+			'@type' => 'LocationFeatureSpecification',
+			'name'  => $name,
+			'value' => true,
+		);
+	}
+	return $out;
 }
 
 function ks_schema_breadcrumb( $city ) {
@@ -377,7 +430,7 @@ function ks_schema_output() {
 	foreach ( ks_schema_branches() as $slug => $b ) {
 		$is_match = is_page( $slug ) || ( ! empty( $b['page_id'] ) && is_page( (int) $b['page_id'] ) );
 		if ( $is_match ) {
-			$blocks[] = ks_schema_restaurant( $b );
+			$blocks[] = ks_schema_restaurant( $b, $slug );
 			if ( ks_schema_should_output( 'BreadcrumbList' ) ) {
 				$blocks[] = ks_schema_breadcrumb( $b['city'] );
 			}
