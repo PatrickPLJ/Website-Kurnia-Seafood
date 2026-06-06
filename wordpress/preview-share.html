@@ -40,6 +40,13 @@ window.KS_CONFIG = {
   // Diisi oleh PEMILIK setelah deploy (lihat integrations/reservation-apps-script.gs).
   RESERVATION_ENDPOINT: "", // TODO: isi dengan URL Apps Script Web App dari pemilik
 
+  // URL proxy ULASAN GOOGLE (Apps Script Web App, diakhiri /exec) yang memanggil
+  // Google Places Details API di sisi server. WAJIB lewat proxy: API key Google
+  // TIDAK BOLEH ada di front-end. Diisi PEMILIK setelah deploy
+  // integrations/google-reviews-apps-script.gs. Selama kosong/gagal, section
+  // "Kata Pelanggan" menampilkan ulasan CONTOH (placeholder), bukan error.
+  REVIEWS_ENDPOINT: "", // TODO: isi URL proxy Apps Script ulasan Google dari pemilik
+
   // URL beranda — dipakai tombol "Kembali ke Beranda" pada section Reservasi
   // bila section berada di halaman terpisah (tanpa #hero di dokumen yang sama).
   HOME_URL: "/"
@@ -56,6 +63,14 @@ window.KS_CONFIG = {
  * Format WA: nomor tanpa '+'/spasi (format wa.me).
  * Field verify:true = data dari artikel pihak ketiga → WAJIB dikonfirmasi tim
  * sebelum produksi (lihat peringatan console di bawah).
+ *
+ * Field placeId = Google Place ID cabang, dipakai section "Kata Pelanggan"
+ * untuk menarik ulasan Google via proxy server (lihat REVIEWS_ENDPOINT di
+ * config.js + integrations/google-reviews-apps-script.gs). Place ID BERBEDA
+ * dari koordinat geo dan harus diambil terpisah lewat Google "Place ID Finder".
+ * Place ID bukan rahasia (boleh tampil di klien); API key Google yang rahasia
+ * dan HANYA hidup di server proxy. Cabang "upcoming" belum punya ulasan/Place ID
+ * → sengaja TIDAK diberi placeId.
  * ====================================================================== */
 window.KS_BRANCHES = [
   {
@@ -63,6 +78,7 @@ window.KS_BRANCHES = [
     city: "Yogyakarta",
     name: "Kurnia Seafood Yogyakarta",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6285229235758",
@@ -89,6 +105,7 @@ window.KS_BRANCHES = [
     city: "Semarang",
     name: "Kurnia Seafood Semarang",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281339505758",
@@ -116,6 +133,7 @@ window.KS_BRANCHES = [
     city: "Bandung",
     name: "Kurnia Seafood Bandung",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281372405758",
@@ -145,6 +163,7 @@ window.KS_BRANCHES = [
     city: "Bali (Tabanan)",
     name: "Kurnia Seafood Bali",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281338555758",
@@ -170,6 +189,7 @@ window.KS_BRANCHES = [
     city: "Surabaya",
     name: "Kurnia Seafood Surabaya",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281385375758",
@@ -295,50 +315,97 @@ window.KS_PROMOS = [
 })();
 </script>
 <script>/* =========================================================================
- * Kurnia Seafood — ULASAN PELANGGAN (sumber data tunggal)
- * Dipakai oleh section 04-review ("Wall of Love").
- * CATATAN: isi di bawah masih CONTOH/placeholder.
- *   TODO: ganti dengan ulasan ASLI (mis. dari Google Reviews / GoFood).
- *   Foto avatar = placeholder pihak ketiga (randomuser.me) → ganti / boleh
- *   dikosongkan (akan otomatis pakai inisial). Lihat PLACEHOLDERS.md.
+ * Kurnia Seafood — ULASAN GOOGLE (SAMPEL/PLACEHOLDER)
+ * Dipakai oleh section 04-review ("Kata Pelanggan") HANYA sebagai placeholder
+ * yang tampil ketika REVIEWS_ENDPOINT (config.js) masih kosong atau proxy gagal.
+ *
+ * ⚠️  INI BUKAN ULASAN ASLI. Semua entri di bawah ditandai dataPlaceholder:true,
+ *     memakai nama "Contoh Pelanggan", dan dirender dengan badge "CONTOH".
+ *     JANGAN menampilkan ini seolah ulasan asli. Lihat PLACEHOLDERS.md.
+ *
+ * Begitu PEMILIK men-deploy proxy Apps Script (lihat
+ * integrations/google-reviews-apps-script.gs) dan mengisi REVIEWS_ENDPOINT +
+ * placeId tiap cabang (branches.js), section akan menarik ulasan ASLI dari
+ * Google Places Details API lewat proxy dan file sampel ini diabaikan.
+ *
+ * BENTUK DATA mengikuti field yang dikembalikan Google Places Details API:
+ *   group: { branch, slug, rating, userRatingsTotal, reviews:[ review... ] }
+ *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl }
+ * (Sama persis dengan yang dipetakan dari respons proxy, agar renderer satu jalur.)
+ *
+ * CATATAN BATAS API (penting untuk ekspektasi tim):
+ *   Google Places Details API mengembalikan MAKSIMAL 5 ulasan per lokasi dan
+ *   TIDAK bisa difilter/diurutkan "terbaik" (Google yang memilih). Jadi tiap
+ *   cabang aktif paling banyak menampilkan 5 ulasan.
  * ====================================================================== */
-window.KS_TESTIMONIALS = [
-  { name: "Rina Anggraini", role: "Keluarga · Yogyakarta",
-    quote: "Seafoodnya benar-benar segar dan bumbunya juara. Tempatnya nyaman buat keluarga, pelayanannya ramah. Sudah jadi langganan tiap akhir pekan!",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg", avatarPlaceholder: true },
-
-  { name: "Budi Santoso", role: "Pelanggan setia · Semarang",
-    quote: "Bisa pilih sendiri ikannya yang masih hidup, lalu dimasak sesuai selera. Anak-anak senang ada playground-nya. Recommended!",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg", avatarPlaceholder: true },
-
-  { name: "Dewi Kartika", role: "Food enthusiast · Bandung",
-    quote: "Kepiting saus padangnya nagih banget, porsinya melimpah. Pelayanan cepat dan stafnya benar-benar ramah. The happiest seafood time memang!",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg", avatarPlaceholder: true },
-
-  { name: "Agus Pratama", role: "Karyawan · Surabaya",
-    quote: "Sering dipakai buat meeting kantor. Ruang VIP-nya nyaman, makanannya enak, dan urusan reservasi gampang lewat WhatsApp.",
-    avatar: "https://randomuser.me/api/portraits/men/15.jpg", avatarPlaceholder: true },
-
-  { name: "Putu Ayu", role: "Wisatawan · Bali",
-    quote: "Mampir saat ke Tanah Lot, parkirnya luas banget dan tempatnya bersih. Ikan bakarnya juara, bumbunya khas. Pasti balik lagi.",
-    avatar: "https://randomuser.me/api/portraits/women/65.jpg", avatarPlaceholder: true },
-
-  { name: "Hendra Wijaya", role: "Keluarga · Yogyakarta",
-    quote: "Suasananya hangat, ada live music. Udang bakar madunya favorit anak-anak. Cocok untuk makan bareng keluarga besar.",
-    avatar: "https://randomuser.me/api/portraits/men/41.jpg", avatarPlaceholder: true },
-
-  { name: "Siti Nurhaliza", role: "Pelanggan · Semarang",
-    quote: "Pesan untuk acara ulang tahun, semuanya rapi dari menu sampai tempat. Tamu-tamu pada muji rasanya. Terima kasih Kurnia!",
-    avatar: "https://randomuser.me/api/portraits/women/12.jpg", avatarPlaceholder: true },
-
-  { name: "Reza Maulana", role: "Mahasiswa · Bandung",
-    quote: "Harga bersahabat untuk porsi dan kualitas seafood sesegar ini. Cumi goreng tepungnya renyah, sambalnya mantap.",
-    avatar: "https://randomuser.me/api/portraits/men/22.jpg", avatarPlaceholder: true },
-
-  { name: "Maria Lestari", role: "Ibu rumah tangga · Surabaya",
-    quote: "Tempat favorit kumpul keluarga tiap akhir pekan. Bersih, halal, dan stafnya selalu sigap membantu. Puas!",
-    avatar: "https://randomuser.me/api/portraits/women/90.jpg", avatarPlaceholder: true },
+window.KS_REVIEWS_SAMPLE = [
+  {
+    branch: "Yogyakarta", slug: "yogyakarta",
+    rating: null, userRatingsTotal: null, // agregat asli datang dari API saat tersambung
+    reviews: [
+      { authorName: "Contoh Pelanggan", rating: 5,
+        text: "Seafoodnya segar, bisa pilih ikan hidup langsung. Tempat luas dan nyaman untuk keluarga, ada live music. (Teks contoh — bukan ulasan asli.)",
+        relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
+        dataPlaceholder: true },
+      { authorName: "Contoh Pelanggan", rating: 4,
+        text: "Pelayanan ramah dan porsinya besar. Cocok buat acara kantor di ruang VIP. (Teks contoh — bukan ulasan asli.)",
+        relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
+        dataPlaceholder: true }
+    ]
+  },
+  {
+    branch: "Semarang", slug: "semarang",
+    rating: null, userRatingsTotal: null,
+    reviews: [
+      { authorName: "Contoh Pelanggan", rating: 5,
+        text: "Ruang VIP-nya fleksibel untuk gathering, makanannya enak. Anak-anak betah ada playground. (Teks contoh — bukan ulasan asli.)",
+        relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
+        dataPlaceholder: true }
+    ]
+  },
+  {
+    branch: "Bandung", slug: "bandung",
+    rating: null, userRatingsTotal: null,
+    reviews: [
+      { authorName: "Contoh Pelanggan", rating: 5,
+        text: "Kepiting saus padangnya juara, kids-friendly, dekat pusat kota. Pasti balik lagi. (Teks contoh — bukan ulasan asli.)",
+        relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
+        dataPlaceholder: true }
+    ]
+  },
+  {
+    branch: "Bali (Tabanan)", slug: "bali",
+    rating: null, userRatingsTotal: null,
+    reviews: [
+      { authorName: "Contoh Pelanggan", rating: 5,
+        text: "Mampir saat ke Tanah Lot, parkir luas dan tempat bersih. Ikan bakarnya mantap. (Teks contoh — bukan ulasan asli.)",
+        relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
+        dataPlaceholder: true }
+    ]
+  },
+  {
+    branch: "Surabaya", slug: "surabaya",
+    rating: null, userRatingsTotal: null,
+    reviews: [
+      { authorName: "Contoh Pelanggan", rating: 4,
+        text: "Cabang baru dengan karaoke dan beberapa VIP room. Seafood segar dari akuarium. (Teks contoh — bukan ulasan asli.)",
+        relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
+        dataPlaceholder: true }
+    ]
+  }
 ];
+
+/* Pengingat internal (TIDAK tampil ke pengunjung): tegaskan ini placeholder. */
+(function () {
+  try {
+    if (window.console) {
+      console.warn(
+        "[Kurnia Seafood] ULASAN = CONTOH/PLACEHOLDER. Isi REVIEWS_ENDPOINT (config.js) " +
+        "+ placeId tiap cabang (branches.js) lalu deploy proxy Apps Script untuk ulasan Google asli."
+      );
+    }
+  } catch (e) {}
+})();
 </script>
 <style>*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff}
 .ks-preview-note{font-family:'Alexandria',sans-serif;background:#021526;color:#F6F1E7;text-align:center;padding:10px;font-size:13px}.ks-preview-note b{color:#FF6B6B}</style>
@@ -1195,93 +1262,269 @@ window.KS_TESTIMONIALS = [
 
 <!-- 04-review -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION KATA PELANGGAN ("Wall of Love")
-     Adaptasi layout grid testimonial (shadcn "Wall of Love") ke vanilla
-     HTML/CSS bergaya brand. Dirender dari window.KS_TESTIMONIALS.
-     PRASYARAT: pasang data/testimonials.js SEKALI sebelum section ini.
-     Avatar = placeholder pihak ketiga → lihat PLACEHOLDERS.md.
+     KURNIA SEAFOOD · SECTION "KATA PELANGGAN" (Ulasan Google)
+     ------------------------------------------------------------
+     Menampilkan ULASAN ASLI dari Google via Google Places Details API,
+     ditarik lewat PROXY server (REVIEWS_ENDPOINT di data/config.js →
+     integrations/google-reviews-apps-script.gs). API key Google TIDAK
+     pernah ada di klien.
+
+     ALUR DATA:
+       1. Tampilkan ulasan CONTOH (window.KS_REVIEWS_SAMPLE) sebagai placeholder
+          bertanda "CONTOH" — supaya section tidak kosong sebelum proxy aktif.
+       2. Bila REVIEWS_ENDPOINT terisi & ada placeId cabang → fetch proxy,
+          ganti dengan ulasan ASLI Google (badge CONTOH hilang).
+       3. Bila endpoint kosong / proxy gagal / tidak ada ulasan → tetap pakai
+          placeholder, JANGAN tampilkan error ke pengunjung.
+
+     KEPATUHAN GOOGLE (WAJIB — ditegakkan di renderer di bawah):
+       • Tampilkan NAMA penulis + FOTO profil bila ada.
+       • Sertakan ATRIBUSI Google + link ke ulasan di Google (authorUrl).
+       • JANGAN mengubah/menyaring/memotong MAKNA teks ulasan. Boleh truncate
+         tampilan panjang dengan "selengkapnya" yang MENGARAH ke Google (teks
+         penuh tetap bisa dibaca di Google) — tapi isi tidak diedit.
+       • Jangan cache ulasan permanen sebagai milik sendiri; ditarik tiap muat
+         halaman (cache pendek opsional ada di sisi proxy, sesuai kebijakan).
+
+     BATAS API: Google mengembalikan MAKSIMAL 5 ulasan per lokasi dan TIDAK bisa
+     difilter "terbaik". Jadi per cabang aktif maksimal 5 kartu.
+
+     PRASYARAT: pasang data/config.js, data/branches.js, data/google-reviews.js
+     SEKALI sebelum section ini.
      ============================================================ -->
-<section class="ks-wol" id="review">
-  <div class="ks-wol__inner">
-    <header class="ks-wol__head">
+<section class="ks-rev" id="review">
+  <div class="ks-rev__inner">
+    <header class="ks-rev__head">
       <span class="ks-kicker">
         <svg viewBox="0 0 24 24"><path d="M12 17.3 6.2 21l1.6-6.6L3 9.8l6.7-.5L12 3l2.3 6.3 6.7.5-4.8 4.6L17.8 21z"/></svg>
         Kata Pelanggan
       </span>
-      <h2 class="ks-wol__title">Dicintai keluarga di lima kota</h2>
-      <p class="ks-wol__rating">
-        <span class="ks-wol__stars" aria-hidden="true">★★★★★</span>
-        <strong>4.9</strong> dari <strong>26.586</strong> ulasan · Google &amp; GoFood
+      <h2 class="ks-rev__title">Dicintai keluarga di lima kota</h2>
+      <p class="ks-rev__sub">Ulasan langsung dari pelanggan kami di Google.</p>
+
+      <!-- Atribusi Google (wajib) + chip rating agregat per cabang (bila tersedia dari API) -->
+      <div class="ks-rev__aggs" aria-label="Rating per cabang"></div>
+      <p class="ks-rev__attr">
+        <span class="ks-rev__gicon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"/></svg>
+        </span>
+        Ulasan diberdayakan oleh Google
       </p>
     </header>
 
-    <div class="ks-wol__grid" aria-live="polite"></div>
+    <div class="ks-rev__grid" aria-live="polite"></div>
   </div>
 
   <style>
-  .ks-wol{
+  .ks-rev{
     --navy:#14263D; --red:#D80000; --blue:#0056AC; --muted:#5d6b7a; --line:#eae6dc; --soft:#E7F0FB;
+    --star:#F5B301;
     --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
     background:#F8F7F2; font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
   }
-  .ks-wol__inner{ max-width:1140px; margin:0 auto; }
-  .ks-wol__head{ text-align:center; margin-bottom:40px; }
+  .ks-rev__inner{ max-width:1140px; margin:0 auto; }
+  .ks-rev__head{ text-align:center; margin-bottom:36px; }
   .ks-kicker{ display:inline-flex; align-items:center; gap:9px; font-family:var(--fl); font-weight:600;
     font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--red); }
   .ks-kicker svg{ width:18px; height:18px; fill:var(--red); }
-  .ks-wol__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
+  .ks-rev__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
     font-size:clamp(2rem,4.4vw,3.1rem); margin:12px 0 0; letter-spacing:-.01em; }
-  .ks-wol__rating{ font-family:var(--fl); font-weight:300; font-size:1rem; color:var(--muted); margin:14px 0 0; }
-  .ks-wol__rating strong{ color:var(--navy); font-weight:700; }
-  .ks-wol__stars{ color:#F5B301; letter-spacing:2px; }
+  .ks-rev__sub{ font-family:var(--fl); font-weight:300; font-size:1rem; color:var(--muted); margin:12px 0 0; }
 
-  /* Wall of love: kolom masonry (cards mengalir, tidak terpotong) */
-  .ks-wol__grid{ columns:3; column-gap:18px; }
-  .ks-tm{ break-inside:avoid; -webkit-column-break-inside:avoid; margin:0 0 18px;
-    background:#fff; border:1px solid var(--line); border-radius:18px; padding:22px 22px 20px;
-    box-shadow:0 12px 30px -22px rgba(20,38,61,.45); }
-  .ks-tm__top{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:12px; }
-  .ks-tm__av{ position:relative; width:44px; height:44px; border-radius:50%; overflow:hidden; flex:none;
+  /* chip rating agregat per cabang (muncul hanya bila API mengirim rating) */
+  .ks-rev__aggs{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:18px 0 0; }
+  .ks-rev__aggs:empty{ display:none; }
+  .ks-agg{ display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line);
+    border-radius:999px; padding:7px 13px; font-family:var(--fl); font-size:13px; color:var(--navy);
+    box-shadow:0 8px 22px -18px rgba(20,38,61,.5); }
+  .ks-agg__city{ font-weight:600; }
+  .ks-agg__num{ font-weight:700; }
+  .ks-agg__star{ color:var(--star); }
+  .ks-agg__total{ color:var(--muted); font-weight:300; }
+
+  .ks-rev__attr{ display:inline-flex; align-items:center; gap:7px; margin:16px 0 0;
+    font-family:var(--fl); font-weight:400; font-size:12.5px; color:var(--muted); }
+  .ks-rev__gicon svg{ width:15px; height:15px; display:block; }
+
+  /* Grid kartu SERAGAM (bento custom dilepas: sumber ulasan kini dari Google). */
+  .ks-rev__grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:18px; align-items:stretch; }
+  .ks-rc{ display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:22px 22px 18px; box-shadow:0 12px 30px -22px rgba(20,38,61,.45); position:relative; }
+
+  .ks-rc__top{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:12px; }
+  .ks-rc__av{ position:relative; width:44px; height:44px; border-radius:50%; overflow:hidden; flex:none;
     display:grid; place-items:center; background:var(--blue); color:#fff;
     font-family:var(--fl); font-weight:700; font-size:15px; }
-  .ks-tm__av img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .ks-tm__name{ font-family:var(--fl); font-weight:600; font-size:.98rem; color:var(--navy); margin:0; line-height:1.2; }
-  .ks-tm__role{ font-family:var(--fl); font-weight:300; font-size:12.5px; color:var(--muted); }
-  .ks-tm__stars{ color:#F5B301; font-size:13px; letter-spacing:1px; margin-top:12px; }
-  .ks-tm__quote{ font-family:var(--fh); font-size:1.06rem; line-height:1.55; color:#33414f; margin:8px 0 0; }
+  .ks-rc__av img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .ks-rc__who{ min-width:0; }
+  .ks-rc__name{ font-family:var(--fl); font-weight:600; font-size:.98rem; color:var(--navy); margin:0; line-height:1.2;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ks-rc__meta{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:3px; }
+  .ks-rc__branch{ font-family:var(--fl); font-weight:600; font-size:11px; letter-spacing:.04em; color:var(--blue);
+    background:var(--soft); border-radius:999px; padding:2px 9px; }
+  .ks-rc__time{ font-family:var(--fl); font-weight:300; font-size:12px; color:var(--muted); }
 
-  @media (max-width:900px){ .ks-wol__grid{ columns:2; } }
-  @media (max-width:560px){ .ks-wol__grid{ columns:1; } }
+  .ks-rc__stars{ color:var(--star); font-size:14px; letter-spacing:1px; margin-top:13px; }
+  .ks-rc__stars .off{ color:#dcd9cf; }
+  .ks-rc__text{ font-family:var(--fh); font-size:1.05rem; line-height:1.55; color:#33414f; margin:8px 0 0; }
+  .ks-rc__more{ font-family:var(--fl); font-weight:600; font-size:13px; color:var(--blue); text-decoration:none; }
+  .ks-rc__more:hover{ text-decoration:underline; }
+
+  .ks-rc__foot{ margin-top:auto; padding-top:14px; }
+  .ks-rc__glink{ display:inline-flex; align-items:center; gap:6px; font-family:var(--fl); font-weight:500;
+    font-size:12px; color:var(--muted); text-decoration:none; }
+  .ks-rc__glink svg{ width:13px; height:13px; }
+  .ks-rc__glink:hover{ color:var(--navy); }
+
+  /* Badge CONTOH untuk ulasan placeholder (bukan ulasan asli) */
+  .ks-rc[data-placeholder="true"]{ border-style:dashed; }
+  .ks-rc__ph{ position:absolute; top:14px; right:14px; font-family:var(--fl); font-weight:700; font-size:10px;
+    letter-spacing:.12em; color:#9a6a00; background:#FFF3D6; border:1px solid #F2D98A; border-radius:6px; padding:3px 7px; }
+
+  .ks-rev__empty{ text-align:center; color:#888; font-family:var(--fl); }
+
+  @media (max-width:560px){ .ks-rev__grid{ grid-template-columns:1fr; } }
   </style>
 
   <script>
   (function () {
-    var grid = document.querySelector('#review .ks-wol__grid');
-    var data = window.KS_TESTIMONIALS || [];
+    var root = document.getElementById('review');
+    var grid = root.querySelector('.ks-rev__grid');
+    var aggsWrap = root.querySelector('.ks-rev__aggs');
     if (!grid) return;
-    if (!data.length) {
-      grid.innerHTML = '<p style="text-align:center;color:#888;font-family:Alexandria,sans-serif">' +
-        'Data ulasan belum dimuat. Pasang <code>data/testimonials.js</code> sebelum section ini.</p>';
+
+    var cfg = window.KS_CONFIG || {};
+    var branches = (window.KS_BRANCHES || []).filter(function (b) {
+      // Cabang upcoming TIDAK punya ulasan/Place ID → dikecualikan dari section ini.
+      return b.status !== 'upcoming';
+    });
+
+    function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
+    function initials(name){ return String(name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w.charAt(0);}).join('').toUpperCase() || '?'; }
+
+    function stars(n){
+      n = Math.max(0, Math.min(5, Math.round(Number(n)||0)));
+      var s = '';
+      for (var i=0;i<5;i++) s += (i<n) ? '★' : '<span class="off">★</span>';
+      return s;
+    }
+
+    // KEPATUHAN: teks ulasan TIDAK diedit. Untuk tampilan, truncate panjang pada
+    // batas kata dan tautkan "selengkapnya" ke ulasan di Google (authorUrl) — teks
+    // penuh tetap dapat dibaca di sumbernya, isi tidak diubah/disensor.
+    var MAX = 280;
+    function renderText(text, authorUrl){
+      var t = String(text || '');
+      if (t.length <= MAX) return esc(t);
+      var cut = t.slice(0, MAX);
+      var sp = cut.lastIndexOf(' ');
+      if (sp > 160) cut = cut.slice(0, sp);
+      var more = authorUrl
+        ? ' <a class="ks-rc__more" href="' + esc(authorUrl) + '" target="_blank" rel="noopener nofollow">selengkapnya di Google ›</a>'
+        : ' …';
+      return esc(cut) + '…' + more;
+    }
+
+    // Bangun daftar "groups" seragam: { branch, slug, rating, userRatingsTotal, reviews:[...] }
+    // dari respons proxy (places keyed by placeId), memakai label cabang dari KS_BRANCHES.
+    function groupsFromLive(resp){
+      var out = [];
+      branches.forEach(function (b) {
+        if (!b.placeId) return;
+        var p = resp && resp.places && resp.places[b.placeId];
+        if (!p || p.error || !p.reviews || !p.reviews.length) return;
+        out.push({ branch: b.city, slug: b.slug, rating: p.rating, userRatingsTotal: p.userRatingsTotal, reviews: p.reviews });
+      });
+      return out;
+    }
+
+    function renderAggregates(groups){
+      var chips = groups.filter(function (g) { return g.rating; }).map(function (g) {
+        var total = g.userRatingsTotal ? ' <span class="ks-agg__total">(' + Number(g.userRatingsTotal).toLocaleString('id-ID') + ')</span>' : '';
+        return '<span class="ks-agg"><span class="ks-agg__city">' + esc(g.branch) + '</span>' +
+               '<span class="ks-agg__star">★</span><span class="ks-agg__num">' + esc(Number(g.rating).toFixed(1)) + '</span>' + total + '</span>';
+      }).join('');
+      aggsWrap.innerHTML = chips; // kosong → CSS menyembunyikan
+    }
+
+    function renderCards(groups){
+      // Ratakan groups → kartu, tiap kartu membawa label cabang.
+      var cards = [];
+      groups.forEach(function (g) {
+        (g.reviews || []).forEach(function (rv) {
+          var isPh = !!rv.dataPlaceholder;
+          var phAttr = isPh ? ' data-placeholder="true"' : '';
+          var phBadge = isPh ? '<span class="ks-rc__ph">CONTOH</span>' : '';
+
+          // Foto profil Google bila ada; gagal → fallback inisial. referrerpolicy
+          // no-referrer agar foto Google tetap tampil di domain lain.
+          var img = rv.profilePhotoUrl
+            ? '<img src="' + esc(rv.profilePhotoUrl) + '" alt="' + esc(rv.authorName) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">'
+            : '';
+
+          var time = rv.relativeTime ? '<span class="ks-rc__time">' + esc(rv.relativeTime) + '</span>' : '';
+
+          // Link wajib ke ulasan/profil di Google (atribusi). Fallback ke pencarian
+          // Google Maps cabang bila authorUrl tak tersedia.
+          var gUrl = rv.authorUrl || ('https://www.google.com/maps/search/' + encodeURIComponent('Kurnia Seafood ' + g.branch));
+          var gLink = '<a class="ks-rc__glink" href="' + esc(gUrl) + '" target="_blank" rel="noopener nofollow">' +
+              '<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"/></svg>' +
+              'Lihat di Google</a>';
+
+          cards.push(
+            '<figure class="ks-rc"' + phAttr + '>' + phBadge +
+              '<div class="ks-rc__top">' +
+                '<div class="ks-rc__av" aria-hidden="true">' + esc(initials(rv.authorName)) + img + '</div>' +
+                '<div class="ks-rc__who">' +
+                  '<p class="ks-rc__name">' + esc(rv.authorName || 'Pengguna Google') + '</p>' +
+                  '<div class="ks-rc__meta"><span class="ks-rc__branch">' + esc(g.branch) + '</span>' + time + '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="ks-rc__stars" aria-label="' + esc((Math.round(rv.rating)||0)) + ' dari 5">' + stars(rv.rating) + '</div>' +
+              '<blockquote class="ks-rc__text">' + renderText(rv.text, rv.authorUrl) + '</blockquote>' +
+              '<div class="ks-rc__foot">' + gLink + '</div>' +
+            '</figure>'
+          );
+        });
+      });
+
+      if (!cards.length) {
+        grid.innerHTML = '<p class="ks-rev__empty">Ulasan belum tersedia.</p>';
+        return;
+      }
+      grid.innerHTML = cards.join('');
+    }
+
+    function render(groups){
+      renderAggregates(groups);
+      renderCards(groups);
+    }
+
+    // 1) Tampilkan placeholder dulu (ditandai CONTOH), supaya tidak kosong.
+    var sample = window.KS_REVIEWS_SAMPLE || [];
+    render(sample);
+
+    // 2) Coba tarik ulasan ASLI via proxy bila dikonfigurasi.
+    var endpoint = cfg.REVIEWS_ENDPOINT;
+    var ids = branches.map(function (b) { return b.placeId; }).filter(Boolean);
+    if (!endpoint || !ids.length) {
+      // Belum dikonfigurasi (endpoint kosong / belum ada placeId) → tetap placeholder.
       return;
     }
-    function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
-    function initials(name){ return name.split(/\s+/).slice(0,2).map(function(w){return w.charAt(0);}).join('').toUpperCase(); }
 
-    grid.innerHTML = data.map(function (t) {
-      var ph = t.avatarPlaceholder ? ' data-placeholder="true"' : '';
-      var img = t.avatar
-        ? '<img src="' + esc(t.avatar) + '" alt="' + esc(t.name) + '" loading="lazy"' + ph + ' onerror="this.remove()">'
-        : '';
-      return '<figure class="ks-tm">' +
-          '<div class="ks-tm__top">' +
-            '<div class="ks-tm__av" aria-hidden="true">' + esc(initials(t.name)) + img + '</div>' +
-            '<figcaption><p class="ks-tm__name">' + esc(t.name) + '</p>' +
-              '<span class="ks-tm__role">' + esc(t.role || '') + '</span></figcaption>' +
-          '</div>' +
-          '<div class="ks-tm__stars" aria-label="5 dari 5">★★★★★</div>' +
-          '<blockquote class="ks-tm__quote">' + esc(t.quote) + '</blockquote>' +
-        '</figure>';
-    }).join('');
+    fetch(endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') + 'ids=' + encodeURIComponent(ids.join(',')), {
+      method: 'GET'
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (resp) {
+        if (!resp || !resp.ok) return; // gagal logis → biarkan placeholder
+        var live = groupsFromLive(resp);
+        if (live.length) render(live); // ada ulasan asli → ganti placeholder
+      })
+      .catch(function (err) {
+        // Jaringan/proxy gagal → JANGAN tampilkan error; placeholder tetap tampil.
+        if (window.console) console.warn('[Kurnia] ulasan Google gagal dimuat (pakai placeholder):', err);
+      });
   })();
   </script>
 </section>

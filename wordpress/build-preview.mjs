@@ -32,7 +32,7 @@ const AMENITIES = {
   surabaya:   ['Aula utama','Ruang VIP','Karaoke','Ruang meeting','Seafood market','Halal'],
 };
 
-const DATA_FILES = ['data/config.js','data/branches.js','data/menu.js','data/promos.js','data/testimonials.js'];
+const DATA_FILES = ['data/config.js','data/branches.js','data/menu.js','data/promos.js','data/google-reviews.js'];
 const ORDER = ['01-hero','12-spotlight','13-new-menu','14-signature','15-locations','07-tentang','11-cabang','08-galeri','04-review','05-kabar','10-faq','06-reservasi','09-footer'];
 
 /* ---------- load data lewat sandbox (shim window) ---------- */

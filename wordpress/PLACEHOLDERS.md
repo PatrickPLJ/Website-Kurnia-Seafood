@@ -17,13 +17,17 @@ resmi `@kurnia.seafood`). Sumber data foto terpusat di `data/menu.js`,
 | New Menu | `data/menu.js` (isNew) | 3 | ganti `image` + isi `name`/`desc` asli (hapus `placeholder`) |
 | Signature | `data/menu.js` (signature) | 5 | ganti `image` dgn foto hidangan resmi |
 | Foto cabang (Locations + tab Cabang) | `data/branches.js` (`photo`) | 5 | ganti `photo` tiap cabang aktif; set `photoPlaceholder:false` setelah diganti |
-| Ulasan + avatar (Kata Pelanggan) | `data/testimonials.js` | 9 | ganti quote dgn ulasan asli (Google/GoFood); avatar randomuser = placeholder |
+| Ulasan (Kata Pelanggan) | `data/google-reviews.js` | 6 | ulasan CONTOH (badge "CONTOH" + `data-placeholder="true"`). Tampil hanya selama proxy ulasan Google belum aktif. Aktifkan ulasan ASLI: isi `REVIEWS_ENDPOINT` (`data/config.js`) + `placeId` tiap cabang (`data/branches.js`) lalu deploy `integrations/google-reviews-apps-script.gs` |
 | og:image (share/SEO) | `build-preview.mjs` (OG_IMAGE) | 1 | ganti URL foto resmi Kurnia (≥1200px) sebelum live |
 
 ## Foto sample lama (juga sebaiknya diganti)
 Section berikut masih memakai foto contoh Unsplash: `08-galeri.html`,
-`05-kabar.html`, `04-review.html`, `07-tentang.html`, `11-cabang.html`
+`05-kabar.html`, `07-tentang.html`, `11-cabang.html`
 (map = embed Google Maps asli, bukan foto, tidak perlu diganti).
+
+Catatan: `04-review.html` (Kata Pelanggan) kini menampilkan ulasan Google —
+foto profil datang dari Google (bila ada) atau jatuh ke inisial; tidak ada
+foto Unsplash di sini. Selama proxy belum aktif, isinya ulasan CONTOH bertanda.
 
 ## Catatan
 - **Peta** di Locations & Cabang memakai embed Google Maps dari koordinat asli

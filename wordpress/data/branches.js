@@ -9,6 +9,14 @@
  * Format WA: nomor tanpa '+'/spasi (format wa.me).
  * Field verify:true = data dari artikel pihak ketiga → WAJIB dikonfirmasi tim
  * sebelum produksi (lihat peringatan console di bawah).
+ *
+ * Field placeId = Google Place ID cabang, dipakai section "Kata Pelanggan"
+ * untuk menarik ulasan Google via proxy server (lihat REVIEWS_ENDPOINT di
+ * config.js + integrations/google-reviews-apps-script.gs). Place ID BERBEDA
+ * dari koordinat geo dan harus diambil terpisah lewat Google "Place ID Finder".
+ * Place ID bukan rahasia (boleh tampil di klien); API key Google yang rahasia
+ * dan HANYA hidup di server proxy. Cabang "upcoming" belum punya ulasan/Place ID
+ * → sengaja TIDAK diberi placeId.
  * ====================================================================== */
 window.KS_BRANCHES = [
   {
@@ -16,6 +24,7 @@ window.KS_BRANCHES = [
     city: "Yogyakarta",
     name: "Kurnia Seafood Yogyakarta",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6285229235758",
@@ -42,6 +51,7 @@ window.KS_BRANCHES = [
     city: "Semarang",
     name: "Kurnia Seafood Semarang",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281339505758",
@@ -69,6 +79,7 @@ window.KS_BRANCHES = [
     city: "Bandung",
     name: "Kurnia Seafood Bandung",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281372405758",
@@ -98,6 +109,7 @@ window.KS_BRANCHES = [
     city: "Bali (Tabanan)",
     name: "Kurnia Seafood Bali",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281338555758",
@@ -123,6 +135,7 @@ window.KS_BRANCHES = [
     city: "Surabaya",
     name: "Kurnia Seafood Surabaya",
     status: "active",
+    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
     photo: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=900&q=72",
     photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
     whatsapp: "6281385375758",
