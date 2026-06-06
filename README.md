@@ -55,9 +55,9 @@ lalu ikuti `wordpress/PANDUAN-ELEMENTOR.md` untuk memasangnya.
 
 ---
 
-## Arsip: prototipe awal (tidak dipakai)
+## Catatan
 
-Folder `html-tailwind/` dan `nextjs/` adalah eksplorasi **arah pertama** (konsep
-"luxury navy", standalone). Setelah arah final ditetapkan (**tetap WordPress** +
-brand resmi yang ceria), keduanya **tidak lagi dipakai** dan hanya disimpan
-sebagai referensi. Boleh dihapus kapan saja.
+Prototipe awal `html-tailwind/` & `nextjs/` (eksplorasi "luxury navy", standalone)
+sudah **dihapus** dari repo karena tidak dipakai & memuat konten contoh lama —
+deliverable final = folder `wordpress/`. Bila perlu, keduanya masih bisa diambil
+dari **histori git**.
