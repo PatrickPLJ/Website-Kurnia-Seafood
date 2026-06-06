@@ -150,20 +150,24 @@ window.KS_BRANCHES = [
   {
     slug: "jakarta-pondok-indah",
     city: "Jakarta",
-    area: "Pondok Indah",
+    area: "Pondok Indah (Kebayoran Lama)",
     name: "Kurnia Seafood Jakarta",
     status: "upcoming",
-    openingEstimate: "Akhir 2026" // perkiraan — TODO: konfirmasi final/estimasi dgn tim
-    // internal: menempati bekas lokasi resto (TODO: konfirmasi ejaan nama). Jangan ditampilkan di UI.
+    openingEstimate: "Akhir 2026", // perkiraan — TODO: konfirmasi final/estimasi dgn tim
+    // INTERNAL — JANGAN render di UI sampai buka:
+    address: "Jl. Metro Pondok Indah No.18, RT.5/RW.14, Pondok Pinang, Kec. Kebayoran Lama, Jakarta Selatan, DKI Jakarta 12310"
+    // internal note: konfirmasi ejaan nama lokasi bekas resto dgn tim (referensi internal saja).
   },
   {
     slug: "bandung-2",
     city: "Bandung",
-    area: "", // TODO: isi area/kawasan spesifik cabang ke-2 bila sudah pasti
+    area: "Bandung Wetan (Citarum)",
     name: "Kurnia Seafood Bandung (Cabang ke-2)",
     status: "upcoming",
-    openingEstimate: "September 2026" // perkiraan — TODO: konfirmasi final/estimasi dgn tim
-    // internal: menempati bekas lokasi resto Hello Summer. Jangan ditampilkan di UI.
+    openingEstimate: "September 2026", // perkiraan — TODO: konfirmasi final/estimasi dgn tim
+    // INTERNAL — JANGAN render di UI sampai buka:
+    address: "Jl. L.L.R.E. Martadinata No.89A, Citarum, Bandung Wetan, Kota Bandung, Jawa Barat 40115"
+    // internal note: bekas lokasi resto Hello Summer.
   }
 ];
 

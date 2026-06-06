@@ -8,7 +8,7 @@
 <script src="data/menu.js"></script>
 <script src="data/promos.js"></script>
 <style>*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff}.ks-preview-note{font-family:'Alexandria',sans-serif;background:#021526;color:#F6F1E7;text-align:center;padding:10px;font-size:13px}.ks-preview-note b{color:#FF6B6B}</style>
-</head><body><div class="ks-preview-note">PREVIEW · tombol Kembali ke Beranda (link) + capture reservasi best-effort.</div>
+</head><body><div class="ks-preview-note">PREVIEW · cabang upcoming (alamat internal tdk dirender).</div>
 
 <!-- 01-hero -->
 <!-- ============================================================
@@ -405,6 +405,7 @@
   .ks-up-card__city{ font-family:var(--fh); font-weight:600; font-size:1.5rem; color:var(--navy); }
   .ks-up-card__area{ font-family:var(--fl); font-weight:400; font-size:.95rem; color:var(--muted); margin-top:2px; }
   .ks-up-card__eta{ display:inline-block; margin-top:12px; font-family:var(--fl); font-weight:600; font-size:12px; letter-spacing:.06em; color:#fff; background:var(--blue); padding:7px 16px; border-radius:999px; }
+  .ks-up-card__est{ font-weight:400; opacity:.8; }
 
   @media (max-width:900px){ .ks-locs__grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:560px){ .ks-locs__grid, .ks-locs__upgrid{ grid-template-columns:1fr; } }
@@ -450,7 +451,7 @@
     if (up.length) {
       upWrap.querySelector('.ks-locs__upgrid').innerHTML = up.map(function (b) {
         var area = b.area ? '<div class="ks-up-card__area">' + esc(b.area) + '</div>' : '';
-        var eta = b.openingEstimate ? '<span class="ks-up-card__eta">Segera Hadir — ' + esc(b.openingEstimate) + '</span>' : '<span class="ks-up-card__eta">Segera Hadir</span>';
+        var eta = b.openingEstimate ? '<span class="ks-up-card__eta">Segera Hadir — ' + esc(b.openingEstimate) + ' <span class="ks-up-card__est">(perkiraan)</span></span>' : '<span class="ks-up-card__eta">Segera Hadir</span>';
         return '<div class="ks-up-card"><div class="ks-up-card__city">' + esc(b.city) + '</div>' + area + eta + '</div>';
       }).join('');
       upWrap.hidden = false;   // tampilkan hanya bila ada upcoming
