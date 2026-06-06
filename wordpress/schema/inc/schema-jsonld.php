@@ -36,7 +36,7 @@ function ks_schema_branches() {
 			'page_id'   => 0, // TODO: isi ID halaman bila slug berbeda
 			'city'      => 'Yogyakarta',
 			'name'      => 'Kurnia Seafood Yogyakarta',
-			'telephone' => '+62274488000', // TODO: pakai nomor WA bila ingin (samakan dgn GBP)
+			'telephone' => '+6285229235758', // kanonik …5758
 			'image'     => '', // TODO: URL foto cabang (>=1200px). Kosong = pakai featured image.
 			'street'    => 'Jl. Laksda Adisucipto No.48B, Ngentak, Caturtunggal, Kec. Depok',
 			'locality'  => 'Kabupaten Sleman',
@@ -71,9 +71,7 @@ function ks_schema_branches() {
 			'page_id'   => 0,
 			'city'      => 'Bandung',
 			'name'      => 'Kurnia Seafood Bandung',
-			// TODO: NAP Bandung perlu disamakan. GBP: +62 821-2188-2122,
-			// halaman Kontak situs: +62 813-7240-5758. Pilih satu & samakan di GBP.
-			'telephone' => '+6282121882122',
+			'telephone' => '+6281372405758', // kanonik …5758 (final)
 			'image'     => '',
 			'street'    => 'Jl. Prof. Dr. Sutami No.100, Sukarasa, Kec. Sukasari',
 			'locality'  => 'Kota Bandung',
@@ -169,6 +167,16 @@ function ks_schema_restaurant( $b, $slug = '' ) {
 		$url = home_url( '/' );
 	}
 
+	// Cabang Bali berada di domain terpisah.
+	$is_bali = ( $slug === 'kurnia-seafood-bali' );
+	if ( $is_bali ) {
+		$url = apply_filters( 'ks_schema_bali_url', 'https://kurniaseafoodbali.com/' );
+	}
+
+	// sameAs silang: Bali ↔ domain utama; lainnya cukup IG.
+	$same_as = array( 'https://www.instagram.com/kurnia.seafood/' );
+	if ( $is_bali ) { $same_as[] = home_url( '/' ); }
+
 	$data = array(
 		'@context'            => 'https://schema.org',
 		'@type'               => 'Restaurant',
@@ -196,8 +204,8 @@ function ks_schema_restaurant( $b, $slug = '' ) {
 		),
 		'openingHoursSpecification' => ks_schema_hours( $b['hours'] ),
 		'brand'               => array( '@type' => 'Brand', 'name' => 'Kurnia Seafood' ),
-		'parentOrganization'  => array( '@type' => 'Organization', 'name' => 'Kurnia Jatim Group' ),
-		'sameAs'              => array( 'https://www.instagram.com/kurnia.seafood/' ),
+		'parentOrganization'  => array( '@type' => 'Organization', 'name' => 'Kurnia Group' ),
+		'sameAs'              => $same_as,
 	);
 
 	// Gambar: pakai 'image' eksplisit, jika kosong coba featured image halaman.
@@ -295,8 +303,8 @@ function ks_schema_organization() {
 		'name'               => 'Kurnia Seafood',
 		'url'                => home_url( '/' ),
 		'logo'               => $logo,
-		'parentOrganization' => array( '@type' => 'Organization', 'name' => 'Kurnia Jatim Group' ),
-		'sameAs'             => array( 'https://www.instagram.com/kurnia.seafood/' ),
+		'parentOrganization' => array( '@type' => 'Organization', 'name' => 'Kurnia Group' ),
+		'sameAs'             => array( 'https://www.instagram.com/kurnia.seafood/', 'https://kurniaseafoodbali.com/' ),
 	);
 }
 

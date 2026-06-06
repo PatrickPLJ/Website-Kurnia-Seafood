@@ -18,6 +18,7 @@ resmi `@kurnia.seafood`). Sumber data foto terpusat di `data/menu.js`,
 | Signature | `data/menu.js` (signature) | 5 | ganti `image` dgn foto hidangan resmi |
 | Foto cabang (Locations + tab Cabang) | `data/branches.js` (`photo`) | 5 | ganti `photo` tiap cabang aktif; set `photoPlaceholder:false` setelah diganti |
 | Ulasan + avatar (Kata Pelanggan) | `data/testimonials.js` | 9 | ganti quote dgn ulasan asli (Google/GoFood); avatar randomuser = placeholder |
+| og:image (share/SEO) | `build-preview.mjs` (OG_IMAGE) | 1 | ganti URL foto resmi Kurnia (≥1200px) sebelum live |
 
 ## Foto sample lama (juga sebaiknya diganti)
 Section berikut masih memakai foto contoh Unsplash: `08-galeri.html`,
