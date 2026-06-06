@@ -57,7 +57,11 @@
   .ks-up-card__est{ font-weight:400; opacity:.8; }
 
   @media (max-width:900px){ .ks-locs__grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .ks-locs__grid, .ks-locs__upgrid{ grid-template-columns:1fr; } }
+  @media (max-width:560px){
+    .ks-locs__grid, .ks-locs__upgrid{ grid-template-columns:1fr; }
+    .ks-loc-card__body{ align-items:center; text-align:center; }   /* center semua di mobile */
+    .ks-loc-card__act{ width:100%; }
+  }
   @media (prefers-reduced-motion: reduce){ .ks-lbtn:hover{ transform:none; } }
   </style>
 
