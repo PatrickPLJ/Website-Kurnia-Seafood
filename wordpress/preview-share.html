@@ -1175,7 +1175,8 @@ window.KS_REVIEWS_SAMPLE = [
       for (var k = 0; k < data.length; k++) { if (data[k].slug === slug) { i = k; break; } }
       if (i < 0) return;
       render(i);
-      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Tidak scrollIntoView di sini: pemilihan tab hanya mengubah konten.
+      // Scroll terjadi via anchor href="#cabang" pada CTA (aksi user), bukan saat load.
     };
 
     render(0);
@@ -1994,7 +1995,8 @@ window.KS_REVIEWS_SAMPLE = [
       if (i < 0) return;
       selectBranch(i);
       goto(2);
-      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Sengaja TIDAK scrollIntoView di sini: preselect hanya MENYETEL nilai.
+      // Scroll terjadi via anchor href="#reservasi" pada CTA (aksi user), bukan saat load.
     };
 
     // --- bind step 2 fields ---

@@ -139,7 +139,8 @@
       for (var k = 0; k < data.length; k++) { if (data[k].slug === slug) { i = k; break; } }
       if (i < 0) return;
       render(i);
-      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Tidak scrollIntoView di sini: pemilihan tab hanya mengubah konten.
+      // Scroll terjadi via anchor href="#cabang" pada CTA (aksi user), bukan saat load.
     };
 
     render(0);
