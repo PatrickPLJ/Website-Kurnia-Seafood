@@ -330,9 +330,9 @@ window.KS_PROMOS = [
  *
  * BENTUK DATA mengikuti field yang dikembalikan Google Places Details API:
  *   group: { branch, slug, rating, userRatingsTotal, reviews:[ review... ] }
- *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl, source }
- *   ("source" = label sumber untuk badge kartu, mis. "Google". Places API selalu
- *    "Google"; nilai lain mis. "GoFood" hanya bila kelak ada sumber data lain.)
+ *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl }
+ *   (Semua ulasan berasal dari Google Places API, jadi badge kartu selalu
+ *    "Google" — tidak perlu field "source".)
  * (Sama persis dengan yang dipetakan dari respons proxy, agar renderer satu jalur.)
  *
  * CATATAN BATAS API (penting untuk ekspektasi tim):
@@ -348,11 +348,11 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Seafoodnya segar, bisa pilih ikan hidup langsung. Tempat luas dan nyaman untuk keluarga, ada live music. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true},
+        dataPlaceholder: true},
       { authorName: "Contoh Pelanggan", rating: 4,
         text: "Pelayanan ramah dan porsinya besar. Cocok buat acara kantor di ruang VIP. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -362,7 +362,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Ruang VIP-nya fleksibel untuk gathering, makanannya enak. Anak-anak betah ada playground. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -372,7 +372,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Kepiting saus padangnya juara, kids-friendly, dekat pusat kota. Pasti balik lagi. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -382,7 +382,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Mampir saat ke Tanah Lot, parkir luas dan tempat bersih. Ikan bakarnya mantap. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -392,7 +392,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 4,
         text: "Cabang baru dengan karaoke dan beberapa VIP room. Seafood segar dari akuarium. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   }
 ];
@@ -1269,7 +1269,7 @@ window.KS_REVIEWS_SAMPLE = [
      Grid kartu ulasan bergaya brand (vanilla HTML/CSS/JS) — layout diadaptasi
      dari pola komponen "review cards" (mis. 21st.dev/shadcn) TANPA framework:
      tidak ada React/shadcn/Tailwind/TS. Ikon Twitter/@username pada komponen
-     asli DIGANTI dengan badge SUMBER (Google/GoFood) + link "Lihat di Google".
+     asli DIGANTI dengan badge sumber Google + link "Lihat di Google".
 
      SUMBER KARTU: Google Places Details API (asli, apa adanya — TIDAK dikurasi,
      TIDAK dikarang). Ditarik lewat PROXY server (REVIEWS_ENDPOINT di
@@ -1402,7 +1402,6 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-rc__src{ display:inline-flex; align-items:center; gap:5px; font-family:var(--fl); font-weight:600;
     font-size:11px; letter-spacing:.02em; border:1px solid var(--line); border-radius:999px; padding:2px 9px; color:var(--navy); background:#fff; }
   .ks-rc__src svg{ width:12px; height:12px; display:block; }
-  .ks-rc__src--gofood{ color:#D80000; border-color:#F5C2C2; background:#FDEDED; }
 
   .ks-rc__stars{ color:var(--star); font-size:14px; letter-spacing:1px; margin-top:13px; }
   .ks-rc__stars .off{ color:#dcd9cf; }
@@ -1467,10 +1466,9 @@ window.KS_REVIEWS_SAMPLE = [
       return s;
     }
 
-    // Badge SUMBER (Google/GoFood) — pengganti ikon Twitter/@username komponen asli.
-    function sourceBadge(src){
-      var s = src || 'Google';
-      if (/gofood/i.test(s)) return '<span class="ks-rc__src ks-rc__src--gofood">GoFood</span>';
+    // Badge sumber — pengganti ikon Twitter/@username komponen asli. Semua ulasan
+    // berasal dari Google Places API, jadi badge SELALU "Google".
+    function sourceBadge(){
       return '<span class="ks-rc__src ks-rc__src--google">' + GOOGLE_SVG + 'Google</span>';
     }
 
@@ -1536,7 +1534,7 @@ window.KS_REVIEWS_SAMPLE = [
             '<div class="ks-rc__av" aria-hidden="true">' + esc(initials(rv.authorName)) + img + '</div>' +
             '<div class="ks-rc__who">' +
               '<p class="ks-rc__name">' + esc(rv.authorName || 'Pengguna Google') + '</p>' +
-              '<div class="ks-rc__meta">' + sourceBadge(rv.source) +
+              '<div class="ks-rc__meta">' + sourceBadge() +
                 '<span class="ks-rc__branch">' + esc(g.branch) + '</span>' + time +
               '</div>' +
             '</div>' +

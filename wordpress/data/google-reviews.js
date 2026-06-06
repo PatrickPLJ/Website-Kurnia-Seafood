@@ -14,9 +14,9 @@
  *
  * BENTUK DATA mengikuti field yang dikembalikan Google Places Details API:
  *   group: { branch, slug, rating, userRatingsTotal, reviews:[ review... ] }
- *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl, source }
- *   ("source" = label sumber untuk badge kartu, mis. "Google". Places API selalu
- *    "Google"; nilai lain mis. "GoFood" hanya bila kelak ada sumber data lain.)
+ *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl }
+ *   (Semua ulasan berasal dari Google Places API, jadi badge kartu selalu
+ *    "Google" — tidak perlu field "source".)
  * (Sama persis dengan yang dipetakan dari respons proxy, agar renderer satu jalur.)
  *
  * CATATAN BATAS API (penting untuk ekspektasi tim):
@@ -32,11 +32,11 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Seafoodnya segar, bisa pilih ikan hidup langsung. Tempat luas dan nyaman untuk keluarga, ada live music. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true},
+        dataPlaceholder: true},
       { authorName: "Contoh Pelanggan", rating: 4,
         text: "Pelayanan ramah dan porsinya besar. Cocok buat acara kantor di ruang VIP. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -46,7 +46,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Ruang VIP-nya fleksibel untuk gathering, makanannya enak. Anak-anak betah ada playground. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -56,7 +56,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Kepiting saus padangnya juara, kids-friendly, dekat pusat kota. Pasti balik lagi. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -66,7 +66,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Mampir saat ke Tanah Lot, parkir luas dan tempat bersih. Ikan bakarnya mantap. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   },
   {
@@ -76,7 +76,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 4,
         text: "Cabang baru dengan karaoke dan beberapa VIP room. Seafood segar dari akuarium. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        source: "Google", dataPlaceholder: true}
+        dataPlaceholder: true}
     ]
   }
 ];

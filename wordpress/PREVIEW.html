@@ -895,7 +895,7 @@
      Grid kartu ulasan bergaya brand (vanilla HTML/CSS/JS) — layout diadaptasi
      dari pola komponen "review cards" (mis. 21st.dev/shadcn) TANPA framework:
      tidak ada React/shadcn/Tailwind/TS. Ikon Twitter/@username pada komponen
-     asli DIGANTI dengan badge SUMBER (Google/GoFood) + link "Lihat di Google".
+     asli DIGANTI dengan badge sumber Google + link "Lihat di Google".
 
      SUMBER KARTU: Google Places Details API (asli, apa adanya — TIDAK dikurasi,
      TIDAK dikarang). Ditarik lewat PROXY server (REVIEWS_ENDPOINT di
@@ -1028,7 +1028,6 @@
   .ks-rc__src{ display:inline-flex; align-items:center; gap:5px; font-family:var(--fl); font-weight:600;
     font-size:11px; letter-spacing:.02em; border:1px solid var(--line); border-radius:999px; padding:2px 9px; color:var(--navy); background:#fff; }
   .ks-rc__src svg{ width:12px; height:12px; display:block; }
-  .ks-rc__src--gofood{ color:#D80000; border-color:#F5C2C2; background:#FDEDED; }
 
   .ks-rc__stars{ color:var(--star); font-size:14px; letter-spacing:1px; margin-top:13px; }
   .ks-rc__stars .off{ color:#dcd9cf; }
@@ -1093,10 +1092,9 @@
       return s;
     }
 
-    // Badge SUMBER (Google/GoFood) — pengganti ikon Twitter/@username komponen asli.
-    function sourceBadge(src){
-      var s = src || 'Google';
-      if (/gofood/i.test(s)) return '<span class="ks-rc__src ks-rc__src--gofood">GoFood</span>';
+    // Badge sumber — pengganti ikon Twitter/@username komponen asli. Semua ulasan
+    // berasal dari Google Places API, jadi badge SELALU "Google".
+    function sourceBadge(){
       return '<span class="ks-rc__src ks-rc__src--google">' + GOOGLE_SVG + 'Google</span>';
     }
 
@@ -1162,7 +1160,7 @@
             '<div class="ks-rc__av" aria-hidden="true">' + esc(initials(rv.authorName)) + img + '</div>' +
             '<div class="ks-rc__who">' +
               '<p class="ks-rc__name">' + esc(rv.authorName || 'Pengguna Google') + '</p>' +
-              '<div class="ks-rc__meta">' + sourceBadge(rv.source) +
+              '<div class="ks-rc__meta">' + sourceBadge() +
                 '<span class="ks-rc__branch">' + esc(g.branch) + '</span>' + time +
               '</div>' +
             '</div>' +
