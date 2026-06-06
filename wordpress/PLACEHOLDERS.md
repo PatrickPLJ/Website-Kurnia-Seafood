@@ -35,10 +35,10 @@ Foto tim ditemukan ter-commit di branch `claude/modest-mendel-NEtWk` (commit
 `menu-rujak.png`, `menu-sorbet.png` — sudah ada di `assets/` tapi tidak ada di
 daftar/menu.js. Beri tahu nama & section tujuannya untuk disambungkan.
 
-### ⚠ Duplikat
-`menu-udang-saus-kurnia.jpg` **dan** `menu-udang-saus-malaka.jpg` sama-sama ada.
-Dipakai yang **`-kurnia`** (sesuai nama dish kanonik); `-malaka` = penamaan lama →
-konfirmasi untuk dihapus.
+### ✅ Duplikat (selesai)
+Dulu ada `menu-udang-saus-kurnia.jpg` & `menu-udang-saus-malaka.jpg`. Yang
+`-malaka` (penamaan lama) sudah **dihapus**; "Udang Saus Kurnia" memakai
+`menu-udang-saus-kurnia.jpg`.
 
 ### Saran optimasi (jangan diubah tanpa minta)
 Foto sangat besar (rahang-tuna **12 MB**, platter 8–9 MB, cabang 1–2 MB). Sebaiknya
