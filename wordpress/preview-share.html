@@ -813,7 +813,11 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-up-card__est{ font-weight:400; opacity:.8; }
 
   @media (max-width:900px){ .ks-locs__grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .ks-locs__grid, .ks-locs__upgrid{ grid-template-columns:1fr; } }
+  @media (max-width:560px){
+    .ks-locs__grid, .ks-locs__upgrid{ grid-template-columns:1fr; }
+    .ks-loc-card__body{ align-items:center; text-align:center; }   /* center semua di mobile */
+    .ks-loc-card__act{ width:100%; }
+  }
   @media (prefers-reduced-motion: reduce){ .ks-lbtn:hover{ transform:none; } }
   </style>
 
@@ -1933,7 +1937,16 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-btn--ghost{ background:transparent; color:var(--cream); border-color:var(--line); }
   .ks-btn--ghost:hover{ background:rgba(246,241,231,.08); }
 
-  @media (max-width:560px){ .ks-resv__branches{ grid-template-columns:1fr; } .ks-resv__fields{ grid-template-columns:1fr; } }
+  @media (max-width:560px){
+    .ks-resv__branches{ grid-template-columns:1fr; }
+    .ks-resv__fields{ grid-template-columns:1fr; }
+    /* center semua di mobile */
+    .ks-bcard{ text-align:center; }
+    .ks-resv__label{ text-align:center; }
+    .ks-f label{ text-align:center; }
+    .ks-resv__nav{ justify-content:center; }
+    .ks-btn--red{ margin-left:0; }
+  }
   @media (prefers-reduced-motion: reduce){ .ks-bcard:hover, .ks-resv__wa:hover, .ks-btn--red:hover{ transform:none; } }
   </style>
 

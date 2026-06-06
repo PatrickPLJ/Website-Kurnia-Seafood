@@ -145,7 +145,16 @@
   .ks-btn--ghost{ background:transparent; color:var(--cream); border-color:var(--line); }
   .ks-btn--ghost:hover{ background:rgba(246,241,231,.08); }
 
-  @media (max-width:560px){ .ks-resv__branches{ grid-template-columns:1fr; } .ks-resv__fields{ grid-template-columns:1fr; } }
+  @media (max-width:560px){
+    .ks-resv__branches{ grid-template-columns:1fr; }
+    .ks-resv__fields{ grid-template-columns:1fr; }
+    /* center semua di mobile */
+    .ks-bcard{ text-align:center; }
+    .ks-resv__label{ text-align:center; }
+    .ks-f label{ text-align:center; }
+    .ks-resv__nav{ justify-content:center; }
+    .ks-btn--red{ margin-left:0; }
+  }
   @media (prefers-reduced-motion: reduce){ .ks-bcard:hover, .ks-resv__wa:hover, .ks-btn--red:hover{ transform:none; } }
   </style>
 
