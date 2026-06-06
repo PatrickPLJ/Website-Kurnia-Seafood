@@ -18,8 +18,9 @@ const SITE = 'https://kurniaseafood.co.id';          // domain utama (.co.id)
 const BALI_SITE = 'https://kurniaseafoodbali.com';   // cabang Bali = domain terpisah
 const IG = 'https://www.instagram.com/kurnia.seafood/';
 const LOGO_ABS = 'https://patrickplj.github.io/Website-Kurnia-Seafood/wordpress/assets/kurnia-seafood-logo.png';
-// og:image = PLACEHOLDER (foto pihak ketiga) → ganti foto resmi Kurnia sebelum live (lihat PLACEHOLDERS.md)
-const OG_IMAGE = 'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1200&q=72';
+// og:image = foto resmi Kurnia (assets/og-image.jpg), URL absolut (wajib utk OG/Twitter).
+// TODO: ganti host ke domain produksi saat go-live. Catatan: rasio 4000x6000 (potret).
+const OG_IMAGE = 'https://patrickplj.github.io/Website-Kurnia-Seafood/wordpress/assets/og-image.jpg';
 const TITLE = 'Kurnia Seafood — Restoran Seafood Segar di Yogyakarta, Semarang, Bandung, Bali & Surabaya';
 const DESC  = 'Kurnia Seafood: seafood segar konsep market, bumbu spesial khas Kurnia. Cocok untuk keluarga & acara. Reservasi WhatsApp di 5 cabang.';
 

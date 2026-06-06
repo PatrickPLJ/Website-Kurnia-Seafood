@@ -9,34 +9,43 @@ Ganti dengan foto milik Kurnia (situs lama, Google Business Profile, atau IG
 resmi `@kurnia.seafood`). Sumber data foto terpusat di `data/menu.js`,
 `data/promos.js`, dan markup section terkait.
 
-## Status aset tim — audit 6 Jun 2026
+## Status aset tim — diperbarui 6 Jun 2026
 
-Tim menyatakan "semua aset sudah diupload", **tetapi hasil verifikasi: belum ada
-satu pun file foto** di repo (`wordpress/assets/` hanya berisi logo; tidak ada di
-history git mana pun). Jadi **semua aset di bawah masih ❌ belum ada** dan tetap
-placeholder. Begitu file benar-benar diupload (pakai nama persis di bawah), beri
-tahu untuk disambungkan.
+Foto tim ditemukan ter-commit di branch `claude/modest-mendel-NEtWk` (commit
+`628d2cb`), lalu **dibawa ke `main`** & disambungkan. Status:
 
-| Aset diharapkan | Taruh di | Sambung ke | Status |
-|---|---|---|---|
-| `cabang-yogyakarta.jpg` | `wordpress/assets/` | `data/branches.js` → yogyakarta `photo` (+ `photoPlaceholder:false`) | ❌ belum ada |
-| `cabang-semarang.jpg` | `wordpress/assets/` | branches.js → semarang `photo` | ❌ belum ada |
-| `cabang-bandung.jpg` | `wordpress/assets/` | branches.js → bandung `photo` | ❌ belum ada |
-| `cabang-bali.jpg` | `wordpress/assets/` | branches.js → bali `photo` | ❌ belum ada |
-| `cabang-surabaya.jpg` | `wordpress/assets/` | branches.js → surabaya `photo` | ❌ belum ada |
-| `menu-king-crab-sultan.jpg` | `wordpress/assets/` | `data/menu.js` (signature) `image` | ❌ belum ada |
-| `menu-udang-saus-kurnia.jpg` | `wordpress/assets/` | menu.js (signature) `image` | ❌ belum ada |
-| `menu-kepiting-garlic-caramel.jpg` | `wordpress/assets/` | menu.js (signature) `image` | ❌ belum ada |
-| `menu-baru-[nama].jpg` (variabel) | `wordpress/assets/` | menu.js (`isNew`) `image` | ❌ belum ada |
-| `og-image.jpg` (≥1200px) | `wordpress/assets/` | `build-preview.mjs` → OG_IMAGE | ❌ belum ada |
+| Aset | Sambung ke | Status |
+|---|---|---|
+| `cabang-{yogyakarta,semarang,bandung,bali,surabaya}.jpg` | branches.js `photo` (placeholder off) | ✅ tersambung (5/5) |
+| `menu-king-crab-sultan.jpg` | menu.js → King Crab Sultan | ✅ |
+| `menu-udang-saus-kurnia.jpg` | menu.js → Udang Saus Kurnia | ✅ (ada duplikat, lihat catatan) |
+| `menu-kepiting-garlic-caramel.jpg` | menu.js → Kepiting Saus Garlic Caramel | ✅ |
+| `menu-ikan-bakar-kurnia.jpg` | menu.js → Ikan Bakar Kurnia | ✅ |
+| `menu-baru-rahang-tuna.png` | menu.js (New Menu) → Rahang Tuna | ✅ |
+| `og-image.jpg` | build-preview.mjs OG_IMAGE + twitter:image | ✅ (4000×6000, ≥1200 ✓ — tapi rasio **potret**) |
 
-Catatan audit:
-- Cabang **upcoming** (Jakarta PI, Bandung ke-2): TIDAK pakai foto interior — tetap "Segera Hadir". Dilewati.
-- ✅ Nama signature `data/menu.js` SUDAH direkonsiliasi ke nama kanonik: "King
-  Crab Sultan", "Udang Saus Kurnia", "Kepiting Saus Garlic Caramel" (dish sama,
-  hanya penamaan). "Ikan Bakar Kurnia" & "Kepiting Saus Kurnia" tetap.
-- Saran optimasi: simpan foto sebagai **WebP** (atau sediakan `.webp` + `.jpg`)
-  & lebar ~1200–1600px agar ringan; `og-image` minimal 1200px.
+### Masih placeholder (belum ada foto khusus)
+- **Kepiting Saus Kurnia** (signature) — tidak ada file → tetap placeholder.
+- **New Menu 2 & 3** — belum ada data/nama asli → placeholder.
+- Hero carousel (5), Spotlight/promos, galeri/kabar/tentang — masih foto contoh.
+
+### ⚠ Foto terupload tapi BELUM dipetakan (butuh info tim: nama dish + posisi)
+`menu-platter-crab.png`, `menu-platter-lobster.png`, `menu-platter-gabungan.png`,
+`menu-es-serut.png`, `menu-mango-sango.png`, `menu-pisang-ijo.png`,
+`menu-rujak.png`, `menu-sorbet.png` — sudah ada di `assets/` tapi tidak ada di
+daftar/menu.js. Beri tahu nama & section tujuannya untuk disambungkan.
+
+### ⚠ Duplikat
+`menu-udang-saus-kurnia.jpg` **dan** `menu-udang-saus-malaka.jpg` sama-sama ada.
+Dipakai yang **`-kurnia`** (sesuai nama dish kanonik); `-malaka` = penamaan lama →
+konfirmasi untuk dihapus.
+
+### Saran optimasi (jangan diubah tanpa minta)
+Foto sangat besar (rahang-tuna **12 MB**, platter 8–9 MB, cabang 1–2 MB). Sebaiknya
+kompres + **WebP**, lebar ~1200–1600px. `og-image` idealnya **landscape 1200×630**
+(yang sekarang potret 4000×6000 — tetap valid, tapi crop kurang ideal di kartu share).
+
+- Cabang **upcoming** (Jakarta PI, Bandung ke-2): TIDAK pakai foto — tetap "Segera Hadir". Dilewati.
 
 ## Prioritas (fitur baru)
 | Section | File | Jumlah | Cara ganti |

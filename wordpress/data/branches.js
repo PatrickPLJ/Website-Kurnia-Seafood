@@ -25,8 +25,8 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Yogyakarta",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    photo: "assets/cabang-yogyakarta.jpg",
+    photoPlaceholder: false,
     whatsapp: "6285229235758",
     phoneDisplay: "+62 852-2923-5758",
     address: "Jl. Laksda Adisucipto No.48B, Ngentak, Caturtunggal, Kec. Depok, Kab. Sleman, DI Yogyakarta 55281",
@@ -52,8 +52,8 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Semarang",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    photo: "assets/cabang-semarang.jpg",
+    photoPlaceholder: false,
     whatsapp: "6281339505758",
     phoneDisplay: "+62 813-3950-5758",
     address: "Jl. Kompol Maksum No.300, Peterongan, Kec. Semarang Selatan, Kota Semarang, Jawa Tengah 50242",
@@ -80,8 +80,8 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Bandung",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    photo: "assets/cabang-bandung.jpg",
+    photoPlaceholder: false,
     whatsapp: "6281372405758",
     phoneDisplay: "+62 813-7240-5758",
     address: "Jl. Prof. Dr. Sutami No.100, Sukarasa, Kec. Sukasari, Kota Bandung, Jawa Barat 40152",
@@ -110,8 +110,8 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Bali",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    photo: "assets/cabang-bali.jpg",
+    photoPlaceholder: false,
     whatsapp: "6281338555758",
     phoneDisplay: "+62 813-3855-5758",
     address: "Jl. By Pass Tanah Lot, Beraban, Kec. Kediri, Kab. Tabanan, Bali 82121",
@@ -136,8 +136,8 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Surabaya",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    photo: "assets/cabang-surabaya.jpg",
+    photoPlaceholder: false,
     whatsapp: "6281385375758",
     phoneDisplay: "+62 813-8537-5758",
     address: "Jl. Kombes Pol. Moh. Duryat No.4, Embong Kaliasin, Kec. Tegalsari, Surabaya, Jawa Timur 60271",
