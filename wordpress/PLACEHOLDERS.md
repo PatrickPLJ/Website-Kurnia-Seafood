@@ -36,9 +36,8 @@ Foto tim ditemukan ter-commit di branch `claude/modest-mendel-NEtWk` (commit
 daftar/menu.js. Beri tahu nama & section tujuannya untuk disambungkan.
 
 ### ✅ Duplikat (selesai)
-Dulu ada `menu-udang-saus-kurnia.jpg` & `menu-udang-saus-malaka.jpg`. Yang
-`-malaka` (penamaan lama) sudah **dihapus**; "Udang Saus Kurnia" memakai
-`menu-udang-saus-kurnia.jpg`.
+Dulu ada dua file foto udang (versi kanonik & versi penamaan lama). File versi
+lama sudah **dihapus**; "Udang Saus Kurnia" memakai `menu-udang-saus-kurnia.jpg`.
 
 ### Saran optimasi (jangan diubah tanpa minta)
 Foto sangat besar (rahang-tuna **12 MB**, platter 8–9 MB, cabang 1–2 MB). Sebaiknya
