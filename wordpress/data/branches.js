@@ -25,7 +25,7 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Yogyakarta",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "assets/cabang-yogyakarta.jpg",
+    photo: "assets/cabang-yogyakarta.webp",
     photoPlaceholder: false,
     whatsapp: "6285229235758",
     phoneDisplay: "+62 852-2923-5758",
@@ -52,7 +52,7 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Semarang",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "assets/cabang-semarang.jpg",
+    photo: "assets/cabang-semarang.webp",
     photoPlaceholder: false,
     whatsapp: "6281339505758",
     phoneDisplay: "+62 813-3950-5758",
@@ -80,7 +80,7 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Bandung",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "assets/cabang-bandung.jpg",
+    photo: "assets/cabang-bandung.webp",
     photoPlaceholder: false,
     whatsapp: "6281372405758",
     phoneDisplay: "+62 813-7240-5758",
@@ -110,7 +110,7 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Bali",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "assets/cabang-bali.jpg",
+    photo: "assets/cabang-bali.webp",
     photoPlaceholder: false,
     whatsapp: "6281338555758",
     phoneDisplay: "+62 813-3855-5758",
@@ -136,7 +136,7 @@ window.KS_BRANCHES = [
     name: "Kurnia Seafood Surabaya",
     status: "active",
     placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
-    photo: "assets/cabang-surabaya.jpg",
+    photo: "assets/cabang-surabaya.webp",
     photoPlaceholder: false,
     whatsapp: "6281385375758",
     phoneDisplay: "+62 813-8537-5758",
