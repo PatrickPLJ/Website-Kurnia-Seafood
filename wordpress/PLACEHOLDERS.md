@@ -9,6 +9,36 @@ Ganti dengan foto milik Kurnia (situs lama, Google Business Profile, atau IG
 resmi `@kurnia.seafood`). Sumber data foto terpusat di `data/menu.js`,
 `data/promos.js`, dan markup section terkait.
 
+## Status aset tim — audit 6 Jun 2026
+
+Tim menyatakan "semua aset sudah diupload", **tetapi hasil verifikasi: belum ada
+satu pun file foto** di repo (`wordpress/assets/` hanya berisi logo; tidak ada di
+history git mana pun). Jadi **semua aset di bawah masih ❌ belum ada** dan tetap
+placeholder. Begitu file benar-benar diupload (pakai nama persis di bawah), beri
+tahu untuk disambungkan.
+
+| Aset diharapkan | Taruh di | Sambung ke | Status |
+|---|---|---|---|
+| `cabang-yogyakarta.jpg` | `wordpress/assets/` | `data/branches.js` → yogyakarta `photo` (+ `photoPlaceholder:false`) | ❌ belum ada |
+| `cabang-semarang.jpg` | `wordpress/assets/` | branches.js → semarang `photo` | ❌ belum ada |
+| `cabang-bandung.jpg` | `wordpress/assets/` | branches.js → bandung `photo` | ❌ belum ada |
+| `cabang-bali.jpg` | `wordpress/assets/` | branches.js → bali `photo` | ❌ belum ada |
+| `cabang-surabaya.jpg` | `wordpress/assets/` | branches.js → surabaya `photo` | ❌ belum ada |
+| `menu-king-crab-sultan.jpg` | `wordpress/assets/` | `data/menu.js` (signature) `image` | ❌ belum ada |
+| `menu-udang-saus-kurnia.jpg` | `wordpress/assets/` | menu.js (signature) `image` | ❌ belum ada |
+| `menu-kepiting-garlic-caramel.jpg` | `wordpress/assets/` | menu.js (signature) `image` | ❌ belum ada |
+| `menu-baru-[nama].jpg` (variabel) | `wordpress/assets/` | menu.js (`isNew`) `image` | ❌ belum ada |
+| `og-image.jpg` (≥1200px) | `wordpress/assets/` | `build-preview.mjs` → OG_IMAGE | ❌ belum ada |
+
+Catatan audit:
+- Cabang **upcoming** (Jakarta PI, Bandung ke-2): TIDAK pakai foto interior — tetap "Segera Hadir". Dilewati.
+- ⚠ Nama signature di `data/menu.js` saat ini (Ikan Bakar Kurnia, Kepiting Saus
+  Kurnia, Udang Saus Malaka, Kepiting Garlic Caramel, Alaskan King Crab Saus
+  Singapore) **berbeda** dari nama aset yang diharapkan (King Crab Sultan, Udang
+  Saus Kurnia, Kepiting Garlic Caramel). Samakan penamaan saat foto diupload.
+- Saran optimasi: simpan foto sebagai **WebP** (atau sediakan `.webp` + `.jpg`)
+  & lebar ~1200–1600px agar ringan; `og-image` minimal 1200px.
+
 ## Prioritas (fitur baru)
 | Section | File | Jumlah | Cara ganti |
 |---------|------|--------|------------|
