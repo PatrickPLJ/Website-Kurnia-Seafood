@@ -118,7 +118,8 @@ function doGet(e) {
           text: rv.text || '',                         // JANGAN diedit/disensor di server
           relativeTime: rv.relative_time_description || '',
           profilePhotoUrl: rv.profile_photo_url || '',
-          authorUrl: rv.author_url || ''               // link ke profil/ulasan di Google
+          authorUrl: rv.author_url || '',              // link ke profil/ulasan di Google
+          source: 'Google'                             // label badge kartu (Places API = Google)
         };
       });
 

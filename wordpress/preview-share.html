@@ -330,7 +330,9 @@ window.KS_PROMOS = [
  *
  * BENTUK DATA mengikuti field yang dikembalikan Google Places Details API:
  *   group: { branch, slug, rating, userRatingsTotal, reviews:[ review... ] }
- *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl }
+ *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl, source }
+ *   ("source" = label sumber untuk badge kartu, mis. "Google". Places API selalu
+ *    "Google"; nilai lain mis. "GoFood" hanya bila kelak ada sumber data lain.)
  * (Sama persis dengan yang dipetakan dari respons proxy, agar renderer satu jalur.)
  *
  * CATATAN BATAS API (penting untuk ekspektasi tim):
@@ -346,11 +348,11 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Seafoodnya segar, bisa pilih ikan hidup langsung. Tempat luas dan nyaman untuk keluarga, ada live music. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        dataPlaceholder: true },
+        source: "Google", dataPlaceholder: true},
       { authorName: "Contoh Pelanggan", rating: 4,
         text: "Pelayanan ramah dan porsinya besar. Cocok buat acara kantor di ruang VIP. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        dataPlaceholder: true }
+        source: "Google", dataPlaceholder: true}
     ]
   },
   {
@@ -360,7 +362,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Ruang VIP-nya fleksibel untuk gathering, makanannya enak. Anak-anak betah ada playground. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        dataPlaceholder: true }
+        source: "Google", dataPlaceholder: true}
     ]
   },
   {
@@ -370,7 +372,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Kepiting saus padangnya juara, kids-friendly, dekat pusat kota. Pasti balik lagi. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        dataPlaceholder: true }
+        source: "Google", dataPlaceholder: true}
     ]
   },
   {
@@ -380,7 +382,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 5,
         text: "Mampir saat ke Tanah Lot, parkir luas dan tempat bersih. Ikan bakarnya mantap. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        dataPlaceholder: true }
+        source: "Google", dataPlaceholder: true}
     ]
   },
   {
@@ -390,7 +392,7 @@ window.KS_REVIEWS_SAMPLE = [
       { authorName: "Contoh Pelanggan", rating: 4,
         text: "Cabang baru dengan karaoke dan beberapa VIP room. Seafood segar dari akuarium. (Teks contoh — bukan ulasan asli.)",
         relativeTime: "beberapa waktu lalu", profilePhotoUrl: "", authorUrl: "https://www.google.com/maps",
-        dataPlaceholder: true }
+        source: "Google", dataPlaceholder: true}
     ]
   }
 ];
@@ -1262,12 +1264,23 @@ window.KS_REVIEWS_SAMPLE = [
 
 <!-- 04-review -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SECTION "KATA PELANGGAN" (Ulasan Google)
+     KURNIA SEAFOOD · SECTION "KATA PELANGGAN" (grid kartu · Ulasan Google)
      ------------------------------------------------------------
-     Menampilkan ULASAN ASLI dari Google via Google Places Details API,
-     ditarik lewat PROXY server (REVIEWS_ENDPOINT di data/config.js →
-     integrations/google-reviews-apps-script.gs). API key Google TIDAK
-     pernah ada di klien.
+     Grid kartu ulasan bergaya brand (vanilla HTML/CSS/JS) — layout diadaptasi
+     dari pola komponen "review cards" (mis. 21st.dev/shadcn) TANPA framework:
+     tidak ada React/shadcn/Tailwind/TS. Ikon Twitter/@username pada komponen
+     asli DIGANTI dengan badge SUMBER (Google/GoFood) + link "Lihat di Google".
+
+     SUMBER KARTU: Google Places Details API (asli, apa adanya — TIDAK dikurasi,
+     TIDAK dikarang). Ditarik lewat PROXY server (REVIEWS_ENDPOINT di
+     data/config.js → integrations/google-reviews-apps-script.gs). API key Google
+     TIDAK pernah ada di klien.
+
+     ANGKA AGREGAT HEADER (4.9 / 26.586 ulasan): dari investor deck = rata-rata
+     GABUNGAN seluruh cabang (snapshot). Kartu di bawah hanyalah SAMPEL ulasan
+     dari Google (maks 5/cabang) — BUKAN ke-26.586-nya. Framing ini dibuat jujur
+     di header. Angka 26.586 sengaja TIDAK dijadikan aggregateRating schema
+     (lihat schema/README.md) dan perlu diperbarui berkala.
 
      ALUR DATA:
        1. Tampilkan ulasan CONTOH (window.KS_REVIEWS_SAMPLE) sebagai placeholder
@@ -1287,7 +1300,7 @@ window.KS_REVIEWS_SAMPLE = [
          halaman (cache pendek opsional ada di sisi proxy, sesuai kebijakan).
 
      BATAS API: Google mengembalikan MAKSIMAL 5 ulasan per lokasi dan TIDAK bisa
-     difilter "terbaik". Jadi per cabang aktif maksimal 5 kartu.
+     difilter "terbaik". Jadi per cabang aktif maksimal 5 kartu (≤25 total).
 
      PRASYARAT: pasang data/config.js, data/branches.js, data/google-reviews.js
      SEKALI sebelum section ini.
@@ -1300,19 +1313,34 @@ window.KS_REVIEWS_SAMPLE = [
         Kata Pelanggan
       </span>
       <h2 class="ks-rev__title">Dicintai keluarga di lima kota</h2>
-      <p class="ks-rev__sub">Ulasan langsung dari pelanggan kami di Google.</p>
 
-      <!-- Atribusi Google (wajib) + chip rating agregat per cabang (bila tersedia dari API) -->
+      <!-- Agregat dari investor deck = GABUNGAN seluruh cabang. 4.9 / 26.586 =
+           snapshot → perbarui berkala. SENGAJA teks brand saja (bukan
+           aggregateRating schema). Disinkronkan dgn section Tentang Kami. -->
+      <div class="ks-rev__agg" role="img"
+           aria-label="Rating 4,9 dari 26.586 ulasan di 5 cabang">
+        <span class="ks-rev__agg-stars" aria-hidden="true">★★★★★</span>
+        <p class="ks-rev__agg-line">
+          Rating <strong>4.9</strong> dari <strong>26.586</strong> ulasan
+          <span class="ks-rev__agg-scope">— gabungan seluruh 5 cabang</span>
+        </p>
+      </div>
+      <p class="ks-rev__sub">Beberapa di antaranya, langsung dari Google:</p>
+
+      <!-- chip rating agregat per cabang (muncul hanya bila API mengirim rating) -->
       <div class="ks-rev__aggs" aria-label="Rating per cabang"></div>
-      <p class="ks-rev__attr">
-        <span class="ks-rev__gicon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"/></svg>
-        </span>
-        Ulasan diberdayakan oleh Google
-      </p>
     </header>
 
     <div class="ks-rev__grid" aria-live="polite"></div>
+
+    <div class="ks-rev__more-wrap"></div>
+
+    <p class="ks-rev__attr">
+      <span class="ks-rev__gicon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"/></svg>
+      </span>
+      Ulasan diberdayakan oleh Google
+    </p>
   </div>
 
   <style>
@@ -1329,9 +1357,16 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-kicker svg{ width:18px; height:18px; fill:var(--red); }
   .ks-rev__title{ font-family:var(--fh); font-weight:600; color:var(--navy);
     font-size:clamp(2rem,4.4vw,3.1rem); margin:12px 0 0; letter-spacing:-.01em; }
-  .ks-rev__sub{ font-family:var(--fl); font-weight:300; font-size:1rem; color:var(--muted); margin:12px 0 0; }
 
-  /* chip rating agregat per cabang (muncul hanya bila API mengirim rating) */
+  /* Agregat deck (gabungan seluruh cabang) */
+  .ks-rev__agg{ display:inline-flex; flex-direction:column; align-items:center; gap:4px; margin:18px 0 0; }
+  .ks-rev__agg-stars{ color:var(--star); font-size:22px; letter-spacing:3px; }
+  .ks-rev__agg-line{ font-family:var(--fl); font-weight:300; font-size:1.02rem; color:var(--muted); margin:0; }
+  .ks-rev__agg-line strong{ color:var(--navy); font-weight:700; }
+  .ks-rev__agg-scope{ display:inline-block; font-size:.92em; }
+  .ks-rev__sub{ font-family:var(--fl); font-weight:300; font-size:.95rem; color:var(--muted); margin:14px 0 0; }
+
+  /* chip rating agregat per cabang (live API) */
   .ks-rev__aggs{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:18px 0 0; }
   .ks-rev__aggs:empty{ display:none; }
   .ks-agg{ display:inline-flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line);
@@ -1342,14 +1377,13 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-agg__star{ color:var(--star); }
   .ks-agg__total{ color:var(--muted); font-weight:300; }
 
-  .ks-rev__attr{ display:inline-flex; align-items:center; gap:7px; margin:16px 0 0;
-    font-family:var(--fl); font-weight:400; font-size:12.5px; color:var(--muted); }
-  .ks-rev__gicon svg{ width:15px; height:15px; display:block; }
-
-  /* Grid kartu SERAGAM (bento custom dilepas: sumber ulasan kini dari Google). */
-  .ks-rev__grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:18px; align-items:stretch; }
+  /* Grid kartu 3 → 2 → 1 kolom */
+  .ks-rev__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; align-items:stretch; }
   .ks-rc{ display:flex; flex-direction:column; background:#fff; border:1px solid var(--line); border-radius:18px;
-    padding:22px 22px 18px; box-shadow:0 12px 30px -22px rgba(20,38,61,.45); position:relative; }
+    padding:22px 22px 18px; box-shadow:0 12px 30px -22px rgba(20,38,61,.45); position:relative;
+    transition:transform .18s, box-shadow .18s; }
+  .ks-rc:hover{ transform:translateY(-3px); box-shadow:0 20px 40px -26px rgba(20,38,61,.55); }
+  .ks-rc.is-hidden{ display:none; }
 
   .ks-rc__top{ display:grid; grid-template-columns:auto 1fr; align-items:center; gap:12px; }
   .ks-rc__av{ position:relative; width:44px; height:44px; border-radius:50%; overflow:hidden; flex:none;
@@ -1359,10 +1393,16 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-rc__who{ min-width:0; }
   .ks-rc__name{ font-family:var(--fl); font-weight:600; font-size:.98rem; color:var(--navy); margin:0; line-height:1.2;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .ks-rc__meta{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:3px; }
+  .ks-rc__meta{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:4px; }
   .ks-rc__branch{ font-family:var(--fl); font-weight:600; font-size:11px; letter-spacing:.04em; color:var(--blue);
     background:var(--soft); border-radius:999px; padding:2px 9px; }
   .ks-rc__time{ font-family:var(--fl); font-weight:300; font-size:12px; color:var(--muted); }
+
+  /* Badge SUMBER (ganti ikon Twitter/@username dari komponen asli) */
+  .ks-rc__src{ display:inline-flex; align-items:center; gap:5px; font-family:var(--fl); font-weight:600;
+    font-size:11px; letter-spacing:.02em; border:1px solid var(--line); border-radius:999px; padding:2px 9px; color:var(--navy); background:#fff; }
+  .ks-rc__src svg{ width:12px; height:12px; display:block; }
+  .ks-rc__src--gofood{ color:#D80000; border-color:#F5C2C2; background:#FDEDED; }
 
   .ks-rc__stars{ color:var(--star); font-size:14px; letter-spacing:1px; margin-top:13px; }
   .ks-rc__stars .off{ color:#dcd9cf; }
@@ -1381,9 +1421,23 @@ window.KS_REVIEWS_SAMPLE = [
   .ks-rc__ph{ position:absolute; top:14px; right:14px; font-family:var(--fl); font-weight:700; font-size:10px;
     letter-spacing:.12em; color:#9a6a00; background:#FFF3D6; border:1px solid #F2D98A; border-radius:6px; padding:3px 7px; }
 
+  /* Load More */
+  .ks-rev__more-wrap{ text-align:center; }
+  .ks-rev__more-wrap:empty{ display:none; }
+  .ks-rev__more-btn{ margin-top:28px; font-family:var(--fl); font-weight:600; font-size:13px; letter-spacing:.06em;
+    text-transform:uppercase; cursor:pointer; color:var(--navy); background:#fff; border:1.5px solid var(--line);
+    border-radius:999px; padding:13px 26px; transition:border-color .2s, color .2s, transform .18s; }
+  .ks-rev__more-btn:hover{ border-color:var(--blue); color:var(--blue); transform:translateY(-2px); }
+
+  .ks-rev__attr{ display:flex; align-items:center; justify-content:center; gap:7px; margin:28px 0 0;
+    font-family:var(--fl); font-weight:400; font-size:12.5px; color:var(--muted); }
+  .ks-rev__gicon svg{ width:15px; height:15px; display:block; }
+
   .ks-rev__empty{ text-align:center; color:#888; font-family:var(--fl); }
 
+  @media (max-width:900px){ .ks-rev__grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:560px){ .ks-rev__grid{ grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce){ .ks-rc:hover, .ks-rev__more-btn:hover{ transform:none; } }
   </style>
 
   <script>
@@ -1391,7 +1445,11 @@ window.KS_REVIEWS_SAMPLE = [
     var root = document.getElementById('review');
     var grid = root.querySelector('.ks-rev__grid');
     var aggsWrap = root.querySelector('.ks-rev__aggs');
+    var moreWrap = root.querySelector('.ks-rev__more-wrap');
     if (!grid) return;
+
+    var INITIAL = 6;          // kartu yang tampil sebelum "Muat lebih banyak"
+    var GOOGLE_SVG = '<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"/></svg>';
 
     var cfg = window.KS_CONFIG || {};
     var branches = (window.KS_BRANCHES || []).filter(function (b) {
@@ -1407,6 +1465,13 @@ window.KS_REVIEWS_SAMPLE = [
       var s = '';
       for (var i=0;i<5;i++) s += (i<n) ? '★' : '<span class="off">★</span>';
       return s;
+    }
+
+    // Badge SUMBER (Google/GoFood) — pengganti ikon Twitter/@username komponen asli.
+    function sourceBadge(src){
+      var s = src || 'Google';
+      if (/gofood/i.test(s)) return '<span class="ks-rc__src ks-rc__src--gofood">GoFood</span>';
+      return '<span class="ks-rc__src ks-rc__src--google">' + GOOGLE_SVG + 'Google</span>';
     }
 
     // KEPATUHAN: teks ulasan TIDAK diedit. Untuk tampilan, truncate panjang pada
@@ -1447,52 +1512,73 @@ window.KS_REVIEWS_SAMPLE = [
       aggsWrap.innerHTML = chips; // kosong → CSS menyembunyikan
     }
 
+    function cardHTML(g, rv){
+      var isPh = !!rv.dataPlaceholder;
+      var phAttr = isPh ? ' data-placeholder="true"' : '';
+      var phBadge = isPh ? '<span class="ks-rc__ph">CONTOH</span>' : '';
+
+      // Foto profil Google bila ada; gagal → fallback inisial. referrerpolicy
+      // no-referrer agar foto Google tetap tampil di domain lain.
+      var img = rv.profilePhotoUrl
+        ? '<img src="' + esc(rv.profilePhotoUrl) + '" alt="' + esc(rv.authorName) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">'
+        : '';
+
+      var time = rv.relativeTime ? '<span class="ks-rc__time">' + esc(rv.relativeTime) + '</span>' : '';
+
+      // Link wajib ke ulasan/profil di Google (atribusi). Fallback ke pencarian
+      // Google Maps cabang bila authorUrl tak tersedia.
+      var gUrl = rv.authorUrl || ('https://www.google.com/maps/search/' + encodeURIComponent('Kurnia Seafood ' + g.branch));
+      var gLink = '<a class="ks-rc__glink" href="' + esc(gUrl) + '" target="_blank" rel="noopener nofollow">' +
+          GOOGLE_SVG + 'Lihat di Google</a>';
+
+      return '<figure class="ks-rc"' + phAttr + '>' + phBadge +
+          '<div class="ks-rc__top">' +
+            '<div class="ks-rc__av" aria-hidden="true">' + esc(initials(rv.authorName)) + img + '</div>' +
+            '<div class="ks-rc__who">' +
+              '<p class="ks-rc__name">' + esc(rv.authorName || 'Pengguna Google') + '</p>' +
+              '<div class="ks-rc__meta">' + sourceBadge(rv.source) +
+                '<span class="ks-rc__branch">' + esc(g.branch) + '</span>' + time +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="ks-rc__stars" aria-label="' + esc((Math.round(rv.rating)||0)) + ' dari 5">' + stars(rv.rating) + '</div>' +
+          '<blockquote class="ks-rc__text">' + renderText(rv.text, rv.authorUrl) + '</blockquote>' +
+          '<div class="ks-rc__foot">' + gLink + '</div>' +
+        '</figure>';
+    }
+
+    function setupLoadMore(total){
+      moreWrap.innerHTML = '';
+      if (total <= INITIAL) return;
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'ks-rev__more-btn';
+      btn.textContent = 'Muat ulasan lainnya (' + (total - INITIAL) + ')';
+      btn.addEventListener('click', function () {
+        var hidden = grid.querySelectorAll('.ks-rc.is-hidden');
+        Array.prototype.forEach.call(hidden, function (el) { el.classList.remove('is-hidden'); });
+        moreWrap.innerHTML = '';
+      });
+      moreWrap.appendChild(btn);
+    }
+
     function renderCards(groups){
-      // Ratakan groups → kartu, tiap kartu membawa label cabang.
+      // Ratakan groups → kartu, tiap kartu membawa label cabang + badge sumber.
       var cards = [];
       groups.forEach(function (g) {
-        (g.reviews || []).forEach(function (rv) {
-          var isPh = !!rv.dataPlaceholder;
-          var phAttr = isPh ? ' data-placeholder="true"' : '';
-          var phBadge = isPh ? '<span class="ks-rc__ph">CONTOH</span>' : '';
-
-          // Foto profil Google bila ada; gagal → fallback inisial. referrerpolicy
-          // no-referrer agar foto Google tetap tampil di domain lain.
-          var img = rv.profilePhotoUrl
-            ? '<img src="' + esc(rv.profilePhotoUrl) + '" alt="' + esc(rv.authorName) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">'
-            : '';
-
-          var time = rv.relativeTime ? '<span class="ks-rc__time">' + esc(rv.relativeTime) + '</span>' : '';
-
-          // Link wajib ke ulasan/profil di Google (atribusi). Fallback ke pencarian
-          // Google Maps cabang bila authorUrl tak tersedia.
-          var gUrl = rv.authorUrl || ('https://www.google.com/maps/search/' + encodeURIComponent('Kurnia Seafood ' + g.branch));
-          var gLink = '<a class="ks-rc__glink" href="' + esc(gUrl) + '" target="_blank" rel="noopener nofollow">' +
-              '<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34A853" d="M12 22c2.7 0 5-1 6.6-2.5l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"/><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"/><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"/></svg>' +
-              'Lihat di Google</a>';
-
-          cards.push(
-            '<figure class="ks-rc"' + phAttr + '>' + phBadge +
-              '<div class="ks-rc__top">' +
-                '<div class="ks-rc__av" aria-hidden="true">' + esc(initials(rv.authorName)) + img + '</div>' +
-                '<div class="ks-rc__who">' +
-                  '<p class="ks-rc__name">' + esc(rv.authorName || 'Pengguna Google') + '</p>' +
-                  '<div class="ks-rc__meta"><span class="ks-rc__branch">' + esc(g.branch) + '</span>' + time + '</div>' +
-                '</div>' +
-              '</div>' +
-              '<div class="ks-rc__stars" aria-label="' + esc((Math.round(rv.rating)||0)) + ' dari 5">' + stars(rv.rating) + '</div>' +
-              '<blockquote class="ks-rc__text">' + renderText(rv.text, rv.authorUrl) + '</blockquote>' +
-              '<div class="ks-rc__foot">' + gLink + '</div>' +
-            '</figure>'
-          );
-        });
+        (g.reviews || []).forEach(function (rv) { cards.push(cardHTML(g, rv)); });
       });
 
       if (!cards.length) {
         grid.innerHTML = '<p class="ks-rev__empty">Ulasan belum tersedia.</p>';
+        moreWrap.innerHTML = '';
         return;
       }
       grid.innerHTML = cards.join('');
+
+      // Load More: sembunyikan kartu di atas batas awal, sesuaikan jumlah data.
+      var nodes = grid.querySelectorAll('.ks-rc');
+      for (var i = INITIAL; i < nodes.length; i++) nodes[i].classList.add('is-hidden');
+      setupLoadMore(nodes.length);
     }
 
     function render(groups){
