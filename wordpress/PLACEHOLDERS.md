@@ -32,10 +32,9 @@ tahu untuk disambungkan.
 
 Catatan audit:
 - Cabang **upcoming** (Jakarta PI, Bandung ke-2): TIDAK pakai foto interior — tetap "Segera Hadir". Dilewati.
-- ⚠ Nama signature di `data/menu.js` saat ini (Ikan Bakar Kurnia, Kepiting Saus
-  Kurnia, Udang Saus Malaka, Kepiting Garlic Caramel, Alaskan King Crab Saus
-  Singapore) **berbeda** dari nama aset yang diharapkan (King Crab Sultan, Udang
-  Saus Kurnia, Kepiting Garlic Caramel). Samakan penamaan saat foto diupload.
+- ✅ Nama signature `data/menu.js` SUDAH direkonsiliasi ke nama kanonik: "King
+  Crab Sultan", "Udang Saus Kurnia", "Kepiting Saus Garlic Caramel" (dish sama,
+  hanya penamaan). "Ikan Bakar Kurnia" & "Kepiting Saus Kurnia" tetap.
 - Saran optimasi: simpan foto sebagai **WebP** (atau sediakan `.webp` + `.jpg`)
   & lebar ~1200–1600px agar ringan; `og-image` minimal 1200px.
 
