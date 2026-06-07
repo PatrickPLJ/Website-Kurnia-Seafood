@@ -1083,9 +1083,14 @@
 
     var cfg = window.KS_CONFIG || {};
     var branches = (window.KS_BRANCHES || []).filter(function (b) {
-      // Cabang upcoming TIDAK punya ulasan/Place ID → dikecualikan dari section ini.
+      // Cabang upcoming TIDAK punya ulasan → dikecualikan dari section ini.
       return b.status !== 'upcoming';
     });
+
+    // Slug cabang (kunci proxy) → nama tampilan untuk label "asal cabang" di kartu.
+    // Konsisten dgn kunci JSON proxy: yogyakarta/semarang/bandung/bali/surabaya.
+    var SLUG_LABEL = { yogyakarta:'Yogyakarta', semarang:'Semarang', bandung:'Bandung', bali:'Bali', surabaya:'Surabaya' };
+    function label(g){ return SLUG_LABEL[g.slug] || g.branch || ''; }
 
     function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
     function initials(name){ return String(name||'?').trim().split(/\s+/).slice(0,2).map(function(w){return w.charAt(0);}).join('').toUpperCase() || '?'; }
@@ -1119,15 +1124,40 @@
       return esc(cut) + '…' + more;
     }
 
+    // Normalisasi 1 review dari proxy → bentuk internal renderer.
+    // Proxy memakai field ringkas (author/photo/url/rating/text/time); fallback ke
+    // nama field lama (authorName/profilePhotoUrl/authorUrl/relativeTime) agar tahan
+    // perubahan kecil. Teks ulasan TIDAK diubah (kepatuhan Google).
+    function mapReview(r){
+      return {
+        authorName:      r.author      || r.authorName      || '',
+        profilePhotoUrl: r.photo       || r.profilePhotoUrl || '',
+        authorUrl:       r.url         || r.authorUrl       || '',
+        rating:          r.rating,
+        text:            r.text        || '',
+        relativeTime:    r.time        || r.relativeTime    || ''
+      };
+    }
+
     // Bangun daftar "groups" seragam: { branch, slug, rating, userRatingsTotal, reviews:[...] }
-    // dari respons proxy (places keyed by placeId), memakai label cabang dari KS_BRANCHES.
+    // dari respons proxy berbentuk { updated, branches: { <slug>: { rating, total, reviews:[...] } } }.
+    // Di-key per SLUG (bukan placeId). Tampilkan SEMUA cabang apa adanya — tidak menyaring.
     function groupsFromLive(resp){
+      var bmap = resp && resp.branches;
+      if (!bmap) return [];
       var out = [];
-      branches.forEach(function (b) {
-        if (!b.placeId) return;
-        var p = resp && resp.places && resp.places[b.placeId];
-        if (!p || p.error || !p.reviews || !p.reviews.length) return;
-        out.push({ branch: b.city, slug: b.slug, rating: p.rating, userRatingsTotal: p.userRatingsTotal, reviews: p.reviews });
+      // Iterasi mengikuti urutan cabang aktif di KS_BRANCHES (fallback: kunci proxy).
+      var slugs = branches.length ? branches.map(function(b){ return b.slug; }) : Object.keys(bmap);
+      slugs.forEach(function (slug) {
+        var p = bmap[slug];
+        if (!p || !p.reviews || !p.reviews.length) return;
+        out.push({
+          branch: SLUG_LABEL[slug] || slug,
+          slug: slug,
+          rating: p.rating,
+          userRatingsTotal: (p.total != null ? p.total : p.userRatingsTotal),
+          reviews: p.reviews.map(mapReview)
+        });
       });
       return out;
     }
@@ -1135,7 +1165,7 @@
     function renderAggregates(groups){
       var chips = groups.filter(function (g) { return g.rating; }).map(function (g) {
         var total = g.userRatingsTotal ? ' <span class="ks-agg__total">(' + Number(g.userRatingsTotal).toLocaleString('id-ID') + ')</span>' : '';
-        return '<span class="ks-agg"><span class="ks-agg__city">' + esc(g.branch) + '</span>' +
+        return '<span class="ks-agg"><span class="ks-agg__city">' + esc(label(g)) + '</span>' +
                '<span class="ks-agg__star">★</span><span class="ks-agg__num">' + esc(Number(g.rating).toFixed(1)) + '</span>' + total + '</span>';
       }).join('');
       aggsWrap.innerHTML = chips; // kosong → CSS menyembunyikan
@@ -1156,7 +1186,7 @@
 
       // Link wajib ke ulasan/profil di Google (atribusi). Fallback ke pencarian
       // Google Maps cabang bila authorUrl tak tersedia.
-      var gUrl = rv.authorUrl || ('https://www.google.com/maps/search/' + encodeURIComponent('Kurnia Seafood ' + g.branch));
+      var gUrl = rv.authorUrl || ('https://www.google.com/maps/search/' + encodeURIComponent('Kurnia Seafood ' + label(g)));
       var gLink = '<a class="ks-rc__glink" href="' + esc(gUrl) + '" target="_blank" rel="noopener nofollow">' +
           GOOGLE_SVG + 'Lihat di Google</a>';
 
@@ -1166,7 +1196,7 @@
             '<div class="ks-rc__who">' +
               '<p class="ks-rc__name">' + esc(rv.authorName || 'Pengguna Google') + '</p>' +
               '<div class="ks-rc__meta">' + sourceBadge() +
-                '<span class="ks-rc__branch">' + esc(g.branch) + '</span>' + time +
+                '<span class="ks-rc__branch">📍 ' + esc(label(g)) + '</span>' + time +
               '</div>' +
             '</div>' +
           '</div>' +
@@ -1220,21 +1250,20 @@
     render(sample);
 
     // 2) Coba tarik ulasan ASLI via proxy bila dikonfigurasi.
+    //    Proxy di-key per SLUG & mengembalikan semua cabang sekaligus (cache mingguan
+    //    di sisi server), jadi TIDAK perlu placeId / query ids dari klien.
     var endpoint = cfg.REVIEWS_ENDPOINT;
-    var ids = branches.map(function (b) { return b.placeId; }).filter(Boolean);
-    if (!endpoint || !ids.length) {
-      // Belum dikonfigurasi (endpoint kosong / belum ada placeId) → tetap placeholder.
+    if (!endpoint) {
+      // Endpoint belum diisi → tetap placeholder CONTOH.
       return;
     }
 
-    fetch(endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') + 'ids=' + encodeURIComponent(ids.join(',')), {
-      method: 'GET'
-    })
+    fetch(endpoint, { method: 'GET' })
       .then(function (r) { return r.json(); })
       .then(function (resp) {
-        if (!resp || !resp.ok) return; // gagal logis → biarkan placeholder
+        if (!resp || !resp.branches) return; // bentuk tak dikenal → biarkan placeholder
         var live = groupsFromLive(resp);
-        if (live.length) render(live); // ada ulasan asli → ganti placeholder
+        if (live.length) render(live); // ada ulasan asli → ganti placeholder CONTOH
       })
       .catch(function (err) {
         // Jaringan/proxy gagal → JANGAN tampilkan error; placeholder tetap tampil.

@@ -7,17 +7,19 @@
  *     memakai nama "Contoh Pelanggan", dan dirender dengan badge "CONTOH".
  *     JANGAN menampilkan ini seolah ulasan asli. Lihat PLACEHOLDERS.md.
  *
- * Begitu PEMILIK men-deploy proxy Apps Script (lihat
- * integrations/google-reviews-apps-script.gs) dan mengisi REVIEWS_ENDPOINT +
- * placeId tiap cabang (branches.js), section akan menarik ulasan ASLI dari
- * Google Places Details API lewat proxy dan file sampel ini diabaikan.
+ * Begitu PEMILIK mengisi REVIEWS_ENDPOINT (config.js) dengan URL proxy Apps Script,
+ * section menarik ulasan ASLI lewat proxy (cache mingguan di server) dan file sampel
+ * ini diabaikan. Proxy di-key per SLUG cabang — placeId TIDAK lagi dibutuhkan klien.
  *
- * BENTUK DATA mengikuti field yang dikembalikan Google Places Details API:
- *   group: { branch, slug, rating, userRatingsTotal, reviews:[ review... ] }
+ * BENTUK RESPONS PROXY (asli):
+ *   { updated:"ISO", branches:{ <slug>:{ rating, total, reviews:[ rv... ] } } }
+ *   rv (proxy): { author, photo, url, rating, text, time }
+ *   slug: yogyakarta | semarang | bandung | bali | surabaya
+ * Renderer (04-review.html → mapReview) memetakan field ringkas proxy ke bentuk
+ * internal di bawah, jadi satu jalur render untuk data asli & sampel:
+ *   group:  { branch, slug, rating, userRatingsTotal, reviews:[ review... ] }
  *   review: { authorName, rating, text, relativeTime, profilePhotoUrl, authorUrl }
- *   (Semua ulasan berasal dari Google Places API, jadi badge kartu selalu
- *    "Google" — tidak perlu field "source".)
- * (Sama persis dengan yang dipetakan dari respons proxy, agar renderer satu jalur.)
+ *   (Semua ulasan dari Google → badge kartu selalu "Google"; tak perlu field "source".)
  *
  * CATATAN BATAS API (penting untuk ekspektasi tim):
  *   Google Places Details API mengembalikan MAKSIMAL 5 ulasan per lokasi dan

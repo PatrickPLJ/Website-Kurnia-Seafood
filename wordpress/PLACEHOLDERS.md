@@ -81,7 +81,7 @@ dipetakan ke menu. `og-image` idealnya **landscape 1200×630** (sekarang potret
 | New Menu | `data/menu.js` (isNew) | 3 | ganti `image` + isi `name`/`desc` asli (hapus `placeholder`) |
 | Signature | `data/menu.js` (signature) | 5 | ganti `image` dgn foto hidangan resmi |
 | Foto cabang (Locations + tab Cabang) | `data/branches.js` (`photo`) | 5 | ganti `photo` tiap cabang aktif; set `photoPlaceholder:false` setelah diganti |
-| Ulasan (Kata Pelanggan) | `data/google-reviews.js` | 6 | ulasan CONTOH (badge "CONTOH" + `data-placeholder="true"`). Tampil hanya selama proxy ulasan Google belum aktif. Aktifkan ulasan ASLI: isi `REVIEWS_ENDPOINT` (`data/config.js`) + `placeId` tiap cabang (`data/branches.js`) lalu deploy `integrations/google-reviews-apps-script.gs` |
+| Ulasan (Kata Pelanggan) | `data/google-reviews.js` | 6 | ✅ `REVIEWS_ENDPOINT` (`data/config.js`) sudah diisi proxy mingguan pemilik → kartu menarik ulasan Google ASLI per slug cabang. Ulasan CONTOH (badge "CONTOH") kini hanya fallback bila proxy gagal/kosong. `placeId` di `branches.js` tidak lagi diperlukan (proxy di-key per slug). |
 | og:image (share/SEO) | `build-preview.mjs` (OG_IMAGE) | 1 | ganti URL foto resmi Kurnia (≥1200px) sebelum live |
 
 ## Foto sample lama (juga sebaiknya diganti)

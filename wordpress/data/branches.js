@@ -10,13 +10,12 @@
  * Field verify:true = data dari artikel pihak ketiga → WAJIB dikonfirmasi tim
  * sebelum produksi (lihat peringatan console di bawah).
  *
- * Field placeId = Google Place ID cabang, dipakai section "Kata Pelanggan"
- * untuk menarik ulasan Google via proxy server (lihat REVIEWS_ENDPOINT di
- * config.js + integrations/google-reviews-apps-script.gs). Place ID BERBEDA
- * dari koordinat geo dan harus diambil terpisah lewat Google "Place ID Finder".
- * Place ID bukan rahasia (boleh tampil di klien); API key Google yang rahasia
- * dan HANYA hidup di server proxy. Cabang "upcoming" belum punya ulasan/Place ID
- * → sengaja TIDAK diberi placeId.
+ * Field placeId = Google Place ID cabang. CATATAN: proxy ulasan Google yang kini
+ * aktif (REVIEWS_ENDPOINT di config.js) di-key per SLUG cabang dan menyimpan Place
+ * ID di sisi server, jadi placeId di sini TIDAK LAGI dipakai klien — dibiarkan
+ * kosong (opsional; boleh diisi/dirapikan nanti, tidak wajib). Yang penting: SLUG
+ * cabang harus cocok dengan kunci proxy (yogyakarta/semarang/bandung/bali/surabaya).
+ * API key Google tetap rahasia & HANYA hidup di server proxy.
  * ====================================================================== */
 window.KS_BRANCHES = [
   {
@@ -24,7 +23,7 @@ window.KS_BRANCHES = [
     city: "Yogyakarta",
     name: "Kurnia Seafood Yogyakarta",
     status: "active",
-    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
     photo: "assets/cabang-yogyakarta.webp",
     photoPlaceholder: false,
     whatsapp: "6285229235758",
@@ -51,7 +50,7 @@ window.KS_BRANCHES = [
     city: "Semarang",
     name: "Kurnia Seafood Semarang",
     status: "active",
-    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
     photo: "assets/cabang-semarang.webp",
     photoPlaceholder: false,
     whatsapp: "6281339505758",
@@ -79,7 +78,7 @@ window.KS_BRANCHES = [
     city: "Bandung",
     name: "Kurnia Seafood Bandung",
     status: "active",
-    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
     photo: "assets/cabang-bandung.webp",
     photoPlaceholder: false,
     whatsapp: "6281372405758",
@@ -109,7 +108,7 @@ window.KS_BRANCHES = [
     city: "Bali (Tabanan)",
     name: "Kurnia Seafood Bali",
     status: "active",
-    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
     photo: "assets/cabang-bali.webp",
     photoPlaceholder: false,
     whatsapp: "6281338555758",
@@ -135,7 +134,7 @@ window.KS_BRANCHES = [
     city: "Surabaya",
     name: "Kurnia Seafood Surabaya",
     status: "active",
-    placeId: "", // TODO: ambil Place ID asli via Google "Place ID Finder" (untuk ulasan Google)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
     photo: "assets/cabang-surabaya.webp",
     photoPlaceholder: false,
     whatsapp: "6281385375758",

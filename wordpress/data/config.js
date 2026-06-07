@@ -13,7 +13,7 @@ window.KS_CONFIG = {
   // TIDAK BOLEH ada di front-end. Diisi PEMILIK setelah deploy
   // integrations/google-reviews-apps-script.gs. Selama kosong/gagal, section
   // "Kata Pelanggan" menampilkan ulasan CONTOH (placeholder), bukan error.
-  REVIEWS_ENDPOINT: "", // TODO: isi URL proxy Apps Script ulasan Google dari pemilik
+  REVIEWS_ENDPOINT: "https://script.google.com/macros/s/AKfycbycdX-QQOLDVz3L22TieD5YcPxGEkZ_hSfJqcTJeZvCHdQ3rYMzM57_xh5uaS6JGgEMgw/exec", // proxy ulasan Google pemilik (cache mingguan; baca-saja, publik by design)
 
   // URL beranda — dipakai tombol "Kembali ke Beranda" pada section Reservasi
   // bila section berada di halaman terpisah (tanpa #hero di dokumen yang sama).
