@@ -6,7 +6,7 @@
 window.KS_CONFIG = {
   // URL Apps Script Web App (diakhiri /exec) untuk menyimpan reservasi ke Google Sheet.
   // Diisi oleh PEMILIK setelah deploy (lihat integrations/reservation-apps-script.gs).
-  RESERVATION_ENDPOINT: "", // TODO: isi dengan URL Apps Script Web App dari pemilik
+  RESERVATION_ENDPOINT: "https://script.google.com/macros/s/AKfycbxJK34uYuHHG7JTEMTOEl-dmAyUZW43VHZGwQ3owxnjFT0H4DJuVUuJO3Q5A5KAk7Bf/exec", // Apps Script Web App pemilik (publik by design: hanya menambah baris, tidak membaca Sheet)
 
   // URL proxy ULASAN GOOGLE (Apps Script Web App, diakhiri /exec) yang memanggil
   // Google Places Details API di sisi server. WAJIB lewat proxy: API key Google

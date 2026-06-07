@@ -1669,8 +1669,6 @@
 
       var wa = root.querySelector('#ksWaBtn');
       if (allValid()) {
-        // TODO: persist reservation data before WA redirect (production) —
-        // simpan ke form endpoint / Google Sheets / CRM sebelum membuka WA.
         wa.href = 'https://wa.me/' + state.whatsapp + '?text=' + encodeURIComponent(buildMessage());
         wa.classList.remove('is-disabled'); wa.setAttribute('aria-disabled', 'false');
       } else {
@@ -1736,6 +1734,13 @@
 
     // --- Capture best-effort ke endpoint (Apps Script) SEBELUM membuka WhatsApp ---
     // Tidak memblokir: bila endpoint kosong/gagal, pengguna tetap lanjut ke WhatsApp.
+    // CATATAN no-cors: dengan `mode:'no-cors'` klien TIDAK BISA membaca respons
+    // sukses/gagal endpoint — itu WAJAR. Verifikasi keberhasilan dengan mengecek
+    // BARIS BARU di Google Sheet, BUKAN dari sisi website. Content-Type text/plain
+    // JSON dipilih karena termasuk jenis "simple" yang diizinkan no-cors (tanpa
+    // preflight); Apps Script membacanya via e.postData.contents. Field diberi nama
+    // jelas (nama, cabang, tanggal, waktu, jumlah_tamu, catatan, sumber) agar jadi
+    // kolom rapi di Sheet. `keepalive` menjaga POST tetap terkirim saat tab pindah ke WA.
     var waBtn = root.querySelector('#ksWaBtn');
     if (waBtn) {
       waBtn.addEventListener('click', function () {
@@ -1745,14 +1750,20 @@
         try {
           fetch(endpoint, {
             method: 'POST',
-            mode: 'no-cors',           // Apps Script Web App
+            mode: 'no-cors',           // Apps Script Web App; respons tak terbaca (wajar)
             keepalive: true,           // tetap terkirim walau tab WA terbuka
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // hindari preflight CORS
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // jenis "simple" -> tanpa preflight
             body: JSON.stringify({
-              timestamp: new Date().toISOString(),
-              cabang: state.city, nama: state.nama, tanggal: state.tanggal,
-              jam: state.jam, jumlah: state.jumlah, preorder: state.menu,
-              sumber: 'preview-github-pages'
+              // Token anti-spam (low-value, PUBLIK by design): hanya menghalau bot
+              // kasar — bukan pengaman penuh. Apps Script menolak POST tanpa token cocok.
+              token:       'krn_69eb88584a427d27',
+              nama:        state.nama,
+              cabang:      state.city,
+              tanggal:     state.tanggal,   // ISO yyyy-mm-dd (rapi & sortable di Sheet)
+              waktu:       state.jam,
+              jumlah_tamu: state.jumlah,
+              catatan:     state.menu,       // pre-order / catatan tambahan
+              sumber:      'preview-github-pages'
             })
           }).catch(function (err) { if (window.console) console.warn('[Kurnia] capture gagal (lanjut ke WA):', err); });
         } catch (err) {
