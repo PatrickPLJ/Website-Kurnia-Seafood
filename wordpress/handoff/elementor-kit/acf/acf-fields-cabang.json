@@ -1,0 +1,171 @@
+[
+  {
+    "key": "group_ks_cabang",
+    "title": "Cabang — Data Kurnia Seafood",
+    "fields": [
+      {
+        "key": "field_ks_cabang_slug",
+        "label": "Slug (kunci proxy ulasan)",
+        "name": "slug",
+        "type": "text",
+        "instructions": "WAJIB salah satu: yogyakarta | semarang | bandung | bali | surabaya. Untuk upcoming: jakarta-pondok-indah | bandung-2. Slug = kunci proxy ulasan Google — jaga konsisten.",
+        "required": 1
+      },
+      {
+        "key": "field_ks_cabang_kota",
+        "label": "Kota",
+        "name": "kota",
+        "type": "text",
+        "instructions": "Mis. Yogyakarta, Semarang, Bandung, Bali (Tabanan), Surabaya.",
+        "required": 1
+      },
+      {
+        "key": "field_ks_cabang_nama",
+        "label": "Nama Lengkap Cabang",
+        "name": "nama_lengkap",
+        "type": "text",
+        "instructions": "Mis. Kurnia Seafood Yogyakarta.",
+        "required": 1
+      },
+      {
+        "key": "field_ks_cabang_status",
+        "label": "Status",
+        "name": "status",
+        "type": "select",
+        "choices": { "active": "Active (tampil penuh + schema)", "upcoming": "Upcoming (Segera Hadir — tanpa peta/CTA/schema)" },
+        "default_value": "active",
+        "required": 1
+      },
+      {
+        "key": "field_ks_cabang_foto",
+        "label": "Foto Cabang",
+        "name": "foto",
+        "type": "image",
+        "return_format": "url",
+        "instructions": "Foto resmi cabang (>=1200px). Di main: assets/cabang-<slug>.webp."
+      },
+      {
+        "key": "field_ks_cabang_whatsapp",
+        "label": "WhatsApp (format wa.me, tanpa + / spasi)",
+        "name": "whatsapp",
+        "type": "text",
+        "instructions": "Nomor kanonik berakhiran ...5758. Mis. 6285229235758.",
+        "required": 0
+      },
+      {
+        "key": "field_ks_cabang_phone_display",
+        "label": "Telepon (tampilan)",
+        "name": "phone_display",
+        "type": "text",
+        "instructions": "Mis. +62 852-2923-5758."
+      },
+      {
+        "key": "field_ks_cabang_alamat",
+        "label": "Alamat",
+        "name": "alamat",
+        "type": "textarea",
+        "rows": 2
+      },
+      {
+        "key": "field_ks_cabang_geo_lat",
+        "label": "Geo Latitude",
+        "name": "geo_lat",
+        "type": "number",
+        "instructions": "Untuk peta embed & schema. Mis. -7.783678."
+      },
+      {
+        "key": "field_ks_cabang_geo_lng",
+        "label": "Geo Longitude",
+        "name": "geo_lng",
+        "type": "number",
+        "instructions": "Mis. 110.407989."
+      },
+      {
+        "key": "field_ks_cabang_jam",
+        "label": "Jam Buka (teks)",
+        "name": "jam_buka",
+        "type": "text",
+        "instructions": "Mis. Sen-Sab: 11.00-22.00 - Min: 10.00-22.00. (Untuk schema gunakan OpeningHoursSpecification — lihat schema-notes.md.)"
+      },
+      {
+        "key": "field_ks_cabang_tagline",
+        "label": "Tagline",
+        "name": "tagline",
+        "type": "text"
+      },
+      {
+        "key": "field_ks_cabang_fasilitas",
+        "label": "Fasilitas",
+        "name": "fasilitas",
+        "type": "repeater",
+        "layout": "table",
+        "button_label": "Tambah fasilitas",
+        "sub_fields": [
+          {
+            "key": "field_ks_cabang_fasilitas_item",
+            "label": "Fasilitas",
+            "name": "item",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "key": "field_ks_cabang_area",
+        "label": "Area (khusus upcoming)",
+        "name": "area",
+        "type": "text",
+        "instructions": "Mis. Pondok Indah (Kebayoran Lama). Hanya untuk status=upcoming.",
+        "conditional_logic": [
+          [ { "field": "field_ks_cabang_status", "operator": "==", "value": "upcoming" } ]
+        ]
+      },
+      {
+        "key": "field_ks_cabang_opening_estimate",
+        "label": "Estimasi Buka (khusus upcoming)",
+        "name": "opening_estimate",
+        "type": "text",
+        "instructions": "Mis. Akhir 2026. Hanya untuk status=upcoming.",
+        "conditional_logic": [
+          [ { "field": "field_ks_cabang_status", "operator": "==", "value": "upcoming" } ]
+        ]
+      },
+      {
+        "key": "field_ks_cabang_url",
+        "label": "URL Halaman Cabang",
+        "name": "url",
+        "type": "url",
+        "instructions": "Untuk schema Restaurant. Bali = domain terpisah https://kurniaseafoodbali.com/ ; lainnya mis. https://kurniaseafood.co.id/cabang/<slug>/."
+      },
+      {
+        "key": "field_ks_cabang_same_as",
+        "label": "sameAs (satu URL per baris)",
+        "name": "same_as",
+        "type": "textarea",
+        "instructions": "Mis. https://www.instagram.com/kurnia.seafood/. Bali: tambahkan domain utama; cabang lain: domain Bali tidak perlu."
+      },
+      {
+        "key": "field_ks_cabang_place_id",
+        "label": "Google Place ID (opsional, tidak dipakai klien)",
+        "name": "place_id",
+        "type": "text",
+        "instructions": "Proxy ulasan di-key per SLUG dan menyimpan Place ID di server. Boleh dikosongkan."
+      },
+      {
+        "key": "field_ks_cabang_verify",
+        "label": "Perlu verifikasi tim (data pihak ketiga)",
+        "name": "verify",
+        "type": "true_false",
+        "ui": 1,
+        "instructions": "Centang bila sebagian data dari artikel pihak ketiga (Yogyakarta, Bandung, Bali) — WAJIB dikonfirmasi tim sebelum produksi."
+      }
+    ],
+    "location": [
+      [ { "param": "post_type", "operator": "==", "value": "cabang" } ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "active": true,
+    "description": "Field cabang Kurnia Seafood — mengikuti data/branches.js (main)."
+  }
+]
