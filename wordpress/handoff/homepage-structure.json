@@ -1,0 +1,310 @@
+{
+  "page": "homepage",
+  "_catatan_blueprint": "Dokumen ini dihasilkan dari KODE AKTUAL repo (sumber kebenaran), BUKAN asumsi brief. Beberapa asumsi brief TIDAK cocok dengan repo — lihat blok 'temuan_vs_brief' di bawah. Tidak ada nilai rahasia/token yang ditulis di sini.",
+  "source": {
+    "preview_url": "https://patrickplj.github.io/Website-Kurnia-Seafood/wordpress/PREVIEW.html",
+    "repo_folder": "wordpress/",
+    "build_script": "wordpress/build-preview.mjs",
+    "stack": "vanilla HTML/CSS/JS (section per file, dirakit oleh build-preview.mjs)",
+    "output_files": ["wordpress/PREVIEW.html (data via <script src>)", "wordpress/preview-share.html (data + logo inline, file mandiri)"],
+    "data_files_load_order": ["data/config.js", "data/branches.js", "data/menu.js", "data/promos.js", "data/testimonials.js"]
+  },
+  "meta": {
+    "_sumber": "wordpress/build-preview.mjs (fungsi head() + konstanta SITE/TITLE/DESC/OG_IMAGE)",
+    "title": "Kurnia Seafood — Restoran Seafood Segar di Yogyakarta, Semarang, Bandung, Bali & Surabaya",
+    "description": "Kurnia Seafood: seafood segar konsep market, bumbu spesial khas Kurnia. Cocok untuk keluarga & acara. Reservasi WhatsApp di 5 cabang.",
+    "canonical": "https://kurniaseafood.co.id/",
+    "robots": "noindex",
+    "robots_catatan": "WAJIB DIHAPUS saat go-live. 'noindex' hanya untuk preview (GitHub Pages) — lihat komentar di build-preview.mjs baris ~112.",
+    "lang": "id",
+    "og": {
+      "type": "restaurant",
+      "site_name": "Kurnia Seafood",
+      "locale": "id_ID",
+      "title": "Kurnia Seafood — Restoran Seafood Segar di Yogyakarta, Semarang, Bandung, Bali & Surabaya",
+      "description": "Kurnia Seafood: seafood segar konsep market, bumbu spesial khas Kurnia. Cocok untuk keluarga & acara. Reservasi WhatsApp di 5 cabang.",
+      "url": "https://kurniaseafood.co.id/",
+      "image": "PLACEHOLDER pihak ketiga (Unsplash, ~1200px landscape) — bukan foto resmi Kurnia",
+      "image_catatan": "OG_IMAGE di build-preview.mjs = URL Unsplash placeholder. Ada juga file lokal wordpress/assets/og-image.jpg (& root og-image.jpg) yang berorientasi PORTRAIT. Sebelum go-live: siapkan og-image RESMI landscape ~1200×630 dan pakai sebagai og:image & twitter:image. Lihat PLACEHOLDERS.md."
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": "Kurnia Seafood — Restoran Seafood Segar di Yogyakarta, Semarang, Bandung, Bali & Surabaya",
+      "description": "Kurnia Seafood: seafood segar konsep market, bumbu spesial khas Kurnia. Cocok untuk keluarga & acara. Reservasi WhatsApp di 5 cabang.",
+      "image": "sama dengan og:image (PLACEHOLDER Unsplash ~1200px)"
+    },
+    "schema_jsonld": {
+      "_sumber_preview": "wordpress/build-preview.mjs (generate dari data/branches.js + FAQ asli sections/10-faq.html)",
+      "_sumber_produksi": "wordpress/schema/inc/schema-jsonld.php (untuk WordPress: hook wp_head)",
+      "tipe_ada": ["Organization", "Restaurant (×5 cabang aktif)", "FAQPage", "BreadcrumbList (hanya di schema PHP, per-halaman cabang)"],
+      "aggregateRating": "TIDAK ADA (sengaja — dikonfirmasi di build-preview.mjs & schema-jsonld.php). Angka 4.9/26.586 = teks brand, JANGAN dijadikan aggregateRating.",
+      "catatan": "Restaurant hanya untuk 5 cabang status:active. Cabang 'upcoming' (Jakarta, Bandung ke-2) sengaja TIDAK di-schema. priceRange '$$' = indikator saja, TANPA harga menu."
+    }
+  },
+  "header": {
+    "source_file": "sections/01-hero.html",
+    "catatan_lokasi": "Header/nav TIDAK punya file sendiri — ada di dalam <nav class=\"ks-nav\"> pada section Hero (01-hero.html). Komentar di file menyebut nav ini OPSIONAL (hapus bila tema WordPress sudah punya header global).",
+    "elemen": [
+      "Logo brand (picture: webp 1x/2x + png fallback) → link ke #hero",
+      "Menu navigasi (pill/glass) — tersembunyi di mobile <=760px",
+      "Tombol CTA 'Reservasi' (ks-btn--red) → #reservasi"
+    ],
+    "navigasi_links": [
+      { "label": "Menu", "target": "#new-menu" },
+      { "label": "Cabang", "target": "#locations" },
+      { "label": "Tentang", "target": "#tentang" },
+      { "label": "Reservasi", "target": "#reservasi" },
+      { "label": "Reservasi (CTA tombol)", "target": "#reservasi" }
+    ],
+    "dinamis": false,
+    "catatan_migrasi": "Gunakan menu/header global WordPress (Elementor Theme Builder atau menu tema). Anchor link (#new-menu, #locations, #tentang, #reservasi) hanya valid bila semua section berada di SATU halaman; jika section dipecah ke halaman terpisah, ganti ke URL halaman masing-masing. Logo dari assets/kurnia-seafood-logo.* (unggah ke Media Library)."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "source_file": "sections/01-hero.html",
+      "urutan": 1,
+      "nama": "Hero (carousel foto background)",
+      "tujuan": "Pembuka brand + dua CTA utama (Reservasi & Lihat Menu). Carousel 5 foto auto-rotate ~5s, fade, pause-on-hover, hormati prefers-reduced-motion.",
+      "elemen": [
+        "5 slide background (data-placeholder, foto Unsplash)",
+        "Scrim gradient agar teks terbaca",
+        "Nav (lihat blok header)",
+        "Kicker 'The Happiest Seafood Time'",
+        "Judul H1 'Tangkapan laut terbaik, untuk keluarga Anda'",
+        "Sub-paragraf konsep Fresh Seafood Market",
+        "Dots indikator slide"
+      ],
+      "cta": [
+        { "label": "Reservasi Sekarang", "target": "#reservasi" },
+        { "label": "Lihat Menu", "target": "#new-menu" }
+      ],
+      "dinamis": false,
+      "sumber_data": null,
+      "fields": [],
+      "catatan_migrasi": "Elementor: section custom / slider. 5 foto background = PLACEHOLDER (Unsplash) → ganti foto resmi Kurnia (PLACEHOLDERS.md). JS carousel ringan bisa diganti widget slider Elementor."
+    },
+    {
+      "id": "spotlight",
+      "source_file": "sections/12-spotlight.html",
+      "urutan": 2,
+      "nama": "Spotlight Terbaru (promo/menu/campaign)",
+      "tujuan": "Menonjolkan 1 item aktif terbaru. Auto-HIDE bila tidak ada item active.",
+      "elemen": ["Media foto + badge tipe", "Kicker 'Terbaru'", "Judul, deskripsi, CTA tombol"],
+      "cta": [{ "label": "(ctaLabel dari data, default 'Lihat Detail')", "target": "(ctaHref dari data, default '#')" }],
+      "dinamis": true,
+      "sumber_data": "data/promos.js (window.KS_PROMOS) — ambil item active:true, urut date terbaru",
+      "fields": [],
+      "catatan_migrasi": "CPT 'Promo' + ACF (type, title, desc, image, date, ctaLabel, ctaHref, active). Render item active terbaru. Saat ini isi promos.js = 1 contoh placeholder (placeholder:true). TANPA harga."
+    },
+    {
+      "id": "new-menu",
+      "source_file": "sections/13-new-menu.html",
+      "urutan": 3,
+      "nama": "New Menu (Baru di Kurnia)",
+      "tujuan": "Grid menu baru (image-forward), TANPA harga. Auto-hide bila tak ada item isNew.",
+      "elemen": ["Header kicker/judul/sub", "Grid kartu (foto + badge 'Baru' + nama + desc)"],
+      "cta": [],
+      "dinamis": true,
+      "sumber_data": "data/menu.js (window.KS_MENU) — filter item isNew:true",
+      "fields": [],
+      "catatan_migrasi": "CPT 'Menu' + ACF (name, desc, image, isNew, signature, placeholder). TANPA HARGA. Saat ini 3 item isNew = placeholder ('Menu Baru 1/2/3') → isi nama & foto resmi dari tim."
+    },
+    {
+      "id": "signature",
+      "source_file": "sections/14-signature.html",
+      "urutan": 4,
+      "nama": "Signature / Hero Menus",
+      "tujuan": "Menu andalan dalam grid gelap premium (image-forward), TANPA harga. Auto-hide bila tak ada item signature.",
+      "elemen": ["Header kicker/judul/sub", "Grid kartu 3:4 (foto + nama overlay)"],
+      "cta": [],
+      "dinamis": true,
+      "sumber_data": "data/menu.js (window.KS_MENU) — filter item signature:true",
+      "fields": [],
+      "catatan_migrasi": "Sumber data sama dengan New Menu (CPT 'Menu' + ACF, flag signature:true). 5 item signature ada (Ikan Bakar Kurnia, Kepiting Saus Kurnia, Udang Saus Malaka, Kepiting Garlic Caramel, Alaskan King Crab Saus Singapore) — foto masih placeholder Unsplash. TANPA HARGA."
+    },
+    {
+      "id": "locations",
+      "source_file": "sections/15-locations.html",
+      "urutan": 5,
+      "nama": "Locations (cabang aktif ringkas + Segera Hadir)",
+      "tujuan": "Ringkasan 5 cabang aktif (kartu + CTA detail/reservasi) dan blok 'Segera Hadir' untuk cabang upcoming (auto-hide bila kosong).",
+      "elemen": ["Header", "Grid kartu cabang aktif (foto, kota, nama, 2 CTA)", "Blok upcoming (kota, area, estimasi buka)"],
+      "cta": [
+        { "label": "Lihat detail", "target": "#cabang (memanggil window.ksCabangSelect(slug))" },
+        { "label": "Reservasi", "target": "#reservasi (memanggil window.ksReservasiSelect(slug))" }
+      ],
+      "dinamis": true,
+      "sumber_data": "data/branches.js (window.KS_BRANCHES) — aktif vs upcoming",
+      "fields": [],
+      "catatan_migrasi": "CPT 'Cabang' + ACF (slug, city, name, status, photo, whatsapp, phoneDisplay, address, geo{lat,lng}, hours, tagline, facilities[], area, openingEstimate). Status 'upcoming' tampil sebagai 'Segera Hadir' TANPA peta/CTA/schema. Cross-link & interaksi antar-section (Locations→Cabang→Reservasi) saat ini lewat fungsi global JS; di WP bisa via anchor/URL atau JS serupa."
+    },
+    {
+      "id": "tentang",
+      "source_file": "sections/07-tentang.html",
+      "urutan": 6,
+      "nama": "Tentang Kami + 3 Core Value",
+      "tujuan": "Cerita brand (Kurnia Group sejak 2005, Seafood sejak 2020, 5 kota), statistik, dan 3 nilai inti (blok permanen).",
+      "elemen": [
+        "Foto + badge 'Sejak 2020'",
+        "2 paragraf cerita",
+        "Statistik: '1Jt+ grup pelanggan', '30% repeat rate', '4.9★ dari 26.586 ulasan'",
+        "3 kartu Core Value (Dilayani Seperti Keluarga / Tangkapan Terbaik / Resep Bumbu Spesial)"
+      ],
+      "cta": [],
+      "dinamis": false,
+      "sumber_data": null,
+      "fields": [],
+      "catatan_migrasi": "Elementor (teks bebas + kolom statistik + 3 kartu). Statistik '4.9 / 26.586' = SNAPSHOT/teks brand — JANGAN dikaitkan ke aggregateRating schema (ada komentar eksplisit di file). Foto = placeholder Unsplash."
+    },
+    {
+      "id": "cabang",
+      "source_file": "sections/11-cabang.html",
+      "urutan": 7,
+      "nama": "Cabang (tab switcher 5 kota)",
+      "tujuan": "Detail unik per cabang via tab: alamat, jam, telp, fasilitas, foto, peta embed, CTA reservasi.",
+      "elemen": ["Header", "Tabs per kota", "Panel: nama/tagline/meta(alamat,jam,telp)/fasilitas/foto/peta Google Maps embed/CTA"],
+      "cta": [{ "label": "Reservasi di {kota}", "target": "#reservasi (memanggil window.ksReservasiSelect(slug))" }],
+      "dinamis": true,
+      "sumber_data": "data/branches.js (window.KS_BRANCHES) — hanya status active",
+      "fields": [],
+      "catatan_migrasi": "CPT 'Cabang' + ACF (sama dengan Locations). Peta = embed Google Maps dari geo{lat,lng} ASLI (bukan placeholder). Telp/WhatsApp kanonik berakhiran …5758. Catatan data: 3 cabang (Yogyakarta, Bandung, Bali) ber-verify:true = data dari artikel pihak ketiga → WAJIB dikonfirmasi tim sebelum produksi."
+    },
+    {
+      "id": "galeri",
+      "source_file": "sections/08-galeri.html",
+      "urutan": 8,
+      "nama": "Galeri (grid foto)",
+      "tujuan": "Etalase suasana/hidangan/kebersamaan.",
+      "elemen": ["Header", "Grid 5 foto (1 big, 1 wide) dengan caption hover"],
+      "cta": [],
+      "dinamis": false,
+      "sumber_data": null,
+      "fields": [],
+      "catatan_migrasi": "Elementor Gallery / Image Grid. 5 foto = contoh Unsplash → ganti foto resmi. Caption statis (hardcoded)."
+    },
+    {
+      "id": "review",
+      "source_file": "sections/04-review.html",
+      "urutan": 9,
+      "nama": "Kata Pelanggan (Wall of Love)",
+      "tujuan": "Testimoni pelanggan dalam masonry + header rating brand.",
+      "elemen": [
+        "Header kicker 'Kata Pelanggan' + judul",
+        "Baris rating: '4.9 dari 26.586 ulasan · Google & GoFood' (teks brand)",
+        "Grid masonry kartu testimoni (avatar/inisial, nama, role, 5 bintang, quote)"
+      ],
+      "cta": [],
+      "dinamis": true,
+      "sumber_data": "data/testimonials.js (window.KS_TESTIMONIALS)",
+      "fields": [],
+      "catatan_migrasi": "PENTING — lihat 'temuan_vs_brief': sumber ulasan saat ini = data/testimonials.js berisi ULASAN CONTOH/placeholder (9 entri, avatar randomuser.me), BUKAN data Google Places live. TIDAK ada proxy Places API / REVIEWS_ENDPOINT / refresh mingguan / cache di repo. Brief mengasumsikan ulasan = data Google asli via proxy; itu BELUM ADA — masih rencana/rekomendasi. Untuk produksi: bila ingin ulasan Google asli, bangun proxy server-side (Places API, refresh berkala, cache) + atribusi + label cabang, JANGAN fabrikasi. Angka '4.9 / 26.586' = teks brand gabungan seluruh cabang, TANPA aggregateRating schema. Pemetaan WP: CPT 'Testimoni' + ACF (name, role, quote, avatar) atau integrasi proxy reviews."
+    },
+    {
+      "id": "kabar",
+      "source_file": "sections/05-kabar.html",
+      "urutan": 10,
+      "nama": "Kabar & Promo (3 kartu blog)",
+      "tujuan": "Update/blog terbaru (3 kartu).",
+      "elemen": ["Header", "3 kartu (foto, tanggal, judul, 'Selengkapnya')"],
+      "cta": [
+        { "label": "Selengkapnya", "target": "# (placeholder)" },
+        { "label": "Selengkapnya", "target": "# (placeholder)" },
+        { "label": "Selengkapnya", "target": "# (placeholder)" }
+      ],
+      "dinamis": false,
+      "sumber_data": null,
+      "fields": [],
+      "catatan_migrasi": "Section ini saat ini STATIS/hardcoded (3 artikel contoh, tanggal & foto Unsplash, link '#'). Catatan: section tidak punya id HTML. Untuk produksi: pakai Posts/CPT 'Kabar' (judul, tanggal, featured image, permalink) + widget loop Elementor. JANGAN bingung dgn Spotlight (yang dinamis dari promos.js)."
+    },
+    {
+      "id": "faq",
+      "source_file": "sections/10-faq.html",
+      "urutan": 11,
+      "nama": "FAQ (accordion native <details>)",
+      "tujuan": "5 pertanyaan umum (reservasi, ramah keluarga, pesan antar, acara/gathering, pembayaran).",
+      "elemen": ["Intro sticky + CTA WhatsApp", "5 item accordion native <details>/<summary>"],
+      "cta": [{ "label": "Tanya via WhatsApp", "target": "https://wa.me/62000000000 (PLACEHOLDER nomor — ganti nomor asli)" }],
+      "dinamis": false,
+      "sumber_data": null,
+      "fields": [],
+      "catatan_migrasi": "Elementor Accordion atau biarkan <details>. KONTEN FAQ INI menjadi sumber FAQPage JSON-LD: build-preview.mjs mem-parsing <details>/<summary> file ini; schema PHP juga parsing konten halaman FAQ. Jaga markup <details>/<summary>+.ks-faq__ans agar parser schema tetap jalan. Nomor WhatsApp tombol = placeholder."
+    },
+    {
+      "id": "reservasi",
+      "source_file": "sections/06-reservasi.html",
+      "urutan": 12,
+      "nama": "Reservasi (3 langkah, branch-aware WhatsApp)",
+      "tujuan": "Wizard 3 langkah: pilih cabang → isi detail → konfirmasi & kirim via WhatsApp cabang yang dipilih. Best-effort capture ke endpoint Apps Script sebelum membuka WA.",
+      "elemen": [
+        "Stepper 1-2-3",
+        "Step 1: kartu pilih cabang (radiogroup, dari branches.js aktif)",
+        "Step 2: form detail",
+        "Step 3: pre-order + ringkasan + tombol WhatsApp + link kembali ke beranda"
+      ],
+      "cta": [
+        { "label": "Lanjut / Kembali (navigasi step)", "target": "internal (JS)" },
+        { "label": "Kirim Reservasi via WhatsApp", "target": "https://wa.me/{whatsapp cabang}?text=... (dibangun runtime dari branches.js)" },
+        { "label": "← Kembali ke Beranda", "target": "#hero (smooth-scroll bila satu halaman) atau KS_CONFIG.HOME_URL ('/')" }
+      ],
+      "dinamis": true,
+      "sumber_data": "data/branches.js (window.KS_BRANCHES, status active) untuk routing WA + data/config.js (window.KS_CONFIG: RESERVATION_ENDPOINT, HOME_URL)",
+      "fields": [
+        { "id": "ksNama", "label": "Nama", "type": "text", "required": false, "autocomplete": "name" },
+        { "id": "ksTgl", "label": "Tanggal", "type": "date", "required": true, "catatan": "min = hari ini (di-set via JS)" },
+        { "id": "ksJam", "label": "Jam", "type": "time", "required": true, "default": "19:00", "step": "900" },
+        { "id": "ksJumlah", "label": "Jumlah tamu", "type": "select", "required": true, "options": ["2 orang", "3–4 orang", "5–6 orang", "7–10 orang", "11–20 orang", "20+ (acara/gathering)"] },
+        { "id": "ksMenu", "label": "Pre-order", "type": "textarea", "required": false }
+      ],
+      "endpoint_reservasi": {
+        "config_key": "KS_CONFIG.RESERVATION_ENDPOINT (data/config.js)",
+        "status": "KOSONG (string \"\") — belum dikonfigurasi pemilik",
+        "jenis": "Google Apps Script Web App (/exec) — prototipe; lihat integrations/reservation-apps-script.gs",
+        "batasan": [
+          "Dikirim via fetch mode:'no-cors' (respons tidak terbaca, best-effort)",
+          "keepalive:true agar tetap terkirim saat tab WA terbuka",
+          "Content-Type text/plain untuk hindari preflight CORS",
+          "Endpoint berada di FRONT-END (publik) — tidak ada token/secret (memang dirancang publik)",
+          "Bila endpoint kosong/gagal, alur tetap lanjut ke WhatsApp (tidak memblokir)"
+        ]
+      },
+      "catatan_migrasi": "REKOMENDASI PRODUKSI: ganti Apps Script dengan PROXY SERVER-SIDE PHP di WordPress (admin-ajax/REST) untuk menyimpan reservasi (CRM/Sheet/DB) + validasi + anti-spam, lalu redirect WhatsApp. JANGAN menaruh token/secret di front-end. Form bisa pakai plugin (mis. WPForms/Forminator) atau form custom; routing nomor WA per cabang tetap dari data Cabang. Tidak ada nilai endpoint/token yang ditulis di file ini."
+    }
+  ],
+  "footer": {
+    "source_file": "sections/09-footer.html",
+    "html_id": "kontak",
+    "elemen": [
+      "Brand: logo + tagline + sosial (Instagram, WhatsApp, Facebook, TikTok — link '#')",
+      "Nav 'Jelajahi' (Tentang #tentang, Menu #menu, Galeri #galeri, FAQ #faq, Reservasi #reservasi)",
+      "Jam Buka (statis: Sen–Jum 10–22, Sab–Min 10–23, Libur Nasional Buka)",
+      "Kontak (alamat/telp/email = PLACEHOLDER contoh)",
+      "Peta Google Maps embed (query 'Jakarta,Indonesia' — PLACEHOLDER)",
+      "Bar bawah: copyright (tahun auto via JS) + link Privasi & S&K (placeholder '#')"
+    ],
+    "dinamis": false,
+    "sumber_data": null,
+    "catatan_migrasi": "Footer global WordPress (Elementor Theme Builder / footer tema). PERHATIAN: link nav footer 'Menu' menunjuk #menu, tapi section menu sebenarnya ber-id #new-menu (ada inkonsistensi anchor — perbaiki saat migrasi). Alamat/telp/email/peta/sosial masih PLACEHOLDER → isi data asli. Jam buka di footer statis & berbeda format dengan jam per-cabang di branches.js — selaraskan."
+  },
+  "aturan_global": [
+    "TANPA HARGA menu di mana pun (New Menu, Signature, Spotlight) — dipatuhi di repo.",
+    "TANPA aggregateRating di schema (dikonfirmasi di build-preview.mjs & schema-jsonld.php). Angka '4.9 / 26.586' hanya teks brand (gabungan seluruh cabang).",
+    "robots 'noindex' WAJIB dihapus saat go-live (sekarang untuk preview saja).",
+    "Reservasi: endpoint Apps Script (RESERVATION_ENDPOINT) status KOSONG; saat produksi pakai proxy server-side PHP; JANGAN simpan token/secret di front-end.",
+    "Cabang upcoming (Jakarta–Pondok Indah, Bandung ke-2): tampil 'Segera Hadir' TANPA peta/CTA/schema/halaman penuh sampai benar-benar buka. Data alamat upcoming ditandai INTERNAL (jangan render di UI).",
+    "Bali = operasi & domain TERPISAH (kurniaseafoodbali.com): URL Restaurant Bali ke domain itu, cross-link sameAs silang ke domain utama (& sebaliknya). Lihat build-preview.mjs & schema-jsonld.php.",
+    "Foto: hampir semua = PLACEHOLDER pihak ketiga (Unsplash/randomuser) bertanda data-placeholder / placeholder:true → ganti foto resmi Kurnia sebelum live (PLACEHOLDERS.md). Peta = embed Google Maps dari geo asli (bukan placeholder).",
+    "og:image perlu foto RESMI landscape ~1200×630 sebelum go-live (saat ini placeholder Unsplash; file lokal og-image.jpg berorientasi portrait).",
+    "Data cabang ber-verify:true (Yogyakarta, Bandung, Bali) = sumber pihak ketiga → WAJIB dikonfirmasi tim sebelum produksi.",
+    "WhatsApp kanonik per cabang berakhiran …5758 (format wa.me tanpa '+'/spasi)."
+  ],
+  "temuan_vs_brief": {
+    "_catatan": "Perbedaan antara asumsi di brief dan repo aktual (repo = sumber kebenaran).",
+    "ulasan_google_proxy": "Brief mengasumsikan ulasan = data Google asli via proxy (Places API, refresh mingguan, cache) dan menyebut file 'data/google-reviews.js' + 'REVIEWS_ENDPOINT'. REPO TIDAK PUNYA itu: tidak ada google-reviews.js, tidak ada REVIEWS_ENDPOINT, tidak ada proxy Places API. Ulasan berasal dari data/testimonials.js = 9 testimoni CONTOH/placeholder (avatar randomuser.me). Status proxy Google: BELUM ADA (hanya rencana/rekomendasi).",
+    "urutan_section": "Urutan render TIDAK mengikuti nomor file. Urutan nyata dari build-preview.mjs ORDER: 01-hero, 12-spotlight, 13-new-menu, 14-signature, 15-locations, 07-tentang, 11-cabang, 08-galeri, 04-review, 05-kabar, 10-faq, 06-reservasi, 09-footer.",
+    "file_data_reviews": "Nama file data ulasan = data/testimonials.js (BUKAN google-reviews.js).",
+    "reservation_endpoint": "RESERVATION_ENDPOINT ADA sebagai kunci config tapi NILAINYA KOSONG (\"\"). Tidak ada REVIEWS_ENDPOINT sama sekali.",
+    "section_kabar_tanpa_id": "Section 05-kabar tidak memiliki atribut id HTML (berbeda dari section lain).",
+    "anchor_footer_menu": "Link footer 'Menu' (#menu) tidak cocok dengan id section menu sebenarnya (#new-menu)."
+  }
+}
