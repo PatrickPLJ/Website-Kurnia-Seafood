@@ -36,7 +36,8 @@ const REPLACEMENTS = [
   ['assets/share/menu-udang-saus-malaka.jpg',       'assets/share/menu-udang-saus-malaka.jpg'],
   ['assets/share/menu-udang-saus-kurnia.jpg',       'assets/share/menu-udang-saus-kurnia.jpg'],
   // logo & font brand
-  ['assets/logo-kurnia-signature-dark.png', 'assets/logo-kurnia-signature-dark.png'],
+  ['assets/logo-kurnia-signature-dark.png',  'assets/logo-kurnia-signature-dark.png'],
+  ['assets/logo-kurnia-signature-light.png', 'assets/logo-kurnia-signature-light.png'],
   ['assets/CSCoster-Italic.woff2',          'assets/CSCoster-Italic.woff2'],
   ['assets/CSCoster-Italic.woff',           'assets/CSCoster-Italic.woff'],
   // Regular menyusul — bila file sudah diupload, otomatis ikut ter-inline
