@@ -51,9 +51,10 @@
   --cream:#F6F1E7;         /* teks panjang di atas navy */
   --muted:rgba(246,241,231,.62);
   --hairline:rgba(194,155,68,.28);
-  --fd:'CS Coaster','Crimson Pro',Georgia,serif;   /* display */
-  --fs:'Crimson Pro',Georgia,serif;                /* serif pendukung */
-  --fl:'Alexandria',system-ui,sans-serif;          /* label/caps */
+  /* Noto Serif JP/KR/SC = fallback per-glyph utk bahasa CJK (dimuat lazy saat bahasa dipilih) */
+  --fd:'CS Coaster','Crimson Pro','Noto Serif JP','Noto Serif KR','Noto Serif SC',Georgia,serif;
+  --fs:'Crimson Pro','Noto Serif JP','Noto Serif KR','Noto Serif SC',Georgia,serif;
+  --fl:'Alexandria','Noto Serif JP','Noto Serif KR','Noto Serif SC',system-ui,sans-serif;
   --ease:cubic-bezier(.22,.61,.2,1);
   --shell:1180px;
 }
@@ -84,14 +85,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 /* ---------- primitif ---------- */
 .sig-shell{ max-width:var(--shell); margin:0 auto; padding:0 24px; }
 .sig-kicker{
-  font-family:var(--fl); font-weight:500; font-size:12px; letter-spacing:.34em;
+  font-family:var(--fl); font-weight:500; font-size:11px; letter-spacing:.34em;
   text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:14px;
 }
 .sig-kicker::before{ content:""; width:34px; height:1px; background:var(--gold-dim); }
 .sig-kicker--center::after{ content:""; width:34px; height:1px; background:var(--gold-dim); }
 .sig-h2{
   font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white);
-  font-size:clamp(2.1rem,4.6vw,3.4rem); line-height:1.12; letter-spacing:.01em;
+  font-size:clamp(1.9rem,4vw,3rem); line-height:1.14; letter-spacing:.01em;
   margin:18px 0 0;
 }
 .sig-lede{ color:var(--muted); font-size:1.06rem; max-width:56ch; margin:16px 0 0; }
@@ -107,6 +108,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-btn--solid:hover{ background:var(--gold-soft); border-color:var(--gold-soft); }
 .sig-btn--ghost{ background:transparent; color:var(--gold-soft); }
 .sig-btn--ghost:hover{ background:rgba(194,155,68,.12); color:var(--cream); }
+/* tautan hening (ref: Aman) — pengganti tombol sekunder */
+.sig-link{
+  display:inline-block; font-family:var(--fl); font-weight:500; font-size:12px;
+  letter-spacing:.24em; text-transform:uppercase; text-decoration:none;
+  color:var(--gold-soft); padding:10px 2px 8px; border-bottom:1px solid var(--gold-dim);
+  transition:color .3s var(--ease), border-color .3s var(--ease);
+}
+.sig-link:hover{ color:var(--cream); border-color:var(--gold); }
 
 /* grain — atmosfer film halus */
 .sig-grain{ position:relative; isolation:isolate; }
@@ -134,6 +143,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 }
 .sig-nav.is-scrolled{ background:rgba(6,26,48,.92); backdrop-filter:blur(10px);
   box-shadow:0 1px 0 var(--hairline); }
+/* bar bahasa (ref: Akaneya) */
+.sig-langbar{
+  display:flex; justify-content:flex-end; gap:2px;
+  max-width:var(--shell); margin:0 auto; padding:10px 24px 0;
+}
+.sig-langbar button{
+  background:none; border:none; cursor:pointer; padding:6px 9px;
+  font-family:var(--fl); font-weight:400; font-size:10.5px; letter-spacing:.18em;
+  color:rgba(246,241,231,.5); transition:color .25s var(--ease);
+}
+.sig-langbar button:hover{ color:var(--cream); }
+.sig-langbar button.is-on{ color:var(--gold); }
+.sig-langbar button + button{ border-left:1px solid rgba(246,241,231,.16); }
+/* melipat saat scroll agar nav tetap ramping */
+.sig-langbar{ max-height:40px; overflow:hidden; transition:max-height .35s var(--ease), padding .35s var(--ease), opacity .3s var(--ease); }
+.sig-nav.is-scrolled .sig-langbar{ max-height:0; padding-top:0; padding-bottom:0; opacity:0; }
+@media (max-width:880px){ .sig-langbar{ display:none; } }
+.sig-menu__langs{ display:flex; gap:2px; margin-top:26px; }
+.sig-menu__langs button{
+  background:none; border:none; cursor:pointer; padding:10px 12px;
+  font-family:var(--fl); font-weight:400; font-size:12px; letter-spacing:.14em;
+  color:rgba(246,241,231,.55); transition:color .25s var(--ease);
+}
+.sig-menu__langs button.is-on{ color:var(--gold); }
+.sig-menu__langs button + button{ border-left:1px solid rgba(246,241,231,.16); }
 .sig-nav__inner{
   max-width:var(--shell); margin:0 auto; padding:16px 24px;
   display:flex; align-items:center; justify-content:space-between; gap:18px;
@@ -215,6 +249,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-hero__bg{ position:absolute; inset:0; z-index:0; }
 .sig-hero__slide{
   position:absolute; inset:0; background-size:cover; background-position:center;
+  filter:saturate(.85) sepia(.05);
   opacity:0; transform:scale(1.06); transition:opacity 2.4s var(--ease), transform 9s linear;
 }
 .sig-hero__slide.is-active{ opacity:1; transform:scale(1); }
@@ -251,20 +286,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   background:linear-gradient(180deg,transparent,var(--gold)); animation:sigCue 2.6s var(--ease) infinite; }
 @keyframes sigCue{ 0%{ top:-100%; } 60%,100%{ top:100%; } }
 
-/* marquee "segera hadir" — pelan & seremonial */
-.sig-ticker{ position:absolute; left:0; right:0; bottom:0; z-index:5;
-  border-top:1px solid var(--hairline); background:rgba(4,16,31,.55); backdrop-filter:blur(6px);
-  overflow:hidden; padding:13px 0; }
-.sig-ticker__track{ display:flex; gap:0; width:max-content; animation:sigTick 46s linear infinite; }
-.sig-ticker span{
-  font-family:var(--fl); font-weight:400; font-size:11.5px; letter-spacing:.34em;
-  text-transform:uppercase; color:var(--gold-soft); white-space:nowrap; padding:0 18px;
+/* baris "segera hadir" — statis & tenang (old money = diam) */
+.sig-hero__notice{
+  position:absolute; left:0; right:0; bottom:0; z-index:5; text-align:center;
+  border-top:1px solid var(--hairline); background:rgba(4,16,31,.55);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); padding:15px 18px;
 }
-.sig-ticker i{ font-style:normal; color:var(--gold); padding:0 4px; }
-@keyframes sigTick{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+.sig-hero__notice span{
+  font-family:var(--fl); font-weight:400; font-size:11px; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--gold-soft);
+}
+.sig-hero__notice i{ font-style:normal; color:var(--gold); padding:0 8px; }
 
 /* ---------- MANIFESTO ---------- */
-.sig-manifesto{ background:var(--navy-deep); padding:clamp(90px,12vw,150px) 24px; text-align:center; }
+.sig-manifesto{ background:var(--navy-deep); padding:clamp(100px,12vw,170px) 24px; text-align:center; }
 .sig-monogram{
   width:74px; height:74px; margin:0 auto; display:flex; align-items:center; justify-content:center;
   border:1px solid var(--gold-dim); transform:rotate(45deg);
@@ -281,8 +316,38 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   letter-spacing:.3em; text-transform:uppercase; color:var(--muted);
 }
 
+/* ---------- WARISAN / HERITAGE — band ivory (ref: Akaneya · Aman) ---------- */
+.sig-heritage{
+  --ink:#14263D; --ink-soft:#3D4F63; --bronze:#8A6D2F;
+  background:#F3EEE7; color:var(--ink-soft);
+  border-top:4px double rgba(138,109,47,.35);
+  padding:clamp(100px,12vw,170px) 24px;
+}
+.sig-heritage__head{ text-align:center; }
+.sig-heritage__mark{
+  display:block; font-family:var(--fd); font-style:italic; font-weight:400;
+  font-size:clamp(2.2rem,4.6vw,3.2rem); color:var(--ink); line-height:1.1;
+}
+.sig-heritage .sig-kicker{ color:var(--bronze); margin-top:14px; }
+.sig-heritage .sig-kicker::before,.sig-heritage .sig-kicker::after{ background:rgba(138,109,47,.4); }
+.sig-heritage__chapters{ max-width:760px; margin:64px auto 0; }
+.sig-heritage__row{
+  display:grid; grid-template-columns:170px 1fr; gap:clamp(20px,4vw,48px);
+  padding:38px 0; border-top:1px solid rgba(138,109,47,.25); align-items:start;
+}
+.sig-heritage__row:last-child{ border-bottom:1px solid rgba(138,109,47,.25); }
+.sig-heritage__year{
+  font-family:var(--fd); font-style:italic; font-weight:400;
+  font-size:clamp(1.7rem,3vw,2.3rem); color:var(--bronze); line-height:1.05;
+}
+.sig-heritage__row p{ margin:0; font-size:1.08rem; line-height:1.85; color:var(--ink-soft); }
+.sig-heritage__row p strong{ color:var(--ink); font-weight:600; }
+@media (max-width:640px){
+  .sig-heritage__row{ grid-template-columns:1fr; gap:10px; }
+}
+
 /* ---------- DISHES ---------- */
-.sig-dishes{ padding:clamp(90px,11vw,140px) 0; }
+.sig-dishes{ padding:clamp(100px,12vw,170px) 0; }
 .sig-dishes__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
 .sig-dishes__note{ font-family:var(--fl); font-weight:300; font-size:12.5px; letter-spacing:.08em;
   color:var(--muted); max-width:300px; text-align:right; }
@@ -303,7 +368,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   border:1px solid rgba(194,155,68,.26); pointer-events:none; }
 .sig-dishes__frame img{
   position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover;
-  filter:saturate(.92) contrast(1.04) brightness(.94);
+  filter:saturate(.82) sepia(.06) contrast(1.03) brightness(.94);
   opacity:0; transition:opacity .7s var(--ease);
 }
 .sig-dishes__frame img.is-show{ opacity:1; z-index:2; }
@@ -335,7 +400,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 }
 
 /* ---------- EXPERIENCE ---------- */
-.sig-exp{ background:var(--navy-deep); padding:clamp(90px,11vw,140px) 0; }
+.sig-exp{ background:var(--navy-deep); padding:clamp(100px,12vw,170px) 0; }
 .sig-exp__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:60px; }
 .sig-exp__item{ border-top:1px solid var(--hairline); padding-top:26px; }
 .sig-exp__num{ font-family:var(--fd); font-style:italic; font-size:1.05rem; color:var(--gold); letter-spacing:.18em; }
@@ -345,7 +410,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   .sig-exp__item{ padding:26px 0; } }
 
 /* ---------- PRIVATE DINING ---------- */
-.sig-priv{ padding:clamp(90px,11vw,140px) 0; }
+.sig-priv{ padding:clamp(100px,12vw,170px) 0; }
 .sig-priv__grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(30px,5vw,72px); align-items:center; }
 .sig-priv__media{ position:relative; overflow:hidden; border:1px solid rgba(194,155,68,.14);
   aspect-ratio:4/4.4; background:linear-gradient(160deg, var(--navy-card), var(--navy-deep) 80%); }
@@ -353,7 +418,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   align-items:center; justify-content:center; font-family:var(--fd); font-style:italic;
   font-size:5rem; color:rgba(194,155,68,.12); pointer-events:none; }
 .sig-priv__media img{ position:relative; z-index:2; width:100%; height:100%; object-fit:cover;
-  filter:saturate(.85) brightness(.9); }
+  filter:saturate(.8) sepia(.06) brightness(.9); }
 .sig-priv__media::before{ content:""; position:absolute; inset:14px; border:1px solid var(--gold-dim); z-index:3; pointer-events:none; }
 .sig-priv__list{ list-style:none; margin:26px 0 0; padding:0; }
 .sig-priv__list li{
@@ -364,7 +429,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 @media (max-width:880px){ .sig-priv__grid{ grid-template-columns:1fr; } }
 
 /* ---------- DUA KOTA ---------- */
-.sig-cities{ background:var(--navy-deep); padding:clamp(90px,11vw,140px) 0; }
+.sig-cities{ background:var(--navy-deep); padding:clamp(100px,12vw,170px) 0; }
 .sig-cities__grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:56px; }
 .sig-city{
   position:relative; background:linear-gradient(160deg, var(--navy-card), var(--navy) 78%);
@@ -424,7 +489,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 @media (max-width:640px){ .sig-form{ grid-template-columns:1fr; } }
 
 /* ---------- FACTS ---------- */
-.sig-facts{ background:var(--navy-deep); padding:clamp(80px,10vw,120px) 0; }
+.sig-facts{ background:var(--navy-deep); padding:clamp(90px,11vw,140px) 0;
+  border-top:4px double rgba(194,155,68,.22); }
 .sig-facts__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:52px;
   border:1px solid rgba(194,155,68,.16); }
 .sig-fact{ padding:28px 26px; border-right:1px solid rgba(194,155,68,.16); }
@@ -474,14 +540,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-sticky .sig-btn{ width:100%; text-align:center; padding:15px 10px; }
 @media (max-width:880px){ .sig-sticky{ display:block; } }
 
+/* ---------- penyesuaian CJK/Hangul (tanpa tracking lebar) ---------- */
+html:is([lang="ja"],[lang="ko"],[lang^="zh"]) :is(.sig-kicker,.sig-hero__kicker,.sig-endorse){ letter-spacing:.14em; }
+html:is([lang="ja"],[lang="ko"],[lang^="zh"]) :is(.sig-btn,.sig-link,.sig-nav__links a,.sig-hero__notice span,.sig-footer__links a){ letter-spacing:.08em; }
+html:is([lang="ja"],[lang="ko"],[lang^="zh"]) :is(.sig-h2,.sig-heritage__mark,.sig-menu-item__name,.sig-exp__title,.sig-city__name,.sig-manifesto__text){ font-style:normal; }
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
   .sig-rise{ animation:none; opacity:1; }
   [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
   .sig-rule{ transform:none !important; transition:none !important; }
-  .sig-ticker__track{ animation:none; }
   .sig-hero__cue{ display:none; }
+  .sig-langbar{ transition:none; }
   .sig-menu{ transition:none; }
   .sig-burger span{ transition:none; }
   .sig-brand img{ transition:none; }
@@ -497,6 +568,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 
 <!-- ==================== NAV ==================== -->
 <header class="sig-nav" id="signav">
+  <div class="sig-langbar" role="group" aria-label="Pilih bahasa / Select language">
+    <button type="button" data-lang="id" class="is-on" lang="id">ID</button>
+    <button type="button" data-lang="en" lang="en">EN</button>
+    <button type="button" data-lang="ja" lang="ja">日本語</button>
+    <button type="button" data-lang="ko" lang="ko">한국어</button>
+    <button type="button" data-lang="zh" lang="zh-CN">中文</button>
+  </div>
   <div class="sig-nav__inner">
     <a class="sig-brand" href="#hero" aria-label="Kurnia Seafood Signature — kembali ke atas">
       <img src="assets/logo-kurnia-signature-dark.png" alt="Kurnia Seafood Signature"
@@ -504,13 +582,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     </a>
     <nav aria-label="Navigasi utama">
       <ul class="sig-nav__links">
-        <li><a href="#dishes">Dishes</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#private">Private Dining</a></li>
-        <li><a href="#cities">Lokasi</a></li>
+        <li><a href="#dishes" data-i18n="nav.dishes">Dishes</a></li>
+        <li><a href="#experience" data-i18n="nav.exp">Experience</a></li>
+        <li><a href="#private" data-i18n="nav.priv">Private Dining</a></li>
+        <li><a href="#cities" data-i18n="nav.loc">Lokasi</a></li>
       </ul>
     </nav>
-    <a href="#join" class="sig-btn sig-btn--solid sig-nav__cta">Priority List</a>
+    <a href="#join" class="sig-btn sig-btn--solid sig-nav__cta" data-i18n="nav.cta">Priority List</a>
     <button class="sig-burger" id="sigBurger" aria-expanded="false" aria-controls="sigMenu"
             aria-label="Buka menu">
       <span></span><span></span><span></span>
@@ -521,12 +599,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 <!-- overlay menu (mobile) -->
 <div class="sig-menu" id="sigMenu" role="dialog" aria-modal="true" aria-label="Menu navigasi">
   <button class="sig-menu__close" id="sigMenuClose" aria-label="Tutup menu">✕</button>
-  <a href="#dishes">Signature Dishes</a>
-  <a href="#experience">The Experience</a>
-  <a href="#private">Private Dining</a>
-  <a href="#cities">Lokasi</a>
-  <a href="#join" class="sig-btn sig-btn--solid">Join the Priority List</a>
-  <span class="sig-menu__eta">Bandung · Sept 2026 — Jakarta · Akhir 2026</span>
+  <a href="#dishes" data-i18n="menu.dishes">Signature Dishes</a>
+  <a href="#experience" data-i18n="menu.exp">The Experience</a>
+  <a href="#private" data-i18n="nav.priv">Private Dining</a>
+  <a href="#cities" data-i18n="nav.loc">Lokasi</a>
+  <a href="#join" class="sig-btn sig-btn--solid" data-i18n="hero.cta1">Join the Priority List</a>
+  <div class="sig-menu__langs" role="group" aria-label="Pilih bahasa / Select language">
+    <button type="button" data-lang="id" class="is-on" lang="id">ID</button>
+    <button type="button" data-lang="en" lang="en">EN</button>
+    <button type="button" data-lang="ja" lang="ja">日本語</button>
+    <button type="button" data-lang="ko" lang="ko">한국어</button>
+    <button type="button" data-lang="zh" lang="zh-CN">中文</button>
+  </div>
+  <span class="sig-menu__eta" data-i18n="menu.eta">Bandung · Sept 2026 — Jakarta · Akhir 2026</span>
 </div>
 
 <main id="main">
@@ -543,18 +628,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   <div class="sig-hero__scrim" aria-hidden="true"></div>
 
   <div class="sig-hero__content">
-    <p class="sig-hero__kicker sig-rise">Sebuah Persembahan Baru</p>
+    <p class="sig-hero__kicker sig-rise" data-i18n="hero.kicker">Sebuah Persembahan Baru</p>
     <h1 class="sig-rise sig-rise-2" style="margin:0">
       <span class="sr-only">Kurnia Seafood Signature</span>
       <img class="sig-hero__logo" src="assets/logo-kurnia-signature-dark.png"
            alt="" width="1200" height="802" fetchpriority="high">
     </h1>
     <div class="sig-hero__frame sig-rise sig-rise-3" aria-hidden="true"></div>
-    <p class="sig-hero__sub sig-rise sig-rise-4">Persembahan terbaik laut Nusantara — dipilih langsung,
+    <p class="sig-hero__sub sig-rise sig-rise-4" data-i18n="hero.sub">Persembahan terbaik laut Nusantara — dipilih langsung,
       diracik dengan warisan rasa Kurnia, disajikan dengan seremoni.</p>
     <div class="sig-hero__cta sig-rise sig-rise-5">
-      <a class="sig-btn sig-btn--solid" href="#join">Join the Priority List</a>
-      <a class="sig-btn sig-btn--ghost" href="#dishes">Signature Dishes</a>
+      <a class="sig-btn sig-btn--solid" href="#join" data-i18n="hero.cta1">Join the Priority List</a>
+      <a class="sig-link" href="#dishes" data-i18n="menu.dishes">Signature Dishes</a>
     </div>
   </div>
 
@@ -563,10 +648,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 
   <div class="sig-hero__cue" aria-hidden="true"></div>
 
-  <div class="sig-ticker" aria-hidden="true">
-    <div class="sig-ticker__track" id="sigTicker">
-      <span>Segera Hadir <i>✦</i> Bandung — September 2026 <i>✦</i> Jakarta — Akhir 2026 <i>✦</i> Fine Seafood Dining <i>✦</i></span>
-    </div>
+  <div class="sig-hero__notice">
+    <span data-i18n="hero.notice" data-i18n-html>Segera Hadir <i>✦</i> Bandung — September 2026 <i>✦</i> Jakarta — Akhir 2026</span>
   </div>
 </section>
 
@@ -575,9 +658,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   <div data-reveal>
     <div class="sig-monogram" aria-hidden="true"><span>KS</span></div>
   </div>
-  <p class="sig-manifesto__text" data-reveal data-delay="1">Ada saatnya makan malam
+  <p class="sig-manifesto__text" data-reveal data-delay="1" data-i18n="mani.text" data-i18n-html>Ada saatnya makan malam
     menjadi <em>sebuah peristiwa</em> — dan laut layak dihidangkan dengan hormat.</p>
-  <p class="sig-endorse" data-reveal data-delay="2">Dari keluarga di balik Kurnia Seafood</p>
+  <p class="sig-endorse" data-reveal data-delay="2" data-i18n="mani.endorse">Dari keluarga di balik Kurnia Seafood</p>
+</section>
+
+<!-- ==================== 2b · WARISAN / HERITAGE ==================== -->
+<section class="sig-heritage" id="heritage" aria-label="Warisan Kurnia">
+  <div class="sig-heritage__head" data-reveal>
+    <span class="sig-heritage__mark">Warisan</span>
+    <span class="sig-kicker sig-kicker--center" data-i18n="her.kicker">Heritage</span>
+  </div>
+  <div class="sig-heritage__chapters">
+    <div class="sig-heritage__row" data-reveal>
+      <span class="sig-heritage__year">2005</span>
+      <p data-i18n="her.p1" data-i18n-html>Kurnia Group berawal dari sebuah rumah makan bus pariwisata
+        di Ngawi, Jawa Timur. Nama <strong>“Kurnia” berarti berkat</strong> — harapan untuk menjadi
+        berkat bagi setiap tamu yang dilayani.</p>
+    </div>
+    <div class="sig-heritage__row" data-reveal data-delay="1">
+      <span class="sig-heritage__year" data-i18n="her.y2">Lima Kota</span>
+      <p data-i18n="her.p2" data-i18n-html>Dari Yogyakarta hingga Bali, lima rumah Kurnia tumbuh dengan
+        satu semangat: <strong>melayani setiap tamu layaknya keluarga</strong> — lebih dari satu juta
+        rombongan tamu hingga hari ini.</p>
+    </div>
+    <div class="sig-heritage__row" data-reveal data-delay="2">
+      <span class="sig-heritage__year">2026</span>
+      <p data-i18n="her.p3" data-i18n-html>Lahirlah <strong>Signature</strong> — undangan Kurnia untuk
+        mengalami laut Nusantara dalam bentuknya yang paling khidmat, di Jakarta dan Bandung.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== 3 · SIGNATURE DISHES ==================== -->
@@ -585,10 +695,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   <div class="sig-shell">
     <div class="sig-dishes__head" data-reveal>
       <div>
-        <span class="sig-kicker">Chef's Selection</span>
-        <h2 class="sig-h2">Signature Dishes</h2>
+        <span class="sig-kicker" data-i18n="d.kicker">Chef's Selection</span>
+        <h2 class="sig-h2" data-i18n="menu.dishes">Signature Dishes</h2>
       </div>
-      <p class="sig-dishes__note">Lima hidangan yang membesarkan nama Kurnia —
+      <p class="sig-dishes__note" data-i18n="d.note">Lima hidangan yang membesarkan nama Kurnia —
         menu lengkap Signature diumumkan menjelang pembukaan.</p>
     </div>
 
@@ -606,7 +716,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
           <span class="sig-menu-item__no">01</span>
           <div>
             <h3 class="sig-menu-item__name">Alaskan King Crab Saus Singapore</h3>
-            <p class="sig-menu-item__desc">King crab premium dengan saus Singapore — kemewahan
+            <p class="sig-menu-item__desc" data-i18n="d1">King crab premium dengan saus Singapore — kemewahan
               laut dingin bertemu racikan khas Kurnia.</p>
           </div>
         </li>
@@ -615,7 +725,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
           <span class="sig-menu-item__no">02</span>
           <div>
             <h3 class="sig-menu-item__name">Kepiting Garlic Caramel</h3>
-            <p class="sig-menu-item__desc">Kepiting dengan karamel bawang putih yang harum.</p>
+            <p class="sig-menu-item__desc" data-i18n="d2">Kepiting dengan karamel bawang putih yang harum.</p>
           </div>
         </li>
         <li class="sig-menu-item" tabindex="0"
@@ -623,7 +733,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
           <span class="sig-menu-item__no">03</span>
           <div>
             <h3 class="sig-menu-item__name">Udang Saus Malaka</h3>
-            <p class="sig-menu-item__desc">Udang segar berbalut saus Malaka gurih-manis.</p>
+            <p class="sig-menu-item__desc" data-i18n="d3">Udang segar berbalut saus Malaka gurih-manis.</p>
           </div>
         </li>
         <li class="sig-menu-item" tabindex="0"
@@ -631,7 +741,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
           <span class="sig-menu-item__no">04</span>
           <div>
             <h3 class="sig-menu-item__name">Ikan Bakar Kurnia</h3>
-            <p class="sig-menu-item__desc">Ikan segar dibakar dengan bumbu spesial khas Kurnia.</p>
+            <p class="sig-menu-item__desc" data-i18n="d4">Ikan segar dibakar dengan bumbu spesial khas Kurnia.</p>
           </div>
         </li>
         <!-- 05: foto resmi belum tersedia → placeholder Unsplash bertanda -->
@@ -640,7 +750,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
           <span class="sig-menu-item__no">05</span>
           <div>
             <h3 class="sig-menu-item__name">Kepiting Saus Kurnia</h3>
-            <p class="sig-menu-item__desc">Kepiting bakau dengan saus rahasia racikan Kurnia —
+            <p class="sig-menu-item__desc" data-i18n="d5">Kepiting bakau dengan saus rahasia racikan Kurnia —
               resep yang membuat tamu kembali.</p>
           </div>
         </li>
@@ -653,26 +763,26 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 <section class="sig-exp sig-grain" id="experience" aria-label="The Experience">
   <div class="sig-shell">
     <div data-reveal>
-      <span class="sig-kicker">The Experience</span>
-      <h2 class="sig-h2">Sebuah Ritual, Tiga Babak</h2>
+      <span class="sig-kicker" data-i18n="menu.exp">The Experience</span>
+      <h2 class="sig-h2" data-i18n="e.title">Sebuah Ritual, Tiga Babak</h2>
     </div>
     <div class="sig-exp__grid">
       <div class="sig-exp__item" data-reveal>
         <span class="sig-exp__num">I.</span>
-        <h3 class="sig-exp__title">Dipilih dari Laut</h3>
-        <p class="sig-exp__desc">Tradisi seafood market Kurnia naik kelas: tangkapan hidup
+        <h3 class="sig-exp__title" data-i18n="e1t">Dipilih dari Laut</h3>
+        <p class="sig-exp__desc" data-i18n="e1p">Tradisi seafood market Kurnia naik kelas: tangkapan hidup
           dipilih bersama chef, ditimbang di hadapan Anda.</p>
       </div>
       <div class="sig-exp__item" data-reveal data-delay="1">
         <span class="sig-exp__num">II.</span>
-        <h3 class="sig-exp__title">Racikan Warisan</h3>
-        <p class="sig-exp__desc">Bumbu yang sama yang membesarkan lima cabang Kurnia —
+        <h3 class="sig-exp__title" data-i18n="e2t">Racikan Warisan</h3>
+        <p class="sig-exp__desc" data-i18n="e2p">Bumbu yang sama yang membesarkan lima cabang Kurnia —
           disempurnakan untuk meja fine dining.</p>
       </div>
       <div class="sig-exp__item" data-reveal data-delay="2">
         <span class="sig-exp__num">III.</span>
-        <h3 class="sig-exp__title">Disajikan dengan Tenang</h3>
-        <p class="sig-exp__desc">Ruang yang lebih hening, layanan yang lebih personal.
+        <h3 class="sig-exp__title" data-i18n="e3t">Disajikan dengan Tenang</h3>
+        <p class="sig-exp__desc" data-i18n="e3p">Ruang yang lebih hening, layanan yang lebih personal.
           Tanpa terburu-buru — makan malam sebagai peristiwa.</p>
       </div>
     </div>
@@ -689,19 +799,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
       </div>
       <div>
         <div data-reveal>
-          <span class="sig-kicker">Private Dining &amp; Occasions</span>
-          <h2 class="sig-h2">Ruang untuk Momen Penting</h2>
-          <p class="sig-lede">Jamuan bisnis, perayaan keluarga, atau malam yang hanya milik
+          <span class="sig-kicker" data-i18n="p.kicker">Private Dining &amp; Occasions</span>
+          <h2 class="sig-h2" data-i18n="p.title">Ruang untuk Momen Penting</h2>
+          <p class="sig-lede" data-i18n="p.lede">Jamuan bisnis, perayaan keluarga, atau malam yang hanya milik
             berdua — setiap outlet Signature dirancang dengan ruang-ruang privat.</p>
         </div>
         <ul class="sig-priv__list" data-reveal data-delay="1">
-          <li>Private room dengan layanan khusus</li>
-          <li>Jamuan korporat &amp; business dinner</li>
-          <li>Perayaan keluarga — dari lamaran hingga ulang tahun</li>
-          <li>Menu set eksklusif sesuai acara <em style="color:var(--muted)">(detail menyusul)</em></li>
+          <li data-i18n="p.l1">Private room dengan layanan khusus</li>
+          <li data-i18n="p.l2">Jamuan korporat &amp; business dinner</li>
+          <li data-i18n="p.l3">Perayaan keluarga — dari lamaran hingga ulang tahun</li>
+          <li data-i18n="p.l4">Menu set eksklusif sesuai acara</li>
         </ul>
         <div data-reveal data-delay="2" style="margin-top:34px">
-          <a class="sig-btn sig-btn--ghost" href="#join">Tanyakan Private Dining</a>
+          <a class="sig-link" href="#join" data-i18n="p.cta">Tanyakan Private Dining</a>
         </div>
       </div>
     </div>
@@ -712,27 +822,27 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 <section class="sig-cities sig-grain" id="cities" aria-label="Lokasi">
   <div class="sig-shell">
     <div data-reveal style="text-align:center">
-      <span class="sig-kicker sig-kicker--center">Two Cities, 2026</span>
+      <span class="sig-kicker sig-kicker--center" data-i18n="c.kicker">Two Cities, 2026</span>
       <h2 class="sig-h2">Jakarta &amp; Bandung</h2>
-      <p class="sig-lede" style="margin-left:auto;margin-right:auto">Dua outlet pertama Kurnia Seafood
+      <p class="sig-lede" style="margin-left:auto;margin-right:auto" data-i18n="c.lede">Dua outlet pertama Kurnia Seafood
         Signature sedang dipersiapkan. Lokasi lengkap diumumkan menjelang pembukaan.</p>
     </div>
     <div class="sig-cities__grid">
       <!-- data dari wordpress/data/branches.js (status upcoming) — hanya AREA yang
            ditampilkan; alamat lengkap internal sampai outlet buka -->
       <article class="sig-city" data-reveal>
-        <span class="sig-city__eta">September 2026</span>
+        <span class="sig-city__eta" data-i18n="c.eta1">September 2026</span>
         <h3 class="sig-city__name">Bandung</h3>
-        <p class="sig-city__area">Kawasan Citarum · Bandung Wetan</p>
-        <a class="sig-btn sig-btn--solid sig-city__cta" data-wa data-city="Bandung" href="#join">Priority List Bandung</a>
-        <span class="sig-city__est">Perkiraan — tanggal resmi diumumkan</span>
+        <p class="sig-city__area" data-i18n="c.area1">Kawasan Citarum · Bandung Wetan</p>
+        <a class="sig-link sig-city__cta" data-wa data-city="Bandung" href="#join" data-i18n="c.cta1">Priority List Bandung</a>
+        <span class="sig-city__est" data-i18n="c.est">Perkiraan — tanggal resmi diumumkan</span>
       </article>
       <article class="sig-city" data-reveal data-delay="1">
-        <span class="sig-city__eta">Akhir 2026</span>
+        <span class="sig-city__eta" data-i18n="c.eta2">Akhir 2026</span>
         <h3 class="sig-city__name">Jakarta</h3>
-        <p class="sig-city__area">Kawasan Pondok Indah · Jakarta Selatan</p>
-        <a class="sig-btn sig-btn--solid sig-city__cta" data-wa data-city="Jakarta" href="#join">Priority List Jakarta</a>
-        <span class="sig-city__est">Perkiraan — tanggal resmi diumumkan</span>
+        <p class="sig-city__area" data-i18n="c.area2">Kawasan Pondok Indah · Jakarta Selatan</p>
+        <a class="sig-link sig-city__cta" data-wa data-city="Jakarta" href="#join" data-i18n="c.cta2">Priority List Jakarta</a>
+        <span class="sig-city__est" data-i18n="c.est">Perkiraan — tanggal resmi diumumkan</span>
       </article>
     </div>
   </div>
@@ -744,40 +854,40 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   <div class="sig-join__scrim" aria-hidden="true"></div>
   <div class="sig-join__inner">
     <div data-reveal>
-      <span class="sig-kicker sig-kicker--center">Priority List</span>
-      <h2 class="sig-h2">Jadilah yang Pertama</h2>
-      <p class="sig-lede" style="margin-left:auto;margin-right:auto">Undangan pembukaan, kursi
+      <span class="sig-kicker sig-kicker--center" data-i18n="nav.cta">Priority List</span>
+      <h2 class="sig-h2" data-i18n="j.title">Jadilah yang Pertama</h2>
+      <p class="sig-lede" style="margin-left:auto;margin-right:auto" data-i18n="j.lede">Undangan pembukaan, kursi
         malam perdana, dan kabar Signature — langsung dari kami, lebih dulu dari siapa pun.</p>
     </div>
 
     <div class="sig-join__wa" data-reveal data-delay="1">
-      <a class="sig-btn sig-btn--solid" data-wa data-city="" href="#" rel="noopener">Gabung via WhatsApp</a>
+      <a class="sig-btn sig-btn--solid" data-wa data-city="" href="#" rel="noopener" data-i18n="j.wa">Gabung via WhatsApp</a>
     </div>
 
-    <div class="sig-join__or" data-reveal data-delay="2"><span>atau tinggalkan kontak</span></div>
+    <div class="sig-join__or" data-reveal data-delay="2"><span data-i18n="j.or">atau tinggalkan kontak</span></div>
 
     <form class="sig-form" id="sigForm" data-reveal data-delay="2" novalidate>
       <div>
-        <label for="sf-name">Nama</label>
-        <input id="sf-name" name="name" type="text" placeholder="Nama Anda" autocomplete="name" required>
+        <label for="sf-name" data-i18n="j.lname">Nama</label>
+        <input id="sf-name" name="name" type="text" placeholder="Nama Anda" data-i18n-ph="j.phname" autocomplete="name" required>
       </div>
       <div>
-        <label for="sf-contact">WhatsApp / Email</label>
-        <input id="sf-contact" name="contact" type="text" placeholder="08xx… atau nama@email.com" autocomplete="tel" required>
+        <label for="sf-contact" data-i18n="j.lcontact">WhatsApp / Email</label>
+        <input id="sf-contact" name="contact" type="text" placeholder="08xx… atau nama@email.com" data-i18n-ph="j.phcontact" autocomplete="tel" required>
       </div>
       <div class="sig-form__full">
-        <label for="sf-city">Kota yang Anda tunggu</label>
+        <label for="sf-city" data-i18n="j.lcity">Kota yang Anda tunggu</label>
         <select id="sf-city" name="city">
-          <option value="Bandung">Bandung — September 2026</option>
-          <option value="Jakarta">Jakarta — Akhir 2026</option>
-          <option value="Keduanya">Keduanya</option>
+          <option value="Bandung" data-i18n="j.o1">Bandung — September 2026</option>
+          <option value="Jakarta" data-i18n="j.o2">Jakarta — Akhir 2026</option>
+          <option value="Keduanya" data-i18n="j.o3">Keduanya</option>
         </select>
       </div>
-      <button class="sig-btn sig-btn--ghost sig-form__submit" type="submit">Daftar Priority List</button>
+      <button class="sig-btn sig-btn--ghost sig-form__submit" type="submit" data-i18n="j.submit">Daftar Priority List</button>
       <p class="sig-form__msg" id="sigFormMsg" role="status" aria-live="polite"></p>
     </form>
 
-    <p class="sig-join__privacy">Kontak Anda hanya dipakai untuk kabar pembukaan Signature.</p>
+    <p class="sig-join__privacy" data-i18n="j.privacy">Kontak Anda hanya dipakai untuk kabar pembukaan Signature.</p>
   </div>
 </section>
 
@@ -785,25 +895,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 <section class="sig-facts" aria-label="Informasi">
   <div class="sig-shell">
     <div data-reveal style="text-align:center">
-      <span class="sig-kicker sig-kicker--center">Good to Know</span>
-      <h2 class="sig-h2">Hal yang Perlu Anda Tahu</h2>
+      <span class="sig-kicker sig-kicker--center" data-i18n="f.kicker">Good to Know</span>
+      <h2 class="sig-h2" data-i18n="f.title">Hal yang Perlu Anda Tahu</h2>
     </div>
     <div class="sig-facts__grid" data-reveal data-delay="1">
       <div class="sig-fact">
-        <span class="sig-fact__k">Sajian</span>
-        <p class="sig-fact__v">Halal<small>Seafood segar, tanpa alkohol dalam masakan</small></p>
+        <span class="sig-fact__k" data-i18n="f1k">Sajian</span>
+        <p class="sig-fact__v"><span data-i18n="f1v">Halal</span><small data-i18n="f1s">Seafood segar, tanpa alkohol dalam masakan</small></p>
       </div>
       <div class="sig-fact">
-        <span class="sig-fact__k">Dress Code</span>
-        <p class="sig-fact__v">Smart casual<small>Detail menyusul menjelang pembukaan</small></p>
+        <span class="sig-fact__k" data-i18n="f2k">Dress Code</span>
+        <p class="sig-fact__v"><span data-i18n="f2v">Smart casual</span><small data-i18n="f2s">Detail menyusul menjelang pembukaan</small></p>
       </div>
       <div class="sig-fact">
-        <span class="sig-fact__k">Jam Operasional</span>
-        <p class="sig-fact__v">Diumumkan<small>Menjelang pembukaan masing-masing outlet</small></p>
+        <span class="sig-fact__k" data-i18n="f3k">Jam Operasional</span>
+        <p class="sig-fact__v"><span data-i18n="f3v">Diumumkan</span><small data-i18n="f3s">Menjelang pembukaan masing-masing outlet</small></p>
       </div>
       <div class="sig-fact">
-        <span class="sig-fact__k">Kontak</span>
-        <p class="sig-fact__v">WhatsApp<small>Melalui tombol Priority List di atas</small></p>
+        <span class="sig-fact__k" data-i18n="f4k">Kontak</span>
+        <p class="sig-fact__v"><span data-i18n="f4v">WhatsApp</span><small data-i18n="f4s">Melalui tombol Priority List di atas</small></p>
       </div>
     </div>
   </div>
@@ -817,17 +927,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
         <img src="assets/logo-kurnia-signature-dark.png" alt="Kurnia Seafood Signature"
              width="210" height="140" loading="lazy" style="width:210px;height:auto">
       </a>
-      <p class="sig-footer__contact">Jakarta — Pondok Indah&ensp;·&ensp;Bandung — Citarum<br>
+      <p class="sig-footer__contact" data-i18n="ft.contact" data-i18n-html>Jakarta — Pondok Indah&ensp;·&ensp;Bandung — Citarum<br>
         Jam operasional diumumkan menjelang pembukaan</p>
       <nav class="sig-footer__links" aria-label="Tautan">
-        <a href="https://kurniaseafood.co.id/" rel="noopener">Kurnia Seafood — Situs Utama</a>
+        <a href="https://kurniaseafood.co.id/" rel="noopener" data-i18n="ft.main">Kurnia Seafood — Situs Utama</a>
         <a href="https://www.instagram.com/kurnia.seafood/" rel="noopener">Instagram</a>
-        <a href="#join">Priority List</a>
+        <a href="#join" data-i18n="nav.cta">Priority List</a>
       </nav>
     </div>
     <div class="sig-footer__legal">
       <span>© 2026 Kurnia Group · Kurnia Seafood Signature</span>
-      <span>Bagian dari keluarga Kurnia Seafood</span>
+      <span data-i18n="ft.est">Est. 2005, Ngawi — Bagian dari Kurnia Group</span>
     </div>
   </div>
 </footer>
@@ -836,7 +946,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 
 <!-- sticky CTA mobile -->
 <div class="sig-sticky" id="sigSticky" aria-hidden="true">
-  <a class="sig-btn sig-btn--solid" href="#join">Join the Priority List</a>
+  <a class="sig-btn sig-btn--solid" href="#join" data-i18n="hero.cta1">Join the Priority List</a>
 </div>
 
 <script>
@@ -857,18 +967,307 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     endpoint: ""
   };
 
+  /* =====================================================================
+     I18N — Indonesia (asal) · English · 日本語 · 한국어 · 中文(简体)
+     Nama hidangan & "Warisan" tetap Bahasa Indonesia (kata benda brand).
+     ==================================================================== */
+  var I18N = {
+    id: {
+      "nav.dishes":"Dishes","nav.exp":"Experience","nav.priv":"Private Dining","nav.loc":"Lokasi","nav.cta":"Priority List",
+      "menu.dishes":"Signature Dishes","menu.exp":"The Experience","menu.eta":"Bandung · Sept 2026 — Jakarta · Akhir 2026",
+      "hero.kicker":"Sebuah Persembahan Baru",
+      "hero.sub":"Persembahan terbaik laut Nusantara — dipilih langsung, diracik dengan warisan rasa Kurnia, disajikan dengan seremoni.",
+      "hero.cta1":"Join the Priority List",
+      "hero.notice":"Segera Hadir <i>✦</i> Bandung — September 2026 <i>✦</i> Jakarta — Akhir 2026",
+      "mani.text":"Ada saatnya makan malam menjadi <em>sebuah peristiwa</em> — dan laut layak dihidangkan dengan hormat.",
+      "mani.endorse":"Dari keluarga di balik Kurnia Seafood",
+      "her.kicker":"Heritage","her.y2":"Lima Kota",
+      "her.p1":"Kurnia Group berawal dari sebuah rumah makan bus pariwisata di Ngawi, Jawa Timur. Nama <strong>“Kurnia” berarti berkat</strong> — harapan untuk menjadi berkat bagi setiap tamu yang dilayani.",
+      "her.p2":"Dari Yogyakarta hingga Bali, lima rumah Kurnia tumbuh dengan satu semangat: <strong>melayani setiap tamu layaknya keluarga</strong> — lebih dari satu juta rombongan tamu hingga hari ini.",
+      "her.p3":"Lahirlah <strong>Signature</strong> — undangan Kurnia untuk mengalami laut Nusantara dalam bentuknya yang paling khidmat, di Jakarta dan Bandung.",
+      "d.kicker":"Chef's Selection","d.note":"Lima hidangan yang membesarkan nama Kurnia — menu lengkap Signature diumumkan menjelang pembukaan.",
+      "d1":"King crab premium dengan saus Singapore — kemewahan laut dingin bertemu racikan khas Kurnia.",
+      "d2":"Kepiting dengan karamel bawang putih yang harum.",
+      "d3":"Udang segar berbalut saus Malaka gurih-manis.",
+      "d4":"Ikan segar dibakar dengan bumbu spesial khas Kurnia.",
+      "d5":"Kepiting bakau dengan saus rahasia racikan Kurnia — resep yang membuat tamu kembali.",
+      "e.title":"Sebuah Ritual, Tiga Babak",
+      "e1t":"Dipilih dari Laut","e1p":"Tradisi seafood market Kurnia naik kelas: tangkapan hidup dipilih bersama chef, ditimbang di hadapan Anda.",
+      "e2t":"Racikan Warisan","e2p":"Bumbu yang sama yang membesarkan lima cabang Kurnia — disempurnakan untuk meja fine dining.",
+      "e3t":"Disajikan dengan Tenang","e3p":"Ruang yang lebih hening, layanan yang lebih personal. Tanpa terburu-buru — makan malam sebagai peristiwa.",
+      "p.kicker":"Private Dining & Occasions","p.title":"Ruang untuk Momen Penting",
+      "p.lede":"Jamuan bisnis, perayaan keluarga, atau malam yang hanya milik berdua — setiap outlet Signature dirancang dengan ruang-ruang privat.",
+      "p.l1":"Private room dengan layanan khusus","p.l2":"Jamuan korporat & business dinner",
+      "p.l3":"Perayaan keluarga — dari lamaran hingga ulang tahun","p.l4":"Menu set eksklusif sesuai acara",
+      "p.cta":"Tanyakan Private Dining",
+      "c.kicker":"Two Cities, 2026","c.lede":"Dua outlet pertama Kurnia Seafood Signature sedang dipersiapkan. Lokasi lengkap diumumkan menjelang pembukaan.",
+      "c.eta1":"September 2026","c.eta2":"Akhir 2026","c.area1":"Kawasan Citarum · Bandung Wetan","c.area2":"Kawasan Pondok Indah · Jakarta Selatan",
+      "c.cta1":"Priority List Bandung","c.cta2":"Priority List Jakarta","c.est":"Perkiraan — tanggal resmi diumumkan",
+      "j.title":"Jadilah yang Pertama","j.lede":"Undangan pembukaan, kursi malam perdana, dan kabar Signature — langsung dari kami, lebih dulu dari siapa pun.",
+      "j.wa":"Gabung via WhatsApp","j.or":"atau tinggalkan kontak","j.lname":"Nama","j.phname":"Nama Anda",
+      "j.lcontact":"WhatsApp / Email","j.phcontact":"08xx… atau nama@email.com","j.lcity":"Kota yang Anda tunggu",
+      "j.o1":"Bandung — September 2026","j.o2":"Jakarta — Akhir 2026","j.o3":"Keduanya",
+      "j.submit":"Daftar Priority List","j.privacy":"Kontak Anda hanya dipakai untuk kabar pembukaan Signature.",
+      "f.kicker":"Good to Know","f.title":"Hal yang Perlu Anda Tahu",
+      "f1k":"Sajian","f1v":"Halal","f1s":"Seafood segar, tanpa alkohol dalam masakan",
+      "f2k":"Dress Code","f2v":"Smart casual","f2s":"Detail menyusul menjelang pembukaan",
+      "f3k":"Jam Operasional","f3v":"Diumumkan","f3s":"Menjelang pembukaan masing-masing outlet",
+      "f4k":"Kontak","f4v":"WhatsApp","f4s":"Melalui tombol Priority List di atas",
+      "ft.contact":"Jakarta — Pondok Indah&ensp;·&ensp;Bandung — Citarum<br>Jam operasional diumumkan menjelang pembukaan",
+      "ft.main":"Kurnia Seafood — Situs Utama","ft.est":"Est. 2005, Ngawi — Bagian dari Kurnia Group",
+      "m.fill":"Mohon isi nama dan kontak Anda.","m.sending":"Mengirim…",
+      "m.thanks":"Terima kasih — Anda ada di daftar. Kabar pembukaan menyusul.","m.towa":"Melanjutkan ke WhatsApp…",
+      "m.wamsg":"Halo, saya ingin bergabung ke Priority List Kurnia Seafood Signature{city}."
+    },
+    en: {
+      "nav.dishes":"Dishes","nav.exp":"Experience","nav.priv":"Private Dining","nav.loc":"Locations","nav.cta":"Priority List",
+      "menu.dishes":"Signature Dishes","menu.exp":"The Experience","menu.eta":"Bandung · Sept 2026 — Jakarta · Late 2026",
+      "hero.kicker":"A New Offering",
+      "hero.sub":"The finest of the archipelago's seas — hand-selected, prepared with Kurnia's heritage recipes, and served with ceremony.",
+      "hero.cta1":"Join the Priority List",
+      "hero.notice":"Opening Soon <i>✦</i> Bandung — September 2026 <i>✦</i> Jakarta — Late 2026",
+      "mani.text":"There are evenings when dinner becomes <em>an occasion</em> — and the sea deserves to be served with honour.",
+      "mani.endorse":"From the family behind Kurnia Seafood",
+      "her.kicker":"Heritage","her.y2":"Five Cities",
+      "her.p1":"Kurnia Group began as a modest rest-stop restaurant for touring buses in Ngawi, East Java. The name <strong>“Kurnia” means blessing</strong> — a hope to be one for every guest we serve.",
+      "her.p2":"From Yogyakarta to Bali, five houses of Kurnia grew with a single spirit: <strong>to serve every guest as family</strong> — more than a million travelling parties to this day.",
+      "her.p3":"<strong>Signature</strong> is born — Kurnia's invitation to experience the archipelago's seas in their most ceremonial form, in Jakarta and Bandung.",
+      "d.kicker":"Chef's Selection","d.note":"Five dishes that built Kurnia's name — the full Signature menu will be announced before opening.",
+      "d1":"Premium king crab in Singapore sauce — cold-water luxury meets Kurnia's signature blend.",
+      "d2":"Mud crab in fragrant garlic caramel.",
+      "d3":"Fresh prawns in sweet-savoury Malacca sauce.",
+      "d4":"Fresh fish grilled with Kurnia's special spice blend.",
+      "d5":"Mud crab in Kurnia's secret house sauce — the recipe guests return for.",
+      "e.title":"A Ritual in Three Acts",
+      "e1t":"Chosen from the Sea","e1p":"Kurnia's seafood-market tradition, elevated: live catch selected with the chef and weighed before you.",
+      "e2t":"A Heritage Blend","e2p":"The same spices that raised five houses of Kurnia — refined for the fine-dining table.",
+      "e3t":"Served in Stillness","e3p":"A quieter room, more personal service. Unhurried — dinner as an occasion.",
+      "p.kicker":"Private Dining & Occasions","p.title":"Rooms for Moments that Matter",
+      "p.lede":"Business dinners, family celebrations, or an evening for two — every Signature house is designed with private rooms.",
+      "p.l1":"Private rooms with dedicated service","p.l2":"Corporate dinners & entertaining",
+      "p.l3":"Family celebrations — from proposals to birthdays","p.l4":"Exclusive set menus for your occasion",
+      "p.cta":"Enquire about Private Dining",
+      "c.kicker":"Two Cities, 2026","c.lede":"The first two Kurnia Seafood Signature houses are in preparation. Full addresses will be announced before opening.",
+      "c.eta1":"September 2026","c.eta2":"Late 2026","c.area1":"Citarum · Bandung Wetan","c.area2":"Pondok Indah · South Jakarta",
+      "c.cta1":"Bandung Priority List","c.cta2":"Jakarta Priority List","c.est":"Estimated — official dates to be announced",
+      "j.title":"Be Among the First","j.lede":"Opening invitations, first-night tables, and Signature news — from us, before anyone else.",
+      "j.wa":"Join via WhatsApp","j.or":"or leave your details","j.lname":"Name","j.phname":"Your name",
+      "j.lcontact":"WhatsApp / Email","j.phcontact":"Phone or email","j.lcity":"The city you await",
+      "j.o1":"Bandung — September 2026","j.o2":"Jakarta — Late 2026","j.o3":"Both",
+      "j.submit":"Join the Priority List","j.privacy":"Your details are used solely for Signature opening news.",
+      "f.kicker":"Good to Know","f.title":"Before You Visit",
+      "f1k":"Cuisine","f1v":"Halal","f1s":"Fresh seafood, no alcohol in cooking",
+      "f2k":"Dress Code","f2v":"Smart casual","f2s":"Details closer to opening",
+      "f3k":"Opening Hours","f3v":"To be announced","f3s":"Ahead of each opening",
+      "f4k":"Contact","f4v":"WhatsApp","f4s":"Via the Priority List buttons above",
+      "ft.contact":"Jakarta — Pondok Indah&ensp;·&ensp;Bandung — Citarum<br>Opening hours to be announced",
+      "ft.main":"Kurnia Seafood — Main Site","ft.est":"Est. 2005, Ngawi — Part of Kurnia Group",
+      "m.fill":"Please provide your name and contact.","m.sending":"Sending…",
+      "m.thanks":"Thank you — you are on the list. Opening news to follow.","m.towa":"Continuing to WhatsApp…",
+      "m.wamsg":"Hello, I would like to join the Kurnia Seafood Signature{city} Priority List."
+    },
+    ja: {
+      "nav.dishes":"お料理","nav.exp":"体験","nav.priv":"個室","nav.loc":"店舗","nav.cta":"優先案内",
+      "menu.dishes":"シグネチャー料理","menu.exp":"体験","menu.eta":"バンドン · 2026年9月 — ジャカルタ · 2026年末",
+      "hero.kicker":"新たなる献呈",
+      "hero.sub":"ヌサンタラの海の最上を——目の前で選び、クルニア伝承の味で仕立て、儀式のごとくお届けします。",
+      "hero.cta1":"優先案内に登録",
+      "hero.notice":"近日開業 <i>✦</i> バンドン — 2026年9月 <i>✦</i> ジャカルタ — 2026年末",
+      "mani.text":"晩餐が<em>特別な出来事</em>となる夜があります——海は、敬意をもって供されるべきものです。",
+      "mani.endorse":"クルニア・シーフードの一族より",
+      "her.kicker":"伝統","her.y2":"五つの都市",
+      "her.p1":"クルニア・グループは、東ジャワ州ンガウィの観光バス食堂から始まりました。<strong>「クルニア」は恵みを意味します</strong>——お迎えするすべてのお客様の恵みとなるようにとの願いです。",
+      "her.p2":"ジョグジャカルタからバリまで、五つの店がひとつの心で育ちました。<strong>すべてのお客様を家族のように</strong>——今日まで百万組を超えるお客様をお迎えしています。",
+      "her.p3":"<strong>シグネチャー</strong>の誕生——ヌサンタラの海を最も厳かな形で味わう、ジャカルタとバンドンでのクルニアの招待状です。",
+      "d.kicker":"シェフのおすすめ","d.note":"クルニアの名を築いた五品——全メニューは開業前に発表いたします。",
+      "d1":"最高級キングクラブのシンガポールソース——冷たい海の贅沢とクルニア特製の味わい。",
+      "d2":"蟹の香ばしいガーリックキャラメル。",
+      "d3":"新鮮な海老の甘辛マラッカソース。",
+      "d4":"新鮮な魚をクルニア特製スパイスで焼き上げて。",
+      "d5":"クルニア秘伝のソースで仕上げた泥蟹——お客様が再び訪れる味。",
+      "e.title":"三幕の儀式",
+      "e1t":"海から選ぶ","e1p":"クルニアの魚市場の伝統を昇華——シェフとともに活きた魚介を選び、目の前で量ります。",
+      "e2t":"伝承の味","e2p":"五つの店を育てた同じスパイスを、ファインダイニングのために磨き上げました。",
+      "e3t":"静けさの中で","e3p":"より静かな空間、より寄り添う接客。急がぬ夜——晩餐という名の儀式。",
+      "p.kicker":"個室・お祝い事","p.title":"大切な時のための空間",
+      "p.lede":"接待、家族のお祝い、ふたりだけの夜——シグネチャーの各店には個室をご用意しています。",
+      "p.l1":"専任サービス付き個室","p.l2":"接待・ビジネスディナー",
+      "p.l3":"家族のお祝い——プロポーズから誕生日まで","p.l4":"ご用途に合わせた特別コース",
+      "p.cta":"個室について問い合わせる",
+      "c.kicker":"二都市、2026年","c.lede":"クルニア・シーフード・シグネチャー最初の二店舗を準備中です。所在地の詳細は開業前に発表いたします。",
+      "c.eta1":"2026年9月","c.eta2":"2026年末","c.area1":"チタルム · バンドン・ウェタン","c.area2":"ポンドック・インダ · 南ジャカルタ",
+      "c.cta1":"バンドン優先案内","c.cta2":"ジャカルタ優先案内","c.est":"予定——正式な日程は追って発表",
+      "j.title":"最初のお客様に","j.lede":"開業のご招待、初日のお席、シグネチャーの便り——誰よりも早くお届けします。",
+      "j.wa":"WhatsAppで登録","j.or":"または連絡先を残す","j.lname":"お名前","j.phname":"お名前",
+      "j.lcontact":"WhatsApp / メール","j.phcontact":"電話番号またはメール","j.lcity":"お待ちの都市",
+      "j.o1":"バンドン — 2026年9月","j.o2":"ジャカルタ — 2026年末","j.o3":"両方",
+      "j.submit":"優先案内に登録","j.privacy":"ご連絡先は開業のお知らせにのみ使用いたします。",
+      "f.kicker":"ご案内","f.title":"ご来店の前に",
+      "f1k":"お料理","f1v":"ハラール","f1s":"新鮮な魚介、調理に酒類不使用",
+      "f2k":"服装","f2v":"スマートカジュアル","f2s":"詳細は開業前に",
+      "f3k":"営業時間","f3v":"追って発表","f3s":"各店舗の開業前に",
+      "f4k":"お問い合わせ","f4v":"WhatsApp","f4s":"上の優先案内ボタンより",
+      "ft.contact":"ジャカルタ — ポンドック・インダ&ensp;·&ensp;バンドン — チタルム<br>営業時間は開業前に発表いたします",
+      "ft.main":"クルニア・シーフード 公式サイト","ft.est":"2005年創業（ンガウィ）— クルニア・グループ",
+      "m.fill":"お名前とご連絡先をご記入ください。","m.sending":"送信中…",
+      "m.thanks":"ありがとうございます——ご登録を承りました。開業の便りをお待ちください。","m.towa":"WhatsAppへ進みます…",
+      "m.wamsg":"こんにちは。クルニア・シーフード・シグネチャー{city}の優先案内への登録を希望します。"
+    },
+    ko: {
+      "nav.dishes":"요리","nav.exp":"경험","nav.priv":"프라이빗 다이닝","nav.loc":"매장","nav.cta":"우선 예약",
+      "menu.dishes":"시그니처 요리","menu.exp":"경험","menu.eta":"반둥 · 2026년 9월 — 자카르타 · 2026년 말",
+      "hero.kicker":"새로운 헌정",
+      "hero.sub":"누산타라 바다의 정수를 — 눈앞에서 고르고, 쿠르니아 전승의 양념으로 빚어, 의식처럼 올립니다.",
+      "hero.cta1":"우선 예약 등록",
+      "hero.notice":"곧 개장 <i>✦</i> 반둥 — 2026년 9월 <i>✦</i> 자카르타 — 2026년 말",
+      "mani.text":"저녁 식사가 <em>하나의 의식</em>이 되는 밤이 있습니다 — 바다는 예를 갖춰 올려야 합니다.",
+      "mani.endorse":"쿠르니아 씨푸드 가족으로부터",
+      "her.kicker":"유산","her.y2":"다섯 도시",
+      "her.p1":"쿠르니아 그룹은 동자바 응아위의 관광버스 휴게 식당에서 시작되었습니다. <strong>'쿠르니아'는 축복을 뜻합니다</strong> — 모시는 모든 손님께 축복이 되고자 하는 바람입니다.",
+      "her.p2":"족자카르타에서 발리까지, 다섯 매장이 하나의 마음으로 자랐습니다. <strong>모든 손님을 가족처럼</strong> — 지금까지 백만 팀이 넘는 손님을 모셨습니다.",
+      "her.p3":"<strong>시그니처</strong>의 탄생 — 누산타라의 바다를 가장 정중한 모습으로 경험하는, 자카르타와 반둥에서의 초대입니다.",
+      "d.kicker":"셰프의 선택","d.note":"쿠르니아의 이름을 세운 다섯 요리 — 전체 메뉴는 개장 전에 공개됩니다.",
+      "d1":"프리미엄 킹크랩과 싱가포르 소스 — 차가운 바다의 사치와 쿠르니아 특제 양념의 만남.",
+      "d2":"향긋한 갈릭 카라멜 크랩.",
+      "d3":"달콤짭짤한 말라카 소스의 신선한 새우.",
+      "d4":"쿠르니아 특제 양념으로 구운 신선한 생선.",
+      "d5":"쿠르니아 비법 소스의 머드크랩 — 손님이 다시 찾는 맛.",
+      "e.title":"세 막의 의식",
+      "e1t":"바다에서 고르다","e1p":"쿠르니아 수산시장 전통의 승화 — 셰프와 함께 살아있는 해산물을 고르고 눈앞에서 계량합니다.",
+      "e2t":"전승의 양념","e2p":"다섯 매장을 키운 그 양념을 파인다이닝을 위해 다듬었습니다.",
+      "e3t":"고요히 올리다","e3p":"더 조용한 공간, 더 세심한 응대. 서두르지 않는 밤 — 의식이 되는 저녁.",
+      "p.kicker":"프라이빗 다이닝","p.title":"소중한 순간을 위한 공간",
+      "p.lede":"비즈니스 만찬, 가족 축하연, 둘만의 저녁 — 모든 시그니처 매장에 프라이빗 룸을 마련했습니다.",
+      "p.l1":"전담 서비스의 프라이빗 룸","p.l2":"기업 만찬 및 접대",
+      "p.l3":"가족 축하연 — 프러포즈부터 생일까지","p.l4":"행사에 맞춘 특별 세트 메뉴",
+      "p.cta":"프라이빗 다이닝 문의",
+      "c.kicker":"두 도시, 2026","c.lede":"쿠르니아 씨푸드 시그니처의 첫 두 매장을 준비하고 있습니다. 정확한 위치는 개장 전에 공개됩니다.",
+      "c.eta1":"2026년 9월","c.eta2":"2026년 말","c.area1":"치타룸 · 반둥 웨탄","c.area2":"폰독 인다 · 남부 자카르타",
+      "c.cta1":"반둥 우선 예약","c.cta2":"자카르타 우선 예약","c.est":"예정 — 공식 일정은 추후 공개",
+      "j.title":"가장 먼저 만나보세요","j.lede":"개장 초대장, 첫날의 자리, 시그니처 소식 — 누구보다 먼저 전해드립니다.",
+      "j.wa":"WhatsApp으로 등록","j.or":"또는 연락처 남기기","j.lname":"성함","j.phname":"성함",
+      "j.lcontact":"WhatsApp / 이메일","j.phcontact":"전화번호 또는 이메일","j.lcity":"기다리시는 도시",
+      "j.o1":"반둥 — 2026년 9월","j.o2":"자카르타 — 2026년 말","j.o3":"둘 다",
+      "j.submit":"우선 예약 등록","j.privacy":"연락처는 시그니처 개장 소식에만 사용됩니다.",
+      "f.kicker":"안내","f.title":"방문 전 안내",
+      "f1k":"요리","f1v":"할랄","f1s":"신선한 해산물, 조리에 주류 미사용",
+      "f2k":"드레스 코드","f2v":"스마트 캐주얼","f2s":"자세한 내용은 개장 전 공지",
+      "f3k":"영업시간","f3v":"추후 공지","f3s":"각 매장 개장 전",
+      "f4k":"문의","f4v":"WhatsApp","f4s":"위의 우선 예약 버튼으로",
+      "ft.contact":"자카르타 — 폰독 인다&ensp;·&ensp;반둥 — 치타룸<br>영업시간은 개장 전에 공지됩니다",
+      "ft.main":"쿠르니아 씨푸드 공식 사이트","ft.est":"2005년 응아위 설립 — 쿠르니아 그룹",
+      "m.fill":"성함과 연락처를 입력해 주세요.","m.sending":"전송 중…",
+      "m.thanks":"감사합니다 — 명단에 등록되었습니다. 개장 소식을 전해드리겠습니다.","m.towa":"WhatsApp으로 이동합니다…",
+      "m.wamsg":"안녕하세요, 쿠르니아 씨푸드 시그니처{city} 우선 예약 명단에 등록하고 싶습니다."
+    },
+    zh: {
+      "nav.dishes":"菜品","nav.exp":"体验","nav.priv":"包间","nav.loc":"门店","nav.cta":"优先预约",
+      "menu.dishes":"招牌菜","menu.exp":"体验","menu.eta":"万隆 · 2026年9月 — 雅加达 · 2026年底",
+      "hero.kicker":"全新献礼",
+      "hero.sub":"群岛海洋的至臻之选——当面挑选，以库尔尼亚传承秘方烹制，如仪式般呈上。",
+      "hero.cta1":"加入优先预约",
+      "hero.notice":"即将开业 <i>✦</i> 万隆 — 2026年9月 <i>✦</i> 雅加达 — 2026年底",
+      "mani.text":"有些夜晚，晚餐本身就是<em>一场盛事</em>——大海值得以敬意呈上。",
+      "mani.endorse":"来自库尔尼亚海鲜家族",
+      "her.kicker":"传承","her.y2":"五座城市",
+      "her.p1":"库尔尼亚集团始于东爪哇艾阿维的一家旅游巴士餐馆。<strong>“Kurnia”意为恩泽</strong>——愿成为每位宾客的祝福。",
+      "her.p2":"从日惹到巴厘，五家门店以同一颗心成长：<strong>待每位宾客如家人</strong>——至今已接待逾百万组宾客。",
+      "her.p3":"<strong>Signature</strong>由此诞生——库尔尼亚的邀约，在雅加达与万隆，以最庄重的方式品味群岛之海。",
+      "d.kicker":"主厨甄选","d.note":"成就库尔尼亚之名的五道菜——完整菜单将于开业前公布。",
+      "d1":"顶级帝王蟹配新加坡酱——冷海之奢与库尔尼亚特调的相遇。",
+      "d2":"香浓蒜香焦糖蟹。",
+      "d3":"鲜虾配甜咸马六甲酱。",
+      "d4":"库尔尼亚特制香料烤制的鲜鱼。",
+      "d5":"库尔尼亚秘制酱汁青蟹——令宾客再度光临的味道。",
+      "e.title":"三幕仪式",
+      "e1t":"取之于海","e1p":"库尔尼亚海鲜市集传统的升华——与主厨一同挑选活鲜，当面过秤。",
+      "e2t":"传承之味","e2p":"养育五家门店的同一香料，为精致餐饮而精心打磨。",
+      "e3t":"静中呈上","e3p":"更安静的空间，更贴心的服务。不疾不徐——晚餐即盛事。",
+      "p.kicker":"包间与宴请","p.title":"为重要时刻而设",
+      "p.lede":"商务宴请、家庭庆典，或只属于两人的夜晚——每家Signature门店均设有包间。",
+      "p.l1":"专属服务包间","p.l2":"商务宴请与晚宴",
+      "p.l3":"家庭庆典——从求婚到生日","p.l4":"按场合定制的专属套餐",
+      "p.cta":"垂询包间事宜",
+      "c.kicker":"双城，2026","c.lede":"库尔尼亚海鲜Signature首两家门店正在筹备中。详细地址将于开业前公布。",
+      "c.eta1":"2026年9月","c.eta2":"2026年底","c.area1":"芝塔隆 · 万隆西塘","c.area2":"本多克英达 · 南雅加达",
+      "c.cta1":"万隆优先预约","c.cta2":"雅加达优先预约","c.est":"预计——正式日期另行公布",
+      "j.title":"成为首批宾客","j.lede":"开业请柬、首夜席位与Signature资讯——由我们率先送达。",
+      "j.wa":"通过WhatsApp加入","j.or":"或留下联系方式","j.lname":"姓名","j.phname":"您的姓名",
+      "j.lcontact":"WhatsApp / 邮箱","j.phcontact":"电话或邮箱","j.lcity":"您期待的城市",
+      "j.o1":"万隆 — 2026年9月","j.o2":"雅加达 — 2026年底","j.o3":"两者皆是",
+      "j.submit":"加入优先预约","j.privacy":"您的联系方式仅用于Signature开业资讯。",
+      "f.kicker":"贴心提示","f.title":"到访须知",
+      "f1k":"菜品","f1v":"清真","f1s":"新鲜海产，烹饪不含酒精",
+      "f2k":"着装","f2v":"商务休闲","f2s":"详情开业前公布",
+      "f3k":"营业时间","f3v":"另行公布","f3s":"于各门店开业前",
+      "f4k":"联系","f4v":"WhatsApp","f4s":"请使用上方优先预约按钮",
+      "ft.contact":"雅加达 — 本多克英达&ensp;·&ensp;万隆 — 芝塔隆<br>营业时间将于开业前公布",
+      "ft.main":"库尔尼亚海鲜官网","ft.est":"2005年创立于艾阿维 — 库尔尼亚集团旗下",
+      "m.fill":"请填写您的姓名与联系方式。","m.sending":"发送中…",
+      "m.thanks":"谢谢——您已在名单中。开业消息将随后送达。","m.towa":"正在前往WhatsApp…",
+      "m.wamsg":"您好，我想加入库尔尼亚海鲜Signature{city}优先预约名单。"
+    }
+  };
+
+  var LANG = "id";
+  try { LANG = localStorage.getItem("sig-lang") || "id"; } catch (e) {}
+  if (!I18N[LANG]) LANG = "id";
+  function t(k) { return (I18N[LANG] && I18N[LANG][k]) || I18N.id[k] || ""; }
+
+  /* font serif CJK — dimuat hanya saat bahasanya dipilih */
+  var CJK_FONTS = {
+    ja: "Noto+Serif+JP:wght@300;400;600",
+    ko: "Noto+Serif+KR:wght@300;400;600",
+    zh: "Noto+Serif+SC:wght@300;400;600"
+  };
+  function ensureCjkFont(l) {
+    if (!CJK_FONTS[l] || document.getElementById("font-" + l)) return;
+    var lk = document.createElement("link");
+    lk.id = "font-" + l; lk.rel = "stylesheet";
+    lk.href = "https://fonts.googleapis.com/css2?family=" + CJK_FONTS[l] + "&display=swap";
+    document.head.appendChild(lk);
+  }
+
   function waLink(city, extra) {
-    var msg = "Halo, saya ingin bergabung ke Priority List Kurnia Seafood Signature" +
-      (city ? " " + city : "") + "." + (extra ? " " + extra : "");
+    var msg = t("m.wamsg").replace("{city}", city ? " " + city : "");
+    if (extra) msg += " " + extra;
     return "https://wa.me/" + SIG.wa + "?text=" + encodeURIComponent(msg);
   }
 
-  /* tombol WhatsApp (hero/kota/join) */
-  document.querySelectorAll("[data-wa]").forEach(function (a) {
-    a.href = waLink(a.getAttribute("data-city"));
-    a.target = "_blank";
-    a.rel = "noopener";
+  function refreshWaLinks() {
+    document.querySelectorAll("[data-wa]").forEach(function (a) {
+      a.href = waLink(a.getAttribute("data-city"));
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+  }
+
+  function applyLang(l) {
+    LANG = I18N[l] ? l : "id";
+    try { localStorage.setItem("sig-lang", LANG); } catch (e) {}
+    document.documentElement.lang = LANG === "zh" ? "zh-CN" : LANG;
+    ensureCjkFont(LANG);
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = t(el.getAttribute("data-i18n"));
+      if (!v) return;
+      if (el.hasAttribute("data-i18n-html")) el.innerHTML = v; else el.textContent = v;
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) {
+      var v = t(el.getAttribute("data-i18n-ph"));
+      if (v) el.placeholder = v;
+    });
+    document.querySelectorAll("[data-lang]").forEach(function (b) {
+      b.classList.toggle("is-on", b.getAttribute("data-lang") === LANG);
+    });
+    refreshWaLinks();
+  }
+
+  document.querySelectorAll("[data-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { applyLang(b.getAttribute("data-lang")); });
   });
+
+  /* terapkan bahasa tersimpan (default id = teks bawaan dokumen) */
+  if (LANG !== "id") applyLang(LANG); else refreshWaLinks();
 
   /* overlay menu mobile */
   var burger = document.getElementById("sigBurger");
@@ -961,10 +1360,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     }, 8000);
   }
 
-  /* ticker: gandakan isi 4x agar loop mulus di layar sangat lebar */
-  var ticker = document.getElementById("sigTicker");
-  if (ticker) { ticker.innerHTML += ticker.innerHTML; ticker.innerHTML += ticker.innerHTML; }
-
   /* dishes: hover/tap/fokus pada daftar mengganti foto (crossfade dua layer) */
   var dishFrame = document.getElementById("dishFrame");
   var dishLayers = dishFrame ? Array.prototype.slice.call(dishFrame.querySelectorAll("img")) : [];
@@ -1009,10 +1404,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   var form = document.getElementById("sigForm");
   var msg = document.getElementById("sigFormMsg");
   var submitBtn = form.querySelector(".sig-form__submit");
-  var submitLabel = submitBtn.textContent;
   function setSending(sending) {
     submitBtn.disabled = sending;
-    submitBtn.textContent = sending ? "Mengirim…" : submitLabel;
+    submitBtn.textContent = sending ? t("m.sending") : t("j.submit");
   }
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
@@ -1021,14 +1415,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     var contact = form.contact.value.trim();
     var city = form.city.value;
     if (!name || !contact) {
-      msg.textContent = "Mohon isi nama dan kontak Anda.";
+      msg.textContent = t("m.fill");
       (name ? form.contact : form.name).focus();
       return;
     }
-    var payload = { type: "signature-priority-list", name: name, contact: contact, city: city, page: location.href };
+    var payload = { type: "signature-priority-list", name: name, contact: contact, city: city, lang: LANG, page: location.href };
     function fallbackWA() {
-      msg.textContent = "Melanjutkan ke WhatsApp…";
-      window.open(waLink(city, "Nama: " + name + " · Kontak: " + contact), "_blank", "noopener");
+      msg.textContent = t("m.towa");
+      window.open(waLink(city, t("j.lname") + ": " + name + " · " + t("j.lcontact") + ": " + contact), "_blank", "noopener");
     }
     if (SIG.endpoint) {
       setSending(true);
@@ -1038,7 +1432,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
         body: JSON.stringify(payload)
       }).then(function () {
-        msg.textContent = "Terima kasih — Anda ada di daftar. Kabar pembukaan menyusul.";
+        msg.textContent = t("m.thanks");
         form.reset();
       }).catch(function () { fallbackWA(); })
         .finally(function () { setSending(false); });
