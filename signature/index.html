@@ -62,7 +62,7 @@
 html{ scroll-behavior:smooth; }
 body{
   margin:0; background:var(--navy); color:var(--cream);
-  font-family:var(--fs); font-weight:300; font-size:1.075rem; line-height:1.65;
+  font-family:var(--fs); font-weight:300; font-size:1.125rem; line-height:1.7;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 ::selection{ background:var(--gold); color:var(--navy); }
@@ -196,6 +196,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   position:relative; min-height:100svh; display:flex; flex-direction:column;
   justify-content:center; overflow:hidden;
 }
+/* bingkai garis emas tipis (ref: Laurent) */
+.sig-hero::before{
+  content:""; position:absolute; z-index:3; pointer-events:none;
+  inset:clamp(14px,1.8vw,24px) clamp(14px,1.8vw,24px) 66px;
+  border:1px solid rgba(194,155,68,.22);
+}
+/* teks vertikal tepi (ref: Laurent) */
+.sig-hero__side{
+  position:absolute; top:50%; z-index:4; writing-mode:vertical-rl;
+  font-family:var(--fl); font-weight:300; font-size:10px; letter-spacing:.44em;
+  text-transform:uppercase; color:rgba(246,241,231,.55); white-space:nowrap;
+}
+.sig-hero__side--l{ left:44px; transform:translateY(-50%) rotate(180deg); }
+.sig-hero__side--r{ right:44px; transform:translateY(-50%); }
+@media (max-width:1100px){ .sig-hero__side{ display:none; } }
 .sig-hero__bg{ position:absolute; inset:0; z-index:0; }
 .sig-hero__slide{
   position:absolute; inset:0; background-size:cover; background-position:center;
@@ -270,48 +285,52 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-dishes__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
 .sig-dishes__note{ font-family:var(--fl); font-weight:300; font-size:12.5px; letter-spacing:.08em;
   color:var(--muted); max-width:300px; text-align:right; }
-.sig-dishes__grid{
-  display:grid; grid-template-columns:repeat(12,1fr); gap:22px; margin-top:56px;
-}
-.sig-dish{ position:relative; }
-.sig-dish__media{
-  position:relative; overflow:hidden;
+/* daftar menu ala fine dining (ref: Laurent) — foto kiri sticky, list kanan,
+   hover/tap pada item mengganti foto (crossfade) */
+.sig-dishes__wrap{ display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(30px,4.5vw,64px);
+  margin-top:56px; align-items:start; }
+.sig-dishes__visual{ position:sticky; top:110px; }
+.sig-dishes__frame{
+  position:relative; overflow:hidden; aspect-ratio:4/4.9;
   background:linear-gradient(160deg, var(--navy-card), var(--navy-deep) 85%);
-  border:1px solid rgba(194,155,68,.14);
+  border:1px solid rgba(194,155,68,.16);
 }
-/* watermark KS — tampak hanya bila foto gagal dimuat */
-.sig-dish__media::before{ content:"KS"; position:absolute; inset:0; display:flex;
+.sig-dishes__frame::before{ content:"KS"; position:absolute; inset:0; display:flex;
   align-items:center; justify-content:center; font-family:var(--fd); font-style:italic;
   font-size:4rem; color:rgba(194,155,68,.12); pointer-events:none; }
-.sig-dish__media::after{ content:""; position:absolute; inset:0; z-index:2;
-  background:linear-gradient(to top, rgba(4,16,31,.66) 0%, transparent 45%); }
-.sig-dish__media img{ position:relative; z-index:1; width:100%; height:100%; object-fit:cover;
-  filter:saturate(.9) contrast(1.04) brightness(.92);
-  transition:transform 1.2s var(--ease), filter 1.2s var(--ease); }
-.sig-dish:hover .sig-dish__media img{ transform:scale(1.045); filter:saturate(1) contrast(1.05) brightness(1); }
-.sig-dish__no{
-  position:absolute; top:14px; left:16px; z-index:3; font-family:var(--fl); font-weight:300;
-  font-size:12px; letter-spacing:.3em; color:var(--gold-soft);
+.sig-dishes__frame::after{ content:""; position:absolute; inset:14px; z-index:3;
+  border:1px solid rgba(194,155,68,.26); pointer-events:none; }
+.sig-dishes__frame img{
+  position:absolute; inset:0; z-index:1; width:100%; height:100%; object-fit:cover;
+  filter:saturate(.92) contrast(1.04) brightness(.94);
+  opacity:0; transition:opacity .7s var(--ease);
 }
-.sig-dish__body{ padding:20px 2px 0; }
-.sig-dish__name{
-  font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white);
-  font-size:1.5rem; line-height:1.2; margin:0;
+.sig-dishes__frame img.is-show{ opacity:1; z-index:2; }
+.sig-menu-list{ list-style:none; margin:0; padding:0; }
+.sig-menu-item{
+  display:flex; gap:22px; align-items:baseline; padding:26px 10px;
+  border-top:1px solid rgba(194,155,68,.16); cursor:pointer;
 }
-.sig-dish__desc{ color:var(--muted); font-size:.99rem; margin:8px 0 0; max-width:40ch; }
-/* komposisi editorial asimetris */
-.sig-dish--feature{ grid-column:1 / span 7; grid-row:1 / span 2; }
-.sig-dish--feature .sig-dish__media{ aspect-ratio:4/4.6; }
-.sig-dish--feature .sig-dish__name{ font-size:clamp(1.7rem,2.6vw,2.2rem); }
-.sig-dish--b{ grid-column:8 / span 5; } .sig-dish--b .sig-dish__media{ aspect-ratio:4/3; }
-.sig-dish--c{ grid-column:8 / span 5; margin-top:8px; } .sig-dish--c .sig-dish__media{ aspect-ratio:4/3; }
-.sig-dish--d{ grid-column:1 / span 5; margin-top:14px; } .sig-dish--d .sig-dish__media{ aspect-ratio:4/3; }
-.sig-dish--e{ grid-column:6 / span 7; margin-top:60px; } .sig-dish--e .sig-dish__media{ aspect-ratio:16/9; }
+.sig-menu-item:last-child{ border-bottom:1px solid rgba(194,155,68,.16); }
+.sig-menu-item__no{ font-family:var(--fl); font-weight:300; font-size:11.5px;
+  letter-spacing:.3em; color:var(--gold-dim); transition:color .3s var(--ease); }
+.sig-menu-item__name{
+  font-family:var(--fd); font-style:italic; font-weight:400; color:var(--cream);
+  font-size:clamp(1.35rem,2.2vw,1.7rem); line-height:1.25; margin:0;
+  transition:color .3s var(--ease), transform .45s var(--ease);
+}
+.sig-menu-item__desc{ color:var(--muted); font-size:1rem; margin:8px 0 0; max-width:46ch; }
+.sig-menu-item:hover .sig-menu-item__name,
+.sig-menu-item.is-active .sig-menu-item__name{ color:var(--gold-soft); transform:translateX(8px); }
+.sig-menu-item:hover .sig-menu-item__no,
+.sig-menu-item.is-active .sig-menu-item__no{ color:var(--gold); }
+.sig-menu-item:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 @media (max-width:880px){
-  .sig-dishes__grid{ grid-template-columns:1fr; gap:38px; }
-  .sig-dish{ grid-column:1 / -1 !important; margin-top:0 !important; }
-  .sig-dish--feature .sig-dish__media{ aspect-ratio:4/4; }
+  .sig-dishes__wrap{ grid-template-columns:1fr; gap:34px; }
+  .sig-dishes__visual{ position:static; }
+  .sig-dishes__frame{ aspect-ratio:16/10; }
   .sig-dishes__note{ text-align:left; }
+  .sig-menu-item{ padding:22px 4px; gap:16px; }
 }
 
 /* ---------- EXPERIENCE ---------- */
@@ -384,12 +403,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-form label{ display:block; font-family:var(--fl); font-weight:400; font-size:10.5px;
   letter-spacing:.24em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:8px; }
 .sig-form input,.sig-form select{
-  width:100%; background:rgba(4,16,31,.55); border:1px solid rgba(246,241,231,.18); border-radius:0;
+  width:100%; background:rgba(4,16,31,.55); border:1px solid rgba(194,155,68,.32); border-radius:0;
   color:var(--cream); font-family:var(--fs); font-size:1rem; padding:14px 15px;
   transition:border-color .25s var(--ease);
 }
 .sig-form input::placeholder{ color:rgba(246,241,231,.35); }
-.sig-form input:hover,.sig-form select:hover{ border-color:rgba(246,241,231,.34); }
+.sig-form input:hover,.sig-form select:hover{ border-color:rgba(194,155,68,.55); }
 .sig-form input:focus,.sig-form select:focus{ border-color:var(--gold); outline:none; }
 .sig-form .sig-btn[disabled]{ opacity:.55; cursor:default; }
 .sig-form select{ appearance:none; cursor:pointer;
@@ -425,9 +444,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 }
 
 /* ---------- FOOTER ---------- */
-.sig-footer{ background:var(--navy-abyss); padding:70px 0 46px; }
-.sig-footer__grid{ display:flex; justify-content:space-between; align-items:flex-start; gap:30px; flex-wrap:wrap; }
-.sig-footer__links{ display:flex; gap:14px; flex-wrap:wrap; }
+/* footer terpusat (ref: Laurent) */
+.sig-footer{ background:var(--navy-abyss); padding:76px 0 46px; text-align:center; }
+.sig-footer__grid{ display:flex; flex-direction:column; align-items:center; gap:20px; }
+.sig-footer__contact{ font-family:var(--fl); font-weight:300; font-size:12.5px;
+  letter-spacing:.1em; color:var(--muted); line-height:2; margin:0; }
+.sig-footer__links{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
 .sig-footer__links a{
   display:inline-block; padding:13px 8px;
   font-family:var(--fl); font-weight:300; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
@@ -435,8 +457,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 }
 .sig-footer__links a:hover{ color:var(--gold-soft); }
 .sig-footer__legal{
-  margin-top:46px; padding-top:24px; border-top:1px solid rgba(246,241,231,.09);
-  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  margin-top:44px; padding-top:24px; border-top:1px solid rgba(246,241,231,.09);
+  display:flex; justify-content:center; gap:14px 30px; flex-wrap:wrap;
   font-family:var(--fl); font-weight:300; font-size:11px; letter-spacing:.1em; color:rgba(246,241,231,.4);
 }
 
@@ -462,6 +484,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   .sig-menu{ transition:none; }
   .sig-burger span{ transition:none; }
   .sig-brand img{ transition:none; }
+  .sig-dishes__frame img{ transition:opacity .15s linear; }
+  .sig-menu-item__name{ transition:none; transform:none !important; }
   .sig-hero__slide{ transition:opacity .8s ease; transform:none !important; }
   .sig-dish__media img,.sig-city{ transition:none !important; }
 }
@@ -532,6 +556,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     </div>
   </div>
 
+  <span class="sig-hero__side sig-hero__side--l" aria-hidden="true">Fine Seafood Dining</span>
+  <span class="sig-hero__side sig-hero__side--r" aria-hidden="true">Jakarta · Bandung — 2026</span>
+
   <div class="sig-hero__cue" aria-hidden="true"></div>
 
   <div class="sig-ticker" aria-hidden="true">
@@ -563,65 +590,59 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
         menu lengkap Signature diumumkan menjelang pembukaan.</p>
     </div>
 
-    <div class="sig-dishes__grid">
-      <!-- 01 · feature — foto resmi Kurnia -->
-      <article class="sig-dish sig-dish--feature" data-reveal>
-        <div class="sig-dish__media">
-          <span class="sig-dish__no">— 01</span>
-          <img src="../wordpress/assets/menu-king-crab-sultan.jpg" alt="Alaskan King Crab Saus Singapore" loading="lazy">
+    <div class="sig-dishes__wrap">
+      <div class="sig-dishes__visual" data-reveal>
+        <div class="sig-dishes__frame" id="dishFrame">
+          <img class="is-show" src="../wordpress/assets/menu-king-crab-sultan.jpg"
+               alt="Alaskan King Crab Saus Singapore" decoding="async">
+          <img src="../wordpress/assets/menu-kepiting-garlic-caramel.jpg" alt="" decoding="async">
         </div>
-        <div class="sig-dish__body">
-          <h3 class="sig-dish__name">Alaskan King Crab Saus Singapore</h3>
-          <p class="sig-dish__desc">King crab premium dengan saus Singapore — kemewahan laut dingin
-            bertemu racikan khas Kurnia.</p>
-        </div>
-      </article>
-      <!-- 02 -->
-      <article class="sig-dish sig-dish--b" data-reveal data-delay="1">
-        <div class="sig-dish__media">
-          <span class="sig-dish__no">— 02</span>
-          <img src="../wordpress/assets/menu-kepiting-garlic-caramel.jpg" alt="Kepiting Garlic Caramel" loading="lazy">
-        </div>
-        <div class="sig-dish__body">
-          <h3 class="sig-dish__name">Kepiting Garlic Caramel</h3>
-          <p class="sig-dish__desc">Kepiting dengan karamel bawang putih yang harum.</p>
-        </div>
-      </article>
-      <!-- 03 -->
-      <article class="sig-dish sig-dish--c" data-reveal data-delay="2">
-        <div class="sig-dish__media">
-          <span class="sig-dish__no">— 03</span>
-          <img src="../wordpress/assets/menu-udang-saus-malaka.jpg" alt="Udang Saus Malaka" loading="lazy">
-        </div>
-        <div class="sig-dish__body">
-          <h3 class="sig-dish__name">Udang Saus Malaka</h3>
-          <p class="sig-dish__desc">Udang segar berbalut saus Malaka gurih-manis.</p>
-        </div>
-      </article>
-      <!-- 04 -->
-      <article class="sig-dish sig-dish--d" data-reveal>
-        <div class="sig-dish__media">
-          <span class="sig-dish__no">— 04</span>
-          <img src="../wordpress/assets/menu-ikan-bakar-kurnia.jpg" alt="Ikan Bakar Kurnia" loading="lazy">
-        </div>
-        <div class="sig-dish__body">
-          <h3 class="sig-dish__name">Ikan Bakar Kurnia</h3>
-          <p class="sig-dish__desc">Ikan segar dibakar dengan bumbu spesial khas Kurnia.</p>
-        </div>
-      </article>
-      <!-- 05 — foto resmi belum ada → placeholder bertanda -->
-      <article class="sig-dish sig-dish--e" data-reveal data-delay="1">
-        <div class="sig-dish__media">
-          <span class="sig-dish__no">— 05</span>
-          <!-- TODO: ganti foto resmi Kepiting Saus Kurnia (belum tersedia di repo) -->
-          <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=1400&q=72" alt="Kepiting Saus Kurnia" loading="lazy" data-placeholder="true" onerror="this.style.display='none'">
-        </div>
-        <div class="sig-dish__body">
-          <h3 class="sig-dish__name">Kepiting Saus Kurnia</h3>
-          <p class="sig-dish__desc">Kepiting bakau dengan saus rahasia racikan Kurnia —
-            resep yang membuat tamu kembali.</p>
-        </div>
-      </article>
+      </div>
+      <ol class="sig-menu-list" data-reveal data-delay="1">
+        <li class="sig-menu-item is-active" tabindex="0"
+            data-img="../wordpress/assets/menu-king-crab-sultan.jpg">
+          <span class="sig-menu-item__no">01</span>
+          <div>
+            <h3 class="sig-menu-item__name">Alaskan King Crab Saus Singapore</h3>
+            <p class="sig-menu-item__desc">King crab premium dengan saus Singapore — kemewahan
+              laut dingin bertemu racikan khas Kurnia.</p>
+          </div>
+        </li>
+        <li class="sig-menu-item" tabindex="0"
+            data-img="../wordpress/assets/menu-kepiting-garlic-caramel.jpg">
+          <span class="sig-menu-item__no">02</span>
+          <div>
+            <h3 class="sig-menu-item__name">Kepiting Garlic Caramel</h3>
+            <p class="sig-menu-item__desc">Kepiting dengan karamel bawang putih yang harum.</p>
+          </div>
+        </li>
+        <li class="sig-menu-item" tabindex="0"
+            data-img="../wordpress/assets/menu-udang-saus-malaka.jpg">
+          <span class="sig-menu-item__no">03</span>
+          <div>
+            <h3 class="sig-menu-item__name">Udang Saus Malaka</h3>
+            <p class="sig-menu-item__desc">Udang segar berbalut saus Malaka gurih-manis.</p>
+          </div>
+        </li>
+        <li class="sig-menu-item" tabindex="0"
+            data-img="../wordpress/assets/menu-ikan-bakar-kurnia.jpg">
+          <span class="sig-menu-item__no">04</span>
+          <div>
+            <h3 class="sig-menu-item__name">Ikan Bakar Kurnia</h3>
+            <p class="sig-menu-item__desc">Ikan segar dibakar dengan bumbu spesial khas Kurnia.</p>
+          </div>
+        </li>
+        <!-- 05: foto resmi belum tersedia → placeholder Unsplash bertanda -->
+        <li class="sig-menu-item" tabindex="0" data-placeholder="true"
+            data-img="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=1400&q=72">
+          <span class="sig-menu-item__no">05</span>
+          <div>
+            <h3 class="sig-menu-item__name">Kepiting Saus Kurnia</h3>
+            <p class="sig-menu-item__desc">Kepiting bakau dengan saus rahasia racikan Kurnia —
+              resep yang membuat tamu kembali.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
@@ -793,8 +814,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     <div class="sig-footer__grid">
       <a href="#hero" aria-label="Kurnia Seafood Signature" style="display:inline-block">
         <img src="assets/logo-kurnia-signature-dark.png" alt="Kurnia Seafood Signature"
-             width="190" height="127" loading="lazy" style="width:190px;height:auto">
+             width="210" height="140" loading="lazy" style="width:210px;height:auto">
       </a>
+      <p class="sig-footer__contact">Jakarta — Pondok Indah&ensp;·&ensp;Bandung — Citarum<br>
+        Jam operasional diumumkan menjelang pembukaan</p>
       <nav class="sig-footer__links" aria-label="Tautan">
         <a href="https://kurniaseafood.co.id/" rel="noopener">Kurnia Seafood — Situs Utama</a>
         <a href="https://www.instagram.com/kurnia.seafood/" rel="noopener">Instagram</a>
@@ -923,6 +946,45 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   /* ticker: gandakan isi 4x agar loop mulus di layar sangat lebar */
   var ticker = document.getElementById("sigTicker");
   if (ticker) { ticker.innerHTML += ticker.innerHTML; ticker.innerHTML += ticker.innerHTML; }
+
+  /* dishes: hover/tap/fokus pada daftar mengganti foto (crossfade dua layer) */
+  var dishFrame = document.getElementById("dishFrame");
+  var dishLayers = dishFrame ? Array.prototype.slice.call(dishFrame.querySelectorAll("img")) : [];
+  var dishItems = Array.prototype.slice.call(document.querySelectorAll(".sig-menu-item"));
+  var dishCur = 0, dishToken = 0;
+  function showDish(item) {
+    dishItems.forEach(function (i) { i.classList.toggle("is-active", i === item); });
+    var url = item.getAttribute("data-img");
+    var front = dishLayers[dishCur], back = dishLayers[1 - dishCur];
+    if (!front || front.getAttribute("src") === url) return;
+    var token = ++dishToken;
+    var pre = new Image();
+    pre.onload = function () {
+      if (token !== dishToken) return;
+      back.src = url;
+      back.alt = item.querySelector(".sig-menu-item__name").textContent;
+      back.classList.add("is-show");
+      front.classList.remove("is-show");
+      dishCur = 1 - dishCur;
+    };
+    pre.onerror = function () { /* foto gagal → biarkan watermark KS terlihat */
+      if (token !== dishToken) return;
+      front.classList.remove("is-show");
+      back.classList.remove("is-show");
+    };
+    pre.src = url;
+  }
+  dishItems.forEach(function (li) {
+    li.addEventListener("mouseenter", function () { showDish(li); });
+    li.addEventListener("focus", function () { showDish(li); });
+    li.addEventListener("click", function () { showDish(li); });
+  });
+  /* prefetch foto dish lain setelah halaman selesai dimuat */
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      dishItems.forEach(function (li) { (new Image()).src = li.getAttribute("data-img"); });
+    }, 1500);
+  });
 
   /* form priority list — best-effort ke Google Sheets, fallback WhatsApp.
      Tombol di-disable selama pengiriman (cegah double-submit). */
