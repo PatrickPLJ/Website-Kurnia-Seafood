@@ -1,42 +1,37 @@
-# signature/assets — Aset yang perlu diupload
+# signature/assets — Status aset brand Signature
 
-Halaman `signature/index.html` sudah berfungsi penuh dengan fallback, tapi butuh
-file-file berikut dari brand kit resmi (folder Google Drive
-**"01 Logo - Kurnia Seafood Signature"**) supaya tampil final.
+Sumber: brand kit resmi (folder Google Drive **"01 Logo - Kurnia Seafood Signature"**).
 Upload lewat github.com → *Add file → Upload files* ke folder `signature/assets/`.
 
 ## 1. Font CS Coaster (dari Drive: `Font/CS Coaster/`)
 
-Nama file HARUS persis seperti ini (sudah dirujuk `@font-face` di index.html):
-
-| File | Wajib? |
+| File | Status |
 |------|--------|
-| `CSCoster-Regular.woff2` | ✅ wajib |
-| `CSCoster-Italic.woff2` | ✅ wajib |
+| `CSCoster-Italic.woff2` + `.woff` | ✅ sudah ada |
+| `CSCoster-Regular.woff2` | ❌ **BELUM — tolong upload** (dipakai judul section non-italic) |
 | `CSCoster-Regular.woff` | opsional (fallback browser lama) |
-| `CSCoster-Italic.woff` | opsional |
 
-Sebelum font ada → halaman otomatis memakai **Crimson Pro** (tidak rusak).
+Selama Regular belum ada, judul non-italic otomatis memakai **Crimson Pro** (tidak rusak).
 
-## 2. Logo Signature (dari Drive: `Logo/`)
+## 2. Logo Signature — ✅ selesai
 
-| File | Dipakai untuk |
-|------|---------------|
-| `logo-kurnia-signature.png` (atau `.jpg` dari `Logo Kurnia Signature-01.jpg`) | Nav + footer |
+| File | Keterangan |
+|------|------------|
+| `Logo Kurnia Signature-01.jpg` | Master latar putih (sumber, jangan dihapus) |
+| `Logo Kurnia Signature-02.jpg` | Master latar navy (sumber, jangan dihapus) |
+| `logo-kurnia-signature-dark.png` | **Dipakai halaman** — transparan, marks putih+gold, utk latar gelap (di-generate dari -02) |
+| `logo-kurnia-signature-light.png` | Transparan, marks navy+gold, utk latar terang (cadangan; dari -01) |
 
-> Disarankan ekspor **PNG transparan** (atau SVG) dari master `.ai` — JPG punya
-> background kotak. Kalau hanya ada JPG, pilih versi yang backgroundnya navy.
-> Sebelum logo ada → wordmark tampil sebagai tipografi CSS (bertanda `data-placeholder`).
+Logo terpasang di: hero + footer `signature/index.html`, dan gateway
+`wordpress/sections/14-signature.html`. Wordmark nav = replika tipografis lockup
+(script CS Coaster) agar tajam di ukuran kecil.
 
-## 3. Placeholder lain yang WAJIB diganti sebelum live
+## 3. Placeholder yang masih WAJIB diganti sebelum live
 
-| Item | Lokasi di index.html | Catatan |
-|------|----------------------|---------|
-| Foto hero (3 slide) | `.sig-hero__slide` (`data-placeholder="true"`) | Foto pihak ketiga (Unsplash) — ganti foto resmi outlet/hidangan Kurnia |
-| Foto experience & private dining | `data-placeholder="true"` | Sama seperti di atas |
-| Nomor WhatsApp priority list | Konstanta `SIG.wa` di blok `<script>` | Masih memakai nomor pusat placeholder — ganti nomor resmi Signature |
-| Endpoint form minat | Konstanta `SIG.endpoint` | Kosong = form menampilkan fallback WhatsApp. Isi URL Apps Script (pola sama dengan `wordpress/integrations/reservation-apps-script.gs`) |
-| Jam operasional & dress code | Section Facts | Masih "menyusul/TBD" — isi saat data outlet fix |
-
-Foto menu signature TIDAK perlu diupload — sudah memakai foto resmi dari
-`../wordpress/assets/` (satu repo).
+| Item | Lokasi | Catatan |
+|------|--------|---------|
+| Foto hero (3 slide) & foto experience/private dining | `data-placeholder="true"` di index.html | Foto pihak ketiga (Unsplash) — ganti foto resmi outlet saat tersedia |
+| Foto "Kepiting Saus Kurnia" | Section Dishes | Foto produk lain sudah memakai foto resmi lama (keputusan pemilik: pakai foto lama dulu) |
+| Nomor WhatsApp priority list | Konstanta `SIG.wa` di `<script>` | Masih nomor pusat — ganti nomor resmi Signature |
+| Endpoint form minat | Konstanta `SIG.endpoint` | Kosong = fallback WhatsApp. Isi URL Apps Script bila mau simpan ke Sheets |
+| Jam operasional & dress code | Section Facts | Isi saat data outlet fix |

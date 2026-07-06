@@ -25,8 +25,8 @@ signature lama), gold redup `#8A6D2F` (garis halus).
 
 | Font | Penggunaan | Sumber |
 |------|------------|--------|
-| **CS Coaster** (CSCoster) | Display / judul besar / momen brand | File resmi di Drive (Regular, Italic, ReverseItalic — otf/ttf/woff/woff2) |
-| **Crimson Pro** (serif) | Fallback display, nama hidangan (italic), manifesto, body | Google Fonts (DNA induk) |
+| **CS Coaster** (CSCoster) | Display / judul besar / momen brand. **Italic = serif elegan yang sama dengan "Seafood" di logo** (script "Kurnia" = lettering custom pada artwork logo, bukan font) | File resmi di Drive (Regular, Italic, ReverseItalic — otf/ttf/woff/woff2) |
+| **Crimson Pro** (serif) | Fallback display & body copy | Google Fonts (DNA induk) |
 | **Alexandria** (sans) | Kicker caps letterspaced, nav, tombol, label kecil | Google Fonts (DNA induk) |
 
 Stack CSS: `font-family:'CS Coaster','Crimson Pro',Georgia,serif`. `@font-face`
@@ -35,16 +35,20 @@ Crimson Pro sampai file font diupload.
 
 ## Logo
 
-Tiga varian resmi (file di Drive, folder Logo):
-1. **Lockup stacked** — "Kurnia Seafood" + "SIGNATURE" (halaman 1 PDF logo)
-2. **Lockup horizontal** — "Kurnia Seafood SIGNATURE" satu baris (halaman 2)
-3. **Monogram "KS"** — untuk favicon, divider, watermark (halaman 3)
+Lockup stacked resmi (file sudah di `signature/assets/`):
+**kepiting siluet** (navy di latar putih / putih di latar navy — evolusi elegan dari
+maskot kartun brand induk) → **"Kurnia"** script gold (CS Coaster) → **"Seafood"**
+italic serif → **"SIGNATURE"** caps renggang. Varian lain di master PDF/AI:
+lockup horizontal & **monogram "KS"** (favicon, divider, watermark).
 
-File: `Logo Kurnia Signature-01.jpg`, `Logo Kurnia Signature-02.jpg`, master
-`Logo Kurnia Signature.ai` / `.pdf`.
+| File | Peran |
+|------|------|
+| `Logo Kurnia Signature-01.jpg` / `-02.jpg` | Master latar putih / navy |
+| `logo-kurnia-signature-dark.png` | Transparan utk latar gelap — dipakai di web |
+| `logo-kurnia-signature-light.png` | Transparan utk latar terang (cadangan) |
 
-> Logo belum ada di repo (lihat `signature/assets/README.md`). Sampai diupload,
-> wordmark direplika sementara via CSS/tipografi dengan tanda `data-placeholder`.
+> Wordmark di nav = replika tipografis lockup (script gold "Kurnia" + serif
+> "Seafood" + caps "SIGNATURE") agar tetap tajam di ukuran kecil.
 
 ## Tone Visual Web ("Midnight Ocean")
 
