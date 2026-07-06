@@ -66,6 +66,9 @@ gold `#C29B44` + putih, font **CS Coaster** (fallback Crimson Pro).
 - Aset yang perlu diupload (font + logo): [`signature/assets/README.md`](signature/assets/README.md)
 - Gerbang dari homepage: section `wordpress/sections/14-signature.html`
   (tombol "Discover Kurnia Signature" → `KS_CONFIG.SIGNATURE_URL`)
+- **`signature/kurnia-signature-share.html`** — versi 1-file mandiri (semua aset
+  inline) untuk dibuka langsung/dibagikan tanpa server. Regenerasi:
+  `node signature/build-share.mjs` setiap kali `signature/index.html` berubah
 
 ---
 
