@@ -138,27 +138,58 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   max-width:var(--shell); margin:0 auto; padding:16px 24px;
   display:flex; align-items:center; justify-content:space-between; gap:18px;
 }
-/* wordmark nav — replika tipografis lockup resmi (Kurnia script gold ·
-   Seafood serif putih · SIGNATURE caps) memakai font brand CS Coaster */
-.sig-mark{ text-decoration:none; line-height:1; display:inline-block; }
-.sig-mark__row{ display:flex; align-items:baseline; gap:9px; }
-.sig-mark__kurnia{ font-family:var(--fd); font-style:italic; font-size:27px;
-  color:var(--gold); letter-spacing:.01em; }
-.sig-mark__seafood{ font-family:var(--fd); font-style:italic; font-weight:400;
-  font-size:19px; color:var(--cream); }
-.sig-mark__sig{ display:block; font-family:var(--fl); font-weight:400; font-size:9.5px;
-  letter-spacing:.52em; text-transform:uppercase; color:var(--cream); opacity:.85; margin-top:5px; }
-.sig-nav__links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+/* brand nav = logo resmi saja */
+.sig-brand{ display:inline-flex; align-items:center; }
+.sig-brand img{ height:62px; width:auto; display:block;
+  filter:drop-shadow(0 2px 14px rgba(4,16,31,.45));
+  transition:height .35s var(--ease); }
+.sig-nav.is-scrolled .sig-brand img{ height:46px; }
+.sig-nav__links{ display:flex; gap:14px; list-style:none; margin:0; padding:0; }
 .sig-nav__links a{
-  font-family:var(--fl); font-weight:400; font-size:12px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--cream); text-decoration:none;
+  display:inline-block; font-family:var(--fl); font-weight:400; font-size:12px;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--cream); text-decoration:none;
   background-image:linear-gradient(var(--gold),var(--gold));
-  background-size:0% 1px; background-position:0 100%; background-repeat:no-repeat;
-  padding-bottom:5px; transition:background-size .35s var(--ease), color .35s var(--ease);
+  background-size:0% 1px; background-position:50% calc(100% - 8px); background-repeat:no-repeat;
+  padding:14px 8px; transition:background-size .35s var(--ease), color .35s var(--ease);
 }
-.sig-nav__links a:hover{ background-size:100% 1px; color:var(--gold-soft); }
-.sig-nav__cta{ padding:12px 22px; font-size:11.5px; }
-@media (max-width:880px){ .sig-nav__links{ display:none; } }
+.sig-nav__links a:hover{ background-size:calc(100% - 16px) 1px; color:var(--gold-soft); }
+.sig-nav__cta{ padding:14px 24px; font-size:11.5px; }
+/* hamburger (mobile) */
+.sig-burger{ display:none; width:46px; height:46px; align-items:center; justify-content:center;
+  flex-direction:column; gap:5px; background:transparent; border:1px solid var(--hairline);
+  border-radius:0; cursor:pointer; padding:0; }
+.sig-burger span{ display:block; width:20px; height:1.5px; background:var(--cream);
+  transition:transform .3s var(--ease), opacity .3s var(--ease); }
+.sig-burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.sig-burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.sig-burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+@media (max-width:880px){
+  .sig-nav__links{ display:none; }
+  .sig-burger{ display:inline-flex; }
+  .sig-brand img{ height:48px; }
+  .sig-nav.is-scrolled .sig-brand img{ height:40px; }
+  .sig-nav__cta{ display:none; } /* CTA pindah ke overlay + sticky bar */
+}
+/* overlay menu mobile */
+.sig-menu{
+  position:fixed; inset:0; z-index:70; background:rgba(4,16,31,.97);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  visibility:hidden; opacity:0;
+  transition:opacity .32s var(--ease), visibility 0s linear .32s;
+}
+.sig-menu.is-open{ visibility:visible; opacity:1; transition:opacity .32s var(--ease); }
+.sig-menu a{ font-family:var(--fd); font-style:italic; font-size:2rem; color:var(--cream);
+  text-decoration:none; padding:13px 28px; transition:color .25s var(--ease); }
+.sig-menu a:hover{ color:var(--gold-soft); }
+.sig-menu .sig-btn{ font-style:normal; font-family:var(--fl); font-size:12.5px; margin-top:22px; }
+.sig-menu__close{ position:absolute; top:18px; right:22px; width:46px; height:46px;
+  background:transparent; border:1px solid var(--hairline); border-radius:0; cursor:pointer;
+  color:var(--cream); font-size:20px; line-height:1; }
+.sig-menu__eta{ font-family:var(--fl); font-weight:300; font-size:10.5px; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--muted); margin-top:30px; }
+/* offset anchor terhadap nav fixed */
+#dishes,#experience,#private,#cities,#join{ scroll-margin-top:92px; }
 
 /* ---------- HERO ---------- */
 .sig-hero{
@@ -244,17 +275,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 }
 .sig-dish{ position:relative; }
 .sig-dish__media{
-  position:relative; overflow:hidden; background:var(--navy-card);
+  position:relative; overflow:hidden;
+  background:linear-gradient(160deg, var(--navy-card), var(--navy-deep) 85%);
   border:1px solid rgba(194,155,68,.14);
 }
-.sig-dish__media::after{ content:""; position:absolute; inset:0;
+/* watermark KS — tampak hanya bila foto gagal dimuat */
+.sig-dish__media::before{ content:"KS"; position:absolute; inset:0; display:flex;
+  align-items:center; justify-content:center; font-family:var(--fd); font-style:italic;
+  font-size:4rem; color:rgba(194,155,68,.12); pointer-events:none; }
+.sig-dish__media::after{ content:""; position:absolute; inset:0; z-index:2;
   background:linear-gradient(to top, rgba(4,16,31,.66) 0%, transparent 45%); }
-.sig-dish__media img{ width:100%; height:100%; object-fit:cover;
+.sig-dish__media img{ position:relative; z-index:1; width:100%; height:100%; object-fit:cover;
   filter:saturate(.9) contrast(1.04) brightness(.92);
   transition:transform 1.2s var(--ease), filter 1.2s var(--ease); }
 .sig-dish:hover .sig-dish__media img{ transform:scale(1.045); filter:saturate(1) contrast(1.05) brightness(1); }
 .sig-dish__no{
-  position:absolute; top:14px; left:16px; z-index:2; font-family:var(--fl); font-weight:300;
+  position:absolute; top:14px; left:16px; z-index:3; font-family:var(--fl); font-weight:300;
   font-size:12px; letter-spacing:.3em; color:var(--gold-soft);
 }
 .sig-dish__body{ padding:20px 2px 0; }
@@ -333,7 +369,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 @media (max-width:880px){ .sig-cities__grid{ grid-template-columns:1fr; } }
 
 /* ---------- PRIORITY LIST ---------- */
-.sig-join{ position:relative; padding:clamp(100px,12vw,160px) 0; text-align:center; overflow:hidden; }
+.sig-join{ position:relative; padding:clamp(100px,12vw,160px) 0; text-align:center; overflow:hidden;
+  background:radial-gradient(85% 70% at 50% 42%, #0E3155 0%, var(--navy) 72%); }
 .sig-join__bg{ position:absolute; inset:0; background-size:cover; background-position:center;
   filter:brightness(.5) saturate(.7); }
 .sig-join__scrim{ position:absolute; inset:0;
@@ -354,7 +391,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-form input::placeholder{ color:rgba(246,241,231,.35); }
 .sig-form input:hover,.sig-form select:hover{ border-color:rgba(246,241,231,.34); }
 .sig-form input:focus,.sig-form select:focus{ border-color:var(--gold); outline:none; }
-.sig-form select{ appearance:none;
+.sig-form .sig-btn[disabled]{ opacity:.55; cursor:default; }
+.sig-form select{ appearance:none; cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C29B44' fill='none'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-position:right 15px center; }
 .sig-form__full{ grid-column:1 / -1; }
@@ -389,8 +427,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 /* ---------- FOOTER ---------- */
 .sig-footer{ background:var(--navy-abyss); padding:70px 0 46px; }
 .sig-footer__grid{ display:flex; justify-content:space-between; align-items:flex-start; gap:30px; flex-wrap:wrap; }
-.sig-footer__links{ display:flex; gap:28px; flex-wrap:wrap; }
+.sig-footer__links{ display:flex; gap:14px; flex-wrap:wrap; }
 .sig-footer__links a{
+  display:inline-block; padding:13px 8px;
   font-family:var(--fl); font-weight:300; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--muted); text-decoration:none; transition:color .25s var(--ease);
 }
@@ -420,6 +459,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   .sig-rule{ transform:none !important; transition:none !important; }
   .sig-ticker__track{ animation:none; }
   .sig-hero__cue{ display:none; }
+  .sig-menu{ transition:none; }
+  .sig-burger span{ transition:none; }
+  .sig-brand img{ transition:none; }
   .sig-hero__slide{ transition:opacity .8s ease; transform:none !important; }
   .sig-dish__media img,.sig-city{ transition:none !important; }
 }
@@ -431,12 +473,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 <!-- ==================== NAV ==================== -->
 <header class="sig-nav" id="signav">
   <div class="sig-nav__inner">
-    <a class="sig-mark" href="#hero" aria-label="Kurnia Seafood Signature">
-      <span class="sig-mark__row">
-        <span class="sig-mark__kurnia">Kurnia</span>
-        <span class="sig-mark__seafood">Seafood</span>
-      </span>
-      <span class="sig-mark__sig">Signature</span>
+    <a class="sig-brand" href="#hero" aria-label="Kurnia Seafood Signature — kembali ke atas">
+      <img src="assets/logo-kurnia-signature-dark.png" alt="Kurnia Seafood Signature"
+           width="1200" height="802">
     </a>
     <nav aria-label="Navigasi utama">
       <ul class="sig-nav__links">
@@ -447,8 +486,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
       </ul>
     </nav>
     <a href="#join" class="sig-btn sig-btn--solid sig-nav__cta">Priority List</a>
+    <button class="sig-burger" id="sigBurger" aria-expanded="false" aria-controls="sigMenu"
+            aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- overlay menu (mobile) -->
+<div class="sig-menu" id="sigMenu" role="dialog" aria-modal="true" aria-label="Menu navigasi">
+  <button class="sig-menu__close" id="sigMenuClose" aria-label="Tutup menu">✕</button>
+  <a href="#dishes">Signature Dishes</a>
+  <a href="#experience">The Experience</a>
+  <a href="#private">Private Dining</a>
+  <a href="#cities">Lokasi</a>
+  <a href="#join" class="sig-btn sig-btn--solid">Join the Priority List</a>
+  <span class="sig-menu__eta">Bandung · Sept 2026 — Jakarta · Akhir 2026</span>
+</div>
 
 <main id="main">
 
@@ -789,6 +843,29 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   document.querySelectorAll("[data-wa]").forEach(function (a) {
     a.href = waLink(a.getAttribute("data-city"));
     a.target = "_blank";
+    a.rel = "noopener";
+  });
+
+  /* overlay menu mobile */
+  var burger = document.getElementById("sigBurger");
+  var menu = document.getElementById("sigMenu");
+  var menuClose = document.getElementById("sigMenuClose");
+  function setMenu(open) {
+    menu.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) { menu.querySelector("a").focus(); } else { burger.focus(); }
+  }
+  burger.addEventListener("click", function () {
+    setMenu(!menu.classList.contains("is-open"));
+  });
+  menuClose.addEventListener("click", function () { setMenu(false); });
+  menu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () { setMenu(false); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menu.classList.contains("is-open")) setMenu(false);
   });
 
   /* nav: solid saat scroll */
@@ -799,19 +876,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   window.addEventListener("scroll", onScrollNav, { passive: true });
   onScrollNav();
 
-  /* sticky CTA mobile: muncul setelah hero */
+  /* sticky CTA mobile: muncul setelah hero, sembunyi di section join & footer */
   var sticky = document.getElementById("sigSticky");
   var hero = document.getElementById("hero");
   var join = document.getElementById("join");
+  var footer = document.querySelector(".sig-footer");
   if ("IntersectionObserver" in window) {
-    var heroSeen = true, joinSeen = false;
-    var update = function () { sticky.classList.toggle("is-on", !heroSeen && !joinSeen); };
+    var heroSeen = true, joinSeen = false, footSeen = false;
+    var update = function () { sticky.classList.toggle("is-on", !heroSeen && !joinSeen && !footSeen); };
     new IntersectionObserver(function (es) {
       es.forEach(function (e) { heroSeen = e.isIntersecting; }); update();
     }, { threshold: 0.15 }).observe(hero);
     new IntersectionObserver(function (es) {
       es.forEach(function (e) { joinSeen = e.isIntersecting; }); update();
     }, { threshold: 0.05 }).observe(join);
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { footSeen = e.isIntersecting; }); update();
+    }, { threshold: 0.05 }).observe(footer);
   }
 
   /* reveal on scroll */
@@ -839,25 +920,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
     }, 8000);
   }
 
-  /* ticker: gandakan isi agar loop mulus */
+  /* ticker: gandakan isi 4x agar loop mulus di layar sangat lebar */
   var ticker = document.getElementById("sigTicker");
-  if (ticker) { ticker.innerHTML += ticker.innerHTML; }
+  if (ticker) { ticker.innerHTML += ticker.innerHTML; ticker.innerHTML += ticker.innerHTML; }
 
-  /* form priority list — best-effort ke Google Sheets, fallback WhatsApp */
+  /* form priority list — best-effort ke Google Sheets, fallback WhatsApp.
+     Tombol di-disable selama pengiriman (cegah double-submit). */
   var form = document.getElementById("sigForm");
   var msg = document.getElementById("sigFormMsg");
+  var submitBtn = form.querySelector(".sig-form__submit");
+  var submitLabel = submitBtn.textContent;
+  function setSending(sending) {
+    submitBtn.disabled = sending;
+    submitBtn.textContent = sending ? "Mengirim…" : submitLabel;
+  }
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
+    if (submitBtn.disabled) return;
     var name = form.name.value.trim();
     var contact = form.contact.value.trim();
     var city = form.city.value;
     if (!name || !contact) {
       msg.textContent = "Mohon isi nama dan kontak Anda.";
+      (name ? form.contact : form.name).focus();
       return;
     }
     var payload = { type: "signature-priority-list", name: name, contact: contact, city: city, page: location.href };
+    function fallbackWA() {
+      msg.textContent = "Melanjutkan ke WhatsApp…";
+      window.open(waLink(city, "Nama: " + name + " · Kontak: " + contact), "_blank", "noopener");
+    }
     if (SIG.endpoint) {
-      msg.textContent = "Mengirim…";
+      setSending(true);
+      msg.textContent = "";
       fetch(SIG.endpoint, {
         method: "POST", mode: "no-cors", keepalive: true,
         headers: { "Content-Type": "text/plain;charset=UTF-8" },
@@ -865,13 +960,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
       }).then(function () {
         msg.textContent = "Terima kasih — Anda ada di daftar. Kabar pembukaan menyusul.";
         form.reset();
-      }).catch(function () { fallbackWA(); });
+      }).catch(function () { fallbackWA(); })
+        .finally(function () { setSending(false); });
     } else {
       fallbackWA();
-    }
-    function fallbackWA() {
-      msg.textContent = "Melanjutkan ke WhatsApp…";
-      window.open(waLink(city, "Nama: " + name + " · Kontak: " + contact), "_blank", "noopener");
     }
   });
 })();
