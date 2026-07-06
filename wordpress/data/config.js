@@ -10,5 +10,11 @@ window.KS_CONFIG = {
 
   // URL beranda — dipakai tombol "Kembali ke Beranda" pada section Reservasi
   // bila section berada di halaman terpisah (tanpa #hero di dokumen yang sama).
-  HOME_URL: "/"
+  HOME_URL: "/",
+
+  // URL landing page Kurnia Seafood Signature — dipakai tombol "Discover Kurnia
+  // Signature" pada section 14-signature. Kosong = fallback ke path relatif repo
+  // (../signature/index.html) untuk preview. Isi URL produksi saat halaman
+  // Signature dipasang di WordPress (mis. "/signature/" atau subdomain).
+  SIGNATURE_URL: ""
 };
