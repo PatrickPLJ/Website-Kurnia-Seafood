@@ -2,18 +2,19 @@
  * Kurnia Seafood — DATA MENU (New Menu + Signature)
  * Dipakai oleh section New Menu (isNew) & Signature (signature). TANPA HARGA.
  *
- * FOTO: semua `image` di bawah = PLACEHOLDER pihak ketiga (Unsplash) karena
- * foto resmi belum tersedia → placeholder:true. WAJIB diganti foto resmi Kurnia.
- * Lihat daftar di wordpress/PLACEHOLDERS.md.
+ * FOTO: item signature (kecuali Kepiting Saus Kurnia) sudah memakai FOTO RESMI
+ * dari assets/ (path relatif thd folder wordpress/ — saat pasang di WordPress
+ * ganti ke URL media library, lihat PLACEHOLDERS.md). Sisanya masih PLACEHOLDER
+ * pihak ketiga (Unsplash) → placeholder:true, WAJIB diganti foto resmi Kurnia.
  * ====================================================================== */
 window.KS_MENU = [
 
   /* ---- SIGNATURE / HERO MENUS (kandidat dari deck investor — milik Kurnia) ---- */
-  { name: "Ikan Bakar Kurnia",                 desc: "Ikan segar dibakar dengan bumbu spesial khas Kurnia.", signature: true,  isNew: false, image: "https://images.unsplash.com/photo-1535140728325-a4d3707eee61?auto=format&fit=crop&w=800&q=72", placeholder: true },
+  { name: "Ikan Bakar Kurnia",                 desc: "Ikan segar dibakar dengan bumbu spesial khas Kurnia.", signature: true,  isNew: false, image: "assets/menu-ikan-bakar-kurnia.jpg" },
   { name: "Kepiting Saus Kurnia",              desc: "Kepiting bakau, saus rahasia racikan Kurnia.",          signature: true,  isNew: false, image: "https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=800&q=72", placeholder: true },
-  { name: "Udang Saus Malaka",                 desc: "Udang segar berbalut saus Malaka gurih-manis.",        signature: true,  isNew: false, image: "https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=800&q=72", placeholder: true },
-  { name: "Kepiting Garlic Caramel",           desc: "Kepiting dengan karamel bawang putih yang harum.",      signature: true,  isNew: false, image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=72", placeholder: true },
-  { name: "Alaskan King Crab Saus Singapore",  desc: "King crab premium dengan saus Singapore.",             signature: true,  isNew: false, image: "https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=800&q=72", placeholder: true },
+  { name: "Udang Saus Malaka",                 desc: "Udang segar berbalut saus Malaka gurih-manis.",        signature: true,  isNew: false, image: "assets/menu-udang-saus-malaka.jpg" },
+  { name: "Kepiting Garlic Caramel",           desc: "Kepiting dengan karamel bawang putih yang harum.",      signature: true,  isNew: false, image: "assets/menu-kepiting-garlic-caramel.jpg" },
+  { name: "Alaskan King Crab Saus Singapore",  desc: "King crab premium dengan saus Singapore.",             signature: true,  isNew: false, image: "assets/menu-king-crab-sultan.jpg" },
 
   /* ---- NEW MENU (placeholder — TODO: isi menu baru asli dari tim) ---- */
   { name: "Menu Baru 1", desc: "", isNew: true, signature: false, image: "https://images.unsplash.com/photo-1625943555435-d9d3a3f9d3f4?auto=format&fit=crop&w=800&q=72", placeholder: true }, // TODO: isi menu baru asli dari tim

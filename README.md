@@ -55,6 +55,20 @@ lalu ikuti `wordpress/PANDUAN-ELEMENTOR.md` untuk memasangnya.
 
 ---
 
+## 👉 `signature/` — Landing page **Kurnia Seafood Signature** (pra-opening)
+
+Landing page standalone untuk tier fine dining **Kurnia Seafood Signature**
+(outlet baru Jakarta–Pondok Indah & Bandung–Citarum, 2026). Satu file mandiri
+(`signature/index.html`), arah desain **"Midnight Ocean"**: navy `#0A2644` +
+gold `#C29B44` + putih, font **CS Coaster** (fallback Crimson Pro).
+
+- Brand kit: [`brand/SIGNATURE-BRAND.md`](brand/SIGNATURE-BRAND.md)
+- Aset yang perlu diupload (font + logo): [`signature/assets/README.md`](signature/assets/README.md)
+- Gerbang dari homepage: section `wordpress/sections/14-signature.html`
+  (tombol "Discover Kurnia Signature" → `KS_CONFIG.SIGNATURE_URL`)
+
+---
+
 ## Arsip: prototipe awal (tidak dipakai)
 
 Folder `html-tailwind/` dan `nextjs/` adalah eksplorasi **arah pertama** (konsep

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurnia Seafood Signature — Segera Hadir di Jakarta &amp; Bandung</title>
+<meta name="description" content="Kurnia Seafood Signature: tier fine dining dari keluarga Kurnia Seafood. Persembahan terbaik laut Nusantara, disajikan dengan seremoni. Segera hadir di Jakarta (Pondok Indah) & Bandung (Citarum), 2026.">
+<meta name="robots" content="noindex"><!-- pra-launch; hapus saat halaman resmi tayang -->
+<meta property="og:type" content="restaurant">
+<meta property="og:site_name" content="Kurnia Seafood Signature">
+<meta property="og:locale" content="id_ID">
+<meta property="og:title" content="Kurnia Seafood Signature — Segera Hadir di Jakarta &amp; Bandung">
+<meta property="og:description" content="Tier fine dining dari keluarga Kurnia Seafood. Segera hadir di Jakarta & Bandung, 2026. Join the Priority List.">
+<meta name="theme-color" content="#0A2644">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A2644'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='28' fill='%23C29B44' text-anchor='middle' letter-spacing='1'%3EKS%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   KURNIA SEAFOOD SIGNATURE · Landing pra-opening — "Midnight Ocean"
+   Palet resmi: navy #0A2644 · gold #C29B44 · putih (brand/SIGNATURE-BRAND.md)
+   Font resmi: CS Coaster (fallback Crimson Pro sampai woff2 diupload —
+   lihat signature/assets/README.md)
+   ====================================================================== */
+
+/* CS Coaster — file diupload pemilik ke signature/assets/ (README.md) */
+@font-face{
+  font-family:'CS Coaster';
+  src:url('assets/CSCoster-Regular.woff2') format('woff2'),
+      url('assets/CSCoster-Regular.woff') format('woff');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'CS Coaster';
+  src:url('assets/CSCoster-Italic.woff2') format('woff2'),
+      url('assets/CSCoster-Italic.woff') format('woff');
+  font-weight:400; font-style:italic; font-display:swap;
+}
+
+:root{
+  --navy:#0A2644;          /* resmi — ground */
+  --navy-deep:#061A30;     /* band kontras */
+  --navy-abyss:#04101F;    /* footer */
+  --navy-card:#0E3155;     /* permukaan kartu */
+  --gold:#C29B44;          /* resmi — aksen & CTA */
+  --gold-soft:#D9BC7A;     /* hover / teks gold di ukuran kecil */
+  --gold-dim:rgba(194,155,68,.38);
+  --white:#FFFFFF;         /* resmi */
+  --cream:#F6F1E7;         /* teks panjang di atas navy */
+  --muted:rgba(246,241,231,.62);
+  --hairline:rgba(194,155,68,.28);
+  --fd:'CS Coaster','Crimson Pro',Georgia,serif;   /* display */
+  --fs:'Crimson Pro',Georgia,serif;                /* serif pendukung */
+  --fl:'Alexandria',system-ui,sans-serif;          /* label/caps */
+  --ease:cubic-bezier(.22,.61,.2,1);
+  --shell:1180px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0; background:var(--navy); color:var(--cream);
+  font-family:var(--fs); font-weight:300; font-size:1.075rem; line-height:1.65;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+::selection{ background:var(--gold); color:var(--navy); }
+img{ max-width:100%; display:block; }
+a{ color:var(--gold-soft); }
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--gold); outline-offset:3px;
+}
+
+.sig-skip{
+  position:absolute; left:-9999px; top:0; z-index:99;
+  background:var(--gold); color:var(--navy); font-family:var(--fl);
+  padding:10px 18px; font-size:13px;
+}
+.sig-skip:focus{ left:12px; top:12px; }
+
+/* ---------- primitif ---------- */
+.sig-shell{ max-width:var(--shell); margin:0 auto; padding:0 24px; }
+.sig-kicker{
+  font-family:var(--fl); font-weight:500; font-size:12px; letter-spacing:.34em;
+  text-transform:uppercase; color:var(--gold); display:inline-flex; align-items:center; gap:14px;
+}
+.sig-kicker::before{ content:""; width:34px; height:1px; background:var(--gold-dim); }
+.sig-kicker--center::after{ content:""; width:34px; height:1px; background:var(--gold-dim); }
+.sig-h2{
+  font-family:var(--fd); font-weight:400; color:var(--white);
+  font-size:clamp(2.1rem,4.6vw,3.4rem); line-height:1.08; letter-spacing:.01em;
+  margin:18px 0 0;
+}
+.sig-lede{ color:var(--muted); font-size:1.06rem; max-width:56ch; margin:16px 0 0; }
+
+/* tombol — tajam, radius 0 (disiplin tier premium) */
+.sig-btn{
+  font-family:var(--fl); font-weight:500; font-size:12.5px; letter-spacing:.22em;
+  text-transform:uppercase; text-decoration:none; cursor:pointer; display:inline-block;
+  padding:16px 30px; border:1px solid var(--gold); border-radius:0;
+  transition:background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+.sig-btn--solid{ background:var(--gold); color:var(--navy); }
+.sig-btn--solid:hover{ background:var(--gold-soft); border-color:var(--gold-soft); }
+.sig-btn--ghost{ background:transparent; color:var(--gold-soft); }
+.sig-btn--ghost:hover{ background:rgba(194,155,68,.12); color:var(--cream); }
+
+/* grain — atmosfer film halus */
+.sig-grain{ position:relative; isolation:isolate; }
+.sig-grain::after{
+  content:""; position:absolute; inset:0; pointer-events:none; z-index:3; opacity:.045; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* reveal saat scroll — "surfacing" pelan */
+[data-reveal]{ opacity:0; transform:translateY(26px); transition:opacity 1s var(--ease), transform 1s var(--ease); }
+[data-reveal].in{ opacity:1; transform:none; }
+[data-reveal][data-delay="1"]{ transition-delay:.1s; }
+[data-reveal][data-delay="2"]{ transition-delay:.2s; }
+[data-reveal][data-delay="3"]{ transition-delay:.3s; }
+[data-reveal][data-delay="4"]{ transition-delay:.4s; }
+/* hairline gold yang menggambar diri */
+.sig-rule{ height:1px; background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);
+  transform:scaleX(0); transition:transform 1.4s var(--ease) .2s; }
+[data-reveal].in .sig-rule, .sig-rule[data-reveal].in{ transform:scaleX(1); }
+
+/* ---------- NAV ---------- */
+.sig-nav{
+  position:fixed; inset:0 0 auto 0; z-index:50;
+  transition:background .4s var(--ease), box-shadow .4s var(--ease);
+}
+.sig-nav.is-scrolled{ background:rgba(6,26,48,.92); backdrop-filter:blur(10px);
+  box-shadow:0 1px 0 var(--hairline); }
+.sig-nav__inner{
+  max-width:var(--shell); margin:0 auto; padding:16px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+/* wordmark CSS — PLACEHOLDER sampai logo resmi diupload (assets/README.md) */
+.sig-mark{ text-decoration:none; line-height:1; }
+.sig-mark__top{ display:block; font-family:var(--fl); font-weight:400; font-size:10.5px;
+  letter-spacing:.42em; text-transform:uppercase; color:var(--cream); }
+.sig-mark__main{ display:block; font-family:var(--fd); font-style:italic; font-size:23px;
+  color:var(--gold); margin-top:3px; letter-spacing:.04em; }
+.sig-nav__links{ display:flex; gap:30px; list-style:none; margin:0; padding:0; }
+.sig-nav__links a{
+  font-family:var(--fl); font-weight:400; font-size:12px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--cream); text-decoration:none;
+  background-image:linear-gradient(var(--gold),var(--gold));
+  background-size:0% 1px; background-position:0 100%; background-repeat:no-repeat;
+  padding-bottom:5px; transition:background-size .35s var(--ease), color .35s var(--ease);
+}
+.sig-nav__links a:hover{ background-size:100% 1px; color:var(--gold-soft); }
+.sig-nav__cta{ padding:12px 22px; font-size:11.5px; }
+@media (max-width:880px){ .sig-nav__links{ display:none; } }
+
+/* ---------- HERO ---------- */
+.sig-hero{
+  position:relative; min-height:100svh; display:flex; flex-direction:column;
+  justify-content:center; overflow:hidden;
+}
+.sig-hero__bg{ position:absolute; inset:0; z-index:0; }
+.sig-hero__slide{
+  position:absolute; inset:0; background-size:cover; background-position:center;
+  opacity:0; transform:scale(1.06); transition:opacity 2.4s var(--ease), transform 9s linear;
+}
+.sig-hero__slide.is-active{ opacity:1; transform:scale(1); }
+.sig-hero__scrim{ position:absolute; inset:0; z-index:1;
+  background:
+    radial-gradient(120% 90% at 50% 108%, rgba(10,38,68,.55), transparent 60%),
+    linear-gradient(180deg, rgba(4,16,31,.86) 0%, rgba(10,38,68,.55) 42%, rgba(4,16,31,.92) 100%); }
+.sig-hero__content{
+  position:relative; z-index:4; text-align:center; padding:150px 24px 130px;
+  max-width:880px; margin:0 auto;
+}
+.sig-hero__kicker{
+  font-family:var(--fl); font-weight:400; font-size:12.5px; letter-spacing:.5em;
+  text-transform:uppercase; color:var(--cream); opacity:.85;
+}
+.sig-hero__title{
+  font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white);
+  font-size:clamp(4rem,13vw,9.5rem); line-height:.95; margin:26px 0 0; letter-spacing:.01em;
+  text-shadow:0 8px 60px rgba(4,16,31,.6);
+}
+.sig-hero__frame{ width:min(340px,60vw); height:1px; margin:34px auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+.sig-hero__sub{ color:var(--cream); opacity:.86; font-size:clamp(1.05rem,2vw,1.25rem);
+  max-width:52ch; margin:26px auto 0; }
+.sig-hero__cta{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:42px; }
+/* entrance */
+@keyframes sigRise{ from{ opacity:0; transform:translateY(30px); } to{ opacity:1; transform:none; } }
+.sig-rise{ opacity:0; animation:sigRise 1.2s var(--ease) forwards; }
+.sig-rise-2{ animation-delay:.25s; } .sig-rise-3{ animation-delay:.5s; }
+.sig-rise-4{ animation-delay:.75s; } .sig-rise-5{ animation-delay:1s; }
+/* scroll cue */
+.sig-hero__cue{ position:absolute; left:50%; bottom:86px; transform:translateX(-50%);
+  z-index:4; width:1px; height:52px; overflow:hidden; }
+.sig-hero__cue::after{ content:""; position:absolute; left:0; top:-100%; width:1px; height:100%;
+  background:linear-gradient(180deg,transparent,var(--gold)); animation:sigCue 2.6s var(--ease) infinite; }
+@keyframes sigCue{ 0%{ top:-100%; } 60%,100%{ top:100%; } }
+
+/* marquee "segera hadir" — pelan & seremonial */
+.sig-ticker{ position:absolute; left:0; right:0; bottom:0; z-index:5;
+  border-top:1px solid var(--hairline); background:rgba(4,16,31,.55); backdrop-filter:blur(6px);
+  overflow:hidden; padding:13px 0; }
+.sig-ticker__track{ display:flex; gap:0; width:max-content; animation:sigTick 46s linear infinite; }
+.sig-ticker span{
+  font-family:var(--fl); font-weight:400; font-size:11.5px; letter-spacing:.34em;
+  text-transform:uppercase; color:var(--gold-soft); white-space:nowrap; padding:0 18px;
+}
+.sig-ticker i{ font-style:normal; color:var(--gold); padding:0 4px; }
+@keyframes sigTick{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ---------- MANIFESTO ---------- */
+.sig-manifesto{ background:var(--navy-deep); padding:clamp(90px,12vw,150px) 24px; text-align:center; }
+.sig-monogram{
+  width:74px; height:74px; margin:0 auto; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--gold-dim); transform:rotate(45deg);
+}
+.sig-monogram span{ transform:rotate(-45deg); font-family:var(--fd); font-size:26px;
+  color:var(--gold); letter-spacing:.12em; padding-left:.12em; }
+.sig-manifesto__text{
+  font-family:var(--fd); font-style:italic; font-weight:400; color:var(--cream);
+  font-size:clamp(1.55rem,3.6vw,2.6rem); line-height:1.35; max-width:24ch; margin:44px auto 0;
+}
+.sig-manifesto__text em{ color:var(--gold-soft); font-style:inherit; }
+.sig-endorse{
+  margin:40px auto 0; font-family:var(--fl); font-weight:400; font-size:12px;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--muted);
+}
+
+/* ---------- DISHES ---------- */
+.sig-dishes{ padding:clamp(90px,11vw,140px) 0; }
+.sig-dishes__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.sig-dishes__note{ font-family:var(--fl); font-weight:300; font-size:12.5px; letter-spacing:.08em;
+  color:var(--muted); max-width:300px; text-align:right; }
+.sig-dishes__grid{
+  display:grid; grid-template-columns:repeat(12,1fr); gap:22px; margin-top:56px;
+}
+.sig-dish{ position:relative; }
+.sig-dish__media{
+  position:relative; overflow:hidden; background:var(--navy-card);
+  border:1px solid rgba(194,155,68,.14);
+}
+.sig-dish__media::after{ content:""; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(4,16,31,.66) 0%, transparent 45%); }
+.sig-dish__media img{ width:100%; height:100%; object-fit:cover;
+  filter:saturate(.9) contrast(1.04) brightness(.92);
+  transition:transform 1.2s var(--ease), filter 1.2s var(--ease); }
+.sig-dish:hover .sig-dish__media img{ transform:scale(1.045); filter:saturate(1) contrast(1.05) brightness(1); }
+.sig-dish__no{
+  position:absolute; top:14px; left:16px; z-index:2; font-family:var(--fl); font-weight:300;
+  font-size:12px; letter-spacing:.3em; color:var(--gold-soft);
+}
+.sig-dish__body{ padding:20px 2px 0; }
+.sig-dish__name{
+  font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white);
+  font-size:1.5rem; line-height:1.2; margin:0;
+}
+.sig-dish__desc{ color:var(--muted); font-size:.99rem; margin:8px 0 0; max-width:40ch; }
+/* komposisi editorial asimetris */
+.sig-dish--feature{ grid-column:1 / span 7; grid-row:1 / span 2; }
+.sig-dish--feature .sig-dish__media{ aspect-ratio:4/4.6; }
+.sig-dish--feature .sig-dish__name{ font-size:clamp(1.7rem,2.6vw,2.2rem); }
+.sig-dish--b{ grid-column:8 / span 5; } .sig-dish--b .sig-dish__media{ aspect-ratio:4/3; }
+.sig-dish--c{ grid-column:8 / span 5; margin-top:8px; } .sig-dish--c .sig-dish__media{ aspect-ratio:4/3; }
+.sig-dish--d{ grid-column:1 / span 5; margin-top:14px; } .sig-dish--d .sig-dish__media{ aspect-ratio:4/3; }
+.sig-dish--e{ grid-column:6 / span 7; margin-top:60px; } .sig-dish--e .sig-dish__media{ aspect-ratio:16/9; }
+@media (max-width:880px){
+  .sig-dishes__grid{ grid-template-columns:1fr; gap:38px; }
+  .sig-dish{ grid-column:1 / -1 !important; margin-top:0 !important; }
+  .sig-dish--feature .sig-dish__media{ aspect-ratio:4/4; }
+  .sig-dishes__note{ text-align:left; }
+}
+
+/* ---------- EXPERIENCE ---------- */
+.sig-exp{ background:var(--navy-deep); padding:clamp(90px,11vw,140px) 0; }
+.sig-exp__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:60px; }
+.sig-exp__item{ border-top:1px solid var(--hairline); padding-top:26px; }
+.sig-exp__num{ font-family:var(--fd); font-style:italic; font-size:1.05rem; color:var(--gold); letter-spacing:.18em; }
+.sig-exp__title{ font-family:var(--fd); font-weight:400; color:var(--white); font-size:1.55rem; margin:14px 0 0; }
+.sig-exp__desc{ color:var(--muted); margin:12px 0 0; font-size:1rem; }
+@media (max-width:880px){ .sig-exp__grid{ grid-template-columns:1fr; gap:8px; }
+  .sig-exp__item{ padding:26px 0; } }
+
+/* ---------- PRIVATE DINING ---------- */
+.sig-priv{ padding:clamp(90px,11vw,140px) 0; }
+.sig-priv__grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(30px,5vw,72px); align-items:center; }
+.sig-priv__media{ position:relative; overflow:hidden; border:1px solid rgba(194,155,68,.14);
+  aspect-ratio:4/4.4; background:linear-gradient(160deg, var(--navy-card), var(--navy-deep) 80%); }
+.sig-priv__media::after{ content:"KS"; position:absolute; inset:0; z-index:1; display:flex;
+  align-items:center; justify-content:center; font-family:var(--fd); font-style:italic;
+  font-size:5rem; color:rgba(194,155,68,.12); pointer-events:none; }
+.sig-priv__media img{ position:relative; z-index:2; width:100%; height:100%; object-fit:cover;
+  filter:saturate(.85) brightness(.9); }
+.sig-priv__media::before{ content:""; position:absolute; inset:14px; border:1px solid var(--gold-dim); z-index:3; pointer-events:none; }
+.sig-priv__list{ list-style:none; margin:26px 0 0; padding:0; }
+.sig-priv__list li{
+  display:flex; gap:16px; align-items:baseline; padding:15px 0; border-bottom:1px solid rgba(246,241,231,.1);
+  color:var(--cream); font-size:1.02rem;
+}
+.sig-priv__list li::before{ content:"✦"; color:var(--gold); font-size:.72rem; }
+@media (max-width:880px){ .sig-priv__grid{ grid-template-columns:1fr; } }
+
+/* ---------- DUA KOTA ---------- */
+.sig-cities{ background:var(--navy-deep); padding:clamp(90px,11vw,140px) 0; }
+.sig-cities__grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:56px; }
+.sig-city{
+  position:relative; background:linear-gradient(160deg, var(--navy-card), var(--navy) 78%);
+  border:1px solid rgba(194,155,68,.2); padding:clamp(34px,4vw,52px);
+  overflow:hidden; transition:border-color .35s var(--ease), transform .35s var(--ease);
+}
+.sig-city:hover{ border-color:var(--gold); transform:translateY(-4px); }
+.sig-city::after{ /* monogram watermark */
+  content:"KS"; position:absolute; right:-14px; bottom:-38px; font-family:var(--fd); font-style:italic;
+  font-size:9rem; color:rgba(194,155,68,.07); line-height:1; pointer-events:none;
+}
+.sig-city__eta{
+  display:inline-block; font-family:var(--fl); font-weight:500; font-size:11px; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--gold); border:1px solid var(--gold-dim); padding:9px 16px;
+}
+.sig-city__name{ font-family:var(--fd); font-weight:400; color:var(--white);
+  font-size:clamp(2.1rem,4vw,3rem); margin:26px 0 0; line-height:1; }
+.sig-city__area{ color:var(--muted); font-size:1.02rem; margin:12px 0 0; }
+.sig-city__cta{ margin-top:30px; display:inline-block; }
+.sig-city__est{ display:block; font-family:var(--fl); font-weight:300; font-size:10.5px;
+  letter-spacing:.14em; color:var(--muted); margin-top:14px; }
+@media (max-width:880px){ .sig-cities__grid{ grid-template-columns:1fr; } }
+
+/* ---------- PRIORITY LIST ---------- */
+.sig-join{ position:relative; padding:clamp(100px,12vw,160px) 0; text-align:center; overflow:hidden; }
+.sig-join__bg{ position:absolute; inset:0; background-size:cover; background-position:center;
+  filter:brightness(.5) saturate(.7); }
+.sig-join__scrim{ position:absolute; inset:0;
+  background:linear-gradient(180deg, var(--navy) 0%, rgba(10,38,68,.72) 30%, rgba(10,38,68,.78) 70%, var(--navy) 100%); }
+.sig-join__inner{ position:relative; z-index:4; max-width:640px; margin:0 auto; padding:0 24px; }
+.sig-join__wa{ margin-top:38px; }
+.sig-join__or{ display:flex; align-items:center; gap:18px; margin:34px 0;
+  font-family:var(--fl); font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted); }
+.sig-join__or::before,.sig-join__or::after{ content:""; flex:1; height:1px; background:rgba(246,241,231,.14); }
+.sig-form{ display:grid; grid-template-columns:1fr 1fr; gap:14px; text-align:left; }
+.sig-form label{ display:block; font-family:var(--fl); font-weight:400; font-size:10.5px;
+  letter-spacing:.24em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:8px; }
+.sig-form input,.sig-form select{
+  width:100%; background:rgba(4,16,31,.55); border:1px solid rgba(246,241,231,.18); border-radius:0;
+  color:var(--cream); font-family:var(--fs); font-size:1rem; padding:14px 15px;
+  transition:border-color .25s var(--ease);
+}
+.sig-form input::placeholder{ color:rgba(246,241,231,.35); }
+.sig-form input:hover,.sig-form select:hover{ border-color:rgba(246,241,231,.34); }
+.sig-form input:focus,.sig-form select:focus{ border-color:var(--gold); outline:none; }
+.sig-form select{ appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C29B44' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 15px center; }
+.sig-form__full{ grid-column:1 / -1; }
+.sig-form__submit{ grid-column:1 / -1; width:100%; margin-top:6px; }
+.sig-form__msg{ grid-column:1 / -1; font-family:var(--fl); font-weight:300; font-size:12.5px;
+  letter-spacing:.05em; color:var(--gold-soft); min-height:1.2em; margin:4px 0 0; }
+.sig-join__privacy{ font-family:var(--fl); font-weight:300; font-size:11px; letter-spacing:.06em;
+  color:var(--muted); margin-top:22px; }
+@media (max-width:640px){ .sig-form{ grid-template-columns:1fr; } }
+
+/* ---------- FACTS ---------- */
+.sig-facts{ background:var(--navy-deep); padding:clamp(80px,10vw,120px) 0; }
+.sig-facts__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:52px;
+  border:1px solid rgba(194,155,68,.16); }
+.sig-fact{ padding:28px 26px; border-right:1px solid rgba(194,155,68,.16); }
+.sig-fact:last-child{ border-right:none; }
+.sig-fact__k{ font-family:var(--fl); font-weight:500; font-size:10.5px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--gold); }
+.sig-fact__v{ color:var(--cream); font-size:1.05rem; margin-top:10px; line-height:1.45; }
+.sig-fact__v small{ display:block; color:var(--muted); font-size:.86rem; margin-top:4px; }
+@media (max-width:880px){
+  .sig-facts__grid{ grid-template-columns:1fr 1fr; }
+  .sig-fact:nth-child(2n){ border-right:none; }
+  .sig-fact:nth-child(-n+2){ border-bottom:1px solid rgba(194,155,68,.16); }
+}
+@media (max-width:520px){
+  .sig-facts__grid{ grid-template-columns:1fr; }
+  .sig-fact{ border-right:none; border-bottom:1px solid rgba(194,155,68,.16); }
+  .sig-fact:last-child{ border-bottom:none; }
+}
+
+/* ---------- FOOTER ---------- */
+.sig-footer{ background:var(--navy-abyss); padding:70px 0 46px; }
+.sig-footer__grid{ display:flex; justify-content:space-between; align-items:flex-start; gap:30px; flex-wrap:wrap; }
+.sig-footer__links{ display:flex; gap:28px; flex-wrap:wrap; }
+.sig-footer__links a{
+  font-family:var(--fl); font-weight:300; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none; transition:color .25s var(--ease);
+}
+.sig-footer__links a:hover{ color:var(--gold-soft); }
+.sig-footer__legal{
+  margin-top:46px; padding-top:24px; border-top:1px solid rgba(246,241,231,.09);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  font-family:var(--fl); font-weight:300; font-size:11px; letter-spacing:.1em; color:rgba(246,241,231,.4);
+}
+
+/* ---------- sticky CTA mobile ---------- */
+.sig-sticky{
+  position:fixed; left:0; right:0; bottom:0; z-index:60; display:none;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(4,16,31,.94); backdrop-filter:blur(10px); border-top:1px solid var(--hairline);
+  transform:translateY(110%); transition:transform .45s var(--ease);
+}
+.sig-sticky.is-on{ transform:none; }
+.sig-sticky .sig-btn{ width:100%; text-align:center; padding:15px 10px; }
+@media (max-width:880px){ .sig-sticky{ display:block; } }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .sig-rise{ animation:none; opacity:1; }
+  [data-reveal]{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .sig-rule{ transform:none !important; transition:none !important; }
+  .sig-ticker__track{ animation:none; }
+  .sig-hero__cue{ display:none; }
+  .sig-hero__slide{ transition:opacity .8s ease; transform:none !important; }
+  .sig-dish__media img,.sig-city{ transition:none !important; }
+}
+</style>
+</head>
+<body>
+<a class="sig-skip" href="#main">Lewati ke konten</a>
+
+<!-- ==================== NAV ==================== -->
+<header class="sig-nav" id="signav">
+  <div class="sig-nav__inner">
+    <!-- Wordmark CSS — PLACEHOLDER: ganti dengan logo resmi (assets/README.md) -->
+    <a class="sig-mark" href="#hero" data-placeholder="true" aria-label="Kurnia Seafood Signature">
+      <span class="sig-mark__top">Kurnia Seafood</span>
+      <span class="sig-mark__main">Signature</span>
+    </a>
+    <nav aria-label="Navigasi utama">
+      <ul class="sig-nav__links">
+        <li><a href="#dishes">Dishes</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#private">Private Dining</a></li>
+        <li><a href="#cities">Lokasi</a></li>
+      </ul>
+    </nav>
+    <a href="#join" class="sig-btn sig-btn--solid sig-nav__cta">Priority List</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ==================== 1 · HERO ==================== -->
+<section class="sig-hero sig-grain" id="hero" aria-label="Kurnia Seafood Signature">
+  <div class="sig-hero__bg" aria-hidden="true">
+    <!-- TODO: ganti foto resmi outlet/hidangan Kurnia (hak cipta) — placeholder pihak ketiga -->
+    <div class="sig-hero__slide is-active" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=72')"></div>
+    <div class="sig-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=1800&q=72')"></div>
+    <div class="sig-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1800&q=72')"></div>
+  </div>
+  <div class="sig-hero__scrim" aria-hidden="true"></div>
+
+  <div class="sig-hero__content">
+    <p class="sig-hero__kicker sig-rise">Kurnia Seafood mempersembahkan</p>
+    <h1 class="sig-hero__title sig-rise sig-rise-2">Signature</h1>
+    <div class="sig-hero__frame sig-rise sig-rise-3" aria-hidden="true"></div>
+    <p class="sig-hero__sub sig-rise sig-rise-4">Persembahan terbaik laut Nusantara — dipilih langsung,
+      diracik dengan warisan rasa Kurnia, disajikan dengan seremoni.</p>
+    <div class="sig-hero__cta sig-rise sig-rise-5">
+      <a class="sig-btn sig-btn--solid" href="#join">Join the Priority List</a>
+      <a class="sig-btn sig-btn--ghost" href="#dishes">Signature Dishes</a>
+    </div>
+  </div>
+
+  <div class="sig-hero__cue" aria-hidden="true"></div>
+
+  <div class="sig-ticker" aria-hidden="true">
+    <div class="sig-ticker__track" id="sigTicker">
+      <span>Segera Hadir <i>✦</i> Bandung — September 2026 <i>✦</i> Jakarta — Akhir 2026 <i>✦</i> Fine Seafood Dining <i>✦</i></span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2 · MANIFESTO ==================== -->
+<section class="sig-manifesto sig-grain" aria-label="Manifesto">
+  <div data-reveal>
+    <div class="sig-monogram" aria-hidden="true"><span>KS</span></div>
+  </div>
+  <p class="sig-manifesto__text" data-reveal data-delay="1">Ada saatnya makan malam
+    menjadi <em>sebuah peristiwa</em> — dan laut layak dihidangkan dengan hormat.</p>
+  <p class="sig-endorse" data-reveal data-delay="2">Dari keluarga di balik Kurnia Seafood</p>
+</section>
+
+<!-- ==================== 3 · SIGNATURE DISHES ==================== -->
+<section class="sig-dishes" id="dishes" aria-label="Signature Dishes">
+  <div class="sig-shell">
+    <div class="sig-dishes__head" data-reveal>
+      <div>
+        <span class="sig-kicker">Chef's Selection</span>
+        <h2 class="sig-h2">Signature Dishes</h2>
+      </div>
+      <p class="sig-dishes__note">Lima hidangan yang membesarkan nama Kurnia —
+        menu lengkap Signature diumumkan menjelang pembukaan.</p>
+    </div>
+
+    <div class="sig-dishes__grid">
+      <!-- 01 · feature — foto resmi Kurnia -->
+      <article class="sig-dish sig-dish--feature" data-reveal>
+        <div class="sig-dish__media">
+          <span class="sig-dish__no">— 01</span>
+          <img src="../wordpress/assets/menu-king-crab-sultan.jpg" alt="Alaskan King Crab Saus Singapore" loading="lazy">
+        </div>
+        <div class="sig-dish__body">
+          <h3 class="sig-dish__name">Alaskan King Crab Saus Singapore</h3>
+          <p class="sig-dish__desc">King crab premium dengan saus Singapore — kemewahan laut dingin
+            bertemu racikan khas Kurnia.</p>
+        </div>
+      </article>
+      <!-- 02 -->
+      <article class="sig-dish sig-dish--b" data-reveal data-delay="1">
+        <div class="sig-dish__media">
+          <span class="sig-dish__no">— 02</span>
+          <img src="../wordpress/assets/menu-kepiting-garlic-caramel.jpg" alt="Kepiting Garlic Caramel" loading="lazy">
+        </div>
+        <div class="sig-dish__body">
+          <h3 class="sig-dish__name">Kepiting Garlic Caramel</h3>
+          <p class="sig-dish__desc">Kepiting dengan karamel bawang putih yang harum.</p>
+        </div>
+      </article>
+      <!-- 03 -->
+      <article class="sig-dish sig-dish--c" data-reveal data-delay="2">
+        <div class="sig-dish__media">
+          <span class="sig-dish__no">— 03</span>
+          <img src="../wordpress/assets/menu-udang-saus-malaka.jpg" alt="Udang Saus Malaka" loading="lazy">
+        </div>
+        <div class="sig-dish__body">
+          <h3 class="sig-dish__name">Udang Saus Malaka</h3>
+          <p class="sig-dish__desc">Udang segar berbalut saus Malaka gurih-manis.</p>
+        </div>
+      </article>
+      <!-- 04 -->
+      <article class="sig-dish sig-dish--d" data-reveal>
+        <div class="sig-dish__media">
+          <span class="sig-dish__no">— 04</span>
+          <img src="../wordpress/assets/menu-ikan-bakar-kurnia.jpg" alt="Ikan Bakar Kurnia" loading="lazy">
+        </div>
+        <div class="sig-dish__body">
+          <h3 class="sig-dish__name">Ikan Bakar Kurnia</h3>
+          <p class="sig-dish__desc">Ikan segar dibakar dengan bumbu spesial khas Kurnia.</p>
+        </div>
+      </article>
+      <!-- 05 — foto resmi belum ada → placeholder bertanda -->
+      <article class="sig-dish sig-dish--e" data-reveal data-delay="1">
+        <div class="sig-dish__media">
+          <span class="sig-dish__no">— 05</span>
+          <!-- TODO: ganti foto resmi Kepiting Saus Kurnia (belum tersedia di repo) -->
+          <img src="https://images.unsplash.com/photo-1606756790138-261d2b21cd75?auto=format&fit=crop&w=1400&q=72" alt="Kepiting Saus Kurnia" loading="lazy" data-placeholder="true" onerror="this.style.display='none'">
+        </div>
+        <div class="sig-dish__body">
+          <h3 class="sig-dish__name">Kepiting Saus Kurnia</h3>
+          <p class="sig-dish__desc">Kepiting bakau dengan saus rahasia racikan Kurnia —
+            resep yang membuat tamu kembali.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4 · THE EXPERIENCE ==================== -->
+<section class="sig-exp sig-grain" id="experience" aria-label="The Experience">
+  <div class="sig-shell">
+    <div data-reveal>
+      <span class="sig-kicker">The Experience</span>
+      <h2 class="sig-h2">Sebuah Ritual, Tiga Babak</h2>
+    </div>
+    <div class="sig-exp__grid">
+      <div class="sig-exp__item" data-reveal>
+        <span class="sig-exp__num">I.</span>
+        <h3 class="sig-exp__title">Dipilih dari Laut</h3>
+        <p class="sig-exp__desc">Tradisi seafood market Kurnia naik kelas: tangkapan hidup
+          dipilih bersama chef, ditimbang di hadapan Anda.</p>
+      </div>
+      <div class="sig-exp__item" data-reveal data-delay="1">
+        <span class="sig-exp__num">II.</span>
+        <h3 class="sig-exp__title">Racikan Warisan</h3>
+        <p class="sig-exp__desc">Bumbu yang sama yang membesarkan lima cabang Kurnia —
+          disempurnakan untuk meja fine dining.</p>
+      </div>
+      <div class="sig-exp__item" data-reveal data-delay="2">
+        <span class="sig-exp__num">III.</span>
+        <h3 class="sig-exp__title">Disajikan dengan Tenang</h3>
+        <p class="sig-exp__desc">Ruang yang lebih hening, layanan yang lebih personal.
+          Tanpa terburu-buru — makan malam sebagai peristiwa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5 · PRIVATE DINING ==================== -->
+<section class="sig-priv" id="private" aria-label="Private Dining">
+  <div class="sig-shell">
+    <div class="sig-priv__grid">
+      <div class="sig-priv__media" data-reveal>
+        <!-- TODO: ganti foto resmi ruang privat outlet Signature -->
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=72" alt="Ruang private dining" loading="lazy" data-placeholder="true" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div data-reveal>
+          <span class="sig-kicker">Private Dining &amp; Occasions</span>
+          <h2 class="sig-h2">Ruang untuk Momen Penting</h2>
+          <p class="sig-lede">Jamuan bisnis, perayaan keluarga, atau malam yang hanya milik
+            berdua — setiap outlet Signature dirancang dengan ruang-ruang privat.</p>
+        </div>
+        <ul class="sig-priv__list" data-reveal data-delay="1">
+          <li>Private room dengan layanan khusus</li>
+          <li>Jamuan korporat &amp; business dinner</li>
+          <li>Perayaan keluarga — dari lamaran hingga ulang tahun</li>
+          <li>Menu set eksklusif sesuai acara <em style="color:var(--muted)">(detail menyusul)</em></li>
+        </ul>
+        <div data-reveal data-delay="2" style="margin-top:34px">
+          <a class="sig-btn sig-btn--ghost" href="#join">Tanyakan Private Dining</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6 · DUA KOTA ==================== -->
+<section class="sig-cities sig-grain" id="cities" aria-label="Lokasi">
+  <div class="sig-shell">
+    <div data-reveal style="text-align:center">
+      <span class="sig-kicker sig-kicker--center">Two Cities, 2026</span>
+      <h2 class="sig-h2">Jakarta &amp; Bandung</h2>
+      <p class="sig-lede" style="margin-left:auto;margin-right:auto">Dua outlet pertama Kurnia Seafood
+        Signature sedang dipersiapkan. Lokasi lengkap diumumkan menjelang pembukaan.</p>
+    </div>
+    <div class="sig-cities__grid">
+      <!-- data dari wordpress/data/branches.js (status upcoming) — hanya AREA yang
+           ditampilkan; alamat lengkap internal sampai outlet buka -->
+      <article class="sig-city" data-reveal>
+        <span class="sig-city__eta">September 2026</span>
+        <h3 class="sig-city__name">Bandung</h3>
+        <p class="sig-city__area">Kawasan Citarum · Bandung Wetan</p>
+        <a class="sig-btn sig-btn--solid sig-city__cta" data-wa data-city="Bandung" href="#join">Priority List Bandung</a>
+        <span class="sig-city__est">Perkiraan — tanggal resmi diumumkan</span>
+      </article>
+      <article class="sig-city" data-reveal data-delay="1">
+        <span class="sig-city__eta">Akhir 2026</span>
+        <h3 class="sig-city__name">Jakarta</h3>
+        <p class="sig-city__area">Kawasan Pondok Indah · Jakarta Selatan</p>
+        <a class="sig-btn sig-btn--solid sig-city__cta" data-wa data-city="Jakarta" href="#join">Priority List Jakarta</a>
+        <span class="sig-city__est">Perkiraan — tanggal resmi diumumkan</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 7 · PRIORITY LIST ==================== -->
+<section class="sig-join sig-grain" id="join" aria-label="Priority List">
+  <!-- TODO: ganti foto resmi (placeholder pihak ketiga) -->
+  <div class="sig-join__bg" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1800&q=72')" aria-hidden="true"></div>
+  <div class="sig-join__scrim" aria-hidden="true"></div>
+  <div class="sig-join__inner">
+    <div data-reveal>
+      <span class="sig-kicker sig-kicker--center">Priority List</span>
+      <h2 class="sig-h2">Jadilah yang Pertama</h2>
+      <p class="sig-lede" style="margin-left:auto;margin-right:auto">Undangan pembukaan, kursi
+        malam perdana, dan kabar Signature — langsung dari kami, lebih dulu dari siapa pun.</p>
+    </div>
+
+    <div class="sig-join__wa" data-reveal data-delay="1">
+      <a class="sig-btn sig-btn--solid" data-wa data-city="" href="#" rel="noopener">Gabung via WhatsApp</a>
+    </div>
+
+    <div class="sig-join__or" data-reveal data-delay="2"><span>atau tinggalkan kontak</span></div>
+
+    <form class="sig-form" id="sigForm" data-reveal data-delay="2" novalidate>
+      <div>
+        <label for="sf-name">Nama</label>
+        <input id="sf-name" name="name" type="text" placeholder="Nama Anda" autocomplete="name" required>
+      </div>
+      <div>
+        <label for="sf-contact">WhatsApp / Email</label>
+        <input id="sf-contact" name="contact" type="text" placeholder="08xx… atau nama@email.com" autocomplete="tel" required>
+      </div>
+      <div class="sig-form__full">
+        <label for="sf-city">Kota yang Anda tunggu</label>
+        <select id="sf-city" name="city">
+          <option value="Bandung">Bandung — September 2026</option>
+          <option value="Jakarta">Jakarta — Akhir 2026</option>
+          <option value="Keduanya">Keduanya</option>
+        </select>
+      </div>
+      <button class="sig-btn sig-btn--ghost sig-form__submit" type="submit">Daftar Priority List</button>
+      <p class="sig-form__msg" id="sigFormMsg" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="sig-join__privacy">Kontak Anda hanya dipakai untuk kabar pembukaan Signature.</p>
+  </div>
+</section>
+
+<!-- ==================== 8 · FACTS ==================== -->
+<section class="sig-facts" aria-label="Informasi">
+  <div class="sig-shell">
+    <div data-reveal style="text-align:center">
+      <span class="sig-kicker sig-kicker--center">Good to Know</span>
+      <h2 class="sig-h2">Hal yang Perlu Anda Tahu</h2>
+    </div>
+    <div class="sig-facts__grid" data-reveal data-delay="1">
+      <div class="sig-fact">
+        <span class="sig-fact__k">Sajian</span>
+        <p class="sig-fact__v">Halal<small>Seafood segar, tanpa alkohol dalam masakan</small></p>
+      </div>
+      <div class="sig-fact">
+        <span class="sig-fact__k">Dress Code</span>
+        <p class="sig-fact__v">Smart casual<small>Detail menyusul menjelang pembukaan</small></p>
+      </div>
+      <div class="sig-fact">
+        <span class="sig-fact__k">Jam Operasional</span>
+        <p class="sig-fact__v">Diumumkan<small>Menjelang pembukaan masing-masing outlet</small></p>
+      </div>
+      <div class="sig-fact">
+        <span class="sig-fact__k">Kontak</span>
+        <p class="sig-fact__v">WhatsApp<small>Melalui tombol Priority List di atas</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 9 · FOOTER ==================== -->
+<footer class="sig-footer" aria-label="Footer">
+  <div class="sig-shell">
+    <div class="sig-footer__grid">
+      <!-- Wordmark CSS — PLACEHOLDER: ganti logo resmi (assets/README.md) -->
+      <a class="sig-mark" href="#hero" data-placeholder="true" aria-label="Kurnia Seafood Signature">
+        <span class="sig-mark__top">Kurnia Seafood</span>
+        <span class="sig-mark__main">Signature</span>
+      </a>
+      <nav class="sig-footer__links" aria-label="Tautan">
+        <a href="https://kurniaseafood.co.id/" rel="noopener">Kurnia Seafood — Situs Utama</a>
+        <a href="https://www.instagram.com/kurnia.seafood/" rel="noopener">Instagram</a>
+        <a href="#join">Priority List</a>
+      </nav>
+    </div>
+    <div class="sig-footer__legal">
+      <span>© 2026 Kurnia Group · Kurnia Seafood Signature</span>
+      <span>Bagian dari keluarga Kurnia Seafood</span>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- sticky CTA mobile -->
+<div class="sig-sticky" id="sigSticky" aria-hidden="true">
+  <a class="sig-btn sig-btn--solid" href="#join">Join the Priority List</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------------------------------------------------------
+     Konfigurasi halaman (sumber data: wordpress/data/branches.js &
+     wordpress/data/menu.js — di-inline agar halaman berdiri sendiri)
+     --------------------------------------------------------------- */
+  var SIG = {
+    // TODO(pemilik): ganti dengan nomor WhatsApp resmi Signature.
+    // Sementara memakai nomor pusat Kurnia (Yogyakarta) agar tombol berfungsi.
+    wa: "6285229235758",
+    // TODO(pemilik): isi URL Apps Script Web App (…/exec) utk simpan ke Google Sheet
+    // (pola sama dgn wordpress/integrations/reservation-apps-script.gs). Kosong =
+    // form fallback ke WhatsApp dengan data terisi.
+    endpoint: ""
+  };
+
+  function waLink(city, extra) {
+    var msg = "Halo, saya ingin bergabung ke Priority List Kurnia Seafood Signature" +
+      (city ? " " + city : "") + "." + (extra ? " " + extra : "");
+    return "https://wa.me/" + SIG.wa + "?text=" + encodeURIComponent(msg);
+  }
+
+  /* tombol WhatsApp (hero/kota/join) */
+  document.querySelectorAll("[data-wa]").forEach(function (a) {
+    a.href = waLink(a.getAttribute("data-city"));
+    a.target = "_blank";
+  });
+
+  /* nav: solid saat scroll */
+  var nav = document.getElementById("signav");
+  var onScrollNav = function () {
+    nav.classList.toggle("is-scrolled", window.scrollY > 40);
+  };
+  window.addEventListener("scroll", onScrollNav, { passive: true });
+  onScrollNav();
+
+  /* sticky CTA mobile: muncul setelah hero */
+  var sticky = document.getElementById("sigSticky");
+  var hero = document.getElementById("hero");
+  var join = document.getElementById("join");
+  if ("IntersectionObserver" in window) {
+    var heroSeen = true, joinSeen = false;
+    var update = function () { sticky.classList.toggle("is-on", !heroSeen && !joinSeen); };
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { heroSeen = e.isIntersecting; }); update();
+    }, { threshold: 0.15 }).observe(hero);
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { joinSeen = e.isIntersecting; }); update();
+    }, { threshold: 0.05 }).observe(join);
+  }
+
+  /* reveal on scroll */
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var toReveal = document.querySelectorAll("[data-reveal]");
+  if (!reduced && "IntersectionObserver" in window) {
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -6% 0px" });
+    toReveal.forEach(function (el) { ro.observe(el); });
+  } else {
+    toReveal.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* hero crossfade pelan (8 dtk) — berhenti bila reduced motion */
+  var slides = document.querySelectorAll(".sig-hero__slide");
+  if (slides.length > 1 && !reduced) {
+    var cur = 0;
+    setInterval(function () {
+      slides[cur].classList.remove("is-active");
+      cur = (cur + 1) % slides.length;
+      slides[cur].classList.add("is-active");
+    }, 8000);
+  }
+
+  /* ticker: gandakan isi agar loop mulus */
+  var ticker = document.getElementById("sigTicker");
+  if (ticker) { ticker.innerHTML += ticker.innerHTML; }
+
+  /* form priority list — best-effort ke Google Sheets, fallback WhatsApp */
+  var form = document.getElementById("sigForm");
+  var msg = document.getElementById("sigFormMsg");
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var name = form.name.value.trim();
+    var contact = form.contact.value.trim();
+    var city = form.city.value;
+    if (!name || !contact) {
+      msg.textContent = "Mohon isi nama dan kontak Anda.";
+      return;
+    }
+    var payload = { type: "signature-priority-list", name: name, contact: contact, city: city, page: location.href };
+    if (SIG.endpoint) {
+      msg.textContent = "Mengirim…";
+      fetch(SIG.endpoint, {
+        method: "POST", mode: "no-cors", keepalive: true,
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
+        body: JSON.stringify(payload)
+      }).then(function () {
+        msg.textContent = "Terima kasih — Anda ada di daftar. Kabar pembukaan menyusul.";
+        form.reset();
+      }).catch(function () { fallbackWA(); });
+    } else {
+      fallbackWA();
+    }
+    function fallbackWA() {
+      msg.textContent = "Melanjutkan ke WhatsApp…";
+      window.open(waLink(city, "Nama: " + name + " · Kontak: " + contact), "_blank", "noopener");
+    }
+  });
+})();
+</script>
+</body>
+</html>
