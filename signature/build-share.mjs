@@ -24,11 +24,17 @@ const dataURI = (file) => {
 
 /* referensi di index.html → file sumber inline */
 const REPLACEMENTS = [
-  // foto dish → turunan terkompresi
+  // foto dish (visual daftar menu) → turunan terkompresi
   ['../wordpress/assets/menu-king-crab-sultan.jpg',        'assets/share/menu-king-crab-sultan.jpg'],
   ['../wordpress/assets/menu-kepiting-garlic-caramel.jpg', 'assets/share/menu-kepiting-garlic-caramel.jpg'],
   ['../wordpress/assets/menu-udang-saus-malaka.jpg',       'assets/share/menu-udang-saus-malaka.jpg'],
   ['../wordpress/assets/menu-ikan-bakar-kurnia.jpg',       'assets/share/menu-ikan-bakar-kurnia.jpg'],
+  // background hero/join/private dining (sudah terkompresi di halaman)
+  ['assets/share/menu-king-crab-sultan.jpg',        'assets/share/menu-king-crab-sultan.jpg'],
+  ['assets/share/menu-ikan-bakar-kurnia.jpg',       'assets/share/menu-ikan-bakar-kurnia.jpg'],
+  ['assets/share/menu-kepiting-garlic-caramel.jpg', 'assets/share/menu-kepiting-garlic-caramel.jpg'],
+  ['assets/share/menu-udang-saus-malaka.jpg',       'assets/share/menu-udang-saus-malaka.jpg'],
+  ['assets/share/menu-udang-saus-kurnia.jpg',       'assets/share/menu-udang-saus-kurnia.jpg'],
   // logo & font brand
   ['assets/logo-kurnia-signature-dark.png', 'assets/logo-kurnia-signature-dark.png'],
   ['assets/CSCoster-Italic.woff2',          'assets/CSCoster-Italic.woff2'],

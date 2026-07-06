@@ -90,8 +90,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-kicker::before{ content:""; width:34px; height:1px; background:var(--gold-dim); }
 .sig-kicker--center::after{ content:""; width:34px; height:1px; background:var(--gold-dim); }
 .sig-h2{
-  font-family:var(--fd); font-weight:400; color:var(--white);
-  font-size:clamp(2.1rem,4.6vw,3.4rem); line-height:1.08; letter-spacing:.01em;
+  font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white);
+  font-size:clamp(2.1rem,4.6vw,3.4rem); line-height:1.12; letter-spacing:.01em;
   margin:18px 0 0;
 }
 .sig-lede{ color:var(--muted); font-size:1.06rem; max-width:56ch; margin:16px 0 0; }
@@ -152,7 +152,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   background-size:0% 1px; background-position:50% calc(100% - 8px); background-repeat:no-repeat;
   padding:14px 8px; transition:background-size .35s var(--ease), color .35s var(--ease);
 }
-.sig-nav__links a:hover{ background-size:calc(100% - 16px) 1px; color:var(--gold-soft); }
+.sig-nav__links a:hover,
+.sig-nav__links a.is-current{ background-size:calc(100% - 16px) 1px; color:var(--gold-soft); }
 .sig-nav__cta{ padding:14px 24px; font-size:11.5px; }
 /* hamburger (mobile) */
 .sig-burger{ display:none; width:46px; height:46px; align-items:center; justify-content:center;
@@ -338,7 +339,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 .sig-exp__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:34px; margin-top:60px; }
 .sig-exp__item{ border-top:1px solid var(--hairline); padding-top:26px; }
 .sig-exp__num{ font-family:var(--fd); font-style:italic; font-size:1.05rem; color:var(--gold); letter-spacing:.18em; }
-.sig-exp__title{ font-family:var(--fd); font-weight:400; color:var(--white); font-size:1.55rem; margin:14px 0 0; }
+.sig-exp__title{ font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white); font-size:1.55rem; margin:14px 0 0; }
 .sig-exp__desc{ color:var(--muted); margin:12px 0 0; font-size:1rem; }
 @media (max-width:880px){ .sig-exp__grid{ grid-template-columns:1fr; gap:8px; }
   .sig-exp__item{ padding:26px 0; } }
@@ -379,8 +380,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   display:inline-block; font-family:var(--fl); font-weight:500; font-size:11px; letter-spacing:.26em;
   text-transform:uppercase; color:var(--gold); border:1px solid var(--gold-dim); padding:9px 16px;
 }
-.sig-city__name{ font-family:var(--fd); font-weight:400; color:var(--white);
-  font-size:clamp(2.1rem,4vw,3rem); margin:26px 0 0; line-height:1; }
+.sig-city__name{ font-family:var(--fd); font-style:italic; font-weight:400; color:var(--white);
+  font-size:clamp(2.1rem,4vw,3rem); margin:26px 0 0; line-height:1.05; }
 .sig-city__area{ color:var(--muted); font-size:1.02rem; margin:12px 0 0; }
 .sig-city__cta{ margin-top:30px; display:inline-block; }
 .sig-city__est{ display:block; font-family:var(--fl); font-weight:300; font-size:10.5px;
@@ -533,10 +534,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 <!-- ==================== 1 · HERO ==================== -->
 <section class="sig-hero sig-grain" id="hero" aria-label="Kurnia Seafood Signature">
   <div class="sig-hero__bg" aria-hidden="true">
-    <!-- TODO: ganti foto resmi outlet/hidangan Kurnia (hak cipta) — placeholder pihak ketiga -->
-    <div class="sig-hero__slide is-active" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=72')"></div>
-    <div class="sig-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=1800&q=72')"></div>
-    <div class="sig-hero__slide" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1800&q=72')"></div>
+    <!-- Foto resmi Kurnia (versi terkompresi assets/share/). Bila foto suasana
+         outlet Signature sudah tersedia, ganti di sini. -->
+    <div class="sig-hero__slide is-active" style="background-image:url('assets/share/menu-king-crab-sultan.jpg')"></div>
+    <div class="sig-hero__slide" style="background-image:url('assets/share/menu-ikan-bakar-kurnia.jpg')"></div>
+    <div class="sig-hero__slide" style="background-image:url('assets/share/menu-kepiting-garlic-caramel.jpg')"></div>
   </div>
   <div class="sig-hero__scrim" aria-hidden="true"></div>
 
@@ -682,8 +684,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   <div class="sig-shell">
     <div class="sig-priv__grid">
       <div class="sig-priv__media" data-reveal>
-        <!-- TODO: ganti foto resmi ruang privat outlet Signature -->
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=72" alt="Ruang private dining" loading="lazy" data-placeholder="true" onerror="this.style.display='none'">
+        <!-- Foto resmi Kurnia. Ganti dengan foto ruang privat outlet Signature bila sudah ada. -->
+        <img src="assets/share/menu-udang-saus-kurnia.jpg" alt="Sajian Udang Saus Kurnia untuk jamuan privat" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div>
         <div data-reveal>
@@ -738,8 +740,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 
 <!-- ==================== 7 · PRIORITY LIST ==================== -->
 <section class="sig-join sig-grain" id="join" aria-label="Priority List">
-  <!-- TODO: ganti foto resmi (placeholder pihak ketiga) -->
-  <div class="sig-join__bg" data-placeholder="true" style="background-image:url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1800&q=72')" aria-hidden="true"></div>
+  <div class="sig-join__bg" style="background-image:url('assets/share/menu-udang-saus-malaka.jpg')" aria-hidden="true"></div>
   <div class="sig-join__scrim" aria-hidden="true"></div>
   <div class="sig-join__inner">
     <div data-reveal>
@@ -898,6 +899,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   };
   window.addEventListener("scroll", onScrollNav, { passive: true });
   onScrollNav();
+
+  /* nav: tandai section yang sedang terlihat */
+  var navLinks = document.querySelectorAll(".sig-nav__links a[href^='#']");
+  if ("IntersectionObserver" in window && navLinks.length) {
+    var secObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        navLinks.forEach(function (a) {
+          a.classList.toggle("is-current", a.getAttribute("href") === "#" + e.target.id);
+        });
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    navLinks.forEach(function (a) {
+      var sec = document.querySelector(a.getAttribute("href"));
+      if (sec) secObs.observe(sec);
+    });
+  }
 
   /* sticky CTA mobile: muncul setelah hero, sembunyi di section join & footer */
   var sticky = document.getElementById("sigSticky");

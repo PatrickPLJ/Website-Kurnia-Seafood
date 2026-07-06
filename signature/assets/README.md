@@ -22,16 +22,24 @@ Selama Regular belum ada, judul non-italic otomatis memakai **Crimson Pro** (tid
 | `logo-kurnia-signature-dark.png` | **Dipakai halaman** — transparan, marks putih+gold, utk latar gelap (di-generate dari -02) |
 | `logo-kurnia-signature-light.png` | Transparan, marks navy+gold, utk latar terang (cadangan; dari -01) |
 
-Logo terpasang di: hero + footer `signature/index.html`, dan gateway
-`wordpress/sections/14-signature.html`. Wordmark nav = replika tipografis lockup
-(script CS Coaster) agar tajam di ukuran kecil.
+Logo terpasang di: nav, hero, footer `signature/index.html`, dan gateway
+`wordpress/sections/14-signature.html`.
 
-## 3. Placeholder yang masih WAJIB diganti sebelum live
+## 3. Foto & data
+
+Seluruh background (hero, private dining, priority list) dan foto dish memakai
+**foto resmi Kurnia** — versi terkompresi 900px ada di `assets/share/`.
+Saat foto suasana outlet Signature sudah tersedia, ganti background hero /
+private dining di `index.html`.
+
+Yang masih perlu dilengkapi pemilik sebelum live:
 
 | Item | Lokasi | Catatan |
 |------|--------|---------|
-| Foto hero (3 slide) & foto experience/private dining | `data-placeholder="true"` di index.html | Foto pihak ketiga (Unsplash) — ganti foto resmi outlet saat tersedia |
-| Foto "Kepiting Saus Kurnia" | Section Dishes | Foto produk lain sudah memakai foto resmi lama (keputusan pemilik: pakai foto lama dulu) |
+| Foto "Kepiting Saus Kurnia" | Section Dishes (item 05, `data-placeholder`) | Satu-satunya foto pihak ketiga tersisa; fallback watermark KS bila gagal |
 | Nomor WhatsApp priority list | Konstanta `SIG.wa` di `<script>` | Masih nomor pusat — ganti nomor resmi Signature |
 | Endpoint form minat | Konstanta `SIG.endpoint` | Kosong = fallback WhatsApp. Isi URL Apps Script bila mau simpan ke Sheets |
 | Jam operasional & dress code | Section Facts | Isi saat data outlet fix |
+
+> Setiap `index.html` berubah, jalankan `node signature/build-share.mjs` untuk
+> memperbarui `kurnia-signature-share.html` (versi 1-file mandiri).
