@@ -79,6 +79,7 @@ Unggah dari `wordpress/assets/` (main), lalu **ganti path relatif `assets/...`**
 - Cabang (5): `cabang-yogyakarta.webp`, `cabang-semarang.webp`, `cabang-bandung.webp`, `cabang-bali.webp`, `cabang-surabaya.webp` (ada juga `.jpg`)
 - Menu signature/baru: `menu-ikan-bakar-kurnia.webp`, `menu-udang-saus-kurnia.webp`, `menu-kepiting-garlic-caramel.webp`, `menu-king-crab-sultan.webp`, `menu-baru-rahang-tuna.webp`
 - OG: `og-image.jpg` (**portrait 4000×6000 → butuh varian landscape ~1200×630**, lihat checklist)
+- Logo Signature (gateway #4): `signature/assets/logo-kurnia-signature-dark.png` — letaknya di luar `wordpress/assets/`
 
 **Masih placeholder (Unsplash) — [GANTI FOTO RESMI]:** background Hero (5), galeri, kabar, tentang, spotlight; menu **"Kepiting Saus Kurnia"** + **"Menu Baru 2"** & **"Menu Baru 3"**. Lihat `wordpress/PLACEHOLDERS.md`.
 
@@ -109,6 +110,7 @@ Unggah dari `wordpress/assets/` (main), lalu **ganti path relatif `assets/...`**
 - [ ] Konfirmasi data cabang **`verify:true`** (Yogyakarta, Bandung, Bali).
 - [ ] Pasang **schema** (`schema-notes.md`); pastikan **tanpa aggregateRating**, Bali domain terpisah, upcoming tanpa schema.
 - [ ] Pasang **301 redirect** (URL lama → baru) + **submit sitemap** (GSC + Bing).
+- [ ] **Gateway Signature**: `SIGNATURE_URL: "/kurnia-signature/"` di `config.js` + `src` logo diganti URL Media Library.
 - [ ] **QA visual berdampingan** (preview kit vs WordPress) per section.
 
 ## 9. Isi paket (file list)

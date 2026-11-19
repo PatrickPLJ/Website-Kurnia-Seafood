@@ -743,6 +743,12 @@ window.KS_REVIEWS_SAMPLE = [
   </div>
 
   <style>
+  /* Font brand Signature untuk nama hidangan. Di WordPress: unggah CSCoster-Italic.woff2
+     lalu ganti URL di bawah; bila file tidak tersedia, otomatis memakai Crimson Pro. */
+  @font-face{
+    font-family:'CS Coaster'; font-style:italic; font-weight:400; font-display:swap;
+    src:url('../signature/assets/CSCoster-Italic.woff2') format('woff2');
+  }
   .ks-sig{
     /* palet resmi Kurnia Seafood Signature (brand/SIGNATURE-BRAND.md) */
     --navy:#0A2644; --navy-deep:#061A30; --gold:#C29B44; --gold-soft:#D9BC7A;
@@ -796,7 +802,7 @@ window.KS_REVIEWS_SAMPLE = [
     background:linear-gradient(to top, rgba(6,26,48,.72) 0%, transparent 50%); }
   .ks-sig__name{
     position:absolute; z-index:1; left:12px; right:12px; bottom:10px;
-    font-family:var(--fh); font-style:italic; font-weight:500; font-size:.98rem;
+    font-family:'CS Coaster',var(--fh); font-style:italic; font-weight:400; font-size:1.05rem;
     line-height:1.25; color:#fff; text-align:left;
   }
   .ks-sig__btn{

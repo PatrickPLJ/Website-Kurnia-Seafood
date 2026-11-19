@@ -6,7 +6,7 @@
 > **Berubah sejak landing page Signature tayang.** Section ini bukan lagi grid menu
 > andalan; sekarang menjadi **pintu masuk** ke landing page **Kurnia Seafood Signature**
 > (`kurniaseafood.co.id/kurnia-signature/`). Desain grid lama masih ada di histori git
-> (`main` sebelum merge PR #4).
+> (commit `7c95325` di `main`, sebelum gateway Signature digabung).
 
 ## Apa yang ditampilkan
 Blok navy `#0A2644` + gold `#C29B44` (palet resmi Signature, lihat `brand/SIGNATURE-BRAND.md`):
@@ -22,6 +22,8 @@ Blok navy `#0A2644` + gold `#C29B44` (palet resmi Signature, lihat `brand/SIGNAT
 2. Di `config.js` isi `SIGNATURE_URL: "/kurnia-signature/"`.
 3. Ganti `src` logo dengan URL media library (file: `signature/assets/logo-kurnia-signature-dark.png`).
 4. Foto strip: ganti `image` di `menu.js` dengan URL media library (lihat `PLACEHOLDERS.md`).
+5. (Opsional) Font nama hidangan: unggah `signature/assets/CSCoster-Italic.woff2` dan ganti URL
+   pada `@font-face` di awal blok. Tanpa itu nama hidangan tampil dengan Crimson Pro.
 
 Strip foto boleh dibuat dengan Loop Grid (CPT "Menu", filter `is_signature = true`, 3 item,
 rasio 4:3, nama di overlay) bila tidak memakai widget HTML.

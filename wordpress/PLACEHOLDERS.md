@@ -79,7 +79,7 @@ dipetakan ke menu. `og-image` idealnya **landscape 1200×630** (sekarang potret
 | Hero (carousel background) | `sections/01-hero.html` | 5 | ganti `background-image:url(...)` tiap `.ks-hero__slide` |
 | Spotlight terbaru | `data/promos.js` | 1+/item | ganti `image` tiap entri promo |
 | New Menu | `data/menu.js` (isNew) | 3 | ganti `image` + isi `name`/`desc` asli (hapus `placeholder`) |
-| Signature | `data/menu.js` (signature) | 5 | ganti `image` dgn foto hidangan resmi |
+| Signature (gateway) | `data/menu.js` (signature) | 0 dari 3 yang tampil | strip memakai 3 item berfoto resmi; placeholder tersisa hanya "Kepiting Saus Kurnia" (tidak tampil di strip) |
 | Foto cabang (Locations + tab Cabang) | `data/branches.js` (`photo`) | 5 | ganti `photo` tiap cabang aktif; set `photoPlaceholder:false` setelah diganti |
 | Ulasan (Kata Pelanggan) | `data/google-reviews.js` | 6 | ✅ `REVIEWS_ENDPOINT` (`data/config.js`) sudah diisi proxy mingguan pemilik → kartu menarik ulasan Google ASLI per slug cabang. Ulasan CONTOH (badge "CONTOH") kini hanya fallback bila proxy gagal/kosong. `placeId` di `branches.js` tidak lagi diperlukan (proxy di-key per slug). |
 | og:image (share/SEO) | `build-preview.mjs` (OG_IMAGE) | 1 | ganti URL foto resmi Kurnia (≥1200px) sebelum live |

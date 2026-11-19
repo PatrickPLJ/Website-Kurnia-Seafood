@@ -4,8 +4,8 @@
  * dobel-klik dari mana pun tanpa server — pola sama dengan
  * wordpress/preview-share.html.
  *
- * Foto dish memakai turunan terkompresi di assets/share/ (regenerasi:
- * lihat catatan di signature/assets/README.md). Foto dish ke-5 (media
+ * Foto dish memakai turunan terkompresi 900px di assets/share/ (file itulah
+ * sumbernya; lihat signature/assets/README.md bagian 3). Foto dish ke-5 (media
  * library situs utama) & Google Fonts tetap URL (butuh internet, punya fallback).
  *
  * File hasil build inilah yang ditempel ke widget HTML Elementor di

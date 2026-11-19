@@ -1,30 +1,21 @@
 # Kurnia Seafood Signature — Panduan Brand (Ringkas)
 
-Lini premium Kurnia Seafood. Ringkasan ini disusun dari **brand kit resmi** yang
-disediakan pemilik (konsultan brand, 2026):
-
-| Sumber | Isi |
-|--------|-----|
-| Drive `01 Logo - Kurnia Seafood Signature/Color/` | `Color Pallate.pdf` — 3 warna resmi |
-| Drive `…/Font/CS Coaster/` | CS Coaster Regular · Italic · ReverseItalic (otf/ttf/woff/woff2) |
-| Drive `…/Logo/` | `Logo Kurnia Signature.pdf` / `.ai` (master vektor: logo di putih, logo di navy, monogram) + JPG |
-| Deck "Logo Development" (Juni 2026) | Arah visual, alternatif logo, contoh penerapan |
+Lini premium Kurnia Seafood. Sumber: **brand kit resmi** dari pemilik (master logo, palet
+warna, font CS Coaster). Dokumen pengembangan logo dari konsultan bersifat internal dan
+tidak disertakan di repo ini.
 
 ## Posisi & arah visual
 
-Brand induk Kurnia Seafood: *fun, friendly, casual, family-oriented* (maskot kepiting
-kartun, merah–biru cerah, "The Happiest Seafood Time!").
+Signature adalah lini tersendiri untuk pengalaman seafood yang lebih premium — bukan
+pengganti brand induk Kurnia Seafood yang ceria dan kekeluargaan. Nuansanya **tenang dan
+mewah**:
 
-Signature **bukan pengganti** identitas itu, melainkan lini dengan segmen berbeda untuk
-pengalaman seafood yang lebih premium. Arah visualnya **tenang dan luxury** — dari
-maskot yang fun menjadi identitas seafood dining yang lebih halus:
+- kepiting tetap menjadi tanda pengenal, tetapi sebagai siluet sederhana (bukan maskot kartun);
+- warna navy + gold;
+- tipografi rapi dan elegan.
 
-- kepiting **tetap dipertahankan**, bentuknya dibuat lebih simpel (siluet);
-- warna lebih premium (navy + gold);
-- tipografi lebih rapi dan elegan.
-
-Konsekuensinya di semua materi Signature: tanpa tanda seru, tanpa bahasa promo/diskon,
-tanpa maskot kartun, tanpa merah–biru cerah brand induk.
+Di semua materi Signature: tanpa tanda seru, tanpa bahasa promo/diskon, tanpa maskot
+kartun, tanpa merah–biru cerah dan tagline brand induk.
 
 ## Palet warna resmi
 
@@ -37,8 +28,9 @@ tanpa maskot kartun, tanpa merah–biru cerah brand induk.
 Hanya tiga warna itu yang resmi. Di web dipakai **turunannya saja** (bukan warna baru):
 navy lebih dalam `#061A30` / `#04101F` (band kontras, footer), navy kartu `#0E3155`,
 gold terang `#D9BC7A` (teks gold berukuran kecil, agar kontras), gold gelap `#82672B`
-(garis/teks gold di atas latar terang), krem `#F6F1E7` (teks panjang di atas navy —
-senada dengan kertas & seragam khaki pada contoh penerapan).
+(garis/teks gold di atas latar terang), krem `#F6F1E7` (teks panjang di atas navy, dan
+latar satu-satunya band terang, "Warisan" — di sana teks memakai navy resmi `#0A2644`
+dan navy pudar `#3D4F63`).
 
 **Tidak dipakai:** merah `#D80000` dan biru cerah milik brand induk, serta warna status
 hijau/merah. Pesan berhasil/gagal pada form memakai gold dan putih.
@@ -78,13 +70,10 @@ Aturan pakai:
 - Monogram **tidak** diganti tulisan "KS" yang diketik.
 - Di atas foto, pastikan ada lapisan navy yang cukup gelap di belakang logo.
 
-Contoh penerapan pada deck (acuan nuansa): signage huruf timbul gold/putih di dinding
-gelap, kop surat putih, seragam navy dengan apron khaki dan bordir monogram gold.
-
 ## Tone visual web
 
-- Navy dominan penuh (dark theme); gold hanya untuk aksen penting: kicker, hairline,
-  tombol CTA. Tombol bersudut siku (radius 0), bukan pil membulat.
+- Navy dominan (dark theme) dengan satu band krem ("Warisan"); gold hanya untuk aksen
+  penting: kicker, hairline, tombol CTA. Tombol bersudut siku (radius 0), bukan pil membulat.
 - Tipografi serif besar; kicker Alexandria kapital renggang. Nama hidangan italic.
 - Foto atmosferik gelap — bukan kolase piring terang.
 - Motion pelan & tenang: crossfade, fade-up reveal. Hormati `prefers-reduced-motion`.
@@ -94,6 +83,7 @@ gelap, kop surat putih, seragam navy dengan apron khaki dan bordir monogram gold
 ## Di mana brand ini dipakai di repo
 
 - `signature/index.html` — landing page (tayang di `kurniaseafood.co.id/kurnia-signature/`).
-- `wordpress/sections/14-signature.html` — gateway di homepage Kurnia Seafood.
+- `wordpress/sections/14-signature.html` — gateway di homepage Kurnia Seafood (logo & monogram
+  resmi; nama hidangan memakai CS Coaster bila file font tersedia, cadangan Crimson Pro).
 - Menu online `menu-signature.kurniaseafood.co.id` ada di repo terpisah
   (`Menu-Digital-Kurnia-Seafood-Signature`) dan mengikuti buku menu cetak.

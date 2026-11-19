@@ -21,11 +21,11 @@
 /* =========================================================================
    KURNIA SEAFOOD SIGNATURE · Landing pra-opening
    Palet resmi: navy #0A2644 · gold #C29B44 · putih (brand/SIGNATURE-BRAND.md)
-   Font resmi: CS Coaster (fallback Crimson Pro sampai woff2 diupload —
-   lihat signature/assets/README.md)
+   Font resmi: CS Coaster Regular + Italic (file di signature/assets/; cadangan
+   Crimson Pro bila gagal dimuat — lihat signature/assets/README.md)
    ====================================================================== */
 
-/* CS Coaster — file diupload pemilik ke signature/assets/ (README.md) */
+/* CS Coaster — dari brand kit resmi (signature/assets/) */
 @font-face{
   font-family:'CS Coaster';
   src:url('assets/CSCoster-Regular.woff2') format('woff2'),
@@ -334,9 +334,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
 
 /* ---------- WARISAN / HERITAGE — band ivory (ref: Akaneya · Aman) ---------- */
 .sig-heritage{
-  --ink:#14263D; --ink-soft:#3D4F63; --bronze:#82672B;
-  background:#F3EEE7; color:var(--ink-soft);
-  border-top:4px double rgba(138,109,47,.35);
+  --ink:#0A2644; --ink-soft:#3D4F63; --bronze:#82672B;   /* navy resmi · navy pudar · gold gelap */
+  background:#F6F1E7; color:var(--ink-soft);
+  border-top:4px double rgba(130,103,43,.35);
   padding:clamp(100px,12vw,170px) 24px;
 }
 .sig-heritage__head{ text-align:center; }
@@ -345,13 +345,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   font-size:clamp(2.2rem,4.6vw,3.2rem); color:var(--ink); line-height:1.1;
 }
 .sig-heritage .sig-kicker{ color:var(--bronze); margin-top:14px; }
-.sig-heritage .sig-kicker::before,.sig-heritage .sig-kicker::after{ background:rgba(138,109,47,.4); }
+.sig-heritage .sig-kicker::before,.sig-heritage .sig-kicker::after{ background:rgba(130,103,43,.4); }
 .sig-heritage__chapters{ max-width:760px; margin:64px auto 0; }
 .sig-heritage__row{
   display:grid; grid-template-columns:170px 1fr; gap:clamp(20px,4vw,48px);
-  padding:38px 0; border-top:1px solid rgba(138,109,47,.25); align-items:start;
+  padding:38px 0; border-top:1px solid rgba(130,103,43,.25); align-items:start;
 }
-.sig-heritage__row:last-child{ border-bottom:1px solid rgba(138,109,47,.25); }
+.sig-heritage__row:last-child{ border-bottom:1px solid rgba(130,103,43,.25); }
 .sig-heritage__year{
   font-family:var(--fd); font-style:italic; font-weight:400;
   font-size:clamp(1.7rem,3vw,2.3rem); color:var(--bronze); line-height:1.05;

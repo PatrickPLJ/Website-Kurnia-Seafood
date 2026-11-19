@@ -23,18 +23,20 @@ wordpress/
 ├─ kurnia-brand.css       # gaya global: warna, font, tombol, form
 ├─ PREVIEW.html           # buka di browser untuk lihat hasil semua section
 ├─ ks-reveal.html         # animasi reveal (tempel SEKALI di bawah halaman)
-└─ sections/              # 10 blok siap tempel ke widget "HTML" Elementor
+└─ sections/              # 13 blok siap tempel ke widget "HTML" Elementor
    ├─ 01-hero.html          # hero gelap + headline serif + foto besar
-   ├─ 02-menu-hidangan.html # daftar menu (kiri) + foto (kanan)
-   ├─ 03-menu-bakar.html    # foto (kiri) + daftar menu (kanan)
-   ├─ 04-review.html        # Customer Review (kartu gelap)
-   ├─ 05-kabar.html         # Kabar & Promo (3 kartu)
-   ├─ 06-reservasi.html     # CTA reservasi (gelap)
+   ├─ 12-spotlight.html     # Spotlight terbaru (promo/kabar utama)
+   ├─ 13-new-menu.html      # New Menu
+   ├─ 14-signature.html     # Gateway ke Kurnia Seafood Signature
+   ├─ 15-locations.html     # Lokasi (cabang aktif + segera hadir)
    ├─ 07-tentang.html       # Tentang Kami (foto + cerita + statistik)
+   ├─ 11-cabang.html        # Cabang (tab switcher 5 kota, info unik per kota)
    ├─ 08-galeri.html        # Galeri foto (grid premium)
-   ├─ 09-footer.html        # Footer navy (peta, jam, sosial, kontak)
+   ├─ 04-review.html        # Kata Pelanggan (ulasan Google)
+   ├─ 05-kabar.html         # Kabar & Promo (3 kartu)
    ├─ 10-faq.html           # FAQ (accordion)
-   └─ 11-cabang.html        # Cabang (tab switcher 5 kota, info unik per kota)
+   ├─ 06-reservasi.html     # Reservasi 3 langkah
+   └─ 09-footer.html        # Footer navy (peta, jam, sosial, kontak)
 data/branches.js            # sumber data tunggal cabang (WA, alamat, fasilitas)
 schema/                     # JSON-LD structured data (drop-in WordPress)
 ```
@@ -43,9 +45,10 @@ schema/                     # JSON-LD structured data (drop-in WordPress)
 cabang); `07-tentang.html` memuat 3 Core Value (blok permanen). Keduanya + Cabang
 membaca `data/branches.js` (pasang sekali — lihat PANDUAN Langkah 4c).
 
-Urutan homepage yang disarankan: `01-hero → 07-tentang → 02-menu-hidangan →
-03-menu-bakar → 08-galeri → 04-review → 05-kabar → 10-faq → 06-reservasi →
-09-footer`. Animasi reveal: tempel `ks-reveal.html` **sekali** di bawah halaman.
+Urutan homepage (sama dengan `ORDER` di `wordpress/build-preview.mjs`): `01-hero →
+12-spotlight → 13-new-menu → 14-signature → 15-locations → 07-tentang → 11-cabang →
+08-galeri → 04-review → 05-kabar → 10-faq → 06-reservasi → 09-footer`.
+Animasi reveal: tempel `ks-reveal.html` **sekali** di bawah halaman.
 
 **Mulai cepat:** buka `wordpress/PREVIEW.html` di browser untuk melihat hasilnya,
 lalu ikuti `wordpress/PANDUAN-ELEMENTOR.md` untuk memasangnya.

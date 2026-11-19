@@ -129,7 +129,7 @@
       "dinamis": false,
       "sumber_data": "data/config.js (SIGNATURE_URL) + data/menu.js (window.KS_MENU, filter signature:true — hanya untuk strip 3 foto)",
       "fields": [],
-      "catatan_migrasi": "BUKAN lagi grid menu andalan: sejak landing page Signature tayang, #signature menjadi gateway statis. Tempel sections/14-signature.html ke widget HTML (ganti src logo ke URL media library; set SIGNATURE_URL = /kurnia-signature/). Strip foto mengambil 3 item signature berfoto resmi; nama KANONIK di menu.js tidak berubah (Ikan Bakar Kurnia, Kepiting Saus Kurnia, Udang Saus Kurnia, Kepiting Saus Garlic Caramel, King Crab Sultan). TANPA HARGA. Desain grid lama ada di histori git (main sebelum merge PR #4)."
+      "catatan_migrasi": "BUKAN lagi grid menu andalan: sejak landing page Signature tayang, #signature menjadi gateway statis. Tempel sections/14-signature.html ke widget HTML (ganti src logo ke URL media library; set SIGNATURE_URL = /kurnia-signature/). Strip foto mengambil 3 item signature berfoto resmi; nama KANONIK di menu.js tidak berubah (Ikan Bakar Kurnia, Kepiting Saus Kurnia, Udang Saus Kurnia, Kepiting Saus Garlic Caramel, King Crab Sultan). TANPA HARGA. Desain grid lama ada di histori git (commit 7c95325 di main, sebelum gateway Signature digabung)."
     },
     {
       "id": "locations",
