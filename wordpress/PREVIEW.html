@@ -322,58 +322,153 @@
 
 <!-- 14-signature -->
 <!-- ============================================================
-     KURNIA SEAFOOD · SIGNATURE / HERO MENUS (image-forward, TANPA harga)
-     Render dari window.KS_MENU (item signature:true). Section gelap premium.
-     Foto = placeholder bertanda. PRASYARAT: data/menu.js dimuat sebelum ini.
+     KURNIA SEAFOOD · SIGNATURE GATEWAY (pintu masuk ke landing page
+     "Kurnia Seafood Signature" — destinasi premium, outlet baru 2026;
+     produksi: kurniaseafood.co.id/kurnia-signature/).
+     Palet resmi Signature: navy #0A2644 · gold #C29B44 · putih
+     (lihat brand/SIGNATURE-BRAND.md).
+     Strip foto = render dari window.KS_MENU (item signature:true) — bila
+     data tak ada, strip disembunyikan (section tetap tampil).
+     Tujuan tombol = window.KS_CONFIG.SIGNATURE_URL (di WordPress isi
+     "/kurnia-signature/"; kosong = ../signature/index.html untuk preview repo).
+     PRASYARAT: data/config.js & data/menu.js dimuat sebelum section ini.
      ============================================================ -->
 <section class="ks-sig" id="signature">
+  <!-- Monogram resmi "Ks" (vektor dari master brand kit) -->
+  <svg class="ks-sig__wm" viewBox="0 0 382.71 338.84" aria-hidden="true" focusable="false"><path d="M319.54 222.87C306.89 218.97 304.23 221.38 296 229.21C250.48 272.52 161.56 245.67 103.46 163.1C171.39 138.43 248.6 88.62 290.99 27.83C291.86 26.58 292.32 25.4 291.92 23.92C290.54 18.65 282.81 15.7 268.76 15.07L262.62 14.17C261.44 14.27 260.66 14.81 260.25 15.78C258.47 20.07 190.06 108 97.49 143.65C97.49 143.65 141.99 46.06 151.09 24.87C151.64 23.6 151.72 22.28 151.36 20.89C150.81 18.82 144.8 16.81 137.37 16C131.22 15.32 126.11 15.11 122.33 15.27C121.92 15.24 121.54 15.22 121.21 15.22C120.3 15.22 119.32 15.37 118.25 15.66C116.82 15.91 115.82 16.25 115.34 16.69C115.33 16.7 115.31 16.72 115.29 16.75C113.02 17.77 110.47 19.31 107.63 21.36C101.97 25.46 97.28 29.61 93.57 33.8C89.85 37.99 88.08 40.58 88.25 41.57C88.42 42.55 89.8 44.09 92.36 46.16C94.93 48.23 96.27 49.63 96.4 50.33C97.25 55.08 72.96 114.29 59.74 149.13C55.75 150.46 52.18 153.27 49.02 157.59C44.84 163.28 43.43 168.76 44.81 173.99C45.36 176.07 46.69 177.66 48.77 178.77C39.81 202.83 14.17 267.22 15.26 269.4C18.07 275.05 39.01 278 40.99 276.04C42.36 274.68 58.35 234.23 83.4 175.74C165.73 296.74 290.43 324.67 329.83 232.56C332.35 226.67 328.04 225.5 319.54 222.87ZM255.92 124.03C267.65 124.03 278.47 130.04 281.64 138.32L287.22 152.91C287.72 154.21 289.62 154.05 289.89 152.68L296.86 117.35C297 116.67 296.61 115.99 295.95 115.76L292.25 114.49C283.07 111.33 271.78 109.51 261.25 109.51C233.61 109.51 214.81 121.17 210.96 140.69C207.29 159.26 225.69 167.09 240.47 173.38C254.41 179.32 262.78 183.42 261.42 190.27C259.14 201.81 247.32 205.93 237.02 205.93C224.17 205.93 212.23 200.07 209.25 192.31L203.66 177.78C203.15 176.47 201.26 176.64 200.99 178.01L194.03 213.28C193.89 213.96 194.28 214.64 194.94 214.87L198.64 216.15C207.93 219.36 219.42 221.12 231 221.12C261.04 221.12 281.28 209.47 285.13 189.95C289.04 170.17 269.69 161.65 254.14 154.8C242.11 149.5 233.68 145.36 234.67 140.37C237.58 125.62 250.5 124.03 255.92 124.03ZM307.13 85.78C312.78 95.7 322.5 103.96 329.31 114.13C334.63 122.07 333.39 131.64 328.61 139.89C326.16 143.93 323.19 147.31 319.63 150.6C323.02 149.88 325.97 148.69 329.04 147.38C344.28 140.78 357.05 128.9 363.21 113.28C368.54 99.8 368.22 84.76 362.99 71.3C356.68 55.04 343.61 40.72 327.41 33.96C322.16 31.76 315.84 30.49 310.27 31.96C316.73 35.76 321.96 40.77 326.12 46.8C328.14 49.73 329.73 52.71 331.18 55.94C335.55 65.66 337.33 77.75 334.07 87.96C334.07 87.96 313.95 86.54 302.69 57.58C300.53 67.6 302.36 76.91 307.13 85.78Z"/></svg>
   <div class="ks-sig__inner">
-    <header class="ks-sig__head">
-      <span class="ks-kicker">Menu Andalan</span>
-      <h2 class="ks-sig__title">Signature Kurnia</h2>
-      <p class="ks-sig__sub">Hidangan yang membuat tamu kembali lagi &amp; lagi.</p>
-    </header>
-    <!-- TODO: ganti dengan foto resmi Kurnia (hak cipta) -->
-    <div class="ks-sig__grid"></div>
+    <span class="ks-sig__kicker">Sebuah Persembahan Baru</span>
+
+    <!-- Logo resmi Kurnia Seafood Signature. Saat pasang di WordPress, ganti src
+         dengan URL media library (file: signature/assets/logo-kurnia-signature-dark.png) -->
+    <div class="ks-sig__mark">
+      <img src="../signature/assets/logo-kurnia-signature-dark.png" alt="Kurnia Seafood Signature"
+           width="1200" height="802" loading="lazy">
+    </div>
+
+    <p class="ks-sig__sub">Destinasi premium seafood dining dari keluarga Kurnia — persembahan
+      terbaik laut Nusantara, disajikan dengan seremoni.</p>
+
+    <p class="ks-sig__cities">
+      <span>Bandung · November 2026</span>
+      <i aria-hidden="true">✦</i>
+      <span>Jakarta · Akhir 2026</span>
+    </p>
+
+    <div class="ks-sig__grid" hidden></div>
+
+    <a class="ks-sig__btn" href="../signature/index.html" data-signature-link>Discover Kurnia Signature</a>
+    <span class="ks-sig__eta">Segera hadir — bergabunglah ke Priority Access</span>
   </div>
 
   <style>
-  .ks-sig{
-    --navy:#03182F; --navy-2:#0A3A66; --cream:#F6F1E7; --red:#D80000; --muted:rgba(246,241,231,.66);
-    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
-    background:radial-gradient(120% 120% at 50% 0%, var(--navy-2), var(--navy) 62%);
-    color:var(--cream); font-family:var(--fh); padding:clamp(54px,8vw,96px) 22px;
+  /* Font brand Signature untuk nama hidangan. Di WordPress: unggah CSCoster-Italic.woff2
+     lalu ganti URL di bawah; bila file tidak tersedia, otomatis memakai Crimson Pro. */
+  @font-face{
+    font-family:'CS Coaster'; font-style:italic; font-weight:400; font-display:swap;
+    src:url('../signature/assets/CSCoster-Italic.woff2') format('woff2');
   }
-  .ks-sig__inner{ max-width:1140px; margin:0 auto; }
-  .ks-sig__head{ text-align:center; margin-bottom:42px; }
-  .ks-kicker{ font-family:var(--fl); font-weight:700; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:#FF6B6B; }
-  .ks-sig__title{ font-family:var(--fh); font-weight:500; color:var(--cream); font-size:clamp(2rem,4.4vw,3.2rem); margin:10px 0 0; letter-spacing:-.01em; }
-  .ks-sig__sub{ font-family:var(--fl); font-weight:300; color:var(--muted); margin:12px 0 0; }
-  .ks-sig__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-  .ks-sig__card{ position:relative; aspect-ratio:3/4; border-radius:20px; overflow:hidden;
-    background:linear-gradient(135deg,#06304F,#0a3c63); border:1px solid rgba(246,241,231,.12); }
-  .ks-sig__card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
-  .ks-sig__card:hover img{ transform:scale(1.06); }
-  .ks-sig__card::after{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(3,24,47,.92) 8%, rgba(3,24,47,.15) 55%, transparent); }
-  .ks-sig__name{ position:absolute; z-index:1; left:18px; right:18px; bottom:18px; font-family:var(--fh); font-weight:600; font-size:1.3rem; line-height:1.2; color:#fff; }
-  @media (max-width:900px){ .ks-sig__grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .ks-sig__grid{ grid-template-columns:1fr; } }
-  @media (prefers-reduced-motion: reduce){ .ks-sig__card:hover img{ transform:none; } }
+  .ks-sig{
+    /* palet resmi Kurnia Seafood Signature (brand/SIGNATURE-BRAND.md) */
+    --navy:#0A2644; --navy-deep:#061A30; --gold:#C29B44; --gold-soft:#D9BC7A;
+    --cream:#F6F1E7; --muted:rgba(246,241,231,.64); --hair:rgba(194,155,68,.3);
+    --fh:'Crimson Pro',Georgia,serif; --fl:'Alexandria',system-ui,sans-serif;
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(110% 90% at 50% -10%, #123a63 0%, transparent 55%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream); font-family:var(--fh);
+    padding:clamp(64px,9vw,110px) 22px; text-align:center;
+  }
+  /* monogram resmi "Ks" sebagai watermark */
+  .ks-sig__wm{
+    position:absolute; right:28px; bottom:26px; width:min(280px,40vw); height:auto;
+    fill:rgba(194,155,68,.06); pointer-events:none;
+  }
+  .ks-sig__inner{ position:relative; z-index:1; max-width:880px; margin:0 auto; }
+  .ks-sig__kicker{
+    font-family:var(--fl); font-weight:500; font-size:11.5px; letter-spacing:.4em;
+    text-transform:uppercase; color:var(--gold);
+  }
+  .ks-sig__mark{ margin-top:30px; }
+  .ks-sig__mark img{
+    width:min(340px,64vw); height:auto; display:inline-block;
+  }
+  .ks-sig__sub{
+    font-family:var(--fh); font-weight:300; font-size:clamp(1.05rem,1.9vw,1.2rem);
+    color:var(--muted); max-width:52ch; margin:22px auto 0; line-height:1.65;
+  }
+  .ks-sig__cities{
+    display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap;
+    margin:26px 0 0; font-family:var(--fl); font-weight:400; font-size:12px;
+    letter-spacing:.26em; text-transform:uppercase; color:var(--gold-soft);
+  }
+  .ks-sig__cities i{ font-style:normal; color:var(--gold); font-size:.7rem; }
+  .ks-sig__grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+    max-width:720px; margin:40px auto 0;
+  }
+  .ks-sig__card{
+    position:relative; aspect-ratio:4/3; overflow:hidden;
+    border:1px solid rgba(194,155,68,.18); background:#0E3155;
+  }
+  .ks-sig__card img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:saturate(.85) brightness(.88); transition:transform .8s cubic-bezier(.22,.61,.2,1);
+  }
+  .ks-sig__card:hover img{ transform:scale(1.05); }
+  .ks-sig__card::after{ content:""; position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(6,26,48,.72) 0%, transparent 50%); }
+  .ks-sig__name{
+    position:absolute; z-index:1; left:12px; right:12px; bottom:10px;
+    font-family:'CS Coaster',var(--fh); font-style:italic; font-weight:400; font-size:1.05rem;
+    line-height:1.25; color:#fff; text-align:left;
+  }
+  .ks-sig__btn{
+    display:inline-block; margin-top:42px; padding:17px 36px;
+    font-family:var(--fl); font-weight:500; font-size:12.5px; letter-spacing:.24em;
+    text-transform:uppercase; text-decoration:none; color:var(--navy);
+    background:var(--gold); border:1px solid var(--gold); border-radius:0;
+    transition:background .25s, border-color .25s, transform .25s;
+  }
+  .ks-sig__btn:hover{ background:var(--gold-soft); border-color:var(--gold-soft); transform:translateY(-2px); }
+  .ks-sig__eta{
+    display:block; margin-top:16px; font-family:var(--fl); font-weight:300;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);
+  }
+  @media (max-width:640px){ .ks-sig__grid{ grid-template-columns:repeat(3,1fr); gap:8px; } }
+  @media (max-width:480px){ .ks-sig__grid{ grid-template-columns:1fr 1fr; }
+    .ks-sig__card:nth-child(3){ display:none; } }
+  @media (prefers-reduced-motion: reduce){
+    .ks-sig__card:hover img{ transform:none; } .ks-sig__btn:hover{ transform:none; }
+  }
   </style>
 
   <script>
   (function () {
     var root = document.getElementById('signature');
+
+    /* tujuan tombol: KS_CONFIG.SIGNATURE_URL (produksi WordPress) →
+       fallback path relatif repo (preview GitHub Pages) */
+    var url = (window.KS_CONFIG && window.KS_CONFIG.SIGNATURE_URL) || '../signature/index.html';
+    root.querySelectorAll('[data-signature-link]').forEach(function (a) { a.href = url; });
+
+    /* strip 3 foto dish signature — opsional, dari KS_MENU.
+       Prioritaskan item berfoto resmi (bukan placeholder) agar strip selalu penuh. */
     var grid = root.querySelector('.ks-sig__grid');
-    var items = (window.KS_MENU || []).filter(function (m) { return m.signature; });
-    if (!items.length) { root.remove(); return; }
-    function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
-    grid.innerHTML = items.map(function (m) {
-      var ph = m.placeholder ? ' data-placeholder="true"' : '';
-      return '<article class="ks-sig__card">' +
-        '<img src="' + esc(m.image) + '" alt="' + esc(m.name) + '" loading="lazy"' + ph + ' onerror="this.style.display=\'none\'">' +
-        '<h3 class="ks-sig__name">' + esc(m.name) + '</h3></article>';
-    }).join('');
+    var sig = (window.KS_MENU || []).filter(function (m) { return m.signature; });
+    var items = sig.filter(function (m) { return !m.placeholder; })
+      .concat(sig.filter(function (m) { return m.placeholder; })).slice(0, 3);
+    if (items.length) {
+      function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c];}); }
+      grid.innerHTML = items.map(function (m) {
+        var ph = m.placeholder ? ' data-placeholder="true"' : '';
+        return '<figure class="ks-sig__card" style="margin:0">' +
+          '<img src="' + esc(m.image) + '" alt="' + esc(m.name) + '" loading="lazy"' + ph + ' onerror="this.style.display=\'none\'">' +
+          '<figcaption class="ks-sig__name">' + esc(m.name) + '</figcaption></figure>';
+      }).join('');
+      grid.hidden = false;
+    }
   })();
   </script>
 </section>

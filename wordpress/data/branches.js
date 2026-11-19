@@ -176,7 +176,7 @@ window.KS_BRANCHES = [
     area: "Bandung Wetan (Citarum)",
     name: "Kurnia Seafood Bandung (Cabang ke-2)",
     status: "upcoming",
-    openingEstimate: "September 2026", // perkiraan — TODO: konfirmasi final/estimasi dgn tim
+    openingEstimate: "November 2026", // perkiraan — mengikuti halaman Signature yang tayang; konfirmasi final dgn tim
     // INTERNAL — JANGAN render di UI sampai buka:
     address: "Jl. L.L.R.E. Martadinata No.89A, Citarum, Bandung Wetan, Kota Bandung, Jawa Barat 40115"
     // internal note: bekas lokasi resto Hello Summer.

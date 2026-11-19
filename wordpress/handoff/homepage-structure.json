@@ -122,14 +122,14 @@
       "id": "signature",
       "source_file": "sections/14-signature.html",
       "urutan": 4,
-      "nama": "Signature / Hero Menus",
-      "tujuan": "Menu andalan grid gelap premium (image-forward), TANPA harga. Auto-hide bila tak ada item signature.",
-      "elemen": ["Header kicker/judul/sub", "Grid kartu 3:4 (foto + nama overlay)"],
-      "cta": [],
-      "dinamis": true,
-      "sumber_data": "data/menu.js (window.KS_MENU) — filter signature:true",
+      "nama": "Signature Gateway",
+      "tujuan": "Pintu masuk ke landing page Kurnia Seafood Signature (kurniaseafood.co.id/kurnia-signature/). Blok navy+gold: logo Signature, teaser, kota & estimasi buka, strip 3 foto hidangan, satu tombol.",
+      "elemen": ["Kicker + logo resmi Kurnia Seafood Signature", "Teaser + baris kota (Bandung · November 2026 ✦ Jakarta · Akhir 2026)", "Strip 3 foto hidangan (nama overlay) dari item signature:true — disembunyikan bila data kosong", "Tombol 'Discover Kurnia Signature' + keterangan Priority Access"],
+      "cta": [{ "label": "Discover Kurnia Signature", "target": "KS_CONFIG.SIGNATURE_URL (di WordPress: /kurnia-signature/)" }],
+      "dinamis": false,
+      "sumber_data": "data/config.js (SIGNATURE_URL) + data/menu.js (window.KS_MENU, filter signature:true — hanya untuk strip 3 foto)",
       "fields": [],
-      "catatan_migrasi": "Sumber sama dengan New Menu (CPT 'Menu', flag signature:true). Di main, 5 item signature dgn nama KANONIK: Ikan Bakar Kurnia, Kepiting Saus Kurnia, Udang Saus Kurnia, Kepiting Saus Garlic Caramel, King Crab Sultan. 4 foto sudah resmi (WebP); 'Kepiting Saus Kurnia' masih placeholder Unsplash. TANPA HARGA."
+      "catatan_migrasi": "BUKAN lagi grid menu andalan: sejak landing page Signature tayang, #signature menjadi gateway statis. Tempel sections/14-signature.html ke widget HTML (ganti src logo ke URL media library; set SIGNATURE_URL = /kurnia-signature/). Strip foto mengambil 3 item signature berfoto resmi; nama KANONIK di menu.js tidak berubah (Ikan Bakar Kurnia, Kepiting Saus Kurnia, Udang Saus Kurnia, Kepiting Saus Garlic Caramel, King Crab Sultan). TANPA HARGA. Desain grid lama ada di histori git (commit 7c95325 di main, sebelum gateway Signature digabung)."
     },
     {
       "id": "locations",

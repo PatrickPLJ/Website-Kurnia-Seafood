@@ -19,7 +19,7 @@ Paket **bahan jadi** untuk merakit homepage Kurnia Seafood di **WordPress + Elem
 1.  01-hero        (STATIS)   sections/01-hero.html
 2.  02-spotlight   (DINAMIS)  dynamic/02-spotlight.md
 3.  03-new-menu    (DINAMIS)  dynamic/03-new-menu.md
-4.  04-signature   (DINAMIS)  dynamic/04-signature.md
+4.  04-signature   (GATEWAY)  dynamic/04-signature.md
 5.  05-locations   (DINAMIS)  dynamic/05-locations.md
 6.  06-tentang     (STATIS)   sections/06-tentang.html
 7.  07-cabang      (DINAMIS)  dynamic/07-cabang.md
@@ -38,7 +38,7 @@ Paket **bahan jadi** untuk merakit homepage Kurnia Seafood di **WordPress + Elem
 | 1 | Hero | STATIS | tempel HTML (hapus `<nav>` bila ada header global) | — (foto placeholder) |
 | 2 | Spotlight | DINAMIS | CPT "Promo" / data JS | `data/promos.js` |
 | 3 | New Menu | DINAMIS | CPT "Menu" (`is_baru`) | `data/menu.js` |
-| 4 | Signature | DINAMIS | CPT "Menu" (`is_signature`) | `data/menu.js` |
+| 4 | Signature (gateway ke `/kurnia-signature/`) | STATIS + strip 3 foto | CPT "Menu" (`is_signature`) utk strip foto | `data/menu.js`, `data/config.js` (`SIGNATURE_URL`) |
 | 5 | Locations | DINAMIS | CPT "Cabang" (active+upcoming) | `data/branches.js` |
 | 6 | Tentang | STATIS | tempel HTML | — |
 | 7 | Cabang | DINAMIS | CPT "Cabang" (tabs/loop) | `data/branches.js` |
@@ -79,6 +79,7 @@ Unggah dari `wordpress/assets/` (main), lalu **ganti path relatif `assets/...`**
 - Cabang (5): `cabang-yogyakarta.webp`, `cabang-semarang.webp`, `cabang-bandung.webp`, `cabang-bali.webp`, `cabang-surabaya.webp` (ada juga `.jpg`)
 - Menu signature/baru: `menu-ikan-bakar-kurnia.webp`, `menu-udang-saus-kurnia.webp`, `menu-kepiting-garlic-caramel.webp`, `menu-king-crab-sultan.webp`, `menu-baru-rahang-tuna.webp`
 - OG: `og-image.jpg` (**portrait 4000×6000 → butuh varian landscape ~1200×630**, lihat checklist)
+- Logo Signature (gateway #4): `signature/assets/logo-kurnia-signature-dark.png` — letaknya di luar `wordpress/assets/`
 
 **Masih placeholder (Unsplash) — [GANTI FOTO RESMI]:** background Hero (5), galeri, kabar, tentang, spotlight; menu **"Kepiting Saus Kurnia"** + **"Menu Baru 2"** & **"Menu Baru 3"**. Lihat `wordpress/PLACEHOLDERS.md`.
 
@@ -109,6 +110,7 @@ Unggah dari `wordpress/assets/` (main), lalu **ganti path relatif `assets/...`**
 - [ ] Konfirmasi data cabang **`verify:true`** (Yogyakarta, Bandung, Bali).
 - [ ] Pasang **schema** (`schema-notes.md`); pastikan **tanpa aggregateRating**, Bali domain terpisah, upcoming tanpa schema.
 - [ ] Pasang **301 redirect** (URL lama → baru) + **submit sitemap** (GSC + Bing).
+- [ ] **Gateway Signature**: `SIGNATURE_URL: "/kurnia-signature/"` di `config.js` + `src` logo diganti URL Media Library.
 - [ ] **QA visual berdampingan** (preview kit vs WordPress) per section.
 
 ## 9. Isi paket (file list)

@@ -13,7 +13,7 @@ Isi folder `wordpress/`:
   1. `01-hero.html` — hero + **carousel foto background** (auto-rotate) + CTA
   2. `12-spotlight.html` — **Spotlight terbaru** (promo/menu/campaign; auto-hide bila kosong)
   3. `13-new-menu.html` — **New Menu** (image-forward, tanpa harga)
-  4. `14-signature.html` — **Signature/Hero Menus** (image-forward, gelap)
+  4. `14-signature.html` — **Gateway Kurnia Seafood Signature** (navy+gold; tombol ke `/kurnia-signature/`)
   5. `15-locations.html` — **Locations** (5 cabang aktif + "Segera Hadir")
   6. `07-tentang.html` — Tentang Kami + 3 Core Value
   7. `11-cabang.html` — Cabang (tab switcher detail per kota)
@@ -97,7 +97,7 @@ Section di atas membaca dari file data (sumber tunggal). Bungkus isi tiap file
 dalam `<script> … </script>` dan tempel **SEKALI** sebelum section terkait
 (mis. Custom Code Header Elementor Pro, atau widget HTML paling atas) —
 **urutkan `config.js` paling awal**:
-- `data/config.js` — konfigurasi terpusat (URL endpoint reservasi + `HOME_URL`).
+- `data/config.js` — konfigurasi terpusat (URL endpoint reservasi + `HOME_URL` + `SIGNATURE_URL`).
 - `data/branches.js` — Locations, Cabang, Reservasi (cabang aktif + upcoming).
 - `data/menu.js` — New Menu & Signature.
 - `data/promos.js` — Spotlight terbaru.
@@ -108,6 +108,11 @@ Catatan:
 - **Tombol "Kembali ke Beranda"** (Reservasi): jika section ada di halaman yang
   sama dengan hero → smooth-scroll; jika di halaman terpisah → navigasi ke
   `KS_CONFIG.HOME_URL` (default `/`). Set `HOME_URL` ke URL beranda situsmu.
+- **Gateway Signature (`14-signature.html`)** — sebelum tayang: (1) isi
+  `SIGNATURE_URL: "/kurnia-signature/"` di `config.js` (bila kosong, tombol mengarah ke
+  path preview repo yang tidak ada di WordPress); (2) unggah
+  `signature/assets/logo-kurnia-signature-dark.png` ke Media Library dan ganti `src`
+  logo di blok dengan URL-nya. Detail: `handoff/elementor-kit/dynamic/04-signature.md`.
 
 ## Langkah 4d — (Opsional) Simpan reservasi ke Google Sheet — PROTOTIPE
 
