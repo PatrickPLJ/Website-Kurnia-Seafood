@@ -1,67 +1,99 @@
 # Kurnia Seafood Signature — Panduan Brand (Ringkas)
 
-Sub-brand kelas atas Kurnia Seafood untuk outlet fine dining. Berdasarkan brand kit
-resmi **"Kurnia Seafood Signature"** yang disediakan pemilik (folder Google Drive:
-`01 Logo - Kurnia Seafood Signature`, berisi subfolder Color / Font / Logo).
+Lini premium Kurnia Seafood. Ringkasan ini disusun dari **brand kit resmi** yang
+disediakan pemilik (konsultan brand, 2026):
 
-Positioning: **premium, tenang, seremonial** — sengaja berbeda register dari brand
-induk yang ceria ("The Happiest Seafood Time!"). Tanpa tanda seru, tanpa bahasa
-promo/diskon, tanpa merah-biru cerah berdampingan.
+| Sumber | Isi |
+|--------|-----|
+| Drive `01 Logo - Kurnia Seafood Signature/Color/` | `Color Pallate.pdf` — 3 warna resmi |
+| Drive `…/Font/CS Coaster/` | CS Coaster Regular · Italic · ReverseItalic (otf/ttf/woff/woff2) |
+| Drive `…/Logo/` | `Logo Kurnia Signature.pdf` / `.ai` (master vektor: logo di putih, logo di navy, monogram) + JPG |
+| Deck "Logo Development" (Juni 2026) | Arah visual, alternatif logo, contoh penerapan |
 
-## Palet Warna Resmi
+## Posisi & arah visual
+
+Brand induk Kurnia Seafood: *fun, friendly, casual, family-oriented* (maskot kepiting
+kartun, merah–biru cerah, "The Happiest Seafood Time!").
+
+Signature **bukan pengganti** identitas itu, melainkan lini dengan segmen berbeda untuk
+pengalaman seafood yang lebih premium. Arah visualnya **tenang dan luxury** — dari
+maskot yang fun menjadi identitas seafood dining yang lebih halus:
+
+- kepiting **tetap dipertahankan**, bentuknya dibuat lebih simpel (siluet);
+- warna lebih premium (navy + gold);
+- tipografi lebih rapi dan elegan.
+
+Konsekuensinya di semua materi Signature: tanpa tanda seru, tanpa bahasa promo/diskon,
+tanpa maskot kartun, tanpa merah–biru cerah brand induk.
+
+## Palet warna resmi
 
 | Peran | Hex | RGB |
 |-------|-----|-----|
 | Navy (dominan) | `#0A2644` | 10 · 38 · 68 |
-| Gold (aksen & CTA) | `#C29B44` | 194 · 155 · 68 |
+| Gold (aksen, "Kurnia" pada logo, CTA) | `#C29B44` | 194 · 155 · 68 |
 | Putih | `#FFFFFF` | 255 · 255 · 255 |
 
-**Merah `#D80000` TIDAK dipakai** — itu milik brand induk. Turunan yang dipakai di web
-(derivasi, bukan warna resmi baru): navy dalam `#061A30` (band kontras), navy kartu
-`#0E3155`, krem lembut `#F6F1E7` (teks panjang di atas navy, kontinuitas dengan section
-signature lama), gold redup `#8A6D2F` (garis halus).
+Hanya tiga warna itu yang resmi. Di web dipakai **turunannya saja** (bukan warna baru):
+navy lebih dalam `#061A30` / `#04101F` (band kontras, footer), navy kartu `#0E3155`,
+gold terang `#D9BC7A` (teks gold berukuran kecil, agar kontras), gold gelap `#82672B`
+(garis/teks gold di atas latar terang), krem `#F6F1E7` (teks panjang di atas navy —
+senada dengan kertas & seragam khaki pada contoh penerapan).
+
+**Tidak dipakai:** merah `#D80000` dan biru cerah milik brand induk, serta warna status
+hijau/merah. Pesan berhasil/gagal pada form memakai gold dan putih.
 
 ## Tipografi
 
 | Font | Penggunaan | Sumber |
 |------|------------|--------|
-| **CS Coaster** (CSCoster) | Display / judul besar / momen brand. **Italic = serif elegan yang sama dengan "Seafood" di logo** (script "Kurnia" = lettering custom pada artwork logo, bukan font) | File resmi di Drive (Regular, Italic, ReverseItalic — otf/ttf/woff/woff2) |
-| **Crimson Pro** (serif) | Fallback display & body copy | Google Fonts (DNA induk) |
-| **Alexandria** (sans) | Kicker caps letterspaced, nav, tombol, label kecil | Google Fonts (DNA induk) |
+| **CS Coaster** Italic | Display: judul, nama hidangan, kutipan — sama dengan "Seafood" pada logo | Brand kit (file di `signature/assets/`) |
+| **CS Coaster** Regular | Judul tegak (mis. huruf Latin dalam judul berbahasa 日本語 / 한국어 / 中文) | Brand kit |
+| Crimson Pro (serif) | Teks paragraf; cadangan bila CS Coaster gagal dimuat | Google Fonts — pendamping untuk web, bukan bagian brand kit |
+| Alexandria (sans) | Kicker huruf kapital renggang, navigasi, tombol, label kecil — senada dengan "SIGNATURE" pada logo | Google Fonts — pendamping untuk web |
 
-Stack CSS: `font-family:'CS Coaster','Crimson Pro',Georgia,serif`. `@font-face`
-menunjuk ke `signature/assets/CSCoster-*.woff2` — halaman tetap tampil benar dengan
-Crimson Pro sampai file font diupload.
+Stack CSS: `font-family:'CS Coaster','Crimson Pro',Georgia,serif`. Tulisan script
+**"Kurnia"** pada logo adalah lettering khas Kurnia (artwork), **bukan font** — jangan
+ditiru dengan font lain; selalu pakai file logo.
 
-## Logo
+## Logo & monogram
 
-Lockup stacked resmi (file sudah di `signature/assets/`):
-**kepiting siluet** (navy di latar putih / putih di latar navy — evolusi elegan dari
-maskot kartun brand induk) → **"Kurnia"** script gold (CS Coaster) → **"Seafood"**
-italic serif → **"SIGNATURE"** caps renggang. Varian lain di master PDF/AI:
-lockup horizontal & **monogram "KS"** (favicon, divider, watermark).
+Lockup resmi (susun ke bawah): **siluet kepiting** → **"Kurnia"** script gold →
+**"Seafood"** serif miring → **"SIGNATURE"** kapital renggang.
 
-| File | Peran |
-|------|------|
-| `Logo Kurnia Signature-01.jpg` / `-02.jpg` | Master latar putih / navy |
-| `logo-kurnia-signature-dark.png` | Transparan utk latar gelap — dipakai di web |
-| `logo-kurnia-signature-light.png` | Transparan utk latar terang (cadangan) |
+| Latar | Kepiting, "Seafood", "SIGNATURE" | "Kurnia" | File |
+|-------|----------------------------------|----------|------|
+| Navy / gelap | Putih | Gold | `signature/assets/logo-kurnia-signature-dark.svg` |
+| Putih / terang | Navy | Gold | `signature/assets/logo-kurnia-signature-light.svg` |
 
-> Wordmark di nav = replika tipografis lockup (script gold "Kurnia" + serif
-> "Seafood" + caps "SIGNATURE") agar tetap tajam di ukuran kecil.
+**Monogram "Ks"** (script K + s kecil + aksen capit, gold): untuk ukuran kecil dan
+penanda brand — favicon, bordir seragam, watermark, pembuka section.
+File: `signature/assets/monogram-ks.svg`.
 
-## Tone Visual Web
+Aturan pakai:
 
-- Navy dominan penuh (dark theme), gold hanya untuk aksen penting: kicker, hairline,
-  tombol CTA. Tombol tajam (radius 0), bukan pil membulat.
-- Tipografi serif besar; kicker Alexandria caps renggang. Nama hidangan italic.
-- Foto atmosferik gelap (ruang makan, seafood di atas es, tangan bekerja) — bukan
-  kolase piring terang.
-- Motion pelan & tenang: crossfade, fade-up reveal, hairline yang menggambar diri.
-  Hormati `prefers-reduced-motion`.
-- Bahasa: Indonesia dengan aksen istilah Inggris fine dining ("Private Dining",
-  "Chef's Selection", "Priority Access").
+- Selalu pakai file resmi (vektor diekstrak langsung dari master, tanpa digambar ulang).
+- Jangan mengubah warna, proporsi, atau susunan; jangan memberi bingkai, bayangan tebal,
+  atau efek lain. Beri ruang kosong di sekeliling logo.
+- Monogram **tidak** diganti tulisan "KS" yang diketik.
+- Di atas foto, pastikan ada lapisan navy yang cukup gelap di belakang logo.
 
-> Sumber: brand kit Drive pemilik + riset desain 26 website premium (Truluck's,
-> Ocean Prime, Milos, Saint Peter, Koral Kempinski, Merah Putih, Seribu Rasa,
-> Starbucks Reserve, dst.) — ringkasan keputusan di README bagian signature/.
+Contoh penerapan pada deck (acuan nuansa): signage huruf timbul gold/putih di dinding
+gelap, kop surat putih, seragam navy dengan apron khaki dan bordir monogram gold.
+
+## Tone visual web
+
+- Navy dominan penuh (dark theme); gold hanya untuk aksen penting: kicker, hairline,
+  tombol CTA. Tombol bersudut siku (radius 0), bukan pil membulat.
+- Tipografi serif besar; kicker Alexandria kapital renggang. Nama hidangan italic.
+- Foto atmosferik gelap — bukan kolase piring terang.
+- Motion pelan & tenang: crossfade, fade-up reveal. Hormati `prefers-reduced-motion`.
+- Bahasa: Indonesia dengan aksen istilah Inggris ("Private Dining", "Chef's Selection",
+  "Priority Access").
+
+## Di mana brand ini dipakai di repo
+
+- `signature/index.html` — landing page (tayang di `kurniaseafood.co.id/kurnia-signature/`).
+- `wordpress/sections/14-signature.html` — gateway di homepage Kurnia Seafood.
+- Menu online `menu-signature.kurniaseafood.co.id` ada di repo terpisah
+  (`Menu-Digital-Kurnia-Seafood-Signature`) dan mengikuti buku menu cetak.

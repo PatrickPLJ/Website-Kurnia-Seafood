@@ -68,6 +68,10 @@ Landing page untuk **Kurnia Seafood Signature** — destinasi premium seafood di
   `node signature/build-share.mjs`, lalu tempel ulang hasilnya. Perubahan yang
   dibuat langsung di WordPress harus dibawa balik ke `index.html` supaya tidak
   tertimpa saat tempel ulang.
+- **Widget kedua di WordPress:** halaman `/kurnia-signature/` berisi **dua** widget HTML.
+  Yang pertama = isi `kurnia-signature-share.html` (yang ditempel ulang). Yang kedua = pill
+  mengambang "Restoran keluarga · Kurnia Seafood" (`.kfp2-pill`, tautan ke situs utama)
+  buatan tim — bukan bagian repo ini; **jangan dihapus atau ditimpa** saat tempel ulang.
 - **Menu online:** tombol "Menu" / "Lihat Menu Lengkap" →
   `menu-signature.kurniaseafood.co.id` (repo `Menu-Digital-Kurnia-Seafood-Signature`),
   otomatis membawa `?lang=` sesuai bahasa halaman.

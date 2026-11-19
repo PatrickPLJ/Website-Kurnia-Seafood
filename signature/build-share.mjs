@@ -19,7 +19,7 @@ import path from 'node:path';
 const HERE = path.dirname(new URL(import.meta.url).pathname);
 const S = (p) => path.join(HERE, p);
 
-const MIME = { '.png':'image/png', '.jpg':'image/jpeg', '.woff2':'font/woff2', '.woff':'font/woff' };
+const MIME = { '.png':'image/png', '.jpg':'image/jpeg', '.svg':'image/svg+xml', '.woff2':'font/woff2', '.woff':'font/woff' };
 const dataURI = (file) => {
   const mime = MIME[path.extname(file)];
   return `data:${mime};base64,` + fs.readFileSync(S(file)).toString('base64');
@@ -33,12 +33,10 @@ const REPLACEMENTS = [
   ['assets/share/menu-kepiting-garlic-caramel.jpg', 'assets/share/menu-kepiting-garlic-caramel.jpg'],
   ['assets/share/menu-udang-saus-malaka.jpg',       'assets/share/menu-udang-saus-malaka.jpg'],
   ['assets/share/menu-udang-saus-kurnia.jpg',       'assets/share/menu-udang-saus-kurnia.jpg'],
-  // logo & font brand
-  ['assets/logo-kurnia-signature-dark.png',  'assets/logo-kurnia-signature-dark.png'],
-  ['assets/logo-kurnia-signature-light.png', 'assets/logo-kurnia-signature-light.png'],
+  // logo (vektor dari master resmi) & font brand CS Coaster
+  ['assets/logo-kurnia-signature-dark.svg',  'assets/logo-kurnia-signature-dark.svg'],
   ['assets/CSCoster-Italic.woff2',          'assets/CSCoster-Italic.woff2'],
   ['assets/CSCoster-Italic.woff',           'assets/CSCoster-Italic.woff'],
-  // Regular menyusul — bila file sudah diupload, otomatis ikut ter-inline
   ['assets/CSCoster-Regular.woff2',         'assets/CSCoster-Regular.woff2'],
   ['assets/CSCoster-Regular.woff',          'assets/CSCoster-Regular.woff'],
 ];

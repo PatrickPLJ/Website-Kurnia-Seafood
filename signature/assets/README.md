@@ -1,29 +1,31 @@
-# signature/assets — Status aset brand Signature
+# signature/assets — Aset brand Signature
 
-Sumber: brand kit resmi (folder Google Drive **"01 Logo - Kurnia Seafood Signature"**).
-Upload lewat github.com → *Add file → Upload files* ke folder `signature/assets/`.
+Sumber: brand kit resmi dari konsultan brand (folder Google Drive
+**"01 Logo - Kurnia Seafood Signature"**: `Color/`, `Font/CS Coaster/`, `Logo/`).
+Ringkasan aturan pakainya ada di [`brand/SIGNATURE-BRAND.md`](../../brand/SIGNATURE-BRAND.md).
 
-## 1. Font CS Coaster (dari Drive: `Font/CS Coaster/`)
+## 1. Font CS Coaster — ✅ lengkap
 
-| File | Status |
-|------|--------|
-| `CSCoster-Italic.woff2` + `.woff` | ✅ sudah ada |
-| `CSCoster-Regular.woff2` | ❌ **BELUM — tolong upload** (dipakai judul section non-italic) |
-| `CSCoster-Regular.woff` | opsional (fallback browser lama) |
+| File | Dipakai untuk |
+|------|---------------|
+| `CSCoster-Italic.woff2` + `.woff` | Judul, nama hidangan, momen brand (gaya utama halaman) |
+| `CSCoster-Regular.woff2` + `.woff` | Judul tegak — mis. huruf Latin di judul saat bahasa 日本語 / 한국어 / 中文 |
 
-Selama Regular belum ada, judul non-italic otomatis memakai **Crimson Pro** (tidak rusak).
+Font berlisensi (Craft Supply Co) — pakai hanya untuk materi Kurnia Seafood Signature.
 
-## 2. Logo Signature — ✅ selesai
+## 2. Logo & monogram — ✅ dari master resmi
 
 | File | Keterangan |
 |------|------------|
-| `Logo Kurnia Signature-01.jpg` | Master latar putih (sumber, jangan dihapus) |
-| `Logo Kurnia Signature-02.jpg` | Master latar navy (sumber, jangan dihapus) |
-| `logo-kurnia-signature-dark.png` | **Dipakai halaman** — transparan, marks putih+gold, utk latar gelap (di-generate dari -02) |
-| `logo-kurnia-signature-light.png` | Transparan, marks navy+gold, utk latar terang (cadangan; dari -01) |
+| `logo-kurnia-signature-dark.svg` | **Dipakai halaman** (nav, hero, footer) — vektor dari master, untuk latar navy/gelap |
+| `logo-kurnia-signature-light.svg` | Vektor untuk latar putih/terang (cadangan) |
+| `monogram-ks.svg` | **Monogram resmi "Ks"** (gold). Di halaman dipakai inline (`#sig-mono`) untuk favicon, pembuka manifesto, dan watermark |
+| `logo-kurnia-signature-dark.png` / `-light.png` | Turunan PNG 1200×802 transparan dari vektor di atas — untuk media library WordPress (gateway homepage) |
+| `Logo Kurnia Signature-01.jpg` / `-02.jpg` | Master JPG latar putih / navy (arsip, jangan dihapus) |
 
-Logo terpasang di: nav, hero, footer `signature/index.html`, dan gateway
-`wordpress/sections/14-signature.html`.
+Vektor diekstrak apa adanya dari `Logo/Logo Kurnia Signature.pdf` di brand kit (tanpa
+digambar ulang). Jangan mengganti monogram dengan tulisan "KS" biasa, mengubah warna
+logo, atau memberi bingkai/efek tambahan.
 
 ## 3. Foto & data
 
@@ -46,7 +48,6 @@ Yang masih perlu dilengkapi pemilik:
 
 | Item | Lokasi | Catatan |
 |------|--------|---------|
-| Font `CSCoster-Regular.woff2` | `signature/assets/` | Lihat bagian 1 |
 | Jam operasional & dress code | Section Facts | Isi saat data outlet fix |
 | Tag `noindex` | `<head>` | Hapus saat halaman boleh diindeks Google |
 
