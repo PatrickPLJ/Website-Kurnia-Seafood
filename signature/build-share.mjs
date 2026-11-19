@@ -5,8 +5,11 @@
  * wordpress/preview-share.html.
  *
  * Foto dish memakai turunan terkompresi di assets/share/ (regenerasi:
- * lihat catatan di signature/assets/README.md). Placeholder Unsplash &
- * Google Fonts tetap URL (butuh internet, punya fallback).
+ * lihat catatan di signature/assets/README.md). Foto dish ke-5 (media
+ * library situs utama) & Google Fonts tetap URL (butuh internet, punya fallback).
+ *
+ * File hasil build inilah yang ditempel ke widget HTML Elementor di
+ * kurniaseafood.co.id/kurnia-signature/.
  *
  * Jalankan:  node signature/build-share.mjs   (cwd = repo root atau signature/)
  * ====================================================================== */
@@ -24,12 +27,7 @@ const dataURI = (file) => {
 
 /* referensi di index.html → file sumber inline */
 const REPLACEMENTS = [
-  // foto dish (visual daftar menu) → turunan terkompresi
-  ['../wordpress/assets/menu-king-crab-sultan.jpg',        'assets/share/menu-king-crab-sultan.jpg'],
-  ['../wordpress/assets/menu-kepiting-garlic-caramel.jpg', 'assets/share/menu-kepiting-garlic-caramel.jpg'],
-  ['../wordpress/assets/menu-udang-saus-malaka.jpg',       'assets/share/menu-udang-saus-malaka.jpg'],
-  ['../wordpress/assets/menu-ikan-bakar-kurnia.jpg',       'assets/share/menu-ikan-bakar-kurnia.jpg'],
-  // background hero/join/private dining (sudah terkompresi di halaman)
+  // foto dish, hero, join & private dining (turunan terkompresi milik folder ini)
   ['assets/share/menu-king-crab-sultan.jpg',        'assets/share/menu-king-crab-sultan.jpg'],
   ['assets/share/menu-ikan-bakar-kurnia.jpg',       'assets/share/menu-ikan-bakar-kurnia.jpg'],
   ['assets/share/menu-kepiting-garlic-caramel.jpg', 'assets/share/menu-kepiting-garlic-caramel.jpg'],

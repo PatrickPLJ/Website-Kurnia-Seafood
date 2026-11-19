@@ -1,0 +1,57 @@
+[
+  {
+    "key": "group_ks_menu",
+    "title": "Menu — Hidangan Kurnia Seafood (TANPA HARGA)",
+    "fields": [
+      {
+        "key": "field_ks_menu_foto",
+        "label": "Foto Hidangan",
+        "name": "foto",
+        "type": "image",
+        "return_format": "url",
+        "instructions": "Foto resmi hidangan (>=800px). Di main: assets/menu-*.webp.",
+        "required": 0
+      },
+      {
+        "key": "field_ks_menu_deskripsi",
+        "label": "Deskripsi",
+        "name": "deskripsi",
+        "type": "textarea",
+        "rows": 2,
+        "instructions": "Deskripsi singkat. TANPA harga."
+      },
+      {
+        "key": "field_ks_menu_is_baru",
+        "label": "Tampilkan di 'New Menu'",
+        "name": "is_baru",
+        "type": "true_false",
+        "ui": 1,
+        "instructions": "Setara isNew:true di menu.js. Muncul di section New Menu (#new-menu)."
+      },
+      {
+        "key": "field_ks_menu_is_signature",
+        "label": "Tampilkan di 'Signature'",
+        "name": "is_signature",
+        "type": "true_false",
+        "ui": 1,
+        "instructions": "Setara signature:true di menu.js. Muncul di section Signature (#signature)."
+      },
+      {
+        "key": "field_ks_menu_placeholder",
+        "label": "Foto masih placeholder",
+        "name": "placeholder",
+        "type": "true_false",
+        "ui": 1,
+        "instructions": "Centang bila foto masih contoh/Unsplash (pengingat tim untuk ganti foto resmi). Tidak tampil ke pengunjung."
+      }
+    ],
+    "location": [
+      [ { "param": "post_type", "operator": "==", "value": "menu_kurnia" } ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "active": true,
+    "description": "Field menu Kurnia Seafood — mengikuti data/menu.js (main). Kategori = taksonomi 'menu_kategori'. TANPA field harga (locked)."
+  }
+]

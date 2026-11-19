@@ -6,7 +6,14 @@
 window.KS_CONFIG = {
   // URL Apps Script Web App (diakhiri /exec) untuk menyimpan reservasi ke Google Sheet.
   // Diisi oleh PEMILIK setelah deploy (lihat integrations/reservation-apps-script.gs).
-  RESERVATION_ENDPOINT: "", // TODO: isi dengan URL Apps Script Web App dari pemilik
+  RESERVATION_ENDPOINT: "https://script.google.com/macros/s/AKfycbxJK34uYuHHG7JTEMTOEl-dmAyUZW43VHZGwQ3owxnjFT0H4DJuVUuJO3Q5A5KAk7Bf/exec", // Apps Script Web App pemilik (publik by design: hanya menambah baris, tidak membaca Sheet)
+
+  // URL proxy ULASAN GOOGLE (Apps Script Web App, diakhiri /exec) yang memanggil
+  // Google Places Details API di sisi server. WAJIB lewat proxy: API key Google
+  // TIDAK BOLEH ada di front-end. Diisi PEMILIK setelah deploy
+  // integrations/google-reviews-apps-script.gs. Selama kosong/gagal, section
+  // "Kata Pelanggan" menampilkan ulasan CONTOH (placeholder), bukan error.
+  REVIEWS_ENDPOINT: "https://script.google.com/macros/s/AKfycbycdX-QQOLDVz3L22TieD5YcPxGEkZ_hSfJqcTJeZvCHdQ3rYMzM57_xh5uaS6JGgEMgw/exec", // proxy ulasan Google pemilik (cache mingguan; baca-saja, publik by design)
 
   // URL beranda — dipakai tombol "Kembali ke Beranda" pada section Reservasi
   // bila section berada di halaman terpisah (tanpa #hero di dokumen yang sama).
@@ -14,7 +21,7 @@ window.KS_CONFIG = {
 
   // URL landing page Kurnia Seafood Signature — dipakai tombol "Discover Kurnia
   // Signature" pada section 14-signature. Kosong = fallback ke path relatif repo
-  // (../signature/index.html) untuk preview. Isi URL produksi saat halaman
-  // Signature dipasang di WordPress (mis. "/signature/" atau subdomain).
+  // (../signature/index.html) untuk preview repo / GitHub Pages. Di WordPress isi
+  // "/kurnia-signature/" (halaman Signature yang sudah tayang).
   SIGNATURE_URL: ""
 };

@@ -9,6 +9,13 @@
  * Format WA: nomor tanpa '+'/spasi (format wa.me).
  * Field verify:true = data dari artikel pihak ketiga → WAJIB dikonfirmasi tim
  * sebelum produksi (lihat peringatan console di bawah).
+ *
+ * Field placeId = Google Place ID cabang. CATATAN: proxy ulasan Google yang kini
+ * aktif (REVIEWS_ENDPOINT di config.js) di-key per SLUG cabang dan menyimpan Place
+ * ID di sisi server, jadi placeId di sini TIDAK LAGI dipakai klien — dibiarkan
+ * kosong (opsional; boleh diisi/dirapikan nanti, tidak wajib). Yang penting: SLUG
+ * cabang harus cocok dengan kunci proxy (yogyakarta/semarang/bandung/bali/surabaya).
+ * API key Google tetap rahasia & HANYA hidup di server proxy.
  * ====================================================================== */
 window.KS_BRANCHES = [
   {
@@ -16,8 +23,9 @@ window.KS_BRANCHES = [
     city: "Yogyakarta",
     name: "Kurnia Seafood Yogyakarta",
     status: "active",
-    photo: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
+    photo: "assets/cabang-yogyakarta.webp",
+    photoPlaceholder: false,
     whatsapp: "6285229235758",
     phoneDisplay: "+62 852-2923-5758",
     address: "Jl. Laksda Adisucipto No.48B, Ngentak, Caturtunggal, Kec. Depok, Kab. Sleman, DI Yogyakarta 55281",
@@ -42,8 +50,9 @@ window.KS_BRANCHES = [
     city: "Semarang",
     name: "Kurnia Seafood Semarang",
     status: "active",
-    photo: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
+    photo: "assets/cabang-semarang.webp",
+    photoPlaceholder: false,
     whatsapp: "6281339505758",
     phoneDisplay: "+62 813-3950-5758",
     address: "Jl. Kompol Maksum No.300, Peterongan, Kec. Semarang Selatan, Kota Semarang, Jawa Tengah 50242",
@@ -69,8 +78,9 @@ window.KS_BRANCHES = [
     city: "Bandung",
     name: "Kurnia Seafood Bandung",
     status: "active",
-    photo: "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
+    photo: "assets/cabang-bandung.webp",
+    photoPlaceholder: false,
     whatsapp: "6281372405758",
     phoneDisplay: "+62 813-7240-5758",
     address: "Jl. Prof. Dr. Sutami No.100, Sukarasa, Kec. Sukasari, Kota Bandung, Jawa Barat 40152",
@@ -98,8 +108,9 @@ window.KS_BRANCHES = [
     city: "Bali (Tabanan)",
     name: "Kurnia Seafood Bali",
     status: "active",
-    photo: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
+    photo: "assets/cabang-bali.webp",
+    photoPlaceholder: false,
     whatsapp: "6281338555758",
     phoneDisplay: "+62 813-3855-5758",
     address: "Jl. By Pass Tanah Lot, Beraban, Kec. Kediri, Kab. Tabanan, Bali 82121",
@@ -123,8 +134,9 @@ window.KS_BRANCHES = [
     city: "Surabaya",
     name: "Kurnia Seafood Surabaya",
     status: "active",
-    photo: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=900&q=72",
-    photoPlaceholder: true, // TODO: ganti foto resmi Kurnia (hak cipta)
+    placeId: "", // opsional & TIDAK dipakai (proxy ulasan di-key per slug; lihat catatan header)
+    photo: "assets/cabang-surabaya.webp",
+    photoPlaceholder: false,
     whatsapp: "6281385375758",
     phoneDisplay: "+62 813-8537-5758",
     address: "Jl. Kombes Pol. Moh. Duryat No.4, Embong Kaliasin, Kec. Tegalsari, Surabaya, Jawa Timur 60271",
@@ -164,7 +176,7 @@ window.KS_BRANCHES = [
     area: "Bandung Wetan (Citarum)",
     name: "Kurnia Seafood Bandung (Cabang ke-2)",
     status: "upcoming",
-    openingEstimate: "September 2026", // perkiraan — TODO: konfirmasi final/estimasi dgn tim
+    openingEstimate: "November 2026", // perkiraan — mengikuti halaman Signature yang tayang; konfirmasi final dgn tim
     // INTERNAL — JANGAN render di UI sampai buka:
     address: "Jl. L.L.R.E. Martadinata No.89A, Citarum, Bandung Wetan, Kota Bandung, Jawa Barat 40115"
     // internal note: bekas lokasi resto Hello Summer.

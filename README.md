@@ -57,24 +57,33 @@ lalu ikuti `wordpress/PANDUAN-ELEMENTOR.md` untuk memasangnya.
 
 ## 👉 `signature/` — Landing page **Kurnia Seafood Signature** (pra-opening)
 
-Landing page standalone untuk tier fine dining **Kurnia Seafood Signature**
-(outlet baru Jakarta–Pondok Indah & Bandung–Citarum, 2026). Satu file mandiri
-(`signature/index.html`), arah desain **"Midnight Ocean"**: navy `#0A2644` +
-gold `#C29B44` + putih, font **CS Coaster** (fallback Crimson Pro).
+Landing page untuk **Kurnia Seafood Signature** — destinasi premium seafood dining
+(outlet baru Bandung–Citarum & Jakarta–Pondok Indah). Satu file mandiri
+(`signature/index.html`): navy `#0A2644` + gold `#C29B44` + putih, font
+**CS Coaster** (fallback Crimson Pro), 5 bahasa (ID · EN · 日本語 · 한국어 · 中文).
 
-- Brand kit: [`brand/SIGNATURE-BRAND.md`](brand/SIGNATURE-BRAND.md)
-- Aset yang perlu diupload (font + logo): [`signature/assets/README.md`](signature/assets/README.md)
+- **Tayang di:** `kurniaseafood.co.id/kurnia-signature/` — isi
+  `signature/kurnia-signature-share.html` ditempel ke widget HTML Elementor.
+  **Repo ini = sumber**: ubah `signature/index.html`, jalankan
+  `node signature/build-share.mjs`, lalu tempel ulang hasilnya. Perubahan yang
+  dibuat langsung di WordPress harus dibawa balik ke `index.html` supaya tidak
+  tertimpa saat tempel ulang.
+- **Menu online:** tombol "Menu" / "Lihat Menu Lengkap" →
+  `menu-signature.kurniaseafood.co.id` (repo `Menu-Digital-Kurnia-Seafood-Signature`),
+  otomatis membawa `?lang=` sesuai bahasa halaman.
+- **Form Priority Access:** POST ke `SIG.api` (backend `kurniaseafood.my.id`); nomor
+  WhatsApp & alamat menu ada di blok `SIG` pada `<script>`.
+- Brand kit: [`brand/SIGNATURE-BRAND.md`](brand/SIGNATURE-BRAND.md) · status aset:
+  [`signature/assets/README.md`](signature/assets/README.md)
 - Gerbang dari homepage: section `wordpress/sections/14-signature.html`
   (tombol "Discover Kurnia Signature" → `KS_CONFIG.SIGNATURE_URL`)
-- **`signature/kurnia-signature-share.html`** — versi 1-file mandiri (semua aset
-  inline) untuk dibuka langsung/dibagikan tanpa server. Regenerasi:
-  `node signature/build-share.mjs` setiap kali `signature/index.html` berubah
+- Pratinjau repo: `signature/index.html` (GitHub Pages: `…/signature/`)
 
 ---
 
-## Arsip: prototipe awal (tidak dipakai)
+## Catatan
 
-Folder `html-tailwind/` dan `nextjs/` adalah eksplorasi **arah pertama** (konsep
-"luxury navy", standalone). Setelah arah final ditetapkan (**tetap WordPress** +
-brand resmi yang ceria), keduanya **tidak lagi dipakai** dan hanya disimpan
-sebagai referensi. Boleh dihapus kapan saja.
+Prototipe awal `html-tailwind/` & `nextjs/` (eksplorasi "luxury navy", standalone)
+sudah **dihapus** dari repo karena tidak dipakai & memuat konten contoh lama —
+deliverable final = folder `wordpress/`. Bila perlu, keduanya masih bisa diambil
+dari **histori git**.

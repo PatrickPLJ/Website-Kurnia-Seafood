@@ -50,7 +50,7 @@ lockup horizontal & **monogram "KS"** (favicon, divider, watermark).
 > Wordmark di nav = replika tipografis lockup (script gold "Kurnia" + serif
 > "Seafood" + caps "SIGNATURE") agar tetap tajam di ukuran kecil.
 
-## Tone Visual Web ("Midnight Ocean")
+## Tone Visual Web
 
 - Navy dominan penuh (dark theme), gold hanya untuk aksen penting: kicker, hairline,
   tombol CTA. Tombol tajam (radius 0), bukan pil membulat.
@@ -60,7 +60,7 @@ lockup horizontal & **monogram "KS"** (favicon, divider, watermark).
 - Motion pelan & tenang: crossfade, fade-up reveal, hairline yang menggambar diri.
   Hormati `prefers-reduced-motion`.
 - Bahasa: Indonesia dengan aksen istilah Inggris fine dining ("Private Dining",
-  "Chef's Selection", "Priority List").
+  "Chef's Selection", "Priority Access").
 
 > Sumber: brand kit Drive pemilik + riset desain 26 website premium (Truluck's,
 > Ocean Prime, Milos, Saint Peter, Koral Kempinski, Merah Putih, Seribu Rasa,

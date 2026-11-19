@@ -13,7 +13,7 @@ Isi folder `wordpress/`:
   1. `01-hero.html` — hero + **carousel foto background** (auto-rotate) + CTA
   2. `12-spotlight.html` — **Spotlight terbaru** (promo/menu/campaign; auto-hide bila kosong)
   3. `13-new-menu.html` — **New Menu** (image-forward, tanpa harga)
-  4. `14-signature.html` — **Signature/Hero Menus** (image-forward, gelap)
+  4. `14-signature.html` — **Gateway Kurnia Seafood Signature** (navy+gold; tombol ke `/kurnia-signature/`)
   5. `15-locations.html` — **Locations** (5 cabang aktif + "Segera Hadir")
   6. `07-tentang.html` — Tentang Kami + 3 Core Value
   7. `11-cabang.html` — Cabang (tab switcher detail per kota)

@@ -27,19 +27,29 @@ Logo terpasang di: nav, hero, footer `signature/index.html`, dan gateway
 
 ## 3. Foto & data
 
-Seluruh background (hero, private dining, priority list) dan foto dish memakai
-**foto resmi Kurnia** — versi terkompresi 900px ada di `assets/share/`.
+Background (hero, private dining, priority access) dan foto dish 01–04 memakai
+**foto resmi Kurnia** — versi terkompresi 900px ada di `assets/share/` (folder
+`signature/` berdiri sendiri, tidak bergantung pada `wordpress/assets/`).
+Foto dish 05 (Kepiting Saus Kurnia) diambil dari media library situs utama.
 Saat foto suasana outlet Signature sudah tersedia, ganti background hero /
 private dining di `index.html`.
 
-Yang masih perlu dilengkapi pemilik sebelum live:
+Konfigurasi halaman ada di blok `SIG` pada `<script>` `index.html`:
+
+| Item | Konstanta | Nilai sekarang |
+|------|-----------|----------------|
+| WhatsApp (GRO Signature) | `SIG.wa` | `6285195521228` |
+| Backend form Priority Access | `SIG.api` | `https://kurniaseafood.my.id/api/v1/signature` |
+| Menu online | `SIG.menu` | `https://menu-signature.kurniaseafood.co.id/` |
+
+Yang masih perlu dilengkapi pemilik:
 
 | Item | Lokasi | Catatan |
 |------|--------|---------|
-| Foto "Kepiting Saus Kurnia" | Section Dishes (item 05, `data-placeholder`) | Satu-satunya foto pihak ketiga tersisa; fallback watermark KS bila gagal |
-| Nomor WhatsApp priority list | Konstanta `SIG.wa` di `<script>` | Masih nomor pusat — ganti nomor resmi Signature |
-| Endpoint form minat | Konstanta `SIG.endpoint` | Kosong = fallback WhatsApp. Isi URL Apps Script bila mau simpan ke Sheets |
+| Font `CSCoster-Regular.woff2` | `signature/assets/` | Lihat bagian 1 |
 | Jam operasional & dress code | Section Facts | Isi saat data outlet fix |
+| Tag `noindex` | `<head>` | Hapus saat halaman boleh diindeks Google |
 
 > Setiap `index.html` berubah, jalankan `node signature/build-share.mjs` untuk
-> memperbarui `kurnia-signature-share.html` (versi 1-file mandiri).
+> memperbarui `kurnia-signature-share.html` (versi 1-file mandiri) — file itulah
+> yang ditempel ke widget HTML di `kurniaseafood.co.id/kurnia-signature/`.

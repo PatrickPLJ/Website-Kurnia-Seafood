@@ -21,29 +21,50 @@
  *   - Hanya URL Web App publik yang dipakai klien (memang dirancang publik).
  *   - JANGAN menaruh kredensial/secret di repo.
  *   - Data dikirim via POST body (bukan query string) agar tidak ter-log di URL.
+ *   - TOKEN anti-spam: ganti nilai EXPECTED_TOKEN di bawah agar SAMA dengan token
+ *     yang dikirim client (config repo: 'krn_69eb88584a427d27'). Ini token PUBLIK
+ *     by design — hanya menghalau bot kasar, bukan pengaman penuh. POST tanpa token
+ *     yang cocok akan DITOLAK (tidak ditulis ke Sheet).
  * ========================================================================= */
+
+var EXPECTED_TOKEN = 'krn_69eb88584a427d27'; // samakan dengan client (anti-spam, low-value)
 
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
-    var d = {};
-    try { d = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (err) { d = {}; }
+    // Terima DUA format:
+    //  - form-urlencoded → terbaca di e.parameter (dipakai client preview krn no-cors)
+    //  - JSON            → terbaca di e.postData.contents
+    var d = (e && e.parameter) ? e.parameter : {};
+    if (e && e.postData && e.postData.contents) {
+      try {
+        var j = JSON.parse(e.postData.contents);
+        for (var k in j) { if (d[k] == null || d[k] === '') d[k] = j[k]; }
+      } catch (err) { /* bukan JSON (mis. form-urlencoded) → cukup pakai e.parameter */ }
+    }
+
+    // Tolak kiriman tanpa token yang cocok (anti-spam bot kasar).
+    if (d.token !== EXPECTED_TOKEN) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: false, error: 'invalid token' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
     // Header sekali di baris pertama.
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Timestamp', 'Cabang', 'Nama', 'Tanggal', 'Jam', 'Jumlah Tamu', 'Pre-order', 'Sumber']);
+      sheet.appendRow(['Timestamp', 'Nama', 'Cabang', 'Tanggal', 'Waktu', 'Jumlah Tamu', 'Catatan', 'Sumber']);
     }
 
     sheet.appendRow([
       new Date(),
-      d.cabang   || '',
-      d.nama     || '',
-      d.tanggal  || '',
-      d.jam      || '',
-      d.jumlah   || '',
-      d.preorder || '',
-      d.sumber   || ''
+      d.nama        || '',
+      d.cabang      || '',
+      d.tanggal     || '',
+      d.waktu       || d.jam      || '',  // 'waktu' (baru); fallback 'jam' (kompat lama)
+      d.jumlah_tamu || d.jumlah   || '',  // 'jumlah_tamu' (baru); fallback 'jumlah'
+      d.catatan     || d.preorder || '',  // 'catatan' (baru); fallback 'preorder'
+      d.sumber      || ''
     ]);
 
     return ContentService
